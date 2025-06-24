@@ -38,7 +38,11 @@ pip install -r requirements.txt
 
 3. Настройте токен:
 ```bash
-# Создайте файл config/token.py
+# Скопируйте файл-пример
+cp ruby_king_bot/config/token.py.example ruby_king_bot/config/token.py
+
+# Отредактируйте файл и замените 'your_token_here' на ваш реальный токен
+# Или используйте команду:
 echo "TOKEN = 'your_game_token_here'" > ruby_king_bot/config/token.py
 ```
 
