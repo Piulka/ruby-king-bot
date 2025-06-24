@@ -1,0 +1,140 @@
+# Ruby King Bot - Project Intelligence
+
+## Project Overview
+Автоматизированный бот для игры Ruby King на Python с модульной архитектурой. Бот управляет персонажем через API запросы, автоматически сражается с мобами, восстанавливает здоровье и отдыхает у костра.
+
+## Key Technical Patterns
+
+### Architecture
+- **Модульная структура**: Разделение на логические компоненты (api/, core/, logic/, ui/, utils/)
+- **State Machine**: Управление состояниями игры (CITY, EXPLORING, COMBAT, RESTING, HEALING)
+- **Observer Pattern**: Уведомления между компонентами
+- **Strategy Pattern**: Гибкая логика принятия решений
+
+### API Integration
+- **Base URL**: https://ruby-king.ru/api
+- **Token Management**: Отдельный файл config/token.py
+- **Headers**: Стандартные браузерные заголовки
+- **Error Handling**: Retry механизм с экспоненциальной задержкой
+
+### Game Mechanics
+- **Attack Cooldown**: 5 секунд между атаками
+- **Heal Cooldown**: 30 секунд между зельями
+- **Rest Duration**: 20 минут у костра
+- **Heal Threshold**: HP < 50% для использования зелья
+- **Stamina Threshold**: 0 для отдыха у костра
+
+## Critical Implementation Paths
+
+### State Detection Logic
+```python
+# Определение состояния на основе API ответов
+def determine_state(api_response):
+    if "mob" in api_response:
+        return GameState.COMBAT
+    elif "fire" in api_response:
+        return GameState.RESTING
+    else:
+        return GameState.CITY
+```
+
+### Combat Cycle
+```python
+# Основной боевой цикл
+while mob.hp > 0:
+    if player.hp < 50 and can_heal():
+        use_healing_potion()
+    attack_mob(mob.id)
+    time.sleep(5)  # Attack cooldown
+```
+
+### Resource Management
+```python
+# Проверка ресурсов и принятие решений
+if player.stamina <= 0:
+    start_resting()
+elif player.hp < 50 and not healing_cooldown:
+    use_healing_potion()
+elif current_state == GameState.CITY:
+    explore_territory()
+```
+
+## User Preferences & Workflow
+
+### Development Preferences
+- **Модульная архитектура**: Легкое расширение и редактирование
+- **Подробное логирование**: Все действия должны быть видны
+- **Консольный UI**: Красивое отображение в терминале с rich
+- **Реальное время**: Обновление информации в реальном времени
+
+### Code Organization
+- **Отдельные файлы для токенов**: Безопасность и гибкость
+- **Четкое разделение ответственности**: Каждый модуль отвечает за свою область
+- **Легкая отладка**: Возможность легко исправить логику определения состояния
+- **Расширяемость**: Простое добавление новой функциональности
+
+### Testing Approach
+- **Unit тесты**: Для каждой логической компоненты
+- **Integration тесты**: Для API взаимодействий
+- **Manual тестирование**: Проверка реальной работы с игрой
+- **Mock данные**: Для тестирования без реальных API вызовов
+
+## Known Challenges & Solutions
+
+### State Detection
+**Проблема**: Сложность точного определения текущего состояния персонажа
+**Решение**: Анализ API ответов и создание гибкой логики определения состояния
+
+### API Stability
+**Проблема**: Возможные изменения в API игры
+**Решение**: Модульная архитектура и изоляция API логики
+
+### Network Resilience
+**Проблема**: Сетевые ошибки и временные сбои
+**Решение**: Retry механизм с экспоненциальной задержкой
+
+## Project Evolution
+
+### Current Phase
+- **Phase 1**: Базовая структура и API клиент
+- **Focus**: Создание модульной архитектуры и интеграция с API
+
+### Future Enhancements
+- Расширенная статистика и аналитика
+- Настройки конфигурации через файлы
+- Обработка особых игровых событий
+- Оптимизация производительности
+
+## Communication Notes
+
+### User Requirements
+- Автоматическое управление без вмешательства
+- Подробное логирование всех действий
+- Модульная архитектура для легкого расширения
+- Безопасное хранение токена в отдельном файле
+
+### User Feedback Integration
+- Все изменения должны быть легко исправимы
+- Код должен быть читаемым и логичным
+- Документация должна быть актуальной
+- Тестирование должно быть комплексным
+
+## Development Guidelines
+
+### Code Quality
+- Использовать типизацию Python (type hints)
+- Следовать PEP 8 стилю кодирования
+- Добавлять docstrings для всех функций
+- Логировать все важные действия
+
+### Error Handling
+- Graceful degradation при ошибках API
+- Подробное логирование ошибок
+- Retry механизм для сетевых ошибок
+- Валидация всех входящих данных
+
+### Performance
+- Минимизация API запросов
+- Эффективное управление памятью
+- Оптимизация циклов и таймеров
+- Мониторинг производительности 
