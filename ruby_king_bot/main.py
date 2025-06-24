@@ -66,6 +66,8 @@ def extract_mob_data(response_data):
         if 'mob' in response_data:
             mob_list = response_data['mob']
             if isinstance(mob_list, list) and len(mob_list) > 0:
+                if len(mob_list) > 1:
+                    print(f"DEBUG: Found {len(mob_list)} mobs, using first one")
                 return mob_list[0]  # Return first mob from list
             elif isinstance(mob_list, dict):
                 return mob_list
@@ -76,6 +78,8 @@ def extract_mob_data(response_data):
                 if isinstance(farm_item, dict) and 'mob' in farm_item:
                     mob_data = farm_item['mob']
                     if isinstance(mob_data, list) and len(mob_data) > 0:
+                        if len(mob_data) > 1:
+                            print(f"DEBUG: Found {len(mob_data)} mobs in farm, using first one")
                         return mob_data[0]
                     elif isinstance(mob_data, dict):
                         return mob_data
@@ -345,7 +349,17 @@ def main():
                                     
                                 # Check if mob died
                                 if current_mob.is_dead():
-                                    display.print_message(f"💀 {current_mob.name} defeated!", "success")
+                                    # Попробуем получить XP из ответа
+                                    exp_gained = result.get('dataWin', {}).get('expWin', 0)
+                                    if exp_gained == 0:
+                                        # Если XP нет в dataWin, используем базовое значение
+                                        exp_gained = 10  # Базовое значение XP за моба
+                                    
+                                    display.print_message(f"💀 {current_mob.name} defeated! +{exp_gained} XP", "success")
+                                    display.update_stats(
+                                        mobs_killed=display.stats['mobs_killed'] + 1,
+                                        total_exp=display.stats['total_exp'] + exp_gained
+                                    )
                                     state_manager.change_state(GameState.CITY, "Combat ended - mob defeated")
                                     current_mob = None
                                     explore_done = False  # Reset exploration flag
