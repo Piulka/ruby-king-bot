@@ -15,6 +15,9 @@ from rich.text import Text
 from rich.columns import Columns
 from rich.align import Align
 
+# Import item database
+from ..utils.item_database import format_item_display_with_emoji
+
 class GameDisplay:
     """Beautiful console UI for Ruby King Bot"""
     
@@ -299,10 +302,9 @@ HP: {mob_hp_bar} {mob_data.get('hp', 0)}/{mob_data.get('max_hp', 0)} ({mob_hp_pe
             sorted_drops = sorted(self.drop_items.items(), key=lambda x: x[1], reverse=True)
             content_lines = []
             for item_id, count in sorted_drops:
-                if count == 1:
-                    content_lines.append(f"• {item_id}")
-                else:
-                    content_lines.append(f"• {item_id} x{count}")
+                # Используем названия предметов вместо ID
+                item_display = format_item_display_with_emoji(item_id, count)
+                content_lines.append(f"• {item_display}")
             content = "\n".join(content_lines)
         
         return Panel(content, title="[bold]Drops[/bold]", border_style="yellow") 
