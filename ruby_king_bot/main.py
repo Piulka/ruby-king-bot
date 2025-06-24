@@ -327,6 +327,9 @@ def main():
                                     # Update drops tracking
                                     display.update_drops(result.get('dataWin', {}).get('drop', []))
                                     
+                                    # Update killed mobs tracking
+                                    display.update_killed_mobs(current_mob.name)
+                                    
                                     display.print_message(f"🎉 {current_mob.name} defeated! +{exp_gained} XP", "success")
                                     display.update_stats(
                                         mobs_killed=display.stats['mobs_killed'] + 1,
@@ -344,6 +347,9 @@ def main():
                                     
                                 # Check if mob died (без начисления XP, так как это уже сделано выше)
                                 if current_mob.is_dead():
+                                    # Update killed mobs tracking
+                                    display.update_killed_mobs(current_mob.name)
+                                    
                                     display.print_message(f"💀 {current_mob.name} defeated!", "success")
                                     state_manager.change_state(GameState.CITY, "Combat ended - mob defeated")
                                     current_mob = None

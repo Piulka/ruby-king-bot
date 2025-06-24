@@ -16,7 +16,7 @@ from rich.columns import Columns
 from rich.align import Align
 
 # Import item database
-from ..utils.item_database import format_item_display_with_emoji
+from ..utils.item_database import format_item_display_with_emoji, get_item_emoji, get_item_name
 
 class GameDisplay:
     """Beautiful console UI for Ruby King Bot"""
@@ -40,6 +40,9 @@ class GameDisplay:
         # Drop tracking
         self.drop_items = {}  # {item_id: count}
         
+        # Killed mobs tracking
+        self.killed_mobs = {}  # {mob_name: count}
+        
         # Create layout
         self.layout.split_column(
             Layout(name="header", size=3),
@@ -53,9 +56,9 @@ class GameDisplay:
         )
         
         self.layout["left"].split_column(
-            Layout(name="status"),
+            Layout(name="status", size=10),  # Player как Statistics
             Layout(name="combat", size=8),
-            Layout(name="timers", size=6)
+            Layout(name="killed_mobs", size=12)  # Новый блок убитых мобов
         )
         
         self.layout["right"].split_column(
@@ -247,7 +250,7 @@ HP: {mob_hp_bar} {mob_data.get('hp', 0)}/{mob_data.get('max_hp', 0)} ({mob_hp_pe
         self.layout["header"].update(self.create_header(current_state, player_name, player_data))
         self.layout["left"]["status"].update(self.create_player_status(player_data))
         self.layout["left"]["combat"].update(self.create_combat_status(mob_data))
-        self.layout["left"]["timers"].update(self.create_timers(attack_cooldown, heal_cooldown, rest_time))
+        self.layout["left"]["killed_mobs"].update(self.create_killed_mobs_panel())
         self.layout["right"]["stats"].update(self.create_stats_table())
         self.layout["right"]["drops_right"].update(self.create_drops_panel())
         self.layout["messages"].update(self.create_messages_panel())
@@ -293,18 +296,47 @@ HP: {mob_hp_bar} {mob_data.get('hp', 0)}/{mob_data.get('max_hp', 0)} ({mob_hp_pe
                 else:
                     self.drop_items[item_id] = 1
     
+    def update_killed_mobs(self, mob_name: str):
+        """Update killed mobs tracking"""
+        if mob_name in self.killed_mobs:
+            self.killed_mobs[mob_name] += 1
+        else:
+            self.killed_mobs[mob_name] = 1
+    
     def create_drops_panel(self) -> Panel:
-        """Create drops panel"""
+        """Create drops panel in statistics style"""
         if not self.drop_items:
             content = "[dim]No drops yet[/dim]"
         else:
             # Сортируем по количеству (по убыванию)
             sorted_drops = sorted(self.drop_items.items(), key=lambda x: x[1], reverse=True)
-            content_lines = []
+            content_lines = ["[bold]Drops[/bold]\n"]
+            
             for item_id, count in sorted_drops:
                 # Используем названия предметов вместо ID
-                item_display = format_item_display_with_emoji(item_id, count)
-                content_lines.append(f"• {item_display}")
+                item_name = get_item_name(item_id)
+                emoji = get_item_emoji(item_id)
+                content_lines.append(f"[cyan]{emoji} {item_name}:[/cyan] [green]{count}[/green]")
+            
             content = "\n".join(content_lines)
         
-        return Panel(content, title="[bold]Drops[/bold]", border_style="yellow") 
+        return Panel(content, title="[bold]Drops[/bold]", border_style="yellow")
+    
+    def create_killed_mobs_panel(self) -> Panel:
+        """Create killed mobs panel in statistics style"""
+        if not self.killed_mobs:
+            content = "[dim]No mobs killed yet[/dim]"
+        else:
+            # Сортируем по количеству (по убыванию)
+            sorted_mobs = sorted(self.killed_mobs.items(), key=lambda x: x[1], reverse=True)
+            content_lines = ["[bold]Killed Mobs[/bold]\n"]
+            
+            for mob_name, count in sorted_mobs:
+                if count == 1:
+                    content_lines.append(f"[cyan]{mob_name}:[/cyan] [green]{count}[/green]")
+                else:
+                    content_lines.append(f"[cyan]{mob_name}:[/cyan] [green]{count}[/green]")
+            
+            content = "\n".join(content_lines)
+        
+        return Panel(content, title="[bold]Killed Mobs[/bold]", border_style="red") 
