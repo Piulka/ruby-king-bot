@@ -21,18 +21,6 @@ from ruby_king_bot.core.player import Player
 from ruby_king_bot.core.mob import Mob
 from ruby_king_bot.ui.display import GameDisplay
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('logs/bot.log'),
-        # Убираем StreamHandler чтобы логи не появлялись в консоли
-        # logging.StreamHandler()
-    ]
-)
-logger = logging.getLogger(__name__)
-
 console = Console()
 
 def setup_logging():
@@ -159,6 +147,10 @@ def main():
     """Main bot loop with beautiful UI"""
     console = Console()
     console.print("[bold blue]Starting Ruby King Bot...[/bold blue]")
+
+    # Вызываем setup_logging ПЕРВЫМ, чтобы убедиться, что папка logs существует
+    setup_logging()
+    logger = logging.getLogger(__name__)  # Инициализируем logger ПОСЛЕ setup_logging
     
     # Initialize components
     api_client = APIClient()
@@ -332,6 +324,9 @@ def main():
                                     exp_gained = result.get('dataWin', {}).get('expWin', 0)
                                     items = [item.get('id', 'Unknown') for item in result.get('dataWin', {}).get('drop', [])]
                                     
+                                    # Update drops tracking
+                                    display.update_drops(result.get('dataWin', {}).get('drop', []))
+                                    
                                     display.print_message(f"🎉 {current_mob.name} defeated! +{exp_gained} XP", "success")
                                     display.update_stats(
                                         mobs_killed=display.stats['mobs_killed'] + 1,
@@ -347,19 +342,9 @@ def main():
                                 # Update mob data from response
                                 current_mob.update_from_combat_response(result)
                                     
-                                # Check if mob died
+                                # Check if mob died (без начисления XP, так как это уже сделано выше)
                                 if current_mob.is_dead():
-                                    # Попробуем получить XP из ответа
-                                    exp_gained = result.get('dataWin', {}).get('expWin', 0)
-                                    if exp_gained == 0:
-                                        # Если XP нет в dataWin, используем базовое значение
-                                        exp_gained = 10  # Базовое значение XP за моба
-                                    
-                                    display.print_message(f"💀 {current_mob.name} defeated! +{exp_gained} XP", "success")
-                                    display.update_stats(
-                                        mobs_killed=display.stats['mobs_killed'] + 1,
-                                        total_exp=display.stats['total_exp'] + exp_gained
-                                    )
+                                    display.print_message(f"💀 {current_mob.name} defeated!", "success")
                                     state_manager.change_state(GameState.CITY, "Combat ended - mob defeated")
                                     current_mob = None
                                     explore_done = False  # Reset exploration flag

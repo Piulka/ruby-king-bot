@@ -7,7 +7,6 @@ import time
 from datetime import datetime, timedelta
 from typing import Optional, Dict, Any
 from rich.console import Console
-from rich.table import Table
 from rich.panel import Panel
 from rich.progress import Progress, BarColumn, TextColumn, TimeElapsedColumn
 from rich.layout import Layout
@@ -35,11 +34,14 @@ class GameDisplay:
         self.message_history = []
         self.max_messages = 10
         
+        # Drop tracking
+        self.drop_items = {}  # {item_id: count}
+        
         # Create layout
         self.layout.split_column(
             Layout(name="header", size=3),
             Layout(name="main", ratio=1),
-            Layout(name="messages", size=12)  # Увеличиваем размер messages
+            Layout(name="messages", size=12)
         )
         
         self.layout["main"].split_row(
@@ -54,7 +56,8 @@ class GameDisplay:
         )
         
         self.layout["right"].split_column(
-            Layout(name="stats")
+            Layout(name="stats", size=10),
+            Layout(name="drops_right")  # Drops занимает оставшееся место до messages
         )
     
     def update_stats(self, **kwargs):
@@ -153,23 +156,23 @@ HP: {mob_hp_bar} {mob_data.get('hp', 0)}/{mob_data.get('max_hp', 0)} ({mob_hp_pe
         return Panel(content, title="[bold]Combat[/bold]", border_style="red")
     
     def create_stats_table(self) -> Panel:
-        """Create statistics table"""
-        table = Table(title="[bold]Session Statistics[/bold]", show_header=True, header_style="bold magenta")
-        table.add_column("Metric", style="cyan")
-        table.add_column("Value", style="green")
-        
+        """Create statistics panel"""
         session_time = int(time.time() - self.stats['session_start'])
         mobs_per_hour = (self.stats['mobs_killed'] / max(session_time / 3600, 0.1))
         
-        table.add_row("Mobs Killed", str(self.stats['mobs_killed']))
-        table.add_row("Total XP", str(self.stats['total_exp']))
-        table.add_row("Session Time", self.format_time(session_time))
-        table.add_row("Mobs/Hour", f"{mobs_per_hour:.1f}")
-        table.add_row("Events Found", str(self.stats.get('events_found', 0)))
-        table.add_row("Current Gold", str(self.stats.get('current_gold', 0)))
-        table.add_row("Current Skulls", str(self.stats.get('current_skulls', 0)))
+        content = f"""
+[bold]Session Statistics[/bold]
+
+[cyan]Mobs Killed:[/cyan]     [green]{self.stats['mobs_killed']}[/green]
+[cyan]Total XP:[/cyan]        [green]{self.stats['total_exp']}[/green]
+[cyan]Session Time:[/cyan]    [green]{self.format_time(session_time)}[/green]
+[cyan]Mobs/Hour:[/cyan]       [green]{mobs_per_hour:.1f}[/green]
+[cyan]Events Found:[/cyan]    [green]{self.stats.get('events_found', 0)}[/green]
+[cyan]Current Gold:[/cyan]    [green]{self.stats.get('current_gold', 0)}[/green]
+[cyan]Current Skulls:[/cyan]  [green]{self.stats.get('current_skulls', 0)}[/green]
+        """.strip()
         
-        return Panel(table, title="[bold]Statistics[/bold]", border_style="magenta")
+        return Panel(content, title="[bold]Statistics[/bold]", border_style="magenta")
     
     def create_timers(self, attack_cooldown: float = 0, heal_cooldown: float = 0, rest_time: Optional[float] = None) -> Panel:
         """Create timers panel"""
@@ -243,6 +246,7 @@ HP: {mob_hp_bar} {mob_data.get('hp', 0)}/{mob_data.get('max_hp', 0)} ({mob_hp_pe
         self.layout["left"]["combat"].update(self.create_combat_status(mob_data))
         self.layout["left"]["timers"].update(self.create_timers(attack_cooldown, heal_cooldown, rest_time))
         self.layout["right"]["stats"].update(self.create_stats_table())
+        self.layout["right"]["drops_right"].update(self.create_drops_panel())
         self.layout["messages"].update(self.create_messages_panel())
     
     def print_message(self, message: str, level: str = "info"):
@@ -274,4 +278,31 @@ HP: {mob_hp_bar} {mob_data.get('hp', 0)}/{mob_data.get('max_hp', 0)} ({mob_hp_pe
     
     def print_rest_complete(self):
         """Print rest complete message"""
-        self.add_message(f"✅ Rest complete! Stamina restored.", "success") 
+        self.add_message(f"✅ Rest complete! Stamina restored.", "success")
+    
+    def update_drops(self, items: list):
+        """Update drop items tracking"""
+        for item in items:
+            item_id = item.get('id', 'Unknown')
+            if item_id != 'm_0_1':  # Исключаем золото
+                if item_id in self.drop_items:
+                    self.drop_items[item_id] += 1
+                else:
+                    self.drop_items[item_id] = 1
+    
+    def create_drops_panel(self) -> Panel:
+        """Create drops panel"""
+        if not self.drop_items:
+            content = "[dim]No drops yet[/dim]"
+        else:
+            # Сортируем по количеству (по убыванию)
+            sorted_drops = sorted(self.drop_items.items(), key=lambda x: x[1], reverse=True)
+            content_lines = []
+            for item_id, count in sorted_drops:
+                if count == 1:
+                    content_lines.append(f"• {item_id}")
+                else:
+                    content_lines.append(f"• {item_id} x{count}")
+            content = "\n".join(content_lines)
+        
+        return Panel(content, title="[bold]Drops[/bold]", border_style="yellow") 

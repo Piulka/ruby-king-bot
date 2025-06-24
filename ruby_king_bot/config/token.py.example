@@ -1,4 +1,4 @@
 # Пример файла конфигурации токена
 # Скопируйте этот файл в token.py и замените 'your_token_here' на ваш реальный токен
 
-TOKEN = 'your_token_here' 
+GAME_TOKEN = 'your_token_here' 
