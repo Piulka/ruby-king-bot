@@ -7,14 +7,16 @@ import time
 from datetime import datetime, timedelta
 from typing import Optional, Dict, Any, List
 from rich.console import Console
+from rich.layout import Layout
 from rich.panel import Panel
 from rich.progress import Progress, BarColumn, TextColumn, TimeElapsedColumn
-from rich.layout import Layout
 from rich.live import Live
 from rich.text import Text
 from rich.columns import Columns
 from rich.align import Align
 from rich.table import Table
+from rich import box
+import logging
 
 # Import item database
 from ..utils.item_database import format_item_display_with_emoji, get_item_emoji, get_item_name
@@ -23,56 +25,67 @@ class GameDisplay:
     """Beautiful console UI for Ruby King Bot"""
     
     def __init__(self):
+        """Initialize the display"""
         self.console = Console()
         self.layout = Layout()
+        
+        # Initialize tracking data
         self.stats = {
             'mobs_killed': 0,
-            'total_exp': 0,  # Накопленный опыт за сессию
+            'total_exp': 0,
+            'session_gold': 0,
             'session_start': time.time(),
-            'current_gold': 0,  # Текущее золото игрока
-            'session_gold': 0,  # Накопленное золото за сессию
-            'current_skulls': 0,
             'events_found': 0
         }
         
-        # Message history for UI
+        # Message history
         self.message_history = []
         self.max_messages = 10
         
-        # Drop tracking
-        self.drop_items = {}  # {item_id: count}
+        # Drop items tracking
+        self.drop_items = {}
         
         # Killed mobs tracking
-        self.killed_mobs = {}  # {mob_name: count}
+        self.killed_mobs = {}
         
-        # Create layout
+        # Cooldown tracking for GCD calculation
+        self.last_attack_time = 0
+        self.last_skill_time = 0
+        
+        # Setup layout
         self.layout.split_column(
-            Layout(name="header", size=3),
-            Layout(name="main", ratio=1),
-            Layout(name="messages", size=12)
+            Layout(name="top", size=3),
+            Layout(name="main"),
+            Layout(name="bottom", size=12)  # Фиксированный размер для сообщений
         )
         
         self.layout["main"].split_row(
-            Layout(name="left", ratio=1),
-            Layout(name="right", ratio=1)
+            Layout(name="left"),
+            Layout(name="right")
         )
         
         self.layout["left"].split_column(
-            Layout(name="status", size=10),  # Player как Statistics
-            Layout(name="combat", size=8),
-            Layout(name="killed_mobs")  # Killed Mobs - адаптивный блок до messages
+            Layout(name="player", size=9),  # Фиксированный размер
+            Layout(name="combat", size=9),  # Фиксированный размер
+            Layout(name="killed_mobs", ratio=1)  # Растягивается до блока сообщений
         )
         
         self.layout["right"].split_column(
-            Layout(name="stats", size=10),
-            Layout(name="drops_right")  # Drops - адаптивный блок до messages
+            Layout(name="stats", size=9),  # Фиксированный размер
+            Layout(name="cooldowns", size=9),  # Фиксированный размер
+            Layout(name="drops", ratio=1)  # Растягивается до блока сообщений
         )
     
     def update_stats(self, **kwargs):
         """Update statistics"""
         for key, value in kwargs.items():
             if key in self.stats:
-                self.stats[key] = value
+                if key == 'mobs_killed':
+                    # Для mobs_killed используем переданное значение напрямую
+                    self.stats[key] = value
+                else:
+                    # Для остальных параметров обновляем как обычно
+                    self.stats[key] = value
             elif key == 'current_gold':
                 self.stats['current_gold'] = value
             elif key == 'current_skulls':
@@ -114,7 +127,7 @@ class GameDisplay:
     def create_player_status(self, player_data: Dict[str, Any]) -> Panel:
         """Create player status panel with HP/MP/Stamina bars"""
         hp_percent = (player_data.get('hp', 0) / max(player_data.get('max_hp', 1), 1)) * 100
-        mp_percent = (player_data.get('mp', 0) / max(player_data.get('max_mp', 1), 1)) * 100
+        mp_percent = (player_data.get('mana', 0) / max(player_data.get('max_mana', 1), 1)) * 100
         
         # Используем мораль как стамину
         stamina_value = player_data.get('morale', 0)
@@ -134,71 +147,100 @@ class GameDisplay:
         gold = player_data.get('gold', 0)
         skulls = player_data.get('skulls', 0)
         heal_potions = player_data.get('heal_potions', 0)
-        mana_potions = player_data.get('mana_potions', player_data.get('mp_potions', 0))
+        mana_potions = player_data.get('mana_potions', 0)
         inventory_weight = player_data.get('inventory_weight', 0)
         max_inventory_weight = player_data.get('max_inventory_weight', 10000)
         
         content = f"""
 [bold]Статус игрока[/bold]
 HP:   {hp_bar} {player_data.get('hp', 0)}/{player_data.get('max_hp', 0)} ({hp_percent:.1f}%)
-MP:   {mp_bar} {player_data.get('mp', 0)}/{player_data.get('max_mp', 0)} ({mp_percent:.1f}%)
+MP:   {mp_bar} {player_data.get('mana', 0)}/{player_data.get('max_mana', 0)} ({mp_percent:.1f}%)
 MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
 [bold yellow]💰 Золото:[/bold yellow] [yellow]{gold}[/yellow]   [bold red]💀 Черепа:[/bold red] [red]{skulls}[/red]
 [bold red]🔴 Хилки:[/bold red] [red]{heal_potions}[/red]   [bold blue]🔵 Мана:[/bold blue] [blue]{mana_potions}[/blue]
 [bold cyan]🎒 Вес:[/bold cyan] [cyan]{inventory_weight}/{max_inventory_weight}[/cyan]
         """.strip()
         
-        return Panel(content, title="[bold]Игрок[/bold]", border_style="green")
+        return Panel(content, title="[bold]Игрок[/bold]", border_style="green", height=9)
     
     def create_combat_status(self, mob_data: Optional[Dict[str, Any]] = None, mob_group_data: Optional[List[Dict[str, Any]]] = None) -> Panel:
         """Create combat status panel"""
-        if not mob_data and not mob_group_data:
-            content = "[dim]Нет активного боя[/dim]"
-        else:
-            content_lines = ["[bold]Бой[/bold]"]
+        logger = logging.getLogger(__name__)
+        logger.debug(f"🔍 DEBUG: create_combat_status called with:")
+        logger.debug(f"  - mob_data: {mob_data}")
+        logger.debug(f"  - mob_group_data: {mob_group_data}")
+        
+        content_lines = []
+        
+        if mob_group_data and len(mob_group_data) > 0:
+            # Multi-mob display
+            logger.debug(f"🔍 DEBUG: Showing {len(mob_group_data)} mobs from mob_group_data")
+            content_lines.append(f"Найдено врагов: {len(mob_group_data)}")
             
-            # If we have mob group data, show all mobs
-            if mob_group_data and len(mob_group_data) > 1:
-                content_lines.append(f"Найдено врагов: {len(mob_group_data)}")
-                for mob_info in mob_group_data:
-                    mob_name = mob_info.get('name', 'Неизвестно')
-                    mob_hp_str = mob_info.get('hp', '0/0')
-                    mob_level = mob_info.get('level', 1)
-                    is_current_target = mob_info.get('is_current_target', False)
-                    is_dead = mob_info.get('is_dead', False)
-                    
-                    # Parse HP string to get current and max HP
+            for i, mob_info in enumerate(mob_group_data):
+                mob_name = mob_info.get('name', 'Неизвестно')
+                mob_level = mob_info.get('level', 1)
+                mob_hp_str = mob_info.get('hp', '0/0')
+                is_current_target = mob_info.get('is_current_target', False)
+                is_dead = mob_info.get('is_dead', False)
+                
+                logger.debug(f"🔍 DEBUG: Mob {i}: {mob_name}, HP: {mob_hp_str}, Level: {mob_level}, Current: {is_current_target}, Dead: {is_dead}")
+                
+                # Parse HP string like "123/134" or "-6/144"
+                if '/' in mob_hp_str:
+                    current_hp_str, max_hp_str = mob_hp_str.split('/')
                     try:
-                        current_hp, max_hp = map(int, mob_hp_str.split('/'))
-                        mob_hp_percent = (current_hp / max(max_hp, 1)) * 100
-                        mob_hp_color = "green" if mob_hp_percent > 50 else "yellow" if mob_hp_percent > 25 else "red"
-                        mob_hp_bar = f"[{mob_hp_color}]█[/{mob_hp_color}]" * int(mob_hp_percent / 10) + "░" * (10 - int(mob_hp_percent / 10))
-                    except:
-                        mob_hp_bar = "░░░░░░░░░░"
+                        current_hp = int(current_hp_str)
+                        max_hp = int(max_hp_str)
+                        mob_hp_percent = (current_hp / max_hp) * 100 if max_hp > 0 else 0
+                    except ValueError:
+                        current_hp = 0
+                        max_hp = 1
                         mob_hp_percent = 0
-                    
-                    # Add indicator for current target or dead mob
-                    if is_dead:
-                        target_indicator = "💀 "  # Skull for dead mob
-                    elif is_current_target:
-                        target_indicator = "🎯 "  # Target for current mob
-                    else:
-                        target_indicator = "   "  # Empty for other mobs
-                    
-                    content_lines.append(f"{target_indicator}[bold red]{mob_name}[/bold red] ур.{mob_level}")
-                    content_lines.append(f"    HP: {mob_hp_bar} {mob_hp_str} ({mob_hp_percent:.1f}%)")
+                else:
+                    current_hp = 0
+                    max_hp = 1
+                    mob_hp_percent = 0
+                
+                # Color based on HP percentage
+                if is_dead or current_hp <= 0:
+                    mob_hp_color = "dim"
+                elif mob_hp_percent > 50:
+                    mob_hp_color = "green"
+                elif mob_hp_percent > 25:
+                    mob_hp_color = "yellow"
+                else:
+                    mob_hp_color = "red"
+                
+                # Create HP bar
+                bar_length = 10
+                filled_bars = int(mob_hp_percent / 10)
+                mob_hp_bar = f"[{mob_hp_color}]█[/{mob_hp_color}]" * filled_bars + "░" * (bar_length - filled_bars)
+                
+                # Target indicator
+                if is_current_target:
+                    target_indicator = "🎯 "  # Target for current mob
+                else:
+                    target_indicator = "   "  # Empty for other mobs
+                
+                content_lines.append(f"{target_indicator}[bold red]{mob_name}[/bold red] ур.{mob_level}")
+                content_lines.append(f"    HP: {mob_hp_bar} {mob_hp_str} ({mob_hp_percent:.1f}%)")
+        else:
+            # Single mob display (backward compatibility)
+            logger.debug("🔍 DEBUG: Using single mob display")
+            if mob_data is None:
+                content_lines.append("[dim]Нет активного боя[/dim]")
             else:
-                # Single mob display (backward compatibility)
                 mob_hp_percent = (mob_data.get('hp', 0) / max(mob_data.get('max_hp', 1), 1)) * 100
                 mob_hp_color = "green" if mob_hp_percent > 50 else "yellow" if mob_hp_percent > 25 else "red"
                 mob_hp_bar = f"[{mob_hp_color}]█[/{mob_hp_color}]" * int(mob_hp_percent / 10) + "░" * (10 - int(mob_hp_percent / 10))
                 
                 content_lines.append(f"Цель: [bold red]{mob_data.get('name', 'Неизвестно')}[/bold red] ур.{mob_data.get('level', 1)}")
                 content_lines.append(f"HP: {mob_hp_bar} {mob_data.get('hp', 0)}/{mob_data.get('max_hp', 0)} ({mob_hp_percent:.1f}%)")
-            
-            content = "\n".join(content_lines)
         
-        return Panel(content, title="[bold]Бой[/bold]", border_style="red")
+        content = "\n".join(content_lines)
+        
+        return Panel(content, title="[bold]Бой[/bold]", border_style="magenta", height=9)
     
     def create_stats_table(self) -> Panel:
         """Create statistics panel"""
@@ -212,8 +254,8 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
         table.add_row("Время сессии:", f"[green]{self.format_time(session_time)}")
         table.add_row("Врагов/час:", f"[green]{mobs_per_hour:.1f}")
         table.add_row("Событий найдено:", f"[green]{self.stats.get('events_found', 0)}")
-        table.add_row("Золото:", f"[green]{self.stats.get('session_gold', 0)}")
-        return Panel(table, title="[bold]Статистика[/bold]", border_style="magenta")
+        table.add_row("Золото:", f"[green]{self.stats.get('current_gold', self.stats.get('session_gold', 0))}")
+        return Panel(table, title="[bold]Статистика[/bold]", border_style="blue", height=9)
     
     def create_timers(self, attack_cooldown: float = 0, heal_cooldown: float = 0, rest_time: Optional[float] = None) -> Panel:
         """Create timers panel"""
@@ -252,7 +294,7 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
             recent_messages = self.message_history[-self.max_messages:]
             content = "\n".join(recent_messages)
         
-        return Panel(content, title="[bold]Сообщения[/bold]", border_style="cyan")
+        return Panel(content, title="[bold]Сообщения[/bold]", border_style="cyan", height=12)
     
     def add_message(self, message: str, level: str = "info"):
         """Add message to history"""
@@ -272,24 +314,34 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
         if len(self.message_history) > self.max_messages:
             self.message_history = self.message_history[-self.max_messages:]
     
-    def update_display(self, 
-                      current_state: str,
-                      player_data: Dict[str, Any],
-                      mob_data: Optional[Dict[str, Any]] = None,
-                      mob_group_data: Optional[List[Dict[str, Any]]] = None,
-                      attack_cooldown: float = 0,
-                      heal_cooldown: float = 0,
-                      rest_time: Optional[float] = None,
-                      player_name: str = "Unknown"):
+    def update_display(self, current_state: str, player_data: dict, mob_data: dict = None, 
+                      mob_group_data: list = None, attack_cooldown: float = 0, 
+                      heal_cooldown: float = 0, skill_cooldown: float = 0, 
+                      mana_cooldown: float = 0, rest_time: float = None, player_name: str = "Player",
+                      last_attack_time: float = 0, last_skill_time: float = 0):
         """Update the entire display"""
+        # Debug logging
+        logger = logging.getLogger(__name__)
+        logger.debug(f"🔍 DEBUG: update_display called with:")
+        logger.debug(f"  - current_state: {current_state}")
+        logger.debug(f"  - player_data keys: {list(player_data.keys()) if player_data else 'None'}")
+        logger.debug(f"  - mob_data: {mob_data}")
+        logger.debug(f"  - mob_group_data: {mob_group_data}")
+        logger.debug(f"  - player_name: {player_name}")
+        
+        # Update cooldown tracking times
+        self.last_attack_time = last_attack_time
+        self.last_skill_time = last_skill_time
+        
         # Update layout components
-        self.layout["header"].update(self.create_header(current_state, player_name, player_data))
-        self.layout["left"]["status"].update(self.create_player_status(player_data))
-        self.layout["left"]["combat"].update(self.create_combat_status(mob_data, mob_group_data))
-        self.layout["left"]["killed_mobs"].update(self.create_killed_mobs_panel())
-        self.layout["right"]["stats"].update(self.create_stats_table())
-        self.layout["right"]["drops_right"].update(self.create_drops_panel())
-        self.layout["messages"].update(self.create_messages_panel())
+        self.layout["top"].update(self.create_header(current_state, player_name, player_data))
+        self.layout["main"]["left"]["player"].update(self.create_player_status(player_data))
+        self.layout["main"]["left"]["combat"].update(self.create_combat_status(mob_data, mob_group_data))
+        self.layout["main"]["left"]["killed_mobs"].update(self.create_killed_mobs_panel())
+        self.layout["main"]["right"]["stats"].update(self.create_stats_table())
+        self.layout["main"]["right"]["cooldowns"].update(self.create_cooldowns_panel(attack_cooldown, heal_cooldown, skill_cooldown, mana_cooldown, rest_time))
+        self.layout["main"]["right"]["drops"].update(self.create_drops_panel())
+        self.layout["bottom"].update(self.create_messages_panel())
     
     def print_message(self, message: str, level: str = "info"):
         """Print a message with appropriate styling"""
@@ -345,15 +397,13 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
             content = "[dim]No drops yet[/dim]"
         else:
             table = Table.grid(padding=(0,1))
-            table.add_column(justify="left", width=18)  # Фиксированная ширина 18 символов
+            table.add_column(justify="left", width=18)
             table.add_column(justify="right")
             sorted_drops = sorted(self.drop_items.items(), key=lambda x: x[1], reverse=True)
             for item_id, count in sorted_drops:
                 item_name = get_item_name(item_id)
                 emoji = get_item_emoji(item_id)
-                # Обрезаем длинные названия до 12 символов и дополняем короткие пробелами
                 display_name = item_name[:12] if len(item_name) > 12 else item_name
-                # Дополняем до 12 символов пробелами справа
                 display_name = display_name.ljust(12)
                 table.add_row(f"{emoji} {display_name}", f"[green]{count}")
             content = table
@@ -371,4 +421,72 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
             for mob_name, count in sorted_mobs:
                 table.add_row(f"{mob_name}", f"[green]{count}")
             content = table
-        return Panel(content, title="[bold]Убитые враги[/bold]", border_style="red") 
+        return Panel(content, title="[bold]Убитые враги[/bold]", border_style="red")
+    
+    def create_cooldowns_panel(self, attack_cooldown: float, heal_cooldown: float, skill_cooldown: float, mana_cooldown: float, rest_time: float = None) -> Panel:
+        """Create cooldowns panel"""
+        from rich.text import Text
+        
+        # Calculate global cooldown (GCD) - time since last combat action
+        current_time = time.time()
+        last_combat_time = max(self.last_attack_time, self.last_skill_time) if hasattr(self, 'last_attack_time') and hasattr(self, 'last_skill_time') else 0
+        gcd_time = max(0, 5.1 - (current_time - last_combat_time))  # 5.1s GCD
+        
+        # Create table for aligned display
+        table = Table.grid(padding=(0, 1))
+        table.add_column(justify="left", width=8)   # Icon column
+        table.add_column(justify="left", width=8)   # Name column  
+        table.add_column(justify="right", width=8)  # Status column
+        
+        # Global Cooldown (GCD)
+        gcd_status = "Готов" if gcd_time <= 0 else f"{gcd_time:.1f}s"
+        gcd_style = "green" if gcd_time <= 0 else "red"
+        table.add_row("⚡", "ГКД", f"[{gcd_style}]{gcd_status}[/{gcd_style}]")
+        
+        # Attack cooldown
+        attack_status = "Готов" if attack_cooldown <= 0 else f"{attack_cooldown:.1f}s"
+        attack_style = "green" if attack_cooldown <= 0 else "red"
+        # Индикатор использованного навыка - если атака только что использовалась (КД > 0)
+        attack_icon = "⚔️" if attack_cooldown <= 0 else "⚔️🔥" if attack_cooldown > 4 else "⚔️"
+        table.add_row(attack_icon, "Атака", f"[{attack_style}]{attack_status}[/{attack_style}]")
+        
+        # Skill cooldown
+        skill_status = "Готов" if skill_cooldown <= 0 else f"{skill_cooldown:.1f}s"
+        skill_style = "green" if skill_cooldown <= 0 else "red"
+        # Индикатор использованного навыка - если скилл только что использовался (КД > 0)
+        skill_icon = "⚡" if skill_cooldown <= 0 else "⚡🔥" if skill_cooldown > 9 else "⚡"
+        table.add_row(skill_icon, "Скилл", f"[{skill_style}]{skill_status}[/{skill_style}]")
+        
+        # Heal cooldown
+        heal_status = "Готов" if heal_cooldown <= 0 else f"{heal_cooldown:.1f}s"
+        heal_style = "green" if heal_cooldown <= 0 else "red"
+        # Индикатор использованного навыка
+        heal_icon = "❤️" if heal_cooldown <= 0 else "❤️🔥" if heal_cooldown > 4 else "❤️"
+        table.add_row(heal_icon, "Лечение", f"[{heal_style}]{heal_status}[/{heal_style}]")
+        
+        # Mana cooldown
+        mana_status = "Готов" if mana_cooldown <= 0 else f"{mana_cooldown:.1f}s"
+        mana_style = "green" if mana_cooldown <= 0 else "red"
+        # Индикатор использованного навыка
+        mana_icon = "🔵" if mana_cooldown <= 0 else "🔵🔥" if mana_cooldown > 4 else "🔵"
+        table.add_row(mana_icon, "Мана", f"[{mana_style}]{mana_status}[/{mana_style}]")
+        
+        # Rest timer
+        if rest_time:
+            remaining = max(0, rest_time - current_time)
+            if remaining > 0:
+                rest_status = f"{self.format_time(int(remaining))}"
+                rest_style = "yellow"
+                rest_icon = "🔥"
+            else:
+                rest_status = "Готов"
+                rest_style = "green"
+                rest_icon = "✅"
+        else:
+            rest_status = "Нет"
+            rest_style = "dim"
+            rest_icon = "🔥"
+        
+        table.add_row(rest_icon, "Отдых", f"[{rest_style}]{rest_status}[/{rest_style}]")
+        
+        return Panel(table, title="⏱️ КД", border_style="blue", height=9) 

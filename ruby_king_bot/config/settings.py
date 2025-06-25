@@ -15,10 +15,14 @@ class Settings:
     
     # Game Mechanics
     ATTACK_COOLDOWN = 5.1  # seconds between attacks
-    HEAL_COOLDOWN = 6  # seconds between healing potions
+    SKILL_COOLDOWN = 11.0  # seconds between skills
+    HEAL_COOLDOWN = 5.5  # seconds between healing potions
+    MANA_COOLDOWN = 5.5  # seconds between mana potions
     REST_DURATION = 1200  # 20 minutes in seconds
     HEAL_THRESHOLD = 50  # HP percentage threshold for healing
+    MANA_THRESHOLD = 50  # Mana percentage threshold for mana potion
     STAMINA_THRESHOLD = 0  # Stamina threshold for resting
+    SKILL_HP_THRESHOLD = 100  # HP threshold for using skill (use skill only if mob HP > 100)
     
     # Combat Configuration (CRITICAL)
     COMBAT_TIMEOUT = 300  # Maximum combat duration (5 minutes)

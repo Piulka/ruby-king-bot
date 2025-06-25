@@ -1,11 +1,11 @@
 """
-Game state management system
+Game state management for Ruby King
 """
 
 import logging
 from enum import Enum
 from typing import Optional, Dict, Any
-from ..config.settings import Settings
+from config.settings import Settings
 
 logger = logging.getLogger(__name__)
 

@@ -1,14 +1,15 @@
 """
-HTTP client for Ruby King API
+API client for Ruby King game
 """
 
-import requests
 import time
 import logging
 from typing import Dict, Any, Optional
-from ..config.settings import Settings
-from ..config.token import GAME_TOKEN
-from .endpoints import Endpoints
+import requests
+
+from config.settings import Settings
+from config.token import GAME_TOKEN
+from api.endpoints import Endpoints
 
 logger = logging.getLogger(__name__)
 
@@ -202,14 +203,25 @@ class APIClient:
         """
         data = {"elemId": "m_3"}
         logger.info("Using mana potion...")
-        result = self._make_request("POST", Endpoints.USE_HEALING_POTION, data)
+        result = self._make_request("POST", Endpoints.USE_MANA_POTION, data)
         return result
 
-    def use_skill(self, mob_id: str) -> Dict[str, Any]:
+    def use_skill(self, mob_id: str, skill_id: str = "skill_0_1") -> Dict[str, Any]:
         """
-        Use skill on mob (skill_0_1)
+        Use skill on mob
         """
-        data = {"mobId": mob_id, "skillId": "skill_0_1"}
-        logger.info(f"Using skill on mob: {mob_id}")
-        result = self._make_request("POST", Endpoints.ATTACK_MOB, data)
+        data = {"mobId": mob_id, "skillId": skill_id}
+        logger.info(f"Using skill {skill_id} on mob: {mob_id}")
+        result = self._make_request("POST", Endpoints.USE_SKILL, data)
+        return result
+
+    def get_user_info(self) -> Dict[str, Any]:
+        """
+        Get user information
+        
+        Returns:
+            Response data with user information
+        """
+        logger.info("Getting user info...")
+        result = self._make_request("GET", Endpoints.USER_INFO)
         return result 

@@ -1,9 +1,9 @@
 """
-Player data management
+Player class for Ruby King game
 """
 
 import logging
-from typing import Dict, Any, Optional
+from typing import Dict, Any, List
 from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)
@@ -33,11 +33,17 @@ class Player:
         self.stats = PlayerStats()
         self.inventory = {}  # Добавлено для хранения инвентаря
         
-        # Cooldown tracking
-        self.last_heal_time = 0
+        # Cooldowns
         self.last_attack_time = 0
-        self.heal_cooldown_end = 0
-        self.attack_cooldown_end = 0
+        self.last_skill_time = 0
+        self.last_heal_time = 0
+        self.last_mana_time = 0
+        
+        # Cooldown durations (in seconds)
+        self.GLOBAL_COOLDOWN = 5.3  # Global cooldown between combat actions
+        self.SKILL_COOLDOWN = 11.0  # Skill personal cooldown
+        self.HEAL_COOLDOWN = 5.5    # Healing potion cooldown
+        self.MANA_COOLDOWN = 5.5    # Mana potion cooldown
     
     @property
     def level(self) -> int:
@@ -115,11 +121,10 @@ class Player:
             self.stats.experience_to_next = user_data.get('userNextXP', self.stats.experience_to_next)
             # Morale (возможно, это стамина)
             self.morale = user_data.get('morale', getattr(self, 'morale', 0))
-            # Inventory weight
-            self.inventory_weight = user_data.get('inventoryWeight', 0)
-            # Max inventory weight (boxLength * 100, примерно)
-            box_length = user_data.get('boxLength', 0)
-            self.max_inventory_weight = box_length * 100 if box_length > 0 else 10000
+            # Inventory weight - inventoryWeight это максимальный вес
+            self.max_inventory_weight = user_data.get('inventoryWeight', 0)
+            # Текущий вес пока не найден, устанавливаем 0
+            self.inventory_weight = 0  # TODO: найти поле с текущим весом
             # Inventory
             if 'inventory' in user_data:
                 self.inventory = user_data['inventory']
@@ -169,11 +174,10 @@ class Player:
             self.stats.experience = player_data.get('userCurrentXP', self.stats.experience)
             self.stats.experience_to_next = player_data.get('userNextXP', self.stats.experience_to_next)
             self.morale = player_data.get('morale', getattr(self, 'morale', 0))
-            # Inventory weight
-            self.inventory_weight = player_data.get('inventoryWeight', 0)
-            # Max inventory weight (boxLength * 100, примерно)
-            box_length = player_data.get('boxLength', 0)
-            self.max_inventory_weight = box_length * 100 if box_length > 0 else 10000
+            # Inventory weight - inventoryWeight это максимальный вес
+            self.max_inventory_weight = player_data.get('inventoryWeight', 0)
+            # Текущий вес пока не найден, устанавливаем 0
+            self.inventory_weight = 0  # TODO: найти поле с текущим весом
             if 'inventory' in player_data:
                 self.inventory = player_data['inventory']
         
@@ -215,68 +219,75 @@ class Player:
     
     def needs_healing(self) -> bool:
         """Check if player needs healing (HP < threshold)"""
-        from ..config.settings import Settings
+        from config.settings import Settings
         return self.get_hp_percentage() < Settings.HEAL_THRESHOLD
     
     def needs_rest(self) -> bool:
         """Check if player needs rest (stamina <= threshold)"""
-        from ..config.settings import Settings
+        from config.settings import Settings
         return self.stamina <= Settings.STAMINA_THRESHOLD
     
-    def can_heal(self, current_time: float) -> bool:
-        """
-        Check if player can use healing potion (cooldown check)
-        
-        Args:
-            current_time: Current timestamp
-            
-        Returns:
-            True if can heal, False otherwise
-        """
-        from ..config.settings import Settings
-        time_since_last_heal = current_time - self.last_heal_time
-        return time_since_last_heal >= Settings.HEAL_COOLDOWN
-    
     def can_attack(self, current_time: float) -> bool:
-        """
-        Check if player can attack (cooldown check)
-        
-        Args:
-            current_time: Current timestamp
-            
-        Returns:
-            True if can attack, False otherwise
-        """
-        from ..config.settings import Settings
-        time_since_last_attack = current_time - self.last_attack_time
-        return time_since_last_attack >= Settings.ATTACK_COOLDOWN
+        """Check if player can attack (respects global cooldown only)"""
+        # Атака не имеет собственного КД, только ГКД между боевыми навыками
+        last_combat_time = max(self.last_attack_time, self.last_skill_time)
+        return current_time - last_combat_time >= self.GLOBAL_COOLDOWN
     
-    def record_heal(self, current_time: float):
-        """Record healing potion usage"""
-        from ..config.settings import Settings
-        self.last_heal_time = current_time
-        self.heal_cooldown_end = current_time + Settings.HEAL_COOLDOWN
-        logger.debug("Healing potion used, cooldown started")
+    def can_use_skill(self, current_time: float) -> bool:
+        """Check if player can use skill (respects both personal and global cooldowns)"""
+        # Скилл имеет собственный КД + ГКД между боевыми навыками
+        skill_cd_ready = current_time - self.last_skill_time >= self.SKILL_COOLDOWN
+        last_combat_time = max(self.last_attack_time, self.last_skill_time)
+        global_cd_ready = current_time - last_combat_time >= self.GLOBAL_COOLDOWN
+        return skill_cd_ready and global_cd_ready
+    
+    def can_use_heal_potion(self, current_time: float) -> bool:
+        """Check if player can use healing potion (only personal cooldown)"""
+        # Зелья не зависят от ГКД, только от собственного КД
+        return current_time - self.last_heal_time >= self.HEAL_COOLDOWN
+    
+    def can_use_mana_potion(self, current_time: float) -> bool:
+        """Check if player can use mana potion (only personal cooldown)"""
+        # Зелья не зависят от ГКД, только от собственного КД
+        return current_time - self.last_mana_time >= self.MANA_COOLDOWN
     
     def record_attack(self, current_time: float):
-        """Record attack usage"""
-        from ..config.settings import Settings
+        """Record attack time"""
         self.last_attack_time = current_time
-        self.attack_cooldown_end = current_time + Settings.ATTACK_COOLDOWN
-        logger.debug("Attack performed, cooldown started")
+    
+    def record_skill(self, current_time: float):
+        """Record skill usage time"""
+        self.last_skill_time = current_time
+        # Скилл также запускает ГКД для боевых навыков
+        self.last_attack_time = current_time
+    
+    def record_heal(self, current_time: float):
+        """Record healing potion usage time"""
+        self.last_heal_time = current_time
+    
+    def record_mana(self, current_time: float):
+        """Record mana potion usage time"""
+        self.last_mana_time = current_time
     
     def get_stats_summary(self) -> Dict[str, Any]:
         """Get player stats summary"""
         return {
-            'hp': f"{self.hp}/{self.max_hp} ({self.get_hp_percentage():.1f}%)",
-            'mp': f"{self.mp}/{self.max_mp} ({self.get_mp_percentage():.1f}%)",
-            'stamina': f"{self.stamina}/{self.max_stamina} ({self.get_stamina_percentage():.1f}%)",
+            'hp': self.hp,
+            'max_hp': self.max_hp,
+            'mana': self.mp,
+            'max_mana': self.max_mp,
+            'stamina': self.stamina,
+            'max_stamina': self.max_stamina,
             'level': self.stats.level,
-            'experience': f"{self.stats.experience}/{self.stats.experience_to_next}",
-            'gold': self.stats.gold,
-            'mobs_killed': self.stats.mobs_killed,
-            'needs_healing': self.needs_healing(),
-            'needs_rest': self.needs_rest()
+            'xp': self.stats.experience,
+            'xp_next': self.stats.experience_to_next,
+            'gold': self.get_gold_count(),
+            'heal_potions': self.get_heal_potions_count(),
+            'mana_potions': self.get_mana_potions_count(),
+            'skulls': self.get_skulls_count(),
+            'morale': getattr(self, 'morale', 0),
+            'inventory_weight': getattr(self, 'inventory_weight', 0),
+            'max_inventory_weight': getattr(self, 'max_inventory_weight', 0)
         }
     
     def get_heal_potions_count(self) -> int:
