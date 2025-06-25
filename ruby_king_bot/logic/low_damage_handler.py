@@ -273,8 +273,16 @@ class LowDamageHandler:
             
             time.sleep(2)
             
-            # Переходим в локацию loco_3 на юг
-            result = self.api_client.change_geo("loco_3", "south")
+            # Выбираем локацию в зависимости от уровня персонажа
+            player_level = self.player.level
+            if player_level < 10:
+                # Для персонажей ниже 10 уровня используем loco_0
+                self.display.print_message(f"📍 Переходим в loco_0 (уровень {player_level} < 10)...", "info")
+                result = self.api_client.change_geo("loco_0", "south")
+            else:
+                # Для персонажей 10+ уровня используем loco_3
+                self.display.print_message(f"📍 Переходим в loco_3 (уровень {player_level} >= 10)...", "info")
+                result = self.api_client.change_geo("loco_3", "south")
             
             if result.get("status") != "success":
                 self.display.print_message(f"❌ Ошибка перехода в локацию: {result.get('message', 'Неизвестная ошибка')}", "error")

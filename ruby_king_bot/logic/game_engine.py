@@ -38,7 +38,7 @@ class GameEngine:
         
         # Handlers
         self.combat_handler = CombatHandler(self.api_client, self.player, self.display)
-        self.exploration_handler = ExplorationHandler(self.api_client, self.display)
+        self.exploration_handler = ExplorationHandler(self.api_client, self.display, self.player)
         self.rest_handler = RestHandler(self.api_client, self.display)
         self.data_extractor = DataExtractor()
         
