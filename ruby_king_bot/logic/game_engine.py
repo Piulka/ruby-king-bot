@@ -250,7 +250,8 @@ class GameEngine:
             result = self.combat_handler.low_damage_handler.handle_low_damage_situation(
                 current_target, 
                 self.current_mob_group, 
-                current_time
+                current_time,
+                self.combat_handler.situation_type
             )
             
             if result:

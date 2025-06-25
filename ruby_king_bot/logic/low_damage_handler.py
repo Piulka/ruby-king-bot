@@ -21,9 +21,15 @@ class LowDamageHandler:
         self.display = display
         self.is_handling_low_damage = False
         
-    def handle_low_damage_situation(self, current_target, mob_group, current_time: float) -> bool:
+    def handle_low_damage_situation(self, current_target, mob_group, current_time: float, situation_type: str = "low_damage") -> bool:
         """
-        Обрабатывает ситуацию с низким уроном
+        Обрабатывает ситуацию с низким уроном или малым количеством зелий
+        
+        Args:
+            current_target: Текущая цель
+            mob_group: Группа мобов
+            current_time: Текущее время
+            situation_type: Тип ситуации ("low_damage" или "low_potions")
         
         Returns:
             bool: True если обработка завершена, False если нужно продолжить
@@ -32,7 +38,11 @@ class LowDamageHandler:
             return False
             
         self.is_handling_low_damage = True
-        self.display.print_message("🔄 Запуск процедуры восстановления после низкого урона...", "warning")
+        
+        if situation_type == "low_potions":
+            self.display.print_message("🔄 Запуск процедуры восстановления из-за малого количества зелий...", "warning")
+        else:
+            self.display.print_message("🔄 Запуск процедуры восстановления после низкого урона...", "warning")
         
         try:
             # 1. Добиваем оставшихся мобов
@@ -53,11 +63,14 @@ class LowDamageHandler:
             # 6. Возвращаемся на фарм и идем на лучший квадрат
             self._return_to_farm_and_move_to_best_square()
             
-            self.display.print_message("✅ Процедура восстановления завершена! Возвращаемся к обычному фарму.", "success")
+            if situation_type == "low_potions":
+                self.display.print_message("✅ Процедура восстановления зелий завершена! Возвращаемся к обычному фарму.", "success")
+            else:
+                self.display.print_message("✅ Процедура восстановления завершена! Возвращаемся к обычному фарму.", "success")
             return True
             
         except Exception as e:
-            logger.error(f"Ошибка в обработке низкого урона: {e}")
+            logger.error(f"Ошибка в обработке ситуации: {e}")
             self.display.print_message(f"❌ Ошибка в процедуре восстановления: {e}", "error")
             return False
         finally:

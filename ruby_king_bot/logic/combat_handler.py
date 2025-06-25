@@ -34,6 +34,7 @@ class CombatHandler:
         self.last_attack_damages = []  # Last 3 attack damages
         self.combat_paused = False  # Flag to pause combat
         self.low_damage_handled = False  # Flag to track if low damage was handled
+        self.situation_type = "low_damage"  # Type of situation: "low_damage" or "low_potions"
     
     def handle_combat_round(self, current_target: Mob, current_time: float, mob_group: MobGroup) -> Literal['victory', 'continue', 'failure']:
         """
@@ -55,6 +56,10 @@ class CombatHandler:
         if self.combat_paused:
             time.sleep(1)
             return 'continue'
+        
+        # Check if potions are running low
+        if self._check_low_potions():
+            return 'continue'  # Let game engine handle the low potions situation
         
         # 1. Check and use healing potion
         if self._should_use_heal_potion(current_time):
@@ -370,6 +375,7 @@ class CombatHandler:
                 if average_damage > 0 and all(damage <= average_damage / 2 for damage in self.last_attack_damages):
                     if not self.low_damage_handled:
                         self.low_damage_handled = True
+                        self.situation_type = "low_damage"
                         self.display.print_message(
                             f"⚠️ Низкий урон! 3 атаки подряд: {self.last_attack_damages}. "
                             f"Средний урон: {average_damage:.1f}. Запуск процедуры восстановления...", 
@@ -378,12 +384,30 @@ class CombatHandler:
                         # Reset pattern
                         self.last_attack_damages = []
     
+    def _check_low_potions(self) -> bool:
+        """Check if potions are running low (10 or less)"""
+        hp_potions = self.player.get_hp_potions_count()
+        mp_potions = self.player.get_mp_potions_count()
+        
+        if hp_potions <= 10 or mp_potions <= 10:
+            if not self.low_damage_handled:
+                self.low_damage_handled = True
+                self.situation_type = "low_potions"
+                self.display.print_message(
+                    f"⚠️ Мало зелий! HP: {hp_potions}, MP: {mp_potions}. "
+                    f"Запуск процедуры восстановления...", 
+                    "warning"
+                )
+                return True
+        return False
+    
     def _reset_low_damage_tracking(self):
         """Reset low damage tracking when combat ends or pattern breaks"""
         self.low_damage_count = 0
         self.last_attack_damages = []
         self.combat_paused = False
         self.low_damage_handled = False
+        self.situation_type = "low_damage"
     
     def _handle_victory(self, result: Dict[str, Any], mob_group: MobGroup) -> Literal['victory']:
         """Handle combat victory"""
