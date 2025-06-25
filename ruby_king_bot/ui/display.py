@@ -76,6 +76,19 @@ class GameDisplay:
             Layout(name="drops", ratio=1)  # Растягивается до блока сообщений
         )
     
+    def get_live_display(self, refresh_per_second: int = 4, screen: bool = True) -> Live:
+        """
+        Get live display context manager for the game engine
+        
+        Args:
+            refresh_per_second: Refresh rate for the display
+            screen: Whether to use screen clearing
+            
+        Returns:
+            Live display context manager
+        """
+        return Live(self.layout, refresh_per_second=refresh_per_second, screen=screen)
+    
     def update_stats(self, **kwargs):
         """Update statistics"""
         for key, value in kwargs.items():
