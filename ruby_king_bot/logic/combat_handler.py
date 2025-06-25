@@ -74,7 +74,7 @@ class CombatHandler:
                 return 'failure'
         
         # 5. Wait for cooldowns
-        time.sleep(0.1)
+        time.sleep(1)
         return 'continue'
     
     def _should_use_heal_potion(self, current_time: float) -> bool:
@@ -112,7 +112,11 @@ class CombatHandler:
                 self.player.update_from_api_response(heal_result)
             
             self.display.print_message("❤️ Использовал зелье лечения!", "success")
-            time.sleep(0.1)  # Delay between requests
+            
+            # Update display after action
+            self._update_display_after_action(None, None, current_time)
+            
+            time.sleep(1)  # Delay between requests - minimum 1 second
             return 'success'
             
         except Exception as e:
@@ -132,7 +136,11 @@ class CombatHandler:
                 self.player.update_from_api_response(mana_result)
             
             self.display.print_message("🔵 Использовал зелье маны!", "success")
-            time.sleep(0.1)  # Delay between requests
+            
+            # Update display after action
+            self._update_display_after_action(None, None, current_time)
+            
+            time.sleep(1)  # Delay between requests - minimum 1 second
             return 'success'
             
         except Exception as e:
@@ -159,7 +167,10 @@ class CombatHandler:
                 elif skill_result.get('status') == 'success':
                     return self._handle_combat_success(skill_result, current_target, mob_group, "skill")
             
-            time.sleep(0.1)  # Delay between requests
+            # Update display after action
+            self._update_display_after_action(current_target, mob_group, current_time)
+            
+            time.sleep(1)  # Delay between requests - minimum 1 second
             return 'continue'
             
         except Exception as e:
@@ -182,7 +193,10 @@ class CombatHandler:
                 elif attack_result.get('status') == 'success':
                     return self._handle_combat_success(attack_result, current_target, mob_group, "attack")
             
-            time.sleep(0.1)  # Delay between requests
+            # Update display after action
+            self._update_display_after_action(current_target, mob_group, current_time)
+            
+            time.sleep(1)  # Delay between requests - minimum 1 second
             return 'continue'
             
         except Exception as e:
@@ -239,6 +253,10 @@ class CombatHandler:
             else:
                 # All mobs dead but statusBattle not 'win' - treat as victory
                 return self._handle_victory(result, mob_group)
+        
+        # Update display after processing combat results
+        current_time = time.time()
+        self._update_display_after_action(current_target, mob_group, current_time)
         
         return 'continue'
     
@@ -327,4 +345,54 @@ class CombatHandler:
         with open("logs/api_responses.log", "a", encoding="utf-8") as f:
             f.write(f"\n--- {context} ---\n")
             f.write(json.dumps(response, ensure_ascii=False, indent=2))
-            f.write("\n") 
+            f.write("\n")
+    
+    def _update_display_after_action(self, current_target: Mob, mob_group: MobGroup, current_time: float):
+        """Update display after any combat action"""
+        # Get player data
+        player_data = self.player.get_stats_summary()
+        
+        # Get mob data
+        mob_data = None
+        mob_group_data = None
+        if current_target:
+            mob_data = {
+                'name': current_target.name,
+                'hp': current_target.hp,
+                'max_hp': current_target.max_hp,
+                'level': current_target.level
+            }
+        
+        if mob_group:
+            # Get all mobs for display
+            all_mobs = mob_group.get_all_mobs()
+            if len(all_mobs) > 1:
+                mob_group_data = mob_group.get_all_mobs_with_status()
+        
+        # Calculate cooldowns
+        attack_cooldown = max(0, self.player.GLOBAL_COOLDOWN - (current_time - self.player.last_attack_time))
+        skill_cooldown = max(0, self.player.SKILL_COOLDOWN - (current_time - self.player.last_skill_time))
+        heal_cooldown = max(0, self.player.HEAL_COOLDOWN - (current_time - self.player.last_heal_time))
+        mana_cooldown = max(0, self.player.MANA_COOLDOWN - (current_time - self.player.last_mana_time))
+        
+        # Update display
+        self.display.update_display(
+            current_state="combat",
+            player_data=player_data,
+            mob_data=mob_data,
+            mob_group_data=mob_group_data,
+            attack_cooldown=attack_cooldown,
+            heal_cooldown=heal_cooldown,
+            skill_cooldown=skill_cooldown,
+            mana_cooldown=mana_cooldown,
+            rest_time=None,
+            player_name="Piulok",
+            last_attack_time=self.player.last_attack_time,
+            last_skill_time=self.player.last_skill_time
+        )
+        
+        # Update statistics
+        self.display.update_stats(
+            current_gold=self.player.get_gold_count(),
+            current_skulls=self.player.get_skulls_count()
+        ) 

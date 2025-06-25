@@ -27,6 +27,10 @@ class RestHandler:
         try:
             result = self.api_client.start_rest()
             self._log_api_response(result, "start_rest")
+            
+            # Add delay after rest request
+            time.sleep(1)
+            
             return result
             
         except Exception as e:

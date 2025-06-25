@@ -27,6 +27,10 @@ class ExplorationHandler:
         try:
             result = self.api_client.explore_territory()
             self._log_api_response(result, "explore_territory")
+            
+            # Add delay after exploration request
+            time.sleep(1)
+            
             return result
             
         except Exception as e:

@@ -82,7 +82,7 @@ class GameEngine:
                         break
                     
                     # Small delay to prevent excessive CPU usage
-                    time.sleep(0.1)
+                    time.sleep(1)
                     
                 except KeyboardInterrupt:
                     console.print("\n[yellow]Bot stopped by user[/yellow]")
@@ -184,6 +184,19 @@ class GameEngine:
                 mob_names = [mob['name'] for mob in mob_group_data]
                 self.display.print_message(f"🔍 Найдены враги: {', '.join(mob_names)}", "info")
                 
+                # Check and use skill immediately after exploration if conditions are met
+                current_time = time.time()
+                if current_target and self._should_use_skill_after_exploration(current_target, current_time):
+                    self.display.print_message("⚡ Проверяем возможность использования скилла...", "info")
+                    skill_result = self.combat_handler._use_skill(current_target, current_time, self.current_mob_group)
+                    if skill_result == 'victory':
+                        self._handle_combat_victory()
+                        return
+                    elif skill_result == 'failure':
+                        self._handle_combat_failure()
+                        return
+                    # If skill was used successfully, continue to combat state
+                
                 self.state_manager.change_state(GameState.COMBAT, "Mobs found")
                 self.explore_done = True
             else:
@@ -191,6 +204,12 @@ class GameEngine:
         else:
             # Exploration done, wait for combat to finish
             time.sleep(1)
+    
+    def _should_use_skill_after_exploration(self, current_target, current_time: float) -> bool:
+        """Check if skill should be used immediately after exploration"""
+        return (current_target and 
+                current_target.hp > Settings.SKILL_HP_THRESHOLD and 
+                self.player.can_use_skill(current_time))
     
     def _handle_exploration_failure(self, result: Dict[str, Any]):
         """Handle exploration failure"""
@@ -268,7 +287,7 @@ class GameEngine:
             self.explore_done = False  # Reset exploration flag
         else:
             # Still resting
-            time.sleep(0.1)
+            time.sleep(1)
     
     def _initialize_player_data(self):
         """Initialize player data from API"""
