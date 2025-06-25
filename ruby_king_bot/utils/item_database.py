@@ -18,8 +18,10 @@ ITEM_DATABASE = {
     
     # Оружие (Weapons) - на основе изображений
     "weapon_1": "Меч",  # w-1.jpg
+    "weapon_2": "Меч",  # w-2.jpg
     "weapon_46": "Топор",  # w-46.jpg
     "weapon_47": "Кинжал",  # w-47.jpg
+    "weapon_48": "Топор",  # w-48.jpg
     
     # Броня (Armors) - на основе изображений
     "armor_81": "Перчатки",  # armor-81.jpg
@@ -114,8 +116,10 @@ def get_item_emoji(item_id: str) -> str:
         
         # Оружие
         "weapon_1": "⚔️",   # Меч
+        "weapon_2": "⚔️",   # Меч
         "weapon_46": "🪓",  # Топор
         "weapon_47": "🗡️",  # Кинжал
+        "weapon_48": "🪓",  # Топор
         
         # Броня
         "armor_81": "🧤",   # Перчатки

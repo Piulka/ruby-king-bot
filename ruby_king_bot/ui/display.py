@@ -342,14 +342,16 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
             content = "[dim]No drops yet[/dim]"
         else:
             table = Table.grid(padding=(0,1))
-            table.add_column(justify="left", width=18)  # Уменьшаем ширину до 18 символов
+            table.add_column(justify="left", width=18)  # Фиксированная ширина 18 символов
             table.add_column(justify="right")
             sorted_drops = sorted(self.drop_items.items(), key=lambda x: x[1], reverse=True)
             for item_id, count in sorted_drops:
                 item_name = get_item_name(item_id)
                 emoji = get_item_emoji(item_id)
-                # Обрезаем длинные названия до 12 символов (с учетом эмодзи и пробела)
+                # Обрезаем длинные названия до 12 символов и дополняем короткие пробелами
                 display_name = item_name[:12] if len(item_name) > 12 else item_name
+                # Дополняем до 12 символов пробелами справа
+                display_name = display_name.ljust(12)
                 table.add_row(f"{emoji} {display_name}", f"[green]{count}")
             content = table
         return Panel(content, title="[bold]Дроп[/bold]", border_style="yellow")
