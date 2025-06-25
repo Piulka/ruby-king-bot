@@ -198,7 +198,9 @@ def main():
                 'heal_potions': player.get_heal_potions_count(),
                 'mana_potions': player.get_mana_potions_count(),
                 'skulls': player.get_skulls_count(),
-                'morale': player.morale
+                'morale': player.morale,
+                'inventory_weight': player.inventory_weight,
+                'max_inventory_weight': player.max_inventory_weight
             }
             
             mob_data = None

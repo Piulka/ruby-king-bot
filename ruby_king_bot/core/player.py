@@ -28,6 +28,8 @@ class Player:
         self.stamina = 100
         self.max_stamina = 100
         self.morale = 0  # Добавлено для хранения морали
+        self.inventory_weight = 0  # Текущий вес рюкзака
+        self.max_inventory_weight = 0  # Максимальный вес рюкзака
         self.stats = PlayerStats()
         self.inventory = {}  # Добавлено для хранения инвентаря
         
@@ -113,6 +115,11 @@ class Player:
             self.stats.experience_to_next = user_data.get('userNextXP', self.stats.experience_to_next)
             # Morale (возможно, это стамина)
             self.morale = user_data.get('morale', getattr(self, 'morale', 0))
+            # Inventory weight
+            self.inventory_weight = user_data.get('inventoryWeight', 0)
+            # Max inventory weight (boxLength * 100, примерно)
+            box_length = user_data.get('boxLength', 0)
+            self.max_inventory_weight = box_length * 100 if box_length > 0 else 10000
             # Inventory
             if 'inventory' in user_data:
                 self.inventory = user_data['inventory']
@@ -162,6 +169,11 @@ class Player:
             self.stats.experience = player_data.get('userCurrentXP', self.stats.experience)
             self.stats.experience_to_next = player_data.get('userNextXP', self.stats.experience_to_next)
             self.morale = player_data.get('morale', getattr(self, 'morale', 0))
+            # Inventory weight
+            self.inventory_weight = player_data.get('inventoryWeight', 0)
+            # Max inventory weight (boxLength * 100, примерно)
+            box_length = player_data.get('boxLength', 0)
+            self.max_inventory_weight = box_length * 100 if box_length > 0 else 10000
             if 'inventory' in player_data:
                 self.inventory = player_data['inventory']
         

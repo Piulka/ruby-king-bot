@@ -135,6 +135,8 @@ class GameDisplay:
         skulls = player_data.get('skulls', 0)
         heal_potions = player_data.get('heal_potions', 0)
         mana_potions = player_data.get('mana_potions', player_data.get('mp_potions', 0))
+        inventory_weight = player_data.get('inventory_weight', 0)
+        max_inventory_weight = player_data.get('max_inventory_weight', 10000)
         
         content = f"""
 [bold]Статус игрока[/bold]
@@ -143,6 +145,7 @@ MP:   {mp_bar} {player_data.get('mp', 0)}/{player_data.get('max_mp', 0)} ({mp_pe
 MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
 [bold yellow]💰 Золото:[/bold yellow] [yellow]{gold}[/yellow]   [bold red]💀 Черепа:[/bold red] [red]{skulls}[/red]
 [bold red]🔴 Хилки:[/bold red] [red]{heal_potions}[/red]   [bold blue]🔵 Мана:[/bold blue] [blue]{mana_potions}[/blue]
+[bold cyan]🎒 Вес:[/bold cyan] [cyan]{inventory_weight}/{max_inventory_weight}[/cyan]
         """.strip()
         
         return Panel(content, title="[bold]Игрок[/bold]", border_style="green")
