@@ -15,7 +15,7 @@ class Settings:
     
     # Game Mechanics
     ATTACK_COOLDOWN = 5.1  # seconds between attacks
-    HEAL_COOLDOWN = 30  # seconds between healing potions
+    HEAL_COOLDOWN = 6  # seconds between healing potions
     REST_DURATION = 1200  # 20 minutes in seconds
     HEAL_THRESHOLD = 50  # HP percentage threshold for healing
     STAMINA_THRESHOLD = 0  # Stamina threshold for resting

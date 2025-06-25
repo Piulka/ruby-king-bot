@@ -273,7 +273,7 @@ def main():
                             current_mob_group = MobGroup(mob_data)
                             state_manager.change_state(GameState.COMBAT, f"Found {len(mob_data)} mobs")
                             mob_names = [mob['name'] for mob in mob_data]
-                            display.print_message(f"🎯 Found: {', '.join(mob_names)}", "success")
+                            display.print_message(f"🎯 Найдено: {', '.join(mob_names)}", "success")
                             
                             # Update player data from response
                             player_data = extract_player_data(result)
@@ -300,8 +300,9 @@ def main():
                             explore_done = True
                         
                     except Exception as e:
-                        display.print_message(f"Failed to explore territory: {e}", "error")
-                        break
+                        display.print_message(f"Network error: {e}. Waiting 60 seconds before retry...", "error")
+                        time.sleep(60)
+                        continue
                 else:
                     # Exploration done, wait for combat to finish
                     time.sleep(1)
@@ -317,24 +318,30 @@ def main():
                     display.print_message("No current target in mob group", "error")
                     break
                 
-                # Check if player needs healing
-                if player.hp < player.max_hp * 0.5 and player.can_heal(current_time):
+                # Использовать хилку, если (max_hp - hp) >= 100 и есть хилки
+                if (player.max_hp - player.hp) >= 100 and player.get_heal_potions_count() > 0 and player.can_heal(current_time):
                     try:
                         heal_result = api_client.use_healing_potion()
                         log_api_response(heal_result, context="use_healing_potion")
                         player.record_heal(current_time)
-                        display.print_message(f"💚 HP: {player.hp}/{player.max_hp}", "success")
+                        remaining_heals = player.get_heal_potions_count()
+                        display.print_message(f"🔴 Использовал хилку! HP: {player.hp}/{player.max_hp} (осталось {remaining_heals} банок)", "success")
                     except Exception as e:
-                        display.print_message(f"Failed to use healing potion: {e}", "error")
+                        display.print_message(f"Network error: {e}. Waiting 60 seconds before retry...", "error")
+                        time.sleep(60)
+                        continue
                 
-                # Use mana potion if mp < 50 and there are mana potions
-                if player.mp < 50 and player.get_mana_potions_count() > 0:
+                # Использовать банку маны, если (max_mp - mp) >= 60 и есть банки маны
+                if (player.max_mp - player.mp) >= 60 and player.get_mana_potions_count() > 0:
                     try:
                         mana_result = api_client.use_mana_potion()
                         log_api_response(mana_result, context="use_mana_potion")
-                        display.print_message(f"🔵 MP: {player.mp}/{player.max_mp}", "success")
+                        remaining_mana = player.get_mana_potions_count()
+                        display.print_message(f"🔵 Использовал банку маны! MP: {player.mp}/{player.max_mp} (осталось {remaining_mana} банок)", "success")
                     except Exception as e:
-                        display.print_message(f"Failed to use mana potion: {e}", "error")
+                        display.print_message(f"Network error: {e}. Waiting 60 seconds before retry...", "error")
+                        time.sleep(60)
+                        continue
                 
                 # Attack mob
                 if player.can_attack(current_time):
@@ -375,7 +382,7 @@ def main():
                                     )
                                     exp_gained = result.get('dataWin', {}).get('expWin', 0)
                                     gold_gained = sum(item.get('count', 0) for item in drop_data if item.get('id') == 'm_0_1')
-                                    display.print_message(f"🎉 All mobs defeated! +{exp_gained} XP, +{gold_gained} Gold", "success")
+                                    display.print_message(f"🎉 Все враги побеждены! +{exp_gained} опыта, +{gold_gained} золота", "success")
                                     state_manager.change_state(GameState.CITY, "Combat ended - all mobs defeated")
                                     current_mob_group = None
                                     explore_done = False  # Reset exploration flag
@@ -407,11 +414,11 @@ def main():
                                     
                                     # Show combined combat result
                                     if player_damage > 0 and mob_damage > 0:
-                                        display.print_message(f"⚔️ {current_target.name}: игрок {player_damage} dmg, получил {mob_damage} dmg", "info")
+                                        display.print_message(f"⚔️ {current_target.name}: игрок {player_damage} урона, получил {mob_damage} урона", "info")
                                     elif player_damage > 0:
-                                        display.print_message(f"⚔️ {current_target.name}: игрок {player_damage} dmg", "info")
+                                        display.print_message(f"⚔️ {current_target.name}: игрок {player_damage} урона", "info")
                                     elif mob_damage > 0:
-                                        display.print_message(f"⚔️ {current_target.name}: получил {mob_damage} dmg", "info")
+                                        display.print_message(f"⚔️ {current_target.name}: получил {mob_damage} урона", "info")
                                 
                                 # Check if current target died (HP = 0 or killed in logs)
                                 if current_target.hp <= 0 or mob_killed:
@@ -464,7 +471,7 @@ def main():
                                             continue
                                     else:
                                         # All mobs defeated - show accumulated rewards
-                                        display.print_message(f"🎉 {current_target.name} defeated!", "success")
+                                        display.print_message(f"🎉 Все враги побеждены! +{exp_gained} опыта, +{gold_gained} золота", "success")
                                         
                                         # Update drops tracking with accumulated drops
                                         if accumulated_drops:
@@ -476,7 +483,7 @@ def main():
                                             session_gold=gold_gained
                                         )
                                         
-                                        display.print_message(f"🎉 All mobs defeated! +{exp_gained} XP, +{gold_gained} Gold", "success")
+                                        display.print_message(f"🎉 Все враги побеждены! +{exp_gained} опыта, +{gold_gained} золота", "success")
                                         state_manager.change_state(GameState.CITY, "Combat ended - all mobs defeated")
                                         current_mob_group = None
                                         explore_done = False  # Reset exploration flag
@@ -484,8 +491,9 @@ def main():
                                         continue
                         
                     except Exception as e:
-                        display.print_message(f"Attack failed: {e}", "error")
-                        break
+                        display.print_message(f"Network error: {e}. Waiting 60 seconds before retry...", "error")
+                        time.sleep(60)
+                        continue
                 else:
                     # Wait for attack cooldown
                     time.sleep(0.5)
