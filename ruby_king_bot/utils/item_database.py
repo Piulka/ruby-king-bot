@@ -134,7 +134,11 @@ def get_item_emoji(item_id: str) -> str:
         "jew_3": "📿",      # Амулет
     }
     
-    return emoji_map.get(item_id, "❓")
+    emoji = emoji_map.get(item_id, "❓")
+    # Гарантируем пробел после эмодзи
+    if not emoji.endswith(' '):
+        emoji = emoji + ' '
+    return emoji
 
 def format_item_display_with_emoji(item_id: str, count: int = 1) -> str:
     """
@@ -151,6 +155,6 @@ def format_item_display_with_emoji(item_id: str, count: int = 1) -> str:
     emoji = get_item_emoji(item_id)
     
     if count == 1:
-        return f"{emoji} {item_name}"
+        return f"{emoji}{item_name}"
     else:
-        return f"{emoji} {item_name} x{count}" 
+        return f"{emoji}{item_name} x{count}" 

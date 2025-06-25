@@ -11,6 +11,7 @@ from rich.live import Live
 from rich.layout import Layout
 from datetime import datetime, timedelta
 import json
+from collections import Counter
 
 # Add project root to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -18,7 +19,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from ruby_king_bot.api.client import APIClient
 from ruby_king_bot.core.game_state import GameState, GameStateManager
 from ruby_king_bot.core.player import Player
-from ruby_king_bot.core.mob import Mob
+from ruby_king_bot.core.mob import Mob, MobGroup
 from ruby_king_bot.ui.display import GameDisplay
 
 console = Console()
@@ -46,19 +47,20 @@ def extract_mob_data(response_data):
         response_data: API response data
         
     Returns:
-        Mob data dictionary or None
+        List of mob data dictionaries or None
     """
+    mobs_found = []
+    
     # Try different possible locations for mob data
     if isinstance(response_data, dict):
         # Direct mob data
         if 'mob' in response_data:
             mob_list = response_data['mob']
             if isinstance(mob_list, list) and len(mob_list) > 0:
-                if len(mob_list) > 1:
-                    print(f"DEBUG: Found {len(mob_list)} mobs, using first one")
-                return mob_list[0]  # Return first mob from list
+                print(f"DEBUG: Found {len(mob_list)} mobs in direct mob field")
+                mobs_found.extend(mob_list)
             elif isinstance(mob_list, dict):
-                return mob_list
+                mobs_found.append(mob_list)
         
         # Check if response contains farm data
         if 'farm' in response_data and isinstance(response_data['farm'], list):
@@ -66,11 +68,14 @@ def extract_mob_data(response_data):
                 if isinstance(farm_item, dict) and 'mob' in farm_item:
                     mob_data = farm_item['mob']
                     if isinstance(mob_data, list) and len(mob_data) > 0:
-                        if len(mob_data) > 1:
-                            print(f"DEBUG: Found {len(mob_data)} mobs in farm, using first one")
-                        return mob_data[0]
+                        print(f"DEBUG: Found {len(mob_data)} mobs in farm data")
+                        mobs_found.extend(mob_data)
                     elif isinstance(mob_data, dict):
-                        return mob_data
+                        mobs_found.append(mob_data)
+    
+    if mobs_found:
+        print(f"DEBUG: Total mobs found: {len(mobs_found)}")
+        return mobs_found
     
     return None
 
@@ -158,11 +163,16 @@ def main():
     player = Player()
     display = GameDisplay()
     
-    # Game state
-    current_mob = None
+    # Initialize game state
+    current_state = GameState.CITY
     explore_done = False
-    single_run = False  # Set to False for continuous mode - бот будет работать непрерывно
+    current_mob_group = None
     rest_end_time = None
+    
+    # Variables for accumulating rewards in multi-mob battles
+    accumulated_exp = 0
+    accumulated_gold = 0
+    accumulated_drops = []
     
     console.print("[green]Bot initialized successfully[/green]")
     console.print("[yellow]Continuous mode: Bot will explore territory after each victory[/yellow]")
@@ -186,18 +196,27 @@ def main():
                 'xp_next': player.stats.experience_to_next,
                 'gold': player.get_gold_count(),
                 'heal_potions': player.get_heal_potions_count(),
+                'mana_potions': player.get_mana_potions_count(),
                 'skulls': player.get_skulls_count(),
                 'morale': player.morale
             }
             
             mob_data = None
-            if current_mob:
-                mob_data = {
-                    'name': current_mob.name,
-                    'hp': current_mob.hp,
-                    'max_hp': current_mob.max_hp,
-                    'level': current_mob.level
-                }
+            mob_group_data = None
+            if current_mob_group:
+                current_target = current_mob_group.get_current_target()
+                if current_target:
+                    mob_data = {
+                        'name': current_target.name,
+                        'hp': current_target.hp,
+                        'max_hp': current_target.max_hp,
+                        'level': current_target.level
+                    }
+                
+                # Get all mobs for display
+                all_mobs = current_mob_group.get_all_mobs()
+                if len(all_mobs) > 1:
+                    mob_group_data = current_mob_group.get_all_mobs_with_status()
             
             # Calculate cooldowns
             attack_cooldown = max(0, player.attack_cooldown_end - current_time)
@@ -208,6 +227,7 @@ def main():
                 current_state=current_state.value,
                 player_data=player_data,
                 mob_data=mob_data,
+                mob_group_data=mob_group_data,
                 attack_cooldown=attack_cooldown,
                 heal_cooldown=heal_cooldown,
                 rest_time=rest_end_time,
@@ -249,17 +269,18 @@ def main():
                         
                         # Check if mob was found
                         mob_data = extract_mob_data(result)
-                        if isinstance(mob_data, dict):
-                            current_mob = Mob(mob_data)
-                            state_manager.change_state(GameState.COMBAT, f"Found mob: {current_mob.name}")
-                            display.print_message(f"🎯 Found: {current_mob.name}", "success")
+                        if isinstance(mob_data, list):
+                            current_mob_group = MobGroup(mob_data)
+                            state_manager.change_state(GameState.COMBAT, f"Found {len(mob_data)} mobs")
+                            mob_names = [mob['name'] for mob in mob_data]
+                            display.print_message(f"🎯 Found: {', '.join(mob_names)}", "success")
                             
                             # Update player data from response
                             player_data = extract_player_data(result)
                             if player_data:
                                 player.update_from_api_response({'player': player_data})
                         elif mob_data is not None:
-                            display.print_message(f"extract_mob_data вернул не словарь: {type(mob_data)}: {mob_data}", "error")
+                            display.print_message(f"extract_mob_data вернул не список: {type(mob_data)}: {mob_data}", "error")
                             break
                         else:
                             # Нет моба и нет текущего моба - это событие или пустая область
@@ -275,7 +296,7 @@ def main():
                             display.update_stats(events_found=display.stats['events_found'] + 1)
                         
                         # Устанавливаем explore_done = True только если нашли моба
-                        if isinstance(mob_data, dict):
+                        if isinstance(mob_data, list):
                             explore_done = True
                         
                     except Exception as e:
@@ -287,8 +308,13 @@ def main():
                     continue
             
             elif current_state == GameState.COMBAT:
-                if not current_mob:
-                    display.print_message("No mob in combat state", "error")
+                if not current_mob_group:
+                    display.print_message("No mob group in combat state", "error")
+                    break
+                
+                current_target = current_mob_group.get_current_target()
+                if not current_target:
+                    display.print_message("No current target in mob group", "error")
                     break
                 
                 # Check if player needs healing
@@ -301,10 +327,19 @@ def main():
                     except Exception as e:
                         display.print_message(f"Failed to use healing potion: {e}", "error")
                 
+                # Use mana potion if mp < 50 and there are mana potions
+                if player.mp < 50 and player.get_mana_potions_count() > 0:
+                    try:
+                        mana_result = api_client.use_mana_potion()
+                        log_api_response(mana_result, context="use_mana_potion")
+                        display.print_message(f"🔵 MP: {player.mp}/{player.max_mp}", "success")
+                    except Exception as e:
+                        display.print_message(f"Failed to use mana potion: {e}", "error")
+                
                 # Attack mob
                 if player.can_attack(current_time):
                     try:
-                        result = api_client.attack_mob(current_mob.farm_id)
+                        result = api_client.attack_mob(current_target.farm_id)
                         log_api_response(result, context="attack_mob")
                         player.record_attack(current_time)
                         
@@ -321,44 +356,39 @@ def main():
                                 # Check for victory status
                                 if result.get('statusBattle') == 'win':
                                     # Extract victory data
-                                    exp_gained = result.get('dataWin', {}).get('expWin', 0)
-                                    items = [item.get('id', 'Unknown') for item in result.get('dataWin', {}).get('drop', [])]
-                                    
-                                    # Update drops tracking
-                                    display.update_drops(result.get('dataWin', {}).get('drop', []))
-                                    
-                                    # Update killed mobs tracking
-                                    display.update_killed_mobs(current_mob.name)
-                                    
-                                    display.print_message(f"🎉 {current_mob.name} defeated! +{exp_gained} XP", "success")
+                                    arr_logs = result.get('arrLogs', [])
+                                    killed_names = []
+                                    for log_entry in arr_logs:
+                                        messages = log_entry.get('messages', [])
+                                        for message in messages:
+                                            if 'погиб' in message or 'погибла' in message:
+                                                killed_names.append(log_entry.get('defname', 'Unknown'))
+                                    for mob_name in killed_names:
+                                        display.update_killed_mobs(mob_name)
+                                    drop_data = result.get('dataWin', {}).get('drop', [])
+                                    if drop_data:
+                                        display.update_drops(drop_data)
                                     display.update_stats(
-                                        mobs_killed=display.stats['mobs_killed'] + 1,
-                                        total_exp=display.stats['total_exp'] + exp_gained
+                                        mobs_killed=display.stats['mobs_killed'] + len(killed_names),
+                                        total_exp=display.stats['total_exp'] + result.get('dataWin', {}).get('expWin', 0),
+                                        session_gold=display.stats['session_gold'] + sum(item.get('count', 0) for item in drop_data if item.get('id') == 'm_0_1')
                                     )
-                                    
-                                    state_manager.change_state(GameState.CITY, "Combat ended - mob defeated")
-                                    current_mob = None
+                                    exp_gained = result.get('dataWin', {}).get('expWin', 0)
+                                    gold_gained = sum(item.get('count', 0) for item in drop_data if item.get('id') == 'm_0_1')
+                                    display.print_message(f"🎉 All mobs defeated! +{exp_gained} XP, +{gold_gained} Gold", "success")
+                                    state_manager.change_state(GameState.CITY, "Combat ended - all mobs defeated")
+                                    current_mob_group = None
                                     explore_done = False  # Reset exploration flag
                                     time.sleep(2)  # Задержка перед новым исследованием
                                     continue
                                 
                                 # Update mob data from response
-                                current_mob.update_from_combat_response(result)
-                                    
-                                # Check if mob died (без начисления XP, так как это уже сделано выше)
-                                if current_mob.is_dead():
-                                    # Update killed mobs tracking
-                                    display.update_killed_mobs(current_mob.name)
-                                    
-                                    display.print_message(f"💀 {current_mob.name} defeated!", "success")
-                                    state_manager.change_state(GameState.CITY, "Combat ended - mob defeated")
-                                    current_mob = None
-                                    explore_done = False  # Reset exploration flag
-                                    time.sleep(2)  # Задержка перед новым исследованием
-                                    continue
+                                current_mob_group.update_from_combat_response(result)
                                 
                                 # Extract combat log from response and show combined message
                                 arr_logs = result.get('arrLogs', [])
+                                mob_killed = False
+                                
                                 if arr_logs:
                                     player_damage = 0
                                     mob_damage = 0
@@ -367,14 +397,91 @@ def main():
                                             player_damage = log_entry.get('damage', 0)
                                         else:  # Mob attack
                                             mob_damage = log_entry.get('damage', 0)
+                                        
+                                        # Check if mob was killed in this log entry
+                                        messages = log_entry.get('messages', [])
+                                        for message in messages:
+                                            if 'погиб' in message or 'погибла' in message:
+                                                mob_killed = True
+                                                break
                                     
                                     # Show combined combat result
                                     if player_damage > 0 and mob_damage > 0:
-                                        display.print_message(f"⚔️ {current_mob.name}: игрок {player_damage} dmg, получил {mob_damage} dmg", "info")
+                                        display.print_message(f"⚔️ {current_target.name}: игрок {player_damage} dmg, получил {mob_damage} dmg", "info")
                                     elif player_damage > 0:
-                                        display.print_message(f"⚔️ {current_mob.name}: игрок {player_damage} dmg", "info")
+                                        display.print_message(f"⚔️ {current_target.name}: игрок {player_damage} dmg", "info")
                                     elif mob_damage > 0:
-                                        display.print_message(f"⚔️ {current_mob.name}: получил {mob_damage} dmg", "info")
+                                        display.print_message(f"⚔️ {current_target.name}: получил {mob_damage} dmg", "info")
+                                
+                                # Check if current target died (HP = 0 or killed in logs)
+                                if current_target.hp <= 0 or mob_killed:
+                                    # Extract drop data from response
+                                    drop_data = result.get('drop', [])
+                                    exp_gained = result.get('expWin', 0)
+                                    
+                                    # If no expWin in main response, try to get from arrLogs
+                                    if exp_gained == 0 and arr_logs:
+                                        for log_entry in arr_logs:
+                                            if not log_entry.get('isMob', False):  # Player attack
+                                                # Try to extract exp from log entry
+                                                exp_gained = log_entry.get('exp', 0)
+                                                if exp_gained > 0:
+                                                    break
+                                    
+                                    # Calculate gold from drops
+                                    gold_gained = 0
+                                    if drop_data:
+                                        for item in drop_data:
+                                            item_id = item.get('id', '')
+                                            item_count = item.get('count', 1)
+                                            # Gold has ID 'm_0_1'
+                                            if item_id == 'm_0_1':
+                                                gold_gained += item_count
+                                    
+                                    # Update killed mobs tracking
+                                    arr_logs = result.get('arrLogs', [])
+                                    killed_names = []
+                                    for log_entry in arr_logs:
+                                        messages = log_entry.get('messages', [])
+                                        for message in messages:
+                                            if 'погиб' in message or 'погибла' in message:
+                                                killed_names.append(log_entry.get('defname', 'Unknown'))
+                                    for mob_name in killed_names:
+                                        display.update_killed_mobs(mob_name)
+                                    display.update_stats(
+                                        mobs_killed=display.stats['mobs_killed'] + len(killed_names),
+                                        total_exp=display.stats['total_exp'] + exp_gained,
+                                        session_gold=display.stats['session_gold'] + gold_gained
+                                    )
+                                    
+                                    # Check if there are more mobs to fight
+                                    if current_mob_group.has_more_targets():
+                                        # Intermediate mob kill - don't show rewards yet
+                                        display.print_message(f"💀 {current_target.name} defeated!", "success")
+                                        next_target = current_mob_group.switch_to_next_target()
+                                        if next_target:
+                                            display.print_message(f"🎯 Switching to next target: {next_target.name}", "info")
+                                            continue
+                                    else:
+                                        # All mobs defeated - show accumulated rewards
+                                        display.print_message(f"🎉 {current_target.name} defeated!", "success")
+                                        
+                                        # Update drops tracking with accumulated drops
+                                        if accumulated_drops:
+                                            display.update_drops(accumulated_drops)
+                                        
+                                        # Update statistics with accumulated rewards
+                                        display.update_stats(
+                                            total_exp=exp_gained,
+                                            session_gold=gold_gained
+                                        )
+                                        
+                                        display.print_message(f"🎉 All mobs defeated! +{exp_gained} XP, +{gold_gained} Gold", "success")
+                                        state_manager.change_state(GameState.CITY, "Combat ended - all mobs defeated")
+                                        current_mob_group = None
+                                        explore_done = False  # Reset exploration flag
+                                        time.sleep(2)  # Задержка перед новым исследованием
+                                        continue
                         
                     except Exception as e:
                         display.print_message(f"Attack failed: {e}", "error")

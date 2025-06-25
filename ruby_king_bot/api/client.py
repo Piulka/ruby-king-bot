@@ -194,4 +194,22 @@ class APIClient:
         logger.info("Ending rest at campfire...")
         result = self._make_request("POST", Endpoints.END_REST, data)
         
+        return result
+
+    def use_mana_potion(self) -> Dict[str, Any]:
+        """
+        Use mana potion to restore MP
+        """
+        data = {"elemId": "m_3"}
+        logger.info("Using mana potion...")
+        result = self._make_request("POST", Endpoints.USE_HEALING_POTION, data)
+        return result
+
+    def use_skill(self, mob_id: str) -> Dict[str, Any]:
+        """
+        Use skill on mob (skill_0_1)
+        """
+        data = {"mobId": mob_id, "skillId": "skill_0_1"}
+        logger.info(f"Using skill on mob: {mob_id}")
+        result = self._make_request("POST", Endpoints.ATTACK_MOB, data)
         return result 

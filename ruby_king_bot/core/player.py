@@ -289,4 +289,12 @@ class Player:
             skulls = self.inventory.get('m_0_2')
             if skulls and isinstance(skulls, dict):
                 return skulls.get('count', 0)
+        return 0
+    
+    def get_mana_potions_count(self) -> int:
+        """Возвращает количество банок маны (m_3) в инвентаре"""
+        if hasattr(self, 'inventory') and self.inventory:
+            potion = self.inventory.get('m_3')
+            if potion and isinstance(potion, dict):
+                return potion.get('count', 0)
         return 0 

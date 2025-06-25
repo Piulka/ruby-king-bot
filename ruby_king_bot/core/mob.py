@@ -3,9 +3,58 @@ Mob data management
 """
 
 import logging
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 
 logger = logging.getLogger(__name__)
+
+class MobGroup:
+    """Group of mobs in a single battle"""
+    
+    def __init__(self, mobs_data: List[Dict[str, Any]]):
+        self.mobs = [Mob(mob_data) for mob_data in mobs_data]
+        self.current_target_index = 0
+    
+    def get_current_target(self) -> Optional['Mob']:
+        """Get the current target mob"""
+        if 0 <= self.current_target_index < len(self.mobs):
+            return self.mobs[self.current_target_index]
+        return None
+    
+    def switch_to_next_target(self) -> Optional['Mob']:
+        """Switch to the next mob target"""
+        self.current_target_index += 1
+        return self.get_current_target()
+    
+    def has_more_targets(self) -> bool:
+        """Check if there are more mobs to fight"""
+        return self.current_target_index < len(self.mobs)
+    
+    def get_all_mobs(self) -> List['Mob']:
+        """Get all mobs in the group"""
+        return self.mobs
+    
+    def get_all_mobs_with_status(self) -> List[Dict[str, Any]]:
+        """Get all mobs with display status including is_dead flag"""
+        mobs_data = []
+        for i, mob in enumerate(self.mobs):
+            mobs_data.append({
+                'name': mob.name,
+                'hp': f"{mob.hp}/{mob.max_hp}",
+                'level': mob.level,
+                'is_current_target': i == self.current_target_index,
+                'is_dead': mob.hp <= 0
+            })
+        return mobs_data
+    
+    def update_from_combat_response(self, response_data: Dict[str, Any]):
+        """Update all mobs from combat response"""
+        current_target = self.get_current_target()
+        if current_target:
+            current_target.update_from_combat_response(response_data)
+    
+    def get_display_data(self) -> List[Dict[str, Any]]:
+        """Get display data for all mobs"""
+        return [mob.get_info() for mob in self.mobs]
 
 class Mob:
     """Mob enemy data and management"""
