@@ -25,13 +25,10 @@ class ExplorationHandler:
             API response data or None if exploration failed
         """
         try:
-            result = self.api_client.explore_territory()
-            self._log_api_response(result, "explore_territory")
+            explore_result = self.api_client.explore_territory()
+            self._log_api_response(explore_result, "explore_territory")
             
-            # Add delay after exploration request
-            time.sleep(1)
-            
-            return result
+            return explore_result
             
         except Exception as e:
             self.display.print_message(f"Network error: {e}. Waiting 60 seconds before retry...", "error")

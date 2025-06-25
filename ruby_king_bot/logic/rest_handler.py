@@ -25,13 +25,12 @@ class RestHandler:
             API response data or None if rest failed
         """
         try:
-            result = self.api_client.start_rest()
-            self._log_api_response(result, "start_rest")
+            rest_result = self.api_client.rest_at_fire()
+            self._log_api_response(rest_result, "rest_at_fire")
             
-            # Add delay after rest request
-            time.sleep(1)
+            self.display.print_message("🔥 Отдыхаем у костра...", "info")
             
-            return result
+            return rest_result
             
         except Exception as e:
             self.display.print_message(f"Network error: {e}. Waiting 60 seconds before retry...", "error")

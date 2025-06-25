@@ -35,7 +35,9 @@ class GameDisplay:
             'total_exp': 0,
             'session_gold': 0,
             'session_start': time.time(),
-            'events_found': 0
+            'events_found': 0,
+            'total_damage_dealt': 0,
+            'total_attacks': 0
         }
         
         # Message history
@@ -76,12 +78,12 @@ class GameDisplay:
             Layout(name="drops", ratio=1)  # Растягивается до блока сообщений
         )
     
-    def get_live_display(self, refresh_per_second: int = 4, screen: bool = True) -> Live:
+    def get_live_display(self, refresh_per_second: int = 1, screen: bool = True) -> Live:
         """
         Get live display context manager for the game engine
         
         Args:
-            refresh_per_second: Refresh rate for the display
+            refresh_per_second: Refresh rate for the display (default 1 per second)
             screen: Whether to use screen clearing
             
         Returns:
@@ -89,13 +91,25 @@ class GameDisplay:
         """
         return Live(self.layout, refresh_per_second=refresh_per_second, screen=screen)
     
+    def auto_refresh_display(self):
+        """Force display refresh - called every second"""
+        # This method can be called to force a display refresh
+        # The Live display will automatically refresh based on refresh_per_second
+        pass
+    
     def update_stats(self, **kwargs):
         """Update statistics"""
         for key, value in kwargs.items():
             if key in self.stats:
                 if key == 'mobs_killed':
-                    # Для mobs_killed используем переданное значение напрямую
-                    self.stats[key] = value
+                    # Для mobs_killed накапливаем за сессию
+                    self.stats[key] += value
+                elif key == 'total_exp':
+                    # Для опыта накапливаем за сессию
+                    self.stats[key] += value
+                elif key == 'session_gold':
+                    # Для золота накапливаем за сессию
+                    self.stats[key] += value
                 else:
                     # Для остальных параметров обновляем как обычно
                     self.stats[key] = value
@@ -132,7 +146,8 @@ class GameDisplay:
         
         title = f"[bold blue]{level_xp_text}[/bold blue] - [bold green]{player_name}[/bold green]"
         status_text = f"Состояние: [bold yellow]{current_state.upper()}[/bold yellow]"
-        time_text = f"Сессия: {self.format_time(int(time.time() - self.stats['session_start']))}"
+        session_time = self.format_time(int(time.time() - self.stats['session_start']))
+        time_text = f"[bold cyan]⏱️ Сессия: {session_time}[/bold cyan]"
         
         content = f"{title}\n{status_text} | {time_text}"
         return Panel(content, title="[bold]Статус игры[/bold]", border_style="blue")
@@ -171,7 +186,6 @@ MP:   {mp_bar} {player_data.get('mana', 0)}/{player_data.get('max_mana', 0)} ({m
 MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
 [bold yellow]💰 Золото:[/bold yellow] [yellow]{gold}[/yellow]   [bold red]💀 Черепа:[/bold red] [red]{skulls}[/red]
 [bold red]🔴 Хилки:[/bold red] [red]{heal_potions}[/red]   [bold blue]🔵 Мана:[/bold blue] [blue]{mana_potions}[/blue]
-[bold cyan]🎒 Вес:[/bold cyan] [cyan]{inventory_weight}/{max_inventory_weight}[/cyan]
         """.strip()
         
         return Panel(content, title="[bold]Игрок[/bold]", border_style="green", height=9)
@@ -258,16 +272,16 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
     def create_stats_table(self) -> Panel:
         """Create statistics panel"""
         session_time = int(time.time() - self.stats['session_start'])
-        mobs_per_hour = (self.stats['mobs_killed'] / max(session_time / 3600, 0.1))
+        avg_damage = self.get_average_damage()
         table = Table.grid(padding=(0,1))
         table.add_column(justify="left")
         table.add_column(justify="right")
+        table.add_row("Время сессии:", f"[bold cyan]{self.format_time(session_time)}[/bold cyan]")
         table.add_row("Убито врагов:", f"[green]{self.stats['mobs_killed']}")
-        table.add_row("Опыт:", f"[green]{self.stats['total_exp']}")
-        table.add_row("Время сессии:", f"[green]{self.format_time(session_time)}")
-        table.add_row("Врагов/час:", f"[green]{mobs_per_hour:.1f}")
+        table.add_row("Опыт за сессию:", f"[green]{self.stats['total_exp']}")
+        table.add_row("Золото за сессию:", f"[green]{self.stats.get('session_gold', 0)}")
+        table.add_row("Средний урон:", f"[yellow]{avg_damage:.1f}[/yellow]")
         table.add_row("Событий найдено:", f"[green]{self.stats.get('events_found', 0)}")
-        table.add_row("Золото:", f"[green]{self.stats.get('current_gold', self.stats.get('session_gold', 0))}")
         return Panel(table, title="[bold]Статистика[/bold]", border_style="blue", height=9)
     
     def create_timers(self, attack_cooldown: float = 0, heal_cooldown: float = 0, rest_time: Optional[float] = None) -> Panel:
@@ -440,66 +454,50 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
         """Create cooldowns panel"""
         from rich.text import Text
         
-        # Calculate global cooldown (GCD) - time since last combat action
-        current_time = time.time()
-        last_combat_time = max(self.last_attack_time, self.last_skill_time) if hasattr(self, 'last_attack_time') and hasattr(self, 'last_skill_time') else 0
-        gcd_time = max(0, 5.1 - (current_time - last_combat_time))  # 5.1s GCD
-        
         # Create table for aligned display
         table = Table.grid(padding=(0, 1))
         table.add_column(justify="left", width=8)   # Icon column
         table.add_column(justify="left", width=8)   # Name column  
         table.add_column(justify="right", width=8)  # Status column
         
-        # Global Cooldown (GCD)
-        gcd_status = "Готов" if gcd_time <= 0 else f"{gcd_time:.1f}s"
-        gcd_style = "green" if gcd_time <= 0 else "red"
-        table.add_row("⚡", "ГКД", f"[{gcd_style}]{gcd_status}[/{gcd_style}]")
-        
         # Attack cooldown
-        attack_status = "Готов" if attack_cooldown <= 0 else f"{attack_cooldown:.1f}s"
+        attack_status = "Готов" if attack_cooldown <= 0 else f"{int(attack_cooldown)}s"
         attack_style = "green" if attack_cooldown <= 0 else "red"
-        # Индикатор использованного навыка - если атака только что использовалась (КД > 0)
-        attack_icon = "⚔️" if attack_cooldown <= 0 else "⚔️🔥" if attack_cooldown > 4 else "⚔️"
+        # Индикатор использованного навыка - подсветка на 5 секунд
+        attack_icon = "⚔️🔥" if 0 < attack_cooldown <= 5 else "⚔️"
         table.add_row(attack_icon, "Атака", f"[{attack_style}]{attack_status}[/{attack_style}]")
         
         # Skill cooldown
-        skill_status = "Готов" if skill_cooldown <= 0 else f"{skill_cooldown:.1f}s"
+        skill_status = "Готов" if skill_cooldown <= 0 else f"{int(skill_cooldown)}s"
         skill_style = "green" if skill_cooldown <= 0 else "red"
-        # Индикатор использованного навыка - если скилл только что использовался (КД > 0)
-        skill_icon = "⚡" if skill_cooldown <= 0 else "⚡🔥" if skill_cooldown > 9 else "⚡"
+        # Индикатор использованного навыка - подсветка на 5 секунд
+        skill_icon = "⚡🔥" if 0 < skill_cooldown <= 5 else "⚡"
         table.add_row(skill_icon, "Скилл", f"[{skill_style}]{skill_status}[/{skill_style}]")
         
         # Heal cooldown
-        heal_status = "Готов" if heal_cooldown <= 0 else f"{heal_cooldown:.1f}s"
+        heal_status = "Готов" if heal_cooldown <= 0 else f"{int(heal_cooldown)}s"
         heal_style = "green" if heal_cooldown <= 0 else "red"
-        # Индикатор использованного навыка
-        heal_icon = "❤️" if heal_cooldown <= 0 else "❤️🔥" if heal_cooldown > 4 else "❤️"
+        # Индикатор использованного навыка - подсветка на 5 секунд
+        heal_icon = "❤️🔥" if 0 < heal_cooldown <= 5 else "❤️"
         table.add_row(heal_icon, "Лечение", f"[{heal_style}]{heal_status}[/{heal_style}]")
         
         # Mana cooldown
-        mana_status = "Готов" if mana_cooldown <= 0 else f"{mana_cooldown:.1f}s"
+        mana_status = "Готов" if mana_cooldown <= 0 else f"{int(mana_cooldown)}s"
         mana_style = "green" if mana_cooldown <= 0 else "red"
-        # Индикатор использованного навыка
-        mana_icon = "🔵" if mana_cooldown <= 0 else "🔵🔥" if mana_cooldown > 4 else "🔵"
+        # Индикатор использованного навыка - подсветка на 5 секунд
+        mana_icon = "🔵🔥" if 0 < mana_cooldown <= 5 else "🔵"
         table.add_row(mana_icon, "Мана", f"[{mana_style}]{mana_status}[/{mana_style}]")
         
-        # Rest timer
-        if rest_time:
-            remaining = max(0, rest_time - current_time)
-            if remaining > 0:
-                rest_status = f"{self.format_time(int(remaining))}"
-                rest_style = "yellow"
-                rest_icon = "🔥"
-            else:
-                rest_status = "Готов"
-                rest_style = "green"
-                rest_icon = "✅"
-        else:
-            rest_status = "Нет"
-            rest_style = "dim"
-            rest_icon = "🔥"
-        
-        table.add_row(rest_icon, "Отдых", f"[{rest_style}]{rest_status}[/{rest_style}]")
-        
-        return Panel(table, title="⏱️ КД", border_style="blue", height=9) 
+        return Panel(table, title="⏱️ КД", border_style="blue", height=9)
+    
+    def update_damage_stats(self, damage_dealt: int):
+        """Update damage statistics"""
+        if damage_dealt > 0:
+            self.stats['total_damage_dealt'] += damage_dealt
+            self.stats['total_attacks'] += 1
+    
+    def get_average_damage(self) -> float:
+        """Get average damage per attack"""
+        if self.stats['total_attacks'] > 0:
+            return self.stats['total_damage_dealt'] / self.stats['total_attacks']
+        return 0.0 

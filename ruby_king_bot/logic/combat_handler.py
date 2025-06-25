@@ -113,10 +113,6 @@ class CombatHandler:
             
             self.display.print_message("❤️ Использовал зелье лечения!", "success")
             
-            # Update display after action
-            self._update_display_after_action(None, None, current_time)
-            
-            time.sleep(1)  # Delay between requests - minimum 1 second
             return 'success'
             
         except Exception as e:
@@ -137,10 +133,6 @@ class CombatHandler:
             
             self.display.print_message("🔵 Использовал зелье маны!", "success")
             
-            # Update display after action
-            self._update_display_after_action(None, None, current_time)
-            
-            time.sleep(1)  # Delay between requests - minimum 1 second
             return 'success'
             
         except Exception as e:
@@ -156,7 +148,6 @@ class CombatHandler:
             skill_result = self.api_client.use_skill(current_target.farm_id)
             self._log_api_response(skill_result, "use_skill")
             self.player.record_skill(current_time)
-            self.display.print_message(f"⚡ Используем скилл против {current_target.name}...", "success")
             
             # Update player data from response
             self.player.update_from_api_response(skill_result)
@@ -167,10 +158,6 @@ class CombatHandler:
                 elif skill_result.get('status') == 'success':
                     return self._handle_combat_success(skill_result, current_target, mob_group, "skill")
             
-            # Update display after action
-            self._update_display_after_action(current_target, mob_group, current_time)
-            
-            time.sleep(1)  # Delay between requests - minimum 1 second
             return 'continue'
             
         except Exception as e:
@@ -180,7 +167,7 @@ class CombatHandler:
     
     def _use_attack(self, current_target: Mob, current_time: float, mob_group: MobGroup) -> Literal['victory', 'continue', 'failure']:
         """Use regular attack"""
-        self.display.print_message(f"⚔️ Атакуем {current_target.name}...", "info")
+        # Не выводим сообщение здесь, оно будет в _display_combat_results
         
         try:
             attack_result = self.api_client.attack_mob(current_target.farm_id)
@@ -193,10 +180,6 @@ class CombatHandler:
                 elif attack_result.get('status') == 'success':
                     return self._handle_combat_success(attack_result, current_target, mob_group, "attack")
             
-            # Update display after action
-            self._update_display_after_action(current_target, mob_group, current_time)
-            
-            time.sleep(1)  # Delay between requests - minimum 1 second
             return 'continue'
             
         except Exception as e:
@@ -217,6 +200,10 @@ class CombatHandler:
     
     def _handle_combat_success(self, result: Dict[str, Any], current_target: Mob, mob_group: MobGroup, action_type: str) -> Literal['victory', 'continue']:
         """Handle successful combat action"""
+        # Get damage from arrLogs first
+        damage_dealt = self._extract_damage_dealt(result)
+        damage_received = self._extract_damage_received(result)
+        
         # Update mob HP from response
         if "mob" in result:
             mob_data = result["mob"]
@@ -224,13 +211,20 @@ class CombatHandler:
                 old_hp = current_target.hp
                 current_target.hp = mob_data.get("hp", current_target.hp)
                 current_target.max_hp = mob_data.get("maxHp", current_target.max_hp)
-                damage_dealt = old_hp - current_target.hp
                 
-                # Get damage received from arrLogs
-                damage_received = self._extract_damage_received(result)
+                # If we couldn't get damage from arrLogs, calculate from HP difference
+                if damage_dealt == 0:
+                    damage_dealt = old_hp - current_target.hp
                 
                 # Display combat results
                 self._display_combat_results(action_type, damage_dealt, damage_received, current_target)
+        else:
+            # No mob data, but we still have damage info - display it
+            if current_target:
+                self._display_combat_results(action_type, damage_dealt, damage_received, current_target)
+            else:
+                # No current target, but we have damage - display basic info
+                self._display_basic_combat_results(action_type, damage_dealt, damage_received)
         
         # Check for victory
         if result.get('statusBattle') == 'win':
@@ -254,10 +248,6 @@ class CombatHandler:
                 # All mobs dead but statusBattle not 'win' - treat as victory
                 return self._handle_victory(result, mob_group)
         
-        # Update display after processing combat results
-        current_time = time.time()
-        self._update_display_after_action(current_target, mob_group, current_time)
-        
         return 'continue'
     
     def _extract_damage_received(self, result: Dict[str, Any]) -> int:
@@ -265,6 +255,11 @@ class CombatHandler:
         damage_received = 0
         arr_logs = result.get('arrLogs', [])
         for log_entry in arr_logs:
+            # Проверяем поле damage в log_entry
+            if 'damage' in log_entry:
+                damage_received = log_entry.get('damage', 0)
+                break
+            # Также проверяем messages на случай если damage нет
             messages = log_entry.get('messages', [])
             for message in messages:
                 if 'наносит' in message and 'урон' in message:
@@ -274,46 +269,62 @@ class CombatHandler:
                         break
         return damage_received
     
+    def _extract_damage_dealt(self, result: Dict[str, Any]) -> int:
+        """Extract damage dealt from combat logs"""
+        damage_dealt = 0
+        arr_logs = result.get('arrLogs', [])
+        for log_entry in arr_logs:
+            # Проверяем поле damage в log_entry
+            if 'damage' in log_entry:
+                damage_dealt = log_entry.get('damage', 0)
+                break
+        return damage_dealt
+    
     def _display_combat_results(self, action_type: str, damage_dealt: int, damage_received: int, current_target: Mob):
         """Display combat results"""
         action_icon = "⚡" if action_type == "skill" else "⚔️"
         action_name = "Скилл" if action_type == "skill" else "Атака"
         
+        # Update damage statistics only for regular attacks
+        if action_type == "attack":
+            self.display.update_damage_stats(damage_dealt)
+        
+        # Формируем сообщение с уроном в одной строке
         if damage_dealt > 0:
             if damage_received > 0:
-                self.display.print_message(
-                    f"{action_icon} {action_name}: нанес {damage_dealt} урона, получил {damage_received} урона. "
-                    f"{current_target.name} HP: {current_target.hp}/{current_target.max_hp}", 
-                    "success"
-                )
+                message = f"{action_icon} {action_name} по [bold cyan]{current_target.name}[/bold cyan]: нанес [bold red]{damage_dealt}[/bold red] урона, получил [bold red]{damage_received}[/bold red] урона."
             else:
-                self.display.print_message(
-                    f"{action_icon} {action_name} нанесла {damage_dealt} урона {current_target.name}! "
-                    f"HP: {current_target.hp}/{current_target.max_hp}", 
-                    "success"
-                )
+                message = f"{action_icon} {action_name} по [bold cyan]{current_target.name}[/bold cyan]: нанес [bold red]{damage_dealt}[/bold red] урона."
         else:
             if damage_received > 0:
-                self.display.print_message(
-                    f"{action_icon} {action_name} по {current_target.name} - промах! "
-                    f"Получил {damage_received} урона. HP: {current_target.hp}/{current_target.max_hp}", 
-                    "warning"
-                )
+                message = f"{action_icon} {action_name} по [bold cyan]{current_target.name}[/bold cyan]: промах! Получил [bold red]{damage_received}[/bold red] урона."
             else:
-                self.display.print_message(
-                    f"{action_icon} {action_name} по {current_target.name} - промах! "
-                    f"HP: {current_target.hp}/{current_target.max_hp}", 
-                    "warning"
-                )
+                message = f"{action_icon} {action_name} по [bold cyan]{current_target.name}[/bold cyan]: промах!"
+        
+        # Определяем уровень сообщения
+        level = "success" if damage_dealt > 0 else "warning"
+        self.display.print_message(message, level)
     
     def _handle_victory(self, result: Dict[str, Any], mob_group: MobGroup) -> Literal['victory']:
         """Handle combat victory"""
-        # Count dead mobs
-        dead_mobs_count = 0
-        for mob in mob_group.get_all_mobs():
-            if mob.hp <= 0:
-                dead_mobs_count += 1
-                self.display.update_killed_mobs(mob.name)
+        # Extract mob information from arrLogs
+        arr_logs = result.get('arrLogs', [])
+        killed_mobs = {}
+        
+        for log_entry in arr_logs:
+            def_name = log_entry.get('defname', '')
+            if def_name and log_entry.get('winAll', False):
+                # This mob was killed
+                if def_name in killed_mobs:
+                    killed_mobs[def_name] += 1
+                else:
+                    killed_mobs[def_name] = 1
+        
+        # Update killed mobs statistics
+        total_killed = 0
+        for mob_name, count in killed_mobs.items():
+            self.display.update_killed_mobs(mob_name, count)
+            total_killed += count
         
         # Process drops
         drop_data = result.get('dataWin', {}).get('drop', [])
@@ -324,15 +335,15 @@ class CombatHandler:
         exp_gained = result.get('dataWin', {}).get('expWin', 0)
         gold_gained = sum(item.get('count', 0) for item in drop_data if item.get('id') == 'm_0_1')
         
-        # Update statistics
+        # Update statistics - добавляем к существующим значениям
         self.display.update_stats(
-            mobs_killed=dead_mobs_count,
+            mobs_killed=total_killed,
             total_exp=exp_gained,
             session_gold=gold_gained
         )
         
         self.display.print_message(
-            f"🎉 Все враги побеждены! Убито мобов: {dead_mobs_count}, "
+            f"🎉 Все враги побеждены! Убито мобов: {total_killed}, "
             f"+{exp_gained} опыта, +{gold_gained} золота", 
             "success"
         )
@@ -395,4 +406,29 @@ class CombatHandler:
         self.display.update_stats(
             current_gold=self.player.get_gold_count(),
             current_skulls=self.player.get_skulls_count()
-        ) 
+        )
+    
+    def _display_basic_combat_results(self, action_type: str, damage_dealt: int, damage_received: int):
+        """Display basic combat results when no mob data is available"""
+        action_icon = "⚡" if action_type == "skill" else "⚔️"
+        action_name = "Скилл" if action_type == "skill" else "Атака"
+        
+        # Update damage statistics only for regular attacks
+        if action_type == "attack":
+            self.display.update_damage_stats(damage_dealt)
+        
+        # Формируем сообщение с уроном в одной строке
+        if damage_dealt > 0:
+            if damage_received > 0:
+                message = f"{action_icon} {action_name}: нанес [bold red]{damage_dealt}[/bold red] урона, получил [bold red]{damage_received}[/bold red] урона"
+            else:
+                message = f"{action_icon} {action_name}: нанес [bold red]{damage_dealt}[/bold red] урона"
+        else:
+            if damage_received > 0:
+                message = f"{action_icon} {action_name}: промах! Получил [bold red]{damage_received}[/bold red] урона"
+            else:
+                message = f"{action_icon} {action_name}: промах!"
+        
+        # Определяем уровень сообщения
+        level = "success" if damage_dealt > 0 else "warning"
+        self.display.print_message(message, level) 

@@ -198,12 +198,16 @@ class GameEngine:
                     # If skill was used successfully, continue to combat state
                 
                 self.state_manager.change_state(GameState.COMBAT, "Mobs found")
-                self.explore_done = True
+                self.explore_done = True  # Set flag only for mobs found
             else:
-                self.display.print_message("🔍 Исследуем территорию...", "info")
-        else:
-            # Exploration done, wait for combat to finish
-            time.sleep(1)
+                # No mobs found - this means an event was found
+                self.display.print_message("🎯 Найдено событие или пустая область", "info")
+                # Update events counter
+                self.display.update_stats(events_found=1)
+                # Don't set explore_done = True for events - continue exploring
+            
+            # Add delay after API request
+            time.sleep(1.1)
     
     def _should_use_skill_after_exploration(self, current_target, current_time: float) -> bool:
         """Check if skill should be used immediately after exploration"""
@@ -224,6 +228,8 @@ class GameEngine:
         elif 'Очень быстро совершаете действия' in message:
             self.display.print_message("⏱️ Actions too fast, waiting 5 seconds...", "warning")
             time.sleep(5)
+            # Reset exploration flag to try again
+            self.explore_done = False
         elif 'Неверное местонахождения' in message:
             self.display.print_message("📍 Location error, waiting 10 seconds...", "warning")
             time.sleep(10)
@@ -252,8 +258,8 @@ class GameEngine:
             # Combat ended with victory
             self._handle_combat_victory()
         elif combat_result == 'continue':
-            # Combat continues
-            pass
+            # Combat continues - add delay after API request
+            time.sleep(1.1)
         else:
             # Combat ended with failure
             self._handle_combat_failure()
@@ -263,7 +269,6 @@ class GameEngine:
         self.state_manager.change_state(GameState.CITY, "Combat ended - victory")
         self.current_mob_group = None
         self.explore_done = False  # Reset exploration flag
-        time.sleep(2)  # Delay before new exploration
     
     def _handle_combat_failure(self):
         """Handle combat failure"""
@@ -271,7 +276,6 @@ class GameEngine:
         self.current_mob_group = None
         self.explore_done = False  # Reset exploration flag
         self.display.print_message("🔄 Начинаем новое исследование...", "info")
-        time.sleep(2)  # Delay before new exploration
     
     def _handle_resting_state(self, current_time: float):
         """Handle resting state"""
@@ -285,9 +289,6 @@ class GameEngine:
             self.display.print_message("No rest time set, returning to city", "warning")
             self.state_manager.change_state(GameState.CITY, "No rest time set")
             self.explore_done = False  # Reset exploration flag
-        else:
-            # Still resting
-            time.sleep(1)
     
     def _initialize_player_data(self):
         """Initialize player data from API"""
