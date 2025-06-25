@@ -187,7 +187,7 @@ class GameEngine:
                 # Check and use skill immediately after exploration if conditions are met
                 current_time = time.time()
                 if current_target and self._should_use_skill_after_exploration(current_target, current_time):
-                    self.display.print_message("⚡ Проверяем возможность использования скилла...", "info")
+                    self.display.print_message("⚡ Проверяем возможность использования усиленного удара...", "info")
                     skill_result = self.combat_handler._use_skill(current_target, current_time, self.current_mob_group)
                     if skill_result == 'victory':
                         self._handle_combat_victory()
@@ -205,9 +205,6 @@ class GameEngine:
                 # Update events counter
                 self.display.update_stats(events_found=1)
                 # Don't set explore_done = True for events - continue exploring
-            
-            # Add delay after API request
-            time.sleep(1.1)
     
     def _should_use_skill_after_exploration(self, current_target, current_time: float) -> bool:
         """Check if skill should be used immediately after exploration"""
@@ -247,6 +244,24 @@ class GameEngine:
             self.display.print_message("No current target in mob group", "error")
             return
         
+        # Check if low damage situation was detected
+        if self.combat_handler.low_damage_handled:
+            # Handle low damage situation
+            result = self.combat_handler.low_damage_handler.handle_low_damage_situation(
+                current_target, 
+                self.current_mob_group, 
+                current_time
+            )
+            
+            if result:
+                # Low damage handling completed, reset flag and continue normal flow
+                self.combat_handler.low_damage_handled = False
+                self.combat_handler._reset_low_damage_tracking()
+                self.state_manager.change_state(GameState.CITY, "Low damage handling completed")
+                self.current_mob_group = None
+                self.explore_done = False
+                return
+        
         # Handle combat actions
         combat_result = self.combat_handler.handle_combat_round(
             current_target, 
@@ -258,8 +273,8 @@ class GameEngine:
             # Combat ended with victory
             self._handle_combat_victory()
         elif combat_result == 'continue':
-            # Combat continues - add delay after API request
-            time.sleep(1.1)
+            # Combat continues
+            pass
         else:
             # Combat ended with failure
             self._handle_combat_failure()

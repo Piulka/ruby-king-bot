@@ -7,9 +7,9 @@ import logging
 from typing import Dict, Any, Optional
 import requests
 
-from config.settings import Settings
-from config.token import GAME_TOKEN
-from api.endpoints import Endpoints
+from ruby_king_bot.config.settings import Settings
+from ruby_king_bot.config.token import GAME_TOKEN
+from ruby_king_bot.api.endpoints import Endpoints
 
 logger = logging.getLogger(__name__)
 
@@ -224,4 +224,86 @@ class APIClient:
         """
         logger.info("Getting user info...")
         result = self._make_request("GET", Endpoints.USER_INFO)
+        return result
+    
+    def sell_items(self, items: list) -> Dict[str, Any]:
+        """
+        Sell items
+        
+        Args:
+            items: List of item IDs to sell
+            
+        Returns:
+            Response data with sell results
+        """
+        data = {"items": items}
+        logger.info(f"Selling items: {items}")
+        result = self._make_request("POST", Endpoints.SELL_ITEMS, data)
+        return result
+    
+    def buy_items(self, item_id: str, count: int) -> Dict[str, Any]:
+        """
+        Buy items
+        
+        Args:
+            item_id: ID of item to buy
+            count: Number of items to buy
+            
+        Returns:
+            Response data with buy results
+        """
+        data = {"itemId": item_id, "count": count}
+        logger.info(f"Buying {count} of item: {item_id}")
+        result = self._make_request("POST", Endpoints.BUY_ITEMS, data)
+        return result
+    
+    def change_main_geo(self, position: str) -> Dict[str, Any]:
+        """
+        Change main geographical position (city/farm)
+        
+        Args:
+            position: Position to change to ("city" or "farm")
+            
+        Returns:
+            Response data with position change results
+        """
+        data = {"position": position}
+        logger.info(f"Changing main geo to: {position}")
+        result = self._make_request("POST", Endpoints.CHANGE_MAIN_GEO, data)
+        return result
+    
+    def change_geo(self, loco: str, direction: str, type_action: str = "change") -> Dict[str, Any]:
+        """
+        Change geographical location within farm
+        
+        Args:
+            loco: Location name (e.g., "loco_3")
+            direction: Direction (e.g., "south", "north")
+            type_action: Action type (default: "change")
+            
+        Returns:
+            Response data with location change results
+        """
+        data = {
+            "loco": loco,
+            "direction": direction,
+            "typeAction": type_action
+        }
+        logger.info(f"Changing geo to {loco} {direction}")
+        result = self._make_request("POST", Endpoints.CHANGE_GEO, data)
+        return result
+    
+    def change_square(self, square: str) -> Dict[str, Any]:
+        """
+        Change square within current location
+        
+        Args:
+            square: Square position (e.g., "G4", "G3")
+            
+        Returns:
+            Response data with square change results
+        """
+        data = {"square": square}
+        logger.info(f"Changing square to: {square}")
+        result = self._make_request("POST", Endpoints.CHANGE_SQUARE, data)
         return result 

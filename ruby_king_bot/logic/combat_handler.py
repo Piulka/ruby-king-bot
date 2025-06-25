@@ -12,6 +12,7 @@ from ruby_king_bot.api.client import APIClient
 from ruby_king_bot.ui.display import GameDisplay
 from ruby_king_bot.config.settings import Settings
 from ruby_king_bot.logic.data_extractor import DataExtractor
+from ruby_king_bot.logic.low_damage_handler import LowDamageHandler
 
 logger = logging.getLogger(__name__)
 
@@ -23,9 +24,16 @@ class CombatHandler:
         self.player = player
         self.display = display
         self.data_extractor = DataExtractor()
+        self.low_damage_handler = LowDamageHandler(api_client, player, display)
         
         # Combat state
         self.skill_used = False  # Flag to track if skill was used in current round
+        
+        # Low damage tracking
+        self.low_damage_count = 0  # Count of consecutive low damage attacks
+        self.last_attack_damages = []  # Last 3 attack damages
+        self.combat_paused = False  # Flag to pause combat
+        self.low_damage_handled = False  # Flag to track if low damage was handled
     
     def handle_combat_round(self, current_target: Mob, current_time: float, mob_group: MobGroup) -> Literal['victory', 'continue', 'failure']:
         """
@@ -42,6 +50,11 @@ class CombatHandler:
             'failure' if combat ended with failure
         """
         self.skill_used = False  # Reset flag at start of round
+        
+        # Check if combat is paused due to low damage
+        if self.combat_paused:
+            time.sleep(1)
+            return 'continue'
         
         # 1. Check and use healing potion
         if self._should_use_heal_potion(current_time):
@@ -73,8 +86,7 @@ class CombatHandler:
             elif attack_result == 'failure':
                 return 'failure'
         
-        # 5. Wait for cooldowns
-        time.sleep(1)
+        # 5. Return immediately - no sleep here, main loop handles timing
         return 'continue'
     
     def _should_use_heal_potion(self, current_time: float) -> bool:
@@ -112,6 +124,7 @@ class CombatHandler:
                 self.player.update_from_api_response(heal_result)
             
             self.display.print_message("❤️ Использовал зелье лечения!", "success")
+            self.display.update_stats(hp_potions_used=1)
             
             return 'success'
             
@@ -132,6 +145,7 @@ class CombatHandler:
                 self.player.update_from_api_response(mana_result)
             
             self.display.print_message("🔵 Использовал зелье маны!", "success")
+            self.display.update_stats(mp_potions_used=1)
             
             return 'success'
             
@@ -204,6 +218,10 @@ class CombatHandler:
         damage_dealt = self._extract_damage_dealt(result)
         damage_received = self._extract_damage_received(result)
         
+        # Update player data from response (for accurate HP tracking)
+        if "user" in result:
+            self.player.update_from_api_response(result)
+        
         # Update mob HP from response
         if "mob" in result:
             mob_data = result["mob"]
@@ -213,7 +231,7 @@ class CombatHandler:
                 current_target.max_hp = mob_data.get("maxHp", current_target.max_hp)
                 
                 # If we couldn't get damage from arrLogs, calculate from HP difference
-                if damage_dealt == 0:
+                if damage_dealt == 0 and old_hp > current_target.hp:
                     damage_dealt = old_hp - current_target.hp
                 
                 # Display combat results
@@ -253,20 +271,39 @@ class CombatHandler:
     def _extract_damage_received(self, result: Dict[str, Any]) -> int:
         """Extract damage received from combat logs"""
         damage_received = 0
-        arr_logs = result.get('arrLogs', [])
-        for log_entry in arr_logs:
-            # Проверяем поле damage в log_entry
-            if 'damage' in log_entry:
-                damage_received = log_entry.get('damage', 0)
-                break
-            # Также проверяем messages на случай если damage нет
-            messages = log_entry.get('messages', [])
-            for message in messages:
-                if 'наносит' in message and 'урон' in message:
-                    damage_match = re.search(r'наносит (\d+) урон', message)
-                    if damage_match:
-                        damage_received = int(damage_match.group(1))
-                        break
+        
+        # First try to get damage from user data (most accurate)
+        if "user" in result:
+            user_data = result["user"]
+            old_hp = self.player.hp
+            new_hp = user_data.get("hp", old_hp)
+            if old_hp > new_hp:
+                damage_received = old_hp - new_hp
+        
+        # If no damage from user data, try arrLogs
+        if damage_received == 0:
+            arr_logs = result.get('arrLogs', [])
+            for log_entry in arr_logs:
+                # Ищем урон, нанесенный мобом игроку (isMob: true, defname: "Piulok")
+                if log_entry.get('isMob') == True and log_entry.get('defname') == 'Piulok':
+                    damage_received = log_entry.get('damage', 0)
+                    break
+                # Также проверяем messages на случай если структура другая
+                messages = log_entry.get('messages', [])
+                for message in messages:
+                    # Ищем сообщения типа "моб наносит X урон игроку"
+                    if 'наносит' in message and 'урон' in message and 'вам' in message:
+                        damage_match = re.search(r'наносит (\d+) урон', message)
+                        if damage_match:
+                            damage_received = int(damage_match.group(1))
+                            break
+                    # Альтернативный поиск - урон от моба
+                    elif 'наносит' in message and 'урон' in message and not 'вы' in message:
+                        damage_match = re.search(r'наносит (\d+) урон', message)
+                        if damage_match:
+                            damage_received = int(damage_match.group(1))
+                            break
+        
         return damage_received
     
     def _extract_damage_dealt(self, result: Dict[str, Any]) -> int:
@@ -278,16 +315,27 @@ class CombatHandler:
             if 'damage' in log_entry:
                 damage_dealt = log_entry.get('damage', 0)
                 break
+            # Также проверяем messages на случай если damage нет
+            messages = log_entry.get('messages', [])
+            for message in messages:
+                if 'наносит' in message and 'урон' in message:
+                    damage_match = re.search(r'наносит (\d+) урон', message)
+                    if damage_match:
+                        damage_dealt = int(damage_match.group(1))
+                        break
         return damage_dealt
     
     def _display_combat_results(self, action_type: str, damage_dealt: int, damage_received: int, current_target: Mob):
         """Display combat results"""
         action_icon = "⚡" if action_type == "skill" else "⚔️"
-        action_name = "Скилл" if action_type == "skill" else "Атака"
+        action_name = "[yellow]Усиленный удар[/yellow]" if action_type == "skill" else "[cyan]Атака[/cyan]"
         
         # Update damage statistics only for regular attacks
         if action_type == "attack":
             self.display.update_damage_stats(damage_dealt)
+            
+            # Check for low damage pattern
+            self._check_low_damage_pattern(damage_dealt)
         
         # Формируем сообщение с уроном в одной строке
         if damage_dealt > 0:
@@ -305,8 +353,43 @@ class CombatHandler:
         level = "success" if damage_dealt > 0 else "warning"
         self.display.print_message(message, level)
     
+    def _check_low_damage_pattern(self, damage_dealt: int):
+        """Check if damage is consistently low and handle low damage situation"""
+        if damage_dealt > 0:  # Only check actual hits
+            self.last_attack_damages.append(damage_dealt)
+            
+            # Keep only last 3 attacks
+            if len(self.last_attack_damages) > 3:
+                self.last_attack_damages = self.last_attack_damages[-3:]
+            
+            # Check if we have 3 consecutive attacks
+            if len(self.last_attack_damages) == 3:
+                average_damage = self.display.get_average_damage()
+                
+                # Check if all 3 attacks are less than half of average
+                if average_damage > 0 and all(damage <= average_damage / 2 for damage in self.last_attack_damages):
+                    if not self.low_damage_handled:
+                        self.low_damage_handled = True
+                        self.display.print_message(
+                            f"⚠️ Низкий урон! 3 атаки подряд: {self.last_attack_damages}. "
+                            f"Средний урон: {average_damage:.1f}. Запуск процедуры восстановления...", 
+                            "warning"
+                        )
+                        # Reset pattern
+                        self.last_attack_damages = []
+    
+    def _reset_low_damage_tracking(self):
+        """Reset low damage tracking when combat ends or pattern breaks"""
+        self.low_damage_count = 0
+        self.last_attack_damages = []
+        self.combat_paused = False
+        self.low_damage_handled = False
+    
     def _handle_victory(self, result: Dict[str, Any], mob_group: MobGroup) -> Literal['victory']:
         """Handle combat victory"""
+        # Reset low damage tracking
+        self._reset_low_damage_tracking()
+        
         # Extract mob information from arrLogs
         arr_logs = result.get('arrLogs', [])
         killed_mobs = {}
@@ -335,16 +418,20 @@ class CombatHandler:
         exp_gained = result.get('dataWin', {}).get('expWin', 0)
         gold_gained = sum(item.get('count', 0) for item in drop_data if item.get('id') == 'm_0_1')
         
-        # Update statistics - добавляем к существующим значениям
+        # Update statistics - добавляем каждого убитого моба отдельно
+        for mob_name, count in killed_mobs.items():
+            for _ in range(count):  # Добавляем каждого моба отдельно
+                self.display.update_stats(mobs_killed=1)
+        
+        # Добавляем опыт и золото
         self.display.update_stats(
-            mobs_killed=total_killed,
             total_exp=exp_gained,
             session_gold=gold_gained
         )
         
         self.display.print_message(
             f"🎉 Все враги побеждены! Убито мобов: {total_killed}, "
-            f"+{exp_gained} опыта, +{gold_gained} золота", 
+            f"[yellow]+{exp_gained}[/yellow] опыта, [yellow]+{gold_gained}[/yellow] золота", 
             "success"
         )
         
@@ -411,7 +498,7 @@ class CombatHandler:
     def _display_basic_combat_results(self, action_type: str, damage_dealt: int, damage_received: int):
         """Display basic combat results when no mob data is available"""
         action_icon = "⚡" if action_type == "skill" else "⚔️"
-        action_name = "Скилл" if action_type == "skill" else "Атака"
+        action_name = "[yellow]Усиленный удар[/yellow]" if action_type == "skill" else "[cyan]Атака[/cyan]"
         
         # Update damage statistics only for regular attacks
         if action_type == "attack":

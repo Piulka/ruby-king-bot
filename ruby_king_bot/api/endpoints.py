@@ -20,6 +20,15 @@ class Endpoints:
     END_REST = "/farm/add-fire-end"
     STOP_REST = "/rest/stop"
     
+    # Shop endpoints
+    SELL_ITEMS = "/shop/sell"
+    BUY_ITEMS = "/shop/buy"
+    
+    # Location endpoints
+    CHANGE_MAIN_GEO = "/farm/change-main-geo"
+    CHANGE_GEO = "/farm/change-geo"
+    CHANGE_SQUARE = "/farm/change-square"
+    
     @classmethod
     def get_full_url(cls, endpoint: str) -> str:
         """Get full URL for endpoint"""

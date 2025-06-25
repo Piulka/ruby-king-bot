@@ -31,13 +31,17 @@ class GameDisplay:
         
         # Initialize tracking data
         self.stats = {
-            'mobs_killed': 0,
             'total_exp': 0,
             'session_gold': 0,
             'session_start': time.time(),
             'events_found': 0,
             'total_damage_dealt': 0,
-            'total_attacks': 0
+            'total_attacks': 0,
+            'city_visits': 0,
+            'items_sold': 0,
+            'gold_from_sales': 0,
+            'hp_potions_used': 0,
+            'mp_potions_used': 0
         }
         
         # Message history
@@ -101,17 +105,10 @@ class GameDisplay:
         """Update statistics"""
         for key, value in kwargs.items():
             if key in self.stats:
-                if key == 'mobs_killed':
-                    # Для mobs_killed накапливаем за сессию
-                    self.stats[key] += value
-                elif key == 'total_exp':
-                    # Для опыта накапливаем за сессию
-                    self.stats[key] += value
-                elif key == 'session_gold':
-                    # Для золота накапливаем за сессию
+                # Для новых полей — всегда инкрементируем
+                if key in ['city_visits', 'items_sold', 'gold_from_sales', 'hp_potions_used', 'mp_potions_used', 'total_exp', 'session_gold']:
                     self.stats[key] += value
                 else:
-                    # Для остальных параметров обновляем как обычно
                     self.stats[key] = value
             elif key == 'current_gold':
                 self.stats['current_gold'] = value
@@ -144,12 +141,11 @@ class GameDisplay:
                 xp_bar = f"{'█' * xp_filled}{'░' * (10 - xp_filled)}"
                 level_xp_text = f"Lv.{level} XP:{xp_bar} {xp}/{xp_next}"
         
-        title = f"[bold blue]{level_xp_text}[/bold blue] - [bold green]{player_name}[/bold green]"
-        status_text = f"Состояние: [bold yellow]{current_state.upper()}[/bold yellow]"
         session_time = self.format_time(int(time.time() - self.stats['session_start']))
-        time_text = f"[bold cyan]⏱️ Сессия: {session_time}[/bold cyan]"
+        title = f"[bold blue]{level_xp_text}[/bold blue] - [bold green]{player_name}[/bold green] - [bold cyan]⏱️ {session_time}[/bold cyan]"
+        status_text = f"Состояние: [bold yellow]{current_state.upper()}[/bold yellow]"
         
-        content = f"{title}\n{status_text} | {time_text}"
+        content = f"{title}\n{status_text}"
         return Panel(content, title="[bold]Статус игры[/bold]", border_style="blue")
     
     def create_player_status(self, player_data: Dict[str, Any]) -> Panel:
@@ -271,18 +267,32 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
     
     def create_stats_table(self) -> Panel:
         """Create statistics panel"""
-        session_time = int(time.time() - self.stats['session_start'])
+        stats = self.stats
         avg_damage = self.get_average_damage()
-        table = Table.grid(padding=(0,1))
+        
+        # Подсчитываем общее количество убитых врагов из killed_mobs
+        total_killed_mobs = sum(self.killed_mobs.values()) if self.killed_mobs else 0
+        
+        # Создаем таблицу
+        table = Table.grid(padding=(0, 2))  # Увеличиваем отступы между столбцами
         table.add_column(justify="left")
         table.add_column(justify="right")
-        table.add_row("Время сессии:", f"[bold cyan]{self.format_time(session_time)}[/bold cyan]")
-        table.add_row("Убито врагов:", f"[green]{self.stats['mobs_killed']}")
-        table.add_row("Опыт за сессию:", f"[green]{self.stats['total_exp']}")
-        table.add_row("Золото за сессию:", f"[green]{self.stats.get('session_gold', 0)}")
-        table.add_row("Средний урон:", f"[yellow]{avg_damage:.1f}[/yellow]")
-        table.add_row("Событий найдено:", f"[green]{self.stats.get('events_found', 0)}")
-        return Panel(table, title="[bold]Статистика[/bold]", border_style="blue", height=9)
+        table.add_column(justify="left")
+        table.add_column(justify="right")
+        
+        # Левый столбец (5 строк)
+        table.add_row("[bold yellow]Опыт:[/bold yellow]", f"[yellow]│{stats['total_exp']}│[/yellow]", 
+                     "[bold magenta]В город:[/bold magenta]", f"[magenta]│{stats.get('city_visits', 0)}│[/magenta]")
+        table.add_row("[bold yellow]Золото:[/bold yellow]", f"[yellow]│{stats['session_gold']}│[/yellow]", 
+                     "[bold green]Продано:[/bold green]", f"[green]│{stats.get('items_sold', 0)}│[/green]")
+        table.add_row("[bold cyan]События:[/bold cyan]", f"[cyan]│{stats.get('events_found', 0)}│[/cyan]", 
+                     "[bold red]Хилки:[/bold red]", f"[red]│{stats.get('hp_potions_used', 0)}│[/red]")
+        table.add_row("[bold]Ср. урон:[/bold]", f"[yellow]│{avg_damage:.1f}│[/yellow]", 
+                     "[bold blue]Мана:[/bold blue]", f"[blue]│{stats.get('mp_potions_used', 0)}│[/blue]")
+        table.add_row("[bold]Убито мобов:[/bold]", f"[green]│{total_killed_mobs}│[/green]", 
+                     "[bold green]Золото с продаж:[/bold green]", f"[yellow]│{stats.get('gold_from_sales', 0)}│[/yellow]")
+        
+        return Panel(table, title="[bold]Статистика[/bold]", border_style="cyan", height=9)
     
     def create_timers(self, attack_cooldown: float = 0, heal_cooldown: float = 0, rest_time: Optional[float] = None) -> Panel:
         """Create timers panel"""
@@ -424,14 +434,14 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
             content = "[dim]No drops yet[/dim]"
         else:
             table = Table.grid(padding=(0,1))
-            table.add_column(justify="left", width=18)
+            table.add_column(justify="left", width=22)  # Фиксированная ширина для эмодзи+название
             table.add_column(justify="right")
             sorted_drops = sorted(self.drop_items.items(), key=lambda x: x[1], reverse=True)
             for item_id, count in sorted_drops:
                 item_name = get_item_name(item_id)
                 emoji = get_item_emoji(item_id)
-                display_name = item_name[:12] if len(item_name) > 12 else item_name
-                display_name = display_name.ljust(12)
+                # Обрезаем/дополняем название до 16 символов
+                display_name = item_name[:16] if len(item_name) > 16 else item_name.ljust(16)
                 table.add_row(f"{emoji} {display_name}", f"[green]{count}")
             content = table
         return Panel(content, title="[bold]Дроп[/bold]", border_style="yellow")
@@ -456,8 +466,8 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
         
         # Create table for aligned display
         table = Table.grid(padding=(0, 1))
-        table.add_column(justify="left", width=8)   # Icon column
-        table.add_column(justify="left", width=8)   # Name column  
+        table.add_column(justify="left", width=6)   # Icon column - делаем уже
+        table.add_column(justify="left", width=16)  # Name column - делаем шире
         table.add_column(justify="right", width=8)  # Status column
         
         # Attack cooldown
@@ -472,7 +482,7 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
         skill_style = "green" if skill_cooldown <= 0 else "red"
         # Индикатор использованного навыка - подсветка на 5 секунд
         skill_icon = "⚡🔥" if 0 < skill_cooldown <= 5 else "⚡"
-        table.add_row(skill_icon, "Скилл", f"[{skill_style}]{skill_status}[/{skill_style}]")
+        table.add_row(skill_icon, "Усиленный удар", f"[{skill_style}]{skill_status}[/{skill_style}]")
         
         # Heal cooldown
         heal_status = "Готов" if heal_cooldown <= 0 else f"{int(heal_cooldown)}s"
