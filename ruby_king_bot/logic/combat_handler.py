@@ -36,7 +36,7 @@ class CombatHandler:
         self.low_damage_handled = False  # Flag to track if low damage was handled
         self.situation_type = "low_damage"  # Type of situation: "low_damage" or "low_potions"
     
-    def handle_combat_round(self, current_target: Mob, current_time: float, mob_group: MobGroup) -> Literal['victory', 'continue', 'failure']:
+    def handle_combat_round(self, current_target: Mob, current_time: float, mob_group: MobGroup) -> Literal['victory', 'continue', 'failure', 'recover']:
         """
         Handle one round of combat
         
@@ -49,8 +49,10 @@ class CombatHandler:
             'victory' if combat ended with victory
             'continue' if combat continues
             'failure' if combat ended with failure
+            'recover' if combat ended with recovery
         """
         self.skill_used = False  # Reset flag at start of round
+        self.need_recover = False
         
         # Check if combat is paused due to low damage
         if self.combat_paused:
@@ -59,7 +61,17 @@ class CombatHandler:
         
         # Check if potions are running low
         if self._check_low_potions():
-            return 'continue'  # Let game engine handle the low potions situation
+            self.need_recover = True
+        # Check if low damage pattern is detected (by last 3 attacks)
+        if hasattr(self, 'last_attack_damages') and len(self.last_attack_damages) == 3:
+            average_damage = self.display.get_average_damage()
+            if average_damage > 0 and all(damage <= average_damage / 2 for damage in self.last_attack_damages):
+                if not self.low_damage_handled:
+                    self.need_recover = True
+        
+        if self.need_recover or self.low_damage_handled:
+            self.display.print_message("🚨 Переход к восстановлению!", "warning")
+            return 'recover'
         
         # 1. Check and use healing potion
         if self._should_use_heal_potion(current_time):
@@ -172,7 +184,11 @@ class CombatHandler:
             self.player.update_from_api_response(skill_result)
             
             if isinstance(skill_result, dict):
-                if skill_result.get('status') == 'fail':
+                # Check if battle is already closed
+                if skill_result.get('status') == 'close':
+                    # Battle is already finished, treat as victory
+                    return self._handle_victory(skill_result, mob_group)
+                elif skill_result.get('status') == 'fail':
                     return self._handle_combat_failure(skill_result, "skill")
                 elif skill_result.get('status') == 'success':
                     return self._handle_combat_success(skill_result, current_target, mob_group, "skill")
@@ -194,7 +210,11 @@ class CombatHandler:
             self.player.record_attack(current_time)
             
             if isinstance(attack_result, dict):
-                if attack_result.get('status') == 'fail':
+                # Check if battle is already closed
+                if attack_result.get('status') == 'close':
+                    # Battle is already finished, treat as victory
+                    return self._handle_victory(attack_result, mob_group)
+                elif attack_result.get('status') == 'fail':
                     return self._handle_combat_failure(attack_result, "attack")
                 elif attack_result.get('status') == 'success':
                     return self._handle_combat_success(attack_result, current_target, mob_group, "attack")
@@ -386,8 +406,12 @@ class CombatHandler:
     
     def _check_low_potions(self) -> bool:
         """Check if potions are running low (10 or less)"""
-        hp_potions = self.player.get_hp_potions_count()
-        mp_potions = self.player.get_mp_potions_count()
+        # Don't check if player data is not initialized yet
+        if not hasattr(self.player, 'inventory') or not self.player.inventory:
+            return False
+            
+        hp_potions = self.player.get_heal_potions_count()
+        mp_potions = self.player.get_mana_potions_count()
         
         if hp_potions <= 10 or mp_potions <= 10:
             if not self.low_damage_handled:

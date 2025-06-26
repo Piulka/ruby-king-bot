@@ -226,35 +226,34 @@ class APIClient:
         result = self._make_request("GET", Endpoints.USER_INFO)
         return result
     
-    def sell_items(self, items: list) -> Dict[str, Any]:
+    def sell_items(self, items: list[dict]) -> dict:
         """
-        Sell items
-        
+        Sell items (оружие, броня, бижутерия)
         Args:
-            items: List of item IDs to sell
-            
+            items: List of dicts {"id": uniqueId, "count": 1}
         Returns:
-            Response data with sell results
+            Response data
         """
         data = {"items": items}
         logger.info(f"Selling items: {items}")
         result = self._make_request("POST", Endpoints.SELL_ITEMS, data)
+        logger.info(f"Sell items response: {result}")
         return result
-    
-    def buy_items(self, item_id: str, count: int) -> Dict[str, Any]:
+
+    def buy_items(self, elem_id: str, name_collection: str, count: int) -> dict:
         """
-        Buy items
-        
+        Buy items (зелья и др.)
         Args:
-            item_id: ID of item to buy
-            count: Number of items to buy
-            
+            elem_id: id предмета (например, m_1)
+            name_collection: коллекция (обычно 'resources')
+            count: сколько купить
         Returns:
-            Response data with buy results
+            Response data
         """
-        data = {"itemId": item_id, "count": count}
-        logger.info(f"Buying {count} of item: {item_id}")
+        data = {"elemId": elem_id, "nameCollection": name_collection, "count": count}
+        logger.info(f"Buying {count} of {elem_id} from {name_collection}")
         result = self._make_request("POST", Endpoints.BUY_ITEMS, data)
+        logger.info(f"Buy items response: {result}")
         return result
     
     def change_main_geo(self, position: str) -> Dict[str, Any]:

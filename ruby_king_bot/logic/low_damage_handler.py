@@ -45,23 +45,47 @@ class LowDamageHandler:
             self.display.print_message("🔄 Запуск процедуры восстановления после низкого урона...", "warning")
         
         try:
-            # 1. Добиваем оставшихся мобов
-            self._finish_remaining_mobs(current_target, mob_group, current_time)
+            self.display.print_message("➡️ Этап 1: Завершение боя (пропускаем добивание)", "info")
+            # 1. Не добиваем оставшихся мобов, сразу идём дальше
+            # self._finish_remaining_mobs(current_target, mob_group, current_time)  # Убираем добивание
             
-            # 2. Переходим на квадрат G4
+            self.display.print_message("➡️ Этап 2: Переход на квадрат G4", "info")
             self._move_to_g4()
+            time.sleep(2)  # Пауза 2 секунды
+            self._force_display_update()  # Принудительное обновление дисплея
             
-            # 3. Выходим в город
+            self.display.print_message("➡️ Этап 3: Сброс локации", "info")
+            self._reset_location()
+            time.sleep(2)  # Пауза 2 секунды
+            self._force_display_update()  # Принудительное обновление дисплея
+            
+            self.display.print_message("➡️ Этап 4: Возврат в город", "info")
             self._return_to_city()
+            time.sleep(2)  # Пауза 2 секунды
+            self._force_display_update()  # Принудительное обновление дисплея
             
-            # 4. Продаем все оружие, броню и украшения
-            self._sell_equipment()
+            self.display.print_message("➡️ Этап 5: Продажа предметов", "info")
+            self._sell_equipment(self.player)
+            time.sleep(2)  # Пауза 2 секунды
+            self._force_display_update()  # Принудительное обновление дисплея
             
-            # 5. Покупаем зелья до 300 каждого типа
+            self.display.print_message("➡️ Этап 6: Покупка зелий", "info")
             self._buy_potions()
+            time.sleep(2)  # Пауза 2 секунды
+            self._force_display_update()  # Принудительное обновление дисплея
             
-            # 6. Возвращаемся на фарм и идем на лучший квадрат
-            self._return_to_farm_and_move_to_best_square()
+            self.display.print_message("➡️ Этап 7: Переход в фарм зону", "info")
+            self._go_to_farm_zone()
+            time.sleep(2)  # Пауза 2 секунды
+            self._force_display_update()  # Принудительное обновление дисплея
+            
+            self.display.print_message("➡️ Этап 8: Переход на локацию", "info")
+            self._go_to_location()
+            time.sleep(2)  # Пауза 2 секунды
+            self._force_display_update()  # Принудительное обновление дисплея
+            
+            self.display.print_message("➡️ Этап 9: Переход на подходящий квадрат", "info")
+            self._go_to_best_square()
             
             if situation_type == "low_potions":
                 self.display.print_message("✅ Процедура восстановления зелий завершена! Возвращаемся к обычному фарму.", "success")
@@ -143,8 +167,6 @@ class LowDamageHandler:
         except Exception as e:
             logger.error(f"Ошибка перехода на G4: {e}")
             self.display.print_message(f"❌ Ошибка перехода на G4: {e}", "error")
-        
-        time.sleep(2)
     
     def _return_to_city(self):
         """Возвращаемся в город"""
@@ -162,152 +184,129 @@ class LowDamageHandler:
         except Exception as e:
             logger.error(f"Ошибка возврата в город: {e}")
             self.display.print_message(f"❌ Ошибка возврата в город: {e}", "error")
-        
-        time.sleep(2)
     
-    def _sell_equipment(self):
-        """Продаем все оружие, броню и украшения"""
-        self.display.print_message("💰 Продаем оружие, броню и украшения...", "info")
-        
+    def _sell_equipment(self, player: Player) -> bool:
+        """Продать все оружие, броню и бижутерию из инвентаря (не надетые)"""
         try:
-            # Получаем информацию о предметах
             user_info = self.api_client.get_user_info()
-            inventory = user_info.get("inventory", [])
-            
-            # Фильтруем предметы для продажи
+            if not user_info or 'user' not in user_info or 'inventory' not in user_info['user']:
+                logger.error("Не удалось получить информацию о предметах")
+                return False
+            inventory = user_info['user']['inventory']
+            logger.info(f"Получен инвентарь: {len(inventory)} предметов")
             items_to_sell = []
-            for item in inventory:
-                item_id = item.get("id", "")
-                item_type = item.get("typeElement", "")
-                
-                # Продаем оружие, броню и украшения
-                if (item_type in ["weapon", "armor", "jewelry"] or 
-                    "weapon" in item_id or "armor" in item_id or "jewelry" in item_id):
-                    items_to_sell.append(item_id)
-            
-            if items_to_sell:
-                # Продаем предметы
-                result = self.api_client.sell_items(items_to_sell)
-                gold_earned = 0
-                if result.get("status") == "success":
-                    # Суммируем золото с продажи (обычно id == 'm_0_1')
-                    for item in result.get('drop', []):
-                        if item.get('id') == 'm_0_1':
-                            gold_earned += item.get('count', 0)
-                    self.display.print_message(f"✅ Продано {len(items_to_sell)} предметов", "success")
-                    self.display.update_stats(items_sold=len(items_to_sell), gold_from_sales=gold_earned)
-                else:
-                    self.display.print_message(f"❌ Ошибка продажи: {result.get('message', 'Неизвестная ошибка')}", "error")
+            for item_id, item_data in inventory.items():
+                item_type = item_data.get('typeElement', '')
+                item_position = item_data.get('position', '')
+                # Продаем только вещи из инвентаря, не надетые
+                if (item_type in ['weapons', 'armors', 'jewelry'] and 
+                    item_position == 'inventory'):
+                    unique_id = item_data.get('uniqueId')
+                    if unique_id:
+                        items_to_sell.append({"id": unique_id, "count": 1})
+                        logger.info(f"Добавлен к продаже: {unique_id} ({item_type}) - из инвентаря")
+                elif item_type in ['weapons', 'armors', 'jewelry'] and item_position == 'onBody':
+                    logger.info(f"Пропускаем надетый предмет: {item_data.get('uniqueId')} ({item_type}) - надет")
+            if not items_to_sell:
+                logger.info("Нет предметов для продажи в инвентаре")
+                return True
+            logger.info(f"Продаём {len(items_to_sell)} предметов из инвентаря: {items_to_sell}")
+            sell_result = self.api_client.sell_items(items_to_sell)
+            logger.info(f"Результат продажи: {sell_result}")
+            if sell_result and sell_result.get('status') == 'success':
+                gold_earned = sell_result.get('goldEarned', 0)
+                self.display.update_stats(gold_earned=gold_earned)
+                logger.info(f"Продано {len(items_to_sell)} предметов, заработано {gold_earned} золота")
+                return True
             else:
-                self.display.print_message("ℹ️ Нет предметов для продажи", "info")
-                
+                logger.error(f"Ошибка продажи: {sell_result}")
+                return False
         except Exception as e:
-            logger.error(f"Ошибка продажи предметов: {e}")
-            self.display.print_message(f"❌ Ошибка продажи предметов: {e}", "error")
-        
-        time.sleep(2)
+            logger.error(f"Ошибка при продаже предметов: {e}")
+            return False
     
     def _buy_potions(self):
-        """Покупаем зелья до 300 каждого типа"""
-        self.display.print_message("🧪 Проверяем и покупаем зелья...", "info")
-        
+        """Купить зелья лечения и маны до лимита 300"""
         try:
-            # Получаем информацию о предметах
             user_info = self.api_client.get_user_info()
-            inventory = user_info.get("inventory", [])
-            
-            # Считаем текущие зелья
-            hp_potions = 0
+            if not user_info or 'user' not in user_info or 'inventory' not in user_info['user']:
+                logger.error("Не удалось получить информацию о зельях")
+                return False
+            inventory = user_info['user']['inventory']
+            logger.info(f"Получен инвентарь для покупки зелий: {len(inventory)} предметов")
+            heal_potions = 0
             mana_potions = 0
-            
-            for item in inventory:
-                item_id = item.get("id", "")
-                count = item.get("count", 0)
-                
-                if item_id == "m_1":  # Зелье здоровья
-                    hp_potions = count
-                elif item_id == "m_3":  # Зелье маны
-                    mana_potions = count
-            
-            # Покупаем зелья здоровья
-            if hp_potions < 300:
-                hp_to_buy = 300 - hp_potions
-                result = self.api_client.buy_items("m_1", hp_to_buy)
-                
-                if result.get("status") == "success":
-                    self.display.print_message(f"✅ Куплено {hp_to_buy} зелий здоровья", "success")
+            for item_id, item_data in inventory.items():
+                item_count = item_data.get('count', 0)
+                if item_id == 'm_1':
+                    heal_potions = item_count
+                    logger.info(f"Найдено зелий лечения: {heal_potions}")
+                elif item_id == 'm_3':
+                    mana_potions = item_count
+                    logger.info(f"Найдено зелий маны: {mana_potions}")
+            potions_bought = 0
+            if heal_potions < 300:
+                to_buy = 300 - heal_potions
+                logger.info(f"Покупаем {to_buy} зелий лечения")
+                heal_result = self.api_client.buy_items('m_1', 'resources', to_buy)
+                logger.info(f"Результат покупки зелий лечения: {heal_result}")
+                if heal_result and heal_result.get('status') == 'success':
+                    potions_bought += to_buy
+                    self.display.update_stats(potions_used=to_buy)
+                    logger.info(f"Куплено {to_buy} зелий лечения")
                 else:
-                    self.display.print_message(f"❌ Ошибка покупки зелий здоровья: {result.get('message', 'Неизвестная ошибка')}", "error")
-            else:
-                self.display.print_message(f"ℹ️ Зелий здоровья достаточно: {hp_potions}", "info")
-            
-            # Покупаем зелья маны
+                    logger.error(f"Ошибка покупки зелий лечения: {heal_result}")
             if mana_potions < 300:
-                mana_to_buy = 300 - mana_potions
-                result = self.api_client.buy_items("m_3", mana_to_buy)
-                
-                if result.get("status") == "success":
-                    self.display.print_message(f"✅ Куплено {mana_to_buy} зелий маны", "success")
+                to_buy = 300 - mana_potions
+                logger.info(f"Покупаем {to_buy} зелий маны")
+                mana_result = self.api_client.buy_items('m_3', 'resources', to_buy)
+                logger.info(f"Результат покупки зелий маны: {mana_result}")
+                if mana_result and mana_result.get('status') == 'success':
+                    potions_bought += to_buy
+                    self.display.update_stats(potions_used=to_buy)
+                    logger.info(f"Куплено {to_buy} зелий маны")
                 else:
-                    self.display.print_message(f"❌ Ошибка покупки зелий маны: {result.get('message', 'Неизвестная ошибка')}", "error")
+                    logger.error(f"Ошибка покупки зелий маны: {mana_result}")
+            if potions_bought > 0:
+                logger.info(f"Всего куплено зелий: {potions_bought}")
+                return True
             else:
-                self.display.print_message(f"ℹ️ Зелий маны достаточно: {mana_potions}", "info")
-                
+                logger.info("Зелья не покупались (достаточно в инвентаре)")
+                return True
         except Exception as e:
-            logger.error(f"Ошибка покупки зелий: {e}")
-            self.display.print_message(f"❌ Ошибка покупки зелий: {e}", "error")
-        
-        time.sleep(2)
+            logger.error(f"Ошибка при покупке зелий: {e}")
+            return False
     
-    def _return_to_farm_and_move_to_best_square(self):
-        """Возвращаемся на фарм и идем на лучший квадрат"""
-        self.display.print_message("🌾 Возвращаемся на фарм...", "info")
+    def _go_to_best_square(self):
+        """Переходим на подходящий квадрат"""
+        self.display.print_message("🎯 Ищем подходящий квадрат...", "info")
         
         try:
-            # Переходим в ферму
-            result = self.api_client.change_main_geo("farm")
+            # Получаем информацию о квадратах
+            user_info = self.api_client.get_user_info()
+            squares = user_info.get("squares", [])
             
-            if result.get("status") != "success":
-                self.display.print_message(f"❌ Ошибка перехода в ферму: {result.get('message', 'Неизвестная ошибка')}", "error")
-                return
-            
-            time.sleep(2)
-            
-            # Выбираем локацию в зависимости от уровня персонажа
-            player_level = self.player.level
-            if player_level < 10:
-                # Для персонажей ниже 10 уровня используем loco_0
-                self.display.print_message(f"📍 Переходим в loco_0 (уровень {player_level} < 10)...", "info")
-                result = self.api_client.change_geo("loco_0", "south")
-            else:
-                # Для персонажей 10+ уровня используем loco_3
-                self.display.print_message(f"📍 Переходим в loco_3 (уровень {player_level} >= 10)...", "info")
-                result = self.api_client.change_geo("loco_3", "south")
-            
-            if result.get("status") != "success":
-                self.display.print_message(f"❌ Ошибка перехода в локацию: {result.get('message', 'Неизвестная ошибка')}", "error")
-                return
-            
-            # Анализируем карту и находим лучший квадрат
-            squares = result.get("squares", [])
-            best_square = self._find_best_square(squares)
-            
-            if best_square:
-                time.sleep(2)
+            if squares:
+                best_square = self._find_best_square(squares)
                 
-                # Переходим на лучший квадрат
-                result = self.api_client.change_square(best_square)
-                
-                if result.get("status") == "success":
-                    self.display.print_message(f"✅ Переход на лучший квадрат {best_square} успешен", "success")
+                if best_square:
+                    self.display.print_message(f"🎯 Найден лучший квадрат: {best_square}", "info")
+                    
+                    # Переходим на лучший квадрат
+                    result = self.api_client.change_square(best_square)
+                    
+                    if result.get("status") == "success":
+                        self.display.print_message(f"✅ Переход на квадрат {best_square} успешен", "success")
+                    else:
+                        self.display.print_message(f"❌ Ошибка перехода на квадрат {best_square}: {result.get('message', 'Неизвестная ошибка')}", "error")
                 else:
-                    self.display.print_message(f"❌ Ошибка перехода на квадрат {best_square}: {result.get('message', 'Неизвестная ошибка')}", "error")
+                    self.display.print_message("❌ Не найден подходящий квадрат", "error")
             else:
-                self.display.print_message("❌ Не найден подходящий квадрат", "error")
+                self.display.print_message("❌ Нет информации о квадратах", "error")
                 
         except Exception as e:
-            logger.error(f"Ошибка возврата на фарм: {e}")
-            self.display.print_message(f"❌ Ошибка возврата на фарм: {e}", "error")
+            logger.error(f"Ошибка перехода на квадрат: {e}")
+            self.display.print_message(f"❌ Ошибка перехода на квадрат: {e}", "error")
     
     def _find_best_square(self, squares: List[Dict[str, Any]]) -> Optional[str]:
         """Находит лучший квадрат для текущего уровня"""
@@ -320,20 +319,112 @@ class LowDamageHandler:
             lvl_mobs = square.get("lvlMobs")
             
             if lvl_mobs and "mobLvl" in lvl_mobs:
-                mob_level = lvl_mobs["mobLvl"]
-                # Вычисляем "идеальность" квадрата (близость к уровню игрока)
-                score = 100 - abs(mob_level - player_level)
-                
-                # Бонус за точное совпадение
-                if mob_level == player_level:
-                    score += 50
-                
-                # Бонус за специальные локации
-                if "locoName" in lvl_mobs:
-                    score += 10
-                
-                if score > best_score:
-                    best_score = score
-                    best_square = position
+                try:
+                    mob_level = int(lvl_mobs["mobLvl"])  # Преобразуем в int
+                    # Вычисляем "идеальность" квадрата (близость к уровню игрока)
+                    score = 100 - abs(mob_level - player_level)
+                    
+                    # Бонус за точное совпадение
+                    if mob_level == player_level:
+                        score += 50
+                    
+                    # Бонус за специальные локации
+                    if "locoName" in lvl_mobs:
+                        score += 10
+                    
+                    if score > best_score:
+                        best_score = score
+                        best_square = position
+                except (ValueError, TypeError) as e:
+                    # Если не удается преобразовать mob_level, пропускаем этот квадрат
+                    logger.warning(f"Не удается обработать уровень мобов в квадрате {position}: {e}")
+                    continue
         
-        return best_square 
+        return best_square
+    
+    def _force_display_update(self):
+        """Принудительное обновление дисплея"""
+        try:
+            current_time = time.time()
+            player_data = self.player.get_stats_summary()
+            
+            # Обновляем дисплей с текущими данными
+            self.display.update_display(
+                current_state="city",  # Во время восстановления считаем что в городе
+                player_data=player_data,
+                mob_data=None,
+                mob_group_data=None,
+                attack_cooldown=0,
+                heal_cooldown=0,
+                skill_cooldown=0,
+                mana_cooldown=0,
+                rest_time=None,
+                player_name="Piulok",
+                last_attack_time=self.player.last_attack_time,
+                last_skill_time=self.player.last_skill_time
+            )
+            
+            # Обновляем статистику
+            self.display.update_stats(
+                current_gold=self.player.get_gold_count(),
+                current_skulls=self.player.get_skulls_count()
+            )
+        except Exception as e:
+            logger.warning(f"Ошибка принудительного обновления дисплея: {e}")
+    
+    def _reset_location(self):
+        """Сбрасываем локацию перед переходом в город"""
+        self.display.print_message("🔄 Сбрасываем локацию...", "info")
+        
+        try:
+            result = self.api_client.change_geo("", "", "reset")
+            
+            if result.get("status") == "success":
+                self.display.print_message("✅ Сброс локации успешен", "success")
+            else:
+                self.display.print_message(f"❌ Ошибка сброса локации: {result.get('message', 'Неизвестная ошибка')}", "error")
+                
+        except Exception as e:
+            logger.error(f"Ошибка сброса локации: {e}")
+            self.display.print_message(f"❌ Ошибка сброса локации: {e}", "error")
+    
+    def _go_to_farm_zone(self):
+        """Переходим в фарм зону"""
+        self.display.print_message("🌾 Переходим в фарм зону...", "info")
+        
+        try:
+            result = self.api_client.change_main_geo("farm")
+            
+            if result.get("status") == "success":
+                self.display.print_message("✅ Переход в фарм зону успешен", "success")
+            else:
+                self.display.print_message(f"❌ Ошибка перехода в фарм зону: {result.get('message', 'Неизвестная ошибка')}", "error")
+                
+        except Exception as e:
+            logger.error(f"Ошибка перехода в фарм зону: {e}")
+            self.display.print_message(f"❌ Ошибка перехода в фарм зону: {e}", "error")
+    
+    def _go_to_location(self):
+        """Переходим на локацию"""
+        self.display.print_message("📍 Переходим на локацию...", "info")
+        
+        try:
+            # Выбираем локацию в зависимости от уровня персонажа
+            player_level = self.player.level
+            if player_level < 10:
+                # Для персонажей ниже 10 уровня используем loco_0
+                self.display.print_message(f"📍 Переходим в loco_0 (уровень {player_level} < 10)...", "info")
+                result = self.api_client.change_geo("loco_0", "south")
+            else:
+                # Для персонажей 10+ уровня используем loco_3
+                self.display.print_message(f"📍 Переходим в loco_3 (уровень {player_level} >= 10)...", "info")
+                result = self.api_client.change_geo("loco_3", "south")
+            
+            if result.get("status") == "success":
+                self.display.print_message("✅ Переход на локацию успешен", "success")
+            else:
+                self.display.print_message(f"❌ Ошибка перехода на локацию: {result.get('message', 'Неизвестная ошибка')}", "error")
+                
+        except Exception as e:
+            logger.error(f"Ошибка перехода на локацию: {e}")
+            self.display.print_message(f"❌ Ошибка перехода на локацию: {e}", "error") 

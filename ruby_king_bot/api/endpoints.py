@@ -21,8 +21,8 @@ class Endpoints:
     STOP_REST = "/rest/stop"
     
     # Shop endpoints
-    SELL_ITEMS = "/shop/sell"
-    BUY_ITEMS = "/shop/buy"
+    SELL_ITEMS = "/trader/sell"
+    BUY_ITEMS = "/trader/buy"
     
     # Location endpoints
     CHANGE_MAIN_GEO = "/farm/change-main-geo"

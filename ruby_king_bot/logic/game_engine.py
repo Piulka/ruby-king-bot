@@ -25,22 +25,21 @@ class GameEngine:
     """Main game engine that manages the game loop and state transitions"""
     
     def __init__(self):
+        """Initialize the game engine"""
         self.api_client = APIClient()
-        self.state_manager = GameStateManager()
         self.player = Player()
         self.display = GameDisplay()
-        
-        # Game state variables
-        self.current_mob_group: Optional[MobGroup] = None
-        self.rest_end_time: Optional[float] = None
-        self.explore_done = False
-        self.total_mobs_killed = 0
-        
-        # Handlers
+        self.state_manager = GameStateManager()
         self.combat_handler = CombatHandler(self.api_client, self.player, self.display)
         self.exploration_handler = ExplorationHandler(self.api_client, self.display)
         self.rest_handler = RestHandler(self.api_client, self.display)
         self.data_extractor = DataExtractor()
+        
+        # Game state variables
+        self.current_mob_group = None
+        self.explore_done = False
+        self.rest_end_time = None
+        self.last_display_update = 0  # Track last display update time
         
         # Statistics
         self.session_stats = {
@@ -57,7 +56,7 @@ class GameEngine:
         console.print("[yellow]Continuous mode: Bot will explore territory after each victory[/yellow]")
         
         # Initialize player data if needed
-        # self._initialize_player_data()
+        self._initialize_player_data()
     
     def run(self):
         """Main game loop"""
@@ -67,8 +66,10 @@ class GameEngine:
                     current_time = time.time()
                     current_state = self.state_manager.get_current_state()
                     
-                    # Update display
-                    self._update_display(current_time, current_state)
+                    # Update display once per second
+                    if current_time - self.last_display_update >= 1.0:
+                        self._update_display(current_time, current_state)
+                        self.last_display_update = current_time
                     
                     # Handle current state
                     if current_state == GameState.CITY:
@@ -82,7 +83,7 @@ class GameEngine:
                         break
                     
                     # Small delay to prevent excessive CPU usage
-                    time.sleep(1)
+                    time.sleep(0.1)  # Small delay to prevent CPU overuse
                     
                 except KeyboardInterrupt:
                     console.print("\n[yellow]Bot stopped by user[/yellow]")
@@ -238,47 +239,39 @@ class GameEngine:
         if not self.current_mob_group:
             self.display.print_message("No mob group in combat state", "error")
             return
-        
         current_target = self.current_mob_group.get_current_target()
         if not current_target:
             self.display.print_message("No current target in mob group", "error")
             return
-        
-        # Check if low damage situation was detected
-        if self.combat_handler.low_damage_handled:
-            # Handle low damage situation
+
+        # Основной боевой цикл
+        combat_result = self.combat_handler.handle_combat_round(current_target, current_time, self.current_mob_group)
+        if combat_result == 'victory':
+            self._handle_combat_victory()
+            return
+        elif combat_result == 'failure':
+            self._handle_combat_failure()
+            return
+        elif combat_result == 'recover':
+            self.display.print_message("▶️ Запуск процедуры восстановления (LowDamageHandler)...", "warning")
             result = self.combat_handler.low_damage_handler.handle_low_damage_situation(
-                current_target, 
-                self.current_mob_group, 
+                current_target,
+                self.current_mob_group,
                 current_time,
                 self.combat_handler.situation_type
             )
-            
             if result:
-                # Low damage handling completed, reset flag and continue normal flow
                 self.combat_handler.low_damage_handled = False
                 self.combat_handler._reset_low_damage_tracking()
-                self.state_manager.change_state(GameState.CITY, "Low damage handling completed")
-                self.current_mob_group = None
+                self.display.print_message("✅ Восстановление завершено, возвращаемся к фарму!", "success")
+                # Сбрасываем флаг исследования и переходим в город для запуска исследования
                 self.explore_done = False
-                return
-        
-        # Handle combat actions
-        combat_result = self.combat_handler.handle_combat_round(
-            current_target, 
-            current_time, 
-            self.current_mob_group
-        )
-        
-        if combat_result == 'victory':
-            # Combat ended with victory
-            self._handle_combat_victory()
-        elif combat_result == 'continue':
-            # Combat continues
-            pass
-        else:
-            # Combat ended with failure
-            self._handle_combat_failure()
+                self.current_mob_group = None  # Очищаем группу мобов
+                self.state_manager.change_state(GameState.CITY, "Восстановление завершено")
+            else:
+                self.display.print_message("❌ Ошибка восстановления, попробуйте позже", "error")
+            return
+        # иначе просто продолжаем бой (continue)
     
     def _handle_combat_victory(self):
         """Handle combat victory"""
@@ -310,14 +303,18 @@ class GameEngine:
         """Initialize player data from API"""
         try:
             console.print("[blue]Initializing player data...[/blue]")
+            logger.info("Initializing player data...")
             player_info = self.api_client.get_user_info()
-            if player_info and 'player' in player_info:
+            if player_info and 'user' in player_info:
                 self.player.update_from_api_response(player_info)
                 console.print("[green]Player data initialized successfully[/green]")
+                logger.info("Player data initialized successfully")
             else:
                 console.print("[yellow]Could not get player data, using defaults[/yellow]")
+                logger.warning("Could not get player data, using defaults")
         except Exception as e:
             console.print(f"[yellow]Failed to get player data: {e}, using defaults[/yellow]")
+            logger.error(f"Failed to get player data: {e}, using defaults")
     
     def get_session_stats(self) -> Dict[str, Any]:
         """Get current session statistics"""

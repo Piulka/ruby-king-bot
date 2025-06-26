@@ -51,6 +51,13 @@ class MobGroup:
         logger.debug("No more alive targets found")
         return False
     
+    def is_empty(self) -> bool:
+        """Check if all mobs in the group are dead"""
+        for mob in self.mobs:
+            if mob.hp > 0:
+                return False
+        return True
+    
     def get_all_mobs(self) -> List['Mob']:
         """Get all mobs in the group"""
         return self.mobs
