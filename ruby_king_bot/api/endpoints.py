@@ -8,6 +8,7 @@ class Endpoints:
     
     # User endpoints
     USER_INFO = "/user/info"
+    USER_CITY = "/user/city"  # Новый endpoint для получения данных из города
     USER_STATS = "/user/stats"
     
     # Game endpoints

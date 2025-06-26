@@ -4,7 +4,7 @@ Game Engine - Main game loop and state management
 
 import time
 import logging
-from typing import Optional, Dict, Any
+from typing import Dict, Any
 from rich.console import Console
 
 from ruby_king_bot.api.client import APIClient
@@ -57,6 +57,14 @@ class GameEngine:
         
         # Initialize player data if needed
         self._initialize_player_data()
+        
+        # Setup farming environment
+        if not self._setup_farming_environment():
+            console.print("[red]Failed to setup farming environment, bot may not work correctly[/red]")
+            logger.error("Failed to setup farming environment")
+        else:
+            console.print("[green]Farming environment ready, starting main loop[/green]")
+            logger.info("Farming environment ready")
     
     def run(self):
         """Main game loop"""
@@ -304,7 +312,9 @@ class GameEngine:
         try:
             console.print("[blue]Initializing player data...[/blue]")
             logger.info("Initializing player data...")
-            player_info = self.api_client.get_user_info()
+            
+            # Получаем данные игрока из города
+            player_info = self.api_client.get_user_city_info()
             if player_info and 'user' in player_info:
                 self.player.update_from_api_response(player_info)
                 console.print("[green]Player data initialized successfully[/green]")
@@ -312,9 +322,280 @@ class GameEngine:
             else:
                 console.print("[yellow]Could not get player data, using defaults[/yellow]")
                 logger.warning("Could not get player data, using defaults")
+            
         except Exception as e:
             console.print(f"[yellow]Failed to get player data: {e}, using defaults[/yellow]")
             logger.error(f"Failed to get player data: {e}, using defaults")
+    
+    def _setup_farming_environment(self):
+        """Setup farming environment - check location and prepare for farming"""
+        try:
+            console.print("[blue]Setting up farming environment...[/blue]")
+            logger.info("Setting up farming environment...")
+            
+            # 1. Получаем актуальную информацию о игроке
+            user_info = self.api_client.get_user_info()
+            if not user_info or user_info.get('status') != 'success':
+                console.print("[red]Failed to get user info[/red]")
+                logger.error("Failed to get user info")
+                return False
+            
+            # Обновляем данные игрока
+            if 'user' in user_info:
+                self.player.update_from_api_response(user_info)
+            
+            # Обновляем дисплей с актуальными данными
+            current_time = time.time()
+            self._update_display(current_time, GameState.CITY)
+            
+            # 2. Проверяем текущую позицию
+            geo = user_info.get('geo', 'city')
+            console.print(f"[yellow]Current location: {geo}[/yellow]")
+            logger.info(f"Current location: {geo}")
+            
+            if geo == 'city':
+                # Игрок в городе - нужно купить зелья и перейти в фарм-зону
+                console.print("[blue]Player is in city, preparing for farming...[/blue]")
+                logger.info("Player is in city, preparing for farming...")
+                
+                # Покупаем зелья
+                if not self._buy_potions_if_needed():
+                    console.print("[red]Failed to buy potions[/red]")
+                    return False
+                
+                # Переходим в фарм-зону
+                if not self._go_to_farm_zone():
+                    console.print("[red]Failed to go to farm zone[/red]")
+                    return False
+                
+                # Получаем обновленную информацию после перехода
+                user_info = self.api_client.get_user_info()
+                if user_info and 'user' in user_info:
+                    self.player.update_from_api_response(user_info)
+            
+            # 3. Теперь игрок должен быть в фарм-зоне - ищем подходящий квадрат
+            if geo == 'farm' or user_info.get('geo') == 'farm':
+                console.print("[blue]Player is in farm zone, finding suitable square...[/blue]")
+                logger.info("Player is in farm zone, finding suitable square...")
+                
+                # Сначала переходим на локацию, чтобы загрузить информацию о мобах
+                if not self._go_to_location():
+                    console.print("[red]Failed to go to location[/red]")
+                    return False
+                
+                if not self._find_and_move_to_suitable_square():
+                    console.print("[red]Failed to find suitable square[/red]")
+                    return False
+            
+            console.print("[green]Farming environment setup completed[/green]")
+            logger.info("Farming environment setup completed")
+            return True
+            
+        except Exception as e:
+            console.print(f"[red]Error setting up farming environment: {e}[/red]")
+            logger.error(f"Error setting up farming environment: {e}")
+            return False
+    
+    def _buy_potions_if_needed(self):
+        """Buy potions if needed to reach 300 each"""
+        try:
+            console.print("[blue]Checking and buying potions...[/blue]")
+            logger.info("Checking and buying potions...")
+            
+            heal_potions = self.player.get_heal_potions_count()
+            mana_potions = self.player.get_mana_potions_count()
+            
+            console.print(f"[yellow]Current potions: HP {heal_potions}, MP {mana_potions}[/yellow]")
+            logger.info(f"Current potions: HP {heal_potions}, MP {mana_potions}")
+            
+            potions_bought = 0
+            
+            # Покупаем зелья лечения если меньше 300
+            if heal_potions < 300:
+                to_buy = 300 - heal_potions
+                console.print(f"[blue]Buying {to_buy} healing potions...[/blue]")
+                logger.info(f"Buying {to_buy} healing potions...")
+                
+                heal_result = self.api_client.buy_items('m_1', 'resources', to_buy)
+                if heal_result and heal_result.get('status') == 'success':
+                    potions_bought += to_buy
+                    console.print(f"[green]Bought {to_buy} healing potions[/green]")
+                    logger.info(f"Bought {to_buy} healing potions")
+                else:
+                    console.print(f"[red]Failed to buy healing potions: {heal_result}[/red]")
+                    logger.error(f"Failed to buy healing potions: {heal_result}")
+                
+                time.sleep(2)  # Пауза 2 секунды
+            
+            # Покупаем зелья маны если меньше 300
+            if mana_potions < 300:
+                to_buy = 300 - mana_potions
+                console.print(f"[blue]Buying {to_buy} mana potions...[/blue]")
+                logger.info(f"Buying {to_buy} mana potions...")
+                
+                mana_result = self.api_client.buy_items('m_3', 'resources', to_buy)
+                if mana_result and mana_result.get('status') == 'success':
+                    potions_bought += to_buy
+                    console.print(f"[green]Bought {to_buy} mana potions[/green]")
+                    logger.info(f"Bought {to_buy} mana potions")
+                else:
+                    console.print(f"[red]Failed to buy mana potions: {mana_result}[/red]")
+                    logger.error(f"Failed to buy mana potions: {mana_result}")
+                
+                time.sleep(2)  # Пауза 2 секунды
+            
+            if potions_bought > 0:
+                console.print(f"[green]Total potions bought: {potions_bought}[/green]")
+                logger.info(f"Total potions bought: {potions_bought}")
+            else:
+                console.print("[green]Potions are sufficient[/green]")
+                logger.info("Potions are sufficient")
+            
+            return True
+                
+        except Exception as e:
+            console.print(f"[red]Error checking/buying potions: {e}[/red]")
+            logger.error(f"Error checking/buying potions: {e}")
+            return False
+    
+    def _go_to_farm_zone(self):
+        """Go to farm zone"""
+        try:
+            console.print("[blue]Going to farm zone...[/blue]")
+            logger.info("Going to farm zone...")
+            
+            result = self.api_client.change_main_geo("farm")
+            
+            if result.get("status") == "success":
+                console.print("[green]Successfully moved to farm zone[/green]")
+                logger.info("Successfully moved to farm zone")
+                time.sleep(2)  # Пауза 2 секунды
+                return True
+            else:
+                console.print(f"[red]Failed to move to farm zone: {result.get('message', 'Unknown error')}[/red]")
+                logger.error(f"Failed to move to farm zone: {result}")
+                return False
+            
+        except Exception as e:
+            console.print(f"[red]Error moving to farm zone: {e}[/red]")
+            logger.error(f"Error moving to farm zone: {e}")
+            return False
+    
+    def _go_to_location(self):
+        """Go to location (loco_3) to load mob information"""
+        try:
+            console.print("[blue]Going to location...[/blue]")
+            logger.info("Going to location...")
+            
+            # Выбираем локацию в зависимости от уровня игрока
+            player_level = self.player.level
+            if player_level >= 10:
+                location = "loco_3"
+                direction = "south"  # Добавляем направление
+                console.print(f"[blue]Going to {location} {direction} (level {player_level} >= 10).[/blue]")
+                logger.info(f"Going to {location} {direction} (level {player_level} >= 10).")
+            else:
+                location = "loco_0"
+                direction = "north"  # Добавляем направление
+                console.print(f"[blue]Going to {location} {direction} (level {player_level} < 10).[/blue]")
+                logger.info(f"Going to {location} {direction} (level {player_level} < 10).")
+            
+            result = self.api_client.change_geo(location, direction)
+            
+            if result.get("status") == "success":
+                console.print(f"[green]Successfully moved to location[/green]")
+                logger.info("Successfully moved to location")
+                time.sleep(2)  # Пауза 2 секунды
+                return True
+            else:
+                console.print(f"[red]Failed to move to location: {result.get('message', 'Unknown error')}[/red]")
+                logger.error(f"Failed to move to location: {result}")
+                return False
+            
+        except Exception as e:
+            console.print(f"[red]Error moving to location: {e}[/red]")
+            logger.error(f"Error moving to location: {e}")
+            return False
+    
+    def _find_and_move_to_suitable_square(self):
+        """Find and move to suitable square (mobs close to player_level - 9, but not less)"""
+        try:
+            console.print("[blue]Finding suitable square...[/blue]")
+            logger.info("Finding suitable square...")
+            
+            # Получаем информацию о квадратах
+            user_info = self.api_client.get_user_info()
+            squares = user_info.get("squares", [])
+            
+            if not squares:
+                console.print("[red]No square information available[/red]")
+                logger.error("No square information available")
+                return False
+            
+            # Ищем подходящий квадрат (мобы максимально близкие к player_level - 9, но не меньше)
+            player_level = self.player.level
+            target_level = player_level - 9  # Целевой уровень мобов
+            min_acceptable_level = target_level  # Минимальный приемлемый уровень
+            best_square = None
+            best_score = float('inf')  # Минимальная разница с целевым уровнем
+            
+            logger.info(f"Looking for square with mobs level close to {target_level} (player {player_level})")
+            
+            for square in squares:
+                position = square.get("position")
+                lvl_mobs = square.get("lvlMobs")
+                
+                # Пропускаем квадраты с названием локации (locoName)
+                if lvl_mobs and "locoName" in lvl_mobs:
+                    logger.info(f"Skipping square {position}: has locoName '{lvl_mobs['locoName']}'")
+                    continue
+                
+                if lvl_mobs and "mobLvl" in lvl_mobs:
+                    try:
+                        mob_level = int(lvl_mobs["mobLvl"])
+                        
+                        # Проверяем, что уровень мобов не меньше минимального приемлемого
+                        if mob_level >= min_acceptable_level:
+                            # Вычисляем разницу с целевым уровнем
+                            level_diff = abs(mob_level - target_level)
+                            
+                            # Ищем квадрат с минимальной разницей (максимально близкий к целевому)
+                            if level_diff < best_score:
+                                best_score = level_diff
+                                best_square = position
+                                logger.info(f"New best square {position}: mobs level {mob_level} (diff {level_diff} from target {target_level})")
+                            
+                    except (ValueError, TypeError) as e:
+                        # Если не удается преобразовать mob_level, пропускаем этот квадрат
+                        logger.warning(f"Cannot process mob level in square {position}: {e}")
+                        continue
+            
+            if best_square:
+                logger.info(f"Selected best square {best_square} with level difference {best_score}")
+                console.print(f"[yellow]Found suitable square: {best_square} (mobs level ~{target_level + best_score})[/yellow]")
+                logger.info(f"Found suitable square: {best_square} (mobs level ~{target_level + best_score})")
+                
+                # Переходим на лучший квадрат
+                result = self.api_client.change_square(best_square)
+                
+                if result.get("status") == "success":
+                    console.print(f"[green]Successfully moved to square {best_square}[/green]")
+                    logger.info(f"Successfully moved to square {best_square}")
+                    time.sleep(2)  # Пауза 2 секунды
+                    return True
+                else:
+                    console.print(f"[red]Failed to move to square {best_square}: {result.get('message', 'Unknown error')}[/red]")
+                    logger.error(f"Failed to move to square {best_square}: {result}")
+                    return False
+            else:
+                console.print("[red]No suitable square found[/red]")
+                logger.warning("No suitable square found")
+                return False
+                
+        except Exception as e:
+            console.print(f"[red]Error finding suitable square: {e}[/red]")
+            logger.error(f"Error finding suitable square: {e}")
+            return False
     
     def get_session_stats(self) -> Dict[str, Any]:
         """Get current session statistics"""

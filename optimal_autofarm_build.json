@@ -1,0 +1,138 @@
+{
+  "recommended_weapon": {
+    "type": "spear",
+    "name": "Копье",
+    "rating": 8.666666666666666
+  },
+  "weapon_comparison": {
+    "sword": {
+      "name": "Меч",
+      "average_rating": 8.5,
+      "total_rating": 34,
+      "skill_count": 4,
+      "best_skills": [
+        {
+          "name": "Базовая атака",
+          "rating": 10,
+          "description": "Основная атака, всегда доступна"
+        },
+        {
+          "name": "Мощный удар",
+          "rating": 9,
+          "description": "Сильная атака, используется ботом при HP моба > 100"
+        },
+        {
+          "name": "Критический удар",
+          "rating": 8,
+          "description": "Высокий урон, но долгий кулдаун"
+        }
+      ]
+    },
+    "axe": {
+      "name": "Топор",
+      "average_rating": 7.666666666666667,
+      "total_rating": 23,
+      "skill_count": 3,
+      "best_skills": [
+        {
+          "name": "Базовая атака",
+          "rating": 9,
+          "description": "Медленнее меча, но сильнее"
+        },
+        {
+          "name": "Тяжелый удар",
+          "rating": 8,
+          "description": "Очень сильная атака"
+        },
+        {
+          "name": "Ярость берсерка",
+          "rating": 6,
+          "description": "Рискованный, но мощный"
+        }
+      ]
+    },
+    "spear": {
+      "name": "Копье",
+      "average_rating": 8.666666666666666,
+      "total_rating": 26,
+      "skill_count": 3,
+      "best_skills": [
+        {
+          "name": "Базовая атака",
+          "rating": 9,
+          "description": "Быстрые атаки"
+        },
+        {
+          "name": "Проникающий удар",
+          "rating": 9,
+          "description": "Эффективен против бронированных мобов"
+        },
+        {
+          "name": "Оборонительная стойка",
+          "rating": 8,
+          "description": "Хорошая защита"
+        }
+      ]
+    },
+    "staff": {
+      "name": "Посох",
+      "average_rating": 7.75,
+      "total_rating": 31,
+      "skill_count": 4,
+      "best_skills": [
+        {
+          "name": "Лечение",
+          "rating": 9,
+          "description": "Автоматическое лечение"
+        },
+        {
+          "name": "Магический снаряд",
+          "rating": 8,
+          "description": "Сильная магическая атака"
+        },
+        {
+          "name": "Базовая атака",
+          "rating": 7,
+          "description": "Слабый базовый урон"
+        }
+      ]
+    }
+  },
+  "essential_skills": [
+    {
+      "name": "Зелье лечения",
+      "rating": 10,
+      "description": "Критично для автофарма, используется при HP < 50%",
+      "importance": "Критично"
+    },
+    {
+      "name": "Отдых у костра",
+      "rating": 10,
+      "description": "Автоматически при стамине = 0",
+      "importance": "Критично"
+    }
+  ],
+  "skill_priority": [
+    {
+      "priority": 1,
+      "name": "Базовая атака",
+      "rating": 9,
+      "cooldown": "4.8 сек",
+      "description": "Быстрые атаки"
+    },
+    {
+      "priority": 2,
+      "name": "Проникающий удар",
+      "rating": 9,
+      "cooldown": "10 сек",
+      "description": "Эффективен против бронированных мобов"
+    },
+    {
+      "priority": 3,
+      "name": "Оборонительная стойка",
+      "rating": 8,
+      "cooldown": "18 сек",
+      "description": "Хорошая защита"
+    }
+  ]
+}

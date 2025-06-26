@@ -226,6 +226,17 @@ class APIClient:
         result = self._make_request("GET", Endpoints.USER_INFO)
         return result
     
+    def get_user_city_info(self) -> Dict[str, Any]:
+        """
+        Get user information from city (for initialization)
+        
+        Returns:
+            Response data with user information from city
+        """
+        logger.info("Getting user city info...")
+        result = self._make_request("GET", Endpoints.USER_CITY)
+        return result
+    
     def sell_items(self, items: list[dict]) -> dict:
         """
         Sell items (оружие, броня, бижутерия)
