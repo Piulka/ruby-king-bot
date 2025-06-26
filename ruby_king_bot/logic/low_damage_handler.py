@@ -311,8 +311,11 @@ class LowDamageHandler:
     def _find_best_square(self, squares: List[Dict[str, Any]]) -> Optional[str]:
         """Находит лучший квадрат для текущего уровня"""
         player_level = self.player.level
+        target_level = player_level - 9  # Ищем мобов на 9 уровней ниже
         best_square = None
-        best_score = -1
+        best_score = float('inf')  # Минимальная разница в уровнях
+        
+        logger.info(f"Ищем квадрат с мобами уровня {target_level} (игрок {player_level})")
         
         for square in squares:
             position = square.get("position")
@@ -320,26 +323,30 @@ class LowDamageHandler:
             
             if lvl_mobs and "mobLvl" in lvl_mobs:
                 try:
-                    mob_level = int(lvl_mobs["mobLvl"])  # Преобразуем в int
-                    # Вычисляем "идеальность" квадрата (близость к уровню игрока)
-                    score = 100 - abs(mob_level - player_level)
+                    mob_level = int(lvl_mobs["mobLvl"])
+                    level_diff = abs(mob_level - target_level)
                     
-                    # Бонус за точное совпадение
-                    if mob_level == player_level:
-                        score += 50
+                    # Если мобы на 9 уровней ниже или выше - это идеально
+                    if mob_level == target_level:
+                        logger.info(f"Найден идеальный квадрат {position}: мобы уровня {mob_level}")
+                        return position
                     
-                    # Бонус за специальные локации
-                    if "locoName" in lvl_mobs:
-                        score += 10
-                    
-                    if score > best_score:
-                        best_score = score
+                    # Ищем квадрат с минимальной разницей в уровнях
+                    if level_diff < best_score:
+                        best_score = level_diff
                         best_square = position
+                        logger.info(f"Новый лучший квадрат {position}: мобы уровня {mob_level} (разница {level_diff})")
+                        
                 except (ValueError, TypeError) as e:
                     # Если не удается преобразовать mob_level, пропускаем этот квадрат
                     logger.warning(f"Не удается обработать уровень мобов в квадрате {position}: {e}")
                     continue
         
+        if best_square:
+            logger.info(f"Выбран лучший квадрат {best_square} с разницей в уровнях {best_score}")
+        else:
+            logger.warning("Не найден подходящий квадрат")
+            
         return best_square
     
     def _force_display_update(self):
