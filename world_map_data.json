@@ -1,0 +1,6357 @@
+{
+  "metadata": {
+    "created_at": "2025-06-27 00:07:12",
+    "total_locations": 10,
+    "total_directions": 4,
+    "stats": {
+      "locations_visited": 10,
+      "directions_visited": 40,
+      "squares_visited": 1280,
+      "mobs_found": 658,
+      "errors": 0
+    }
+  },
+  "world_map": {
+    "loco_0": {
+      "name": "Болото",
+      "directions": {
+        "north": {
+          "name": "Север",
+          "squares": {
+            "R1": {
+              "mob_level": 100,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 100
+              }
+            },
+            "R3": {
+              "mob_level": 90,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 90
+              }
+            },
+            "U1": {
+              "mob_level": 80,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 80
+              }
+            },
+            "U3": {
+              "mob_level": 70,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 70
+              }
+            },
+            "B1": {
+              "mob_level": 4,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 4,
+                "locoId": "loco_0_8",
+                "locoName": "Закрытая школа "
+              }
+            },
+            "B2": {
+              "mob_level": 2,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 2
+              }
+            },
+            "B3": {
+              "mob_level": 60,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 60
+              }
+            },
+            "B4": {
+              "mob_level": 65,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 65
+              }
+            },
+            "Y1": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14
+              }
+            },
+            "Y2": {
+              "mob_level": 50,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 50
+              }
+            },
+            "Y3": {
+              "mob_level": 44,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 44,
+                "mobCount": 2
+              }
+            },
+            "Y4": {
+              "mob_level": 110,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 110
+              }
+            },
+            "K1": {
+              "mob_level": 55,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 55
+              }
+            },
+            "K2": {
+              "mob_level": 40,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 40
+              }
+            },
+            "K3": {
+              "mob_level": 27,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 27,
+                "mobCount": "2-3"
+              }
+            },
+            "K4": {
+              "mob_level": 30,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 30,
+                "mobCount": 2
+              }
+            },
+            "I1": {
+              "mob_level": 30,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 30
+              }
+            },
+            "I2": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "I3": {
+              "mob_level": 34,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 34
+              }
+            },
+            "I4": {
+              "mob_level": 28,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 28
+              }
+            },
+            "N1": {
+              "mob_level": 20,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 20
+              }
+            },
+            "N2": {
+              "mob_level": 20,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 20,
+                "mobCount": 3
+              }
+            },
+            "N3": {
+              "mob_level": 12,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 12
+              }
+            },
+            "N4": {
+              "mob_level": 6,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 6,
+                "locoId": "loco_0_2",
+                "locoName": "Кладбище героев"
+              }
+            },
+            "G1": {
+              "mob_level": 0,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 0,
+                "locoId": "loco_0_castle_1",
+                "locoName": "Северный замок"
+              }
+            },
+            "G2": {
+              "mob_level": 4,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 4,
+                "mobCount": 2
+              }
+            },
+            "G3": {
+              "mob_level": "2-3",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "2-3"
+              }
+            },
+            "G4": {
+              "mob_level": 1,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 1
+              }
+            }
+          }
+        },
+        "south": {
+          "name": "Юг",
+          "squares": {
+            "R1": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "R3": {
+              "mob_level": "112-116",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "112-116"
+              }
+            },
+            "U1": {
+              "mob_level": 50,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 50
+              }
+            },
+            "U2": {
+              "mob_level": "40-44",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "40-44"
+              }
+            },
+            "B1": {
+              "mob_level": 4,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 4,
+                "locoId": "loco_0_7",
+                "locoName": "Поле подсолнухов"
+              }
+            },
+            "B4": {
+              "mob_level": "26-32",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "26-32"
+              }
+            },
+            "Y2": {
+              "mob_level": 3,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 3,
+                "locoId": "loco_0_3",
+                "locoName": "Фруктовый сад"
+              }
+            },
+            "K1": {
+              "mob_level": 20,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 20
+              }
+            },
+            "K4": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            },
+            "I1": {
+              "mob_level": 16,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 16
+              }
+            },
+            "I4": {
+              "mob_level": 0,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 0,
+                "locoId": "loco_0_fishing_1",
+                "locoName": "Озеро Тишины"
+              }
+            },
+            "N3": {
+              "mob_level": 2,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 2,
+                "locoId": "loco_0_1",
+                "locoName": "Фермы"
+              }
+            },
+            "N4": {
+              "mob_level": "4-6",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "4-6"
+              }
+            },
+            "G1": {
+              "mob_level": 0,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 0,
+                "locoId": "loco_0_castle_2",
+                "locoName": "Южный замок"
+              }
+            },
+            "G2": {
+              "mob_level": 6,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 6,
+                "mobCount": 2
+              }
+            },
+            "G3": {
+              "mob_level": "2-3",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "2-3"
+              }
+            },
+            "G4": {
+              "mob_level": 1,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 1,
+                "mobCount": 2
+              }
+            }
+          }
+        },
+        "east": {
+          "name": "Восток",
+          "squares": {
+            "R1": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "R4": {
+              "mob_level": 110,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 110
+              }
+            },
+            "U3": {
+              "mob_level": 6,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 6,
+                "locoId": "loco_0_6",
+                "locoName": "Кукурузные поля"
+              }
+            },
+            "U4": {
+              "mob_level": 100,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 100
+              }
+            },
+            "B2": {
+              "mob_level": 90,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 90
+              }
+            },
+            "B4": {
+              "mob_level": 80,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 80
+              }
+            },
+            "Y2": {
+              "mob_level": 70,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 70
+              }
+            },
+            "Y4": {
+              "mob_level": 3,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 3,
+                "locoId": "loco_0_4",
+                "locoName": "Старая мельница"
+              }
+            },
+            "K1": {
+              "mob_level": 50,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 50
+              }
+            },
+            "K3": {
+              "mob_level": 40,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 40
+              }
+            },
+            "K4": {
+              "mob_level": 60,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 60
+              }
+            },
+            "I1": {
+              "mob_level": 25,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 25
+              }
+            },
+            "I2": {
+              "mob_level": 30,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 30
+              }
+            },
+            "I4": {
+              "mob_level": 20,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 20
+              }
+            },
+            "N1": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14
+              }
+            },
+            "N3": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            },
+            "G1": {
+              "mob_level": 0,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 0,
+                "locoId": "loco_0_castle_4",
+                "locoName": "Восточный замок"
+              }
+            },
+            "G2": {
+              "mob_level": 4,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 4
+              }
+            },
+            "G3": {
+              "mob_level": 2,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 2
+              }
+            },
+            "G4": {
+              "mob_level": 1,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 1
+              }
+            }
+          }
+        },
+        "west": {
+          "name": "Запад",
+          "squares": {
+            "R2": {
+              "mob_level": 100,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 100
+              }
+            },
+            "R3": {
+              "mob_level": 90,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 90
+              }
+            },
+            "R4": {
+              "mob_level": 80,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 80
+              }
+            },
+            "U2": {
+              "mob_level": 70,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 70
+              }
+            },
+            "U4": {
+              "mob_level": 60,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 60
+              }
+            },
+            "B1": {
+              "mob_level": 110,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 110
+              }
+            },
+            "B3": {
+              "mob_level": 50,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 50
+              }
+            },
+            "Y1": {
+              "mob_level": 40,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 40
+              }
+            },
+            "Y2": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "Y4": {
+              "mob_level": 30,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 30
+              }
+            },
+            "K4": {
+              "mob_level": 4,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 4,
+                "locoId": "loco_0_5",
+                "locoName": "Заброшенные поля"
+              }
+            },
+            "I1": {
+              "mob_level": 16,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 16
+              }
+            },
+            "I2": {
+              "mob_level": 20,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 20
+              }
+            },
+            "N1": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            },
+            "N3": {
+              "mob_level": 6,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 6
+              }
+            },
+            "G1": {
+              "mob_level": 0,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 0,
+                "locoId": "loco_0_castle_3",
+                "locoName": "Западный замок"
+              }
+            },
+            "G2": {
+              "mob_level": 3,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 3
+              }
+            },
+            "G4": {
+              "mob_level": 1,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "loco_1": {
+      "name": "Таинственный лес",
+      "directions": {
+        "north": {
+          "name": "Север",
+          "squares": {
+            "R3": {
+              "mob_level": 70,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 70
+              }
+            },
+            "U2": {
+              "mob_level": 82,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 82
+              }
+            },
+            "U4": {
+              "mob_level": 46,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 46
+              }
+            },
+            "B1": {
+              "mob_level": 5,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 5,
+                "locoId": "loco_1_8",
+                "locoName": "Вороний холм"
+              }
+            },
+            "B3": {
+              "mob_level": 110,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 110
+              }
+            },
+            "Y2": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "Y4": {
+              "mob_level": 30,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 30
+              }
+            },
+            "K2": {
+              "mob_level": 4,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 4,
+                "locoId": "loco_1_3",
+                "locoName": "Землянка"
+              }
+            },
+            "I1": {
+              "mob_level": 100,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 100
+              }
+            },
+            "I3": {
+              "mob_level": 36,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 36
+              }
+            },
+            "I4": {
+              "mob_level": 90,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 90
+              }
+            },
+            "N2": {
+              "mob_level": 60,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 60
+              }
+            },
+            "N3": {
+              "mob_level": 26,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 26
+              }
+            },
+            "N4": {
+              "mob_level": 40,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 40
+              }
+            },
+            "G1": {
+              "mob_level": 16,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 16
+              }
+            },
+            "G2": {
+              "mob_level": 20,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 20
+              }
+            },
+            "G4": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            }
+          }
+        },
+        "south": {
+          "name": "Юг",
+          "squares": {
+            "R1": {
+              "mob_level": 80,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 80
+              }
+            },
+            "R2": {
+              "mob_level": 58,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 58
+              }
+            },
+            "R3": {
+              "mob_level": 76,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 76
+              }
+            },
+            "U1": {
+              "mob_level": 1,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 1
+              }
+            },
+            "U2": {
+              "mob_level": 69,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 69
+              }
+            },
+            "U3": {
+              "mob_level": 90,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 90
+              }
+            },
+            "U4": {
+              "mob_level": 65,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 65
+              }
+            },
+            "B1": {
+              "mob_level": 72,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 72
+              }
+            },
+            "B3": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "Y1": {
+              "mob_level": 60,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 60
+              }
+            },
+            "Y2": {
+              "mob_level": "86-88",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "86-88"
+              }
+            },
+            "Y3": {
+              "mob_level": 56,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 56
+              }
+            },
+            "Y4": {
+              "mob_level": 4,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 4,
+                "locoId": "loco_1_6",
+                "locoName": "Древо Мудрости"
+              }
+            },
+            "K1": {
+              "mob_level": 110,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 110
+              }
+            },
+            "K2": {
+              "mob_level": 46,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 46
+              }
+            },
+            "K3": {
+              "mob_level": 40,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 40
+              }
+            },
+            "K4": {
+              "mob_level": 84,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 84
+              }
+            },
+            "I2": {
+              "mob_level": 3,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 3,
+                "locoId": "loco_1_4",
+                "locoName": "Священный водопад"
+              }
+            },
+            "I3": {
+              "mob_level": 36,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 36
+              }
+            },
+            "N1": {
+              "mob_level": 26,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 26
+              }
+            },
+            "N2": {
+              "mob_level": 34,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 34,
+                "mobCount": 2
+              }
+            },
+            "N4": {
+              "mob_level": 30,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 30
+              }
+            },
+            "G1": {
+              "mob_level": 20,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 20
+              }
+            },
+            "G3": {
+              "mob_level": 17,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 17
+              }
+            },
+            "G4": {
+              "mob_level": 12,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 12
+              }
+            }
+          }
+        },
+        "east": {
+          "name": "Восток",
+          "squares": {
+            "R1": {
+              "mob_level": 112,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 112
+              }
+            },
+            "R3": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "R4": {
+              "mob_level": 100,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 100
+              }
+            },
+            "U3": {
+              "mob_level": 92,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 92
+              }
+            },
+            "B1": {
+              "mob_level": 84,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 84
+              }
+            },
+            "B2": {
+              "mob_level": "52-56",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "52-56"
+              }
+            },
+            "B3": {
+              "mob_level": 76,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 76
+              }
+            },
+            "B4": {
+              "mob_level": 70,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 70
+              }
+            },
+            "Y1": {
+              "mob_level": 48,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 48
+              }
+            },
+            "Y2": {
+              "mob_level": 60,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 60
+              }
+            },
+            "Y3": {
+              "mob_level": "40-43",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "40-43"
+              }
+            },
+            "Y4": {
+              "mob_level": 4,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 4,
+                "locoId": "loco_1_2_1",
+                "locoName": "Заброшенный дом"
+              }
+            },
+            "K1": {
+              "mob_level": 50,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 50
+              }
+            },
+            "K2": {
+              "mob_level": "32-34",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "32-34"
+              }
+            },
+            "K3": {
+              "mob_level": 40,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 40
+              }
+            },
+            "K4": {
+              "mob_level": 30,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 30
+              }
+            },
+            "I1": {
+              "mob_level": 24,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 24
+              }
+            },
+            "I3": {
+              "mob_level": 20,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 20
+              }
+            },
+            "I4": {
+              "mob_level": "16-18",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "16-18"
+              }
+            },
+            "N1": {
+              "mob_level": 4,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 4,
+                "locoId": "loco_1_1",
+                "locoName": "Кладбище"
+              }
+            },
+            "N3": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14
+              }
+            },
+            "G1": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            },
+            "G3": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10,
+                "mobCount": 2
+              }
+            },
+            "G4": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14,
+                "mobCount": 2
+              }
+            }
+          }
+        },
+        "west": {
+          "name": "Запад",
+          "squares": {
+            "R3": {
+              "mob_level": 96,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 96
+              }
+            },
+            "U2": {
+              "mob_level": 116,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 116
+              }
+            },
+            "U4": {
+              "mob_level": "83-86",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "83-86"
+              }
+            },
+            "B1": {
+              "mob_level": 76,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 76
+              }
+            },
+            "B2": {
+              "mob_level": "59-63",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "59-63"
+              }
+            },
+            "B3": {
+              "mob_level": 86,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 86
+              }
+            },
+            "B4": {
+              "mob_level": 72,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 72
+              }
+            },
+            "Y1": {
+              "mob_level": 56,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 56
+              }
+            },
+            "Y3": {
+              "mob_level": 68,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 68
+              }
+            },
+            "Y4": {
+              "mob_level": 40,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 40
+              }
+            },
+            "K1": {
+              "mob_level": 2,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 2,
+                "locoId": "loco_1_5",
+                "locoName": "Эльфийская роща"
+              }
+            },
+            "K2": {
+              "mob_level": 80,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 80
+              }
+            },
+            "K3": {
+              "mob_level": 46,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 46
+              }
+            },
+            "K4": {
+              "mob_level": 50,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 50
+              }
+            },
+            "I3": {
+              "mob_level": 2,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 2,
+                "locoId": "loco_1_7",
+                "locoName": "Грибная поляна"
+              }
+            },
+            "I4": {
+              "mob_level": "30-32",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "30-32"
+              }
+            },
+            "N1": {
+              "mob_level": 20,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 20,
+                "mobCount": 2
+              }
+            },
+            "N2": {
+              "mob_level": 36,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 36
+              }
+            },
+            "N4": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14,
+                "mobCount": 3
+              }
+            },
+            "G1": {
+              "mob_level": 20,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 20
+              }
+            },
+            "G2": {
+              "mob_level": 26,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 26
+              }
+            },
+            "G3": {
+              "mob_level": 16,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 16
+              }
+            },
+            "G4": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            }
+          }
+        }
+      }
+    },
+    "loco_2": {
+      "name": "Горы",
+      "directions": {
+        "north": {
+          "name": "Север",
+          "squares": {
+            "R1": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "R3": {
+              "mob_level": 108,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 108
+              }
+            },
+            "U2": {
+              "mob_level": 98,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 98
+              }
+            },
+            "U3": {
+              "mob_level": 75,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 75
+              }
+            },
+            "U4": {
+              "mob_level": 88,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 88
+              }
+            },
+            "B1": {
+              "mob_level": 80,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 80
+              }
+            },
+            "B2": {
+              "mob_level": "68-71",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "68-71"
+              }
+            },
+            "B3": {
+              "mob_level": 78,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 78
+              }
+            },
+            "B4": {
+              "mob_level": "62-64",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "62-64"
+              }
+            },
+            "Y1": {
+              "mob_level": "52-54",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "52-54"
+              }
+            },
+            "Y2": {
+              "mob_level": 4,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 4,
+                "locoId": "loco_2_5",
+                "locoName": "Кладбище Кораблей"
+              }
+            },
+            "Y4": {
+              "mob_level": 68,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 68
+              }
+            },
+            "K2": {
+              "mob_level": 58,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 58
+              }
+            },
+            "K3": {
+              "mob_level": "42-44",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "42-44"
+              }
+            },
+            "K4": {
+              "mob_level": 48,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 48
+              }
+            },
+            "I1": {
+              "mob_level": "30-32",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "30-32"
+              }
+            },
+            "I2": {
+              "mob_level": 2,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 2,
+                "locoId": "loco_2_1",
+                "locoName": "Заброшенный форт"
+              }
+            },
+            "I3": {
+              "mob_level": "22-24",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "22-24"
+              }
+            },
+            "I4": {
+              "mob_level": 34,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 34,
+                "mobCount": 2
+              }
+            },
+            "N1": {
+              "mob_level": 38,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 38
+              }
+            },
+            "N3": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14,
+                "mobCount": "2-3"
+              }
+            },
+            "N4": {
+              "mob_level": 28,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 28
+              }
+            },
+            "G2": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10,
+                "mobCount": 2
+              }
+            },
+            "G3": {
+              "mob_level": 18,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 18
+              }
+            },
+            "G4": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            }
+          }
+        },
+        "south": {
+          "name": "Юг",
+          "squares": {
+            "R2": {
+              "mob_level": 117,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 117
+              }
+            },
+            "U1": {
+              "mob_level": 106,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 106
+              }
+            },
+            "U2": {
+              "mob_level": 72,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 72
+              }
+            },
+            "U4": {
+              "mob_level": 88,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 88
+              }
+            },
+            "B1": {
+              "mob_level": 98,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 98
+              }
+            },
+            "B2": {
+              "mob_level": 62,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 62
+              }
+            },
+            "B3": {
+              "mob_level": 87,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 87
+              }
+            },
+            "B4": {
+              "mob_level": "68-70",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "68-70"
+              }
+            },
+            "Y1": {
+              "mob_level": "52-55",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "52-55"
+              }
+            },
+            "Y2": {
+              "mob_level": 67,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 67
+              }
+            },
+            "Y3": {
+              "mob_level": "48-50",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "48-50"
+              }
+            },
+            "Y4": {
+              "mob_level": 57,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 57
+              }
+            },
+            "K1": {
+              "mob_level": 77,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 77
+              }
+            },
+            "K2": {
+              "mob_level": "42-44",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "42-44"
+              }
+            },
+            "K3": {
+              "mob_level": 2,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 2,
+                "locoId": "loco_2_2",
+                "locoName": "Старый корабль"
+              }
+            },
+            "K4": {
+              "mob_level": 41,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 41
+              }
+            },
+            "I2": {
+              "mob_level": 37,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 37
+              }
+            },
+            "I4": {
+              "mob_level": "32-34",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "32-34"
+              }
+            },
+            "N1": {
+              "mob_level": 47,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 47
+              }
+            },
+            "N2": {
+              "mob_level": 22,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 22
+              }
+            },
+            "N3": {
+              "mob_level": 20,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 20,
+                "mobCount": 2
+              }
+            },
+            "N4": {
+              "mob_level": 27,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 27
+              }
+            },
+            "G1": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14
+              }
+            },
+            "G2": {
+              "mob_level": 12,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 12,
+                "mobCount": 2
+              }
+            },
+            "G3": {
+              "mob_level": 16,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 16
+              }
+            },
+            "G4": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            }
+          }
+        },
+        "east": {
+          "name": "Восток",
+          "squares": {
+            "R2": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "U1": {
+              "mob_level": 100,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 100
+              }
+            },
+            "U2": {
+              "mob_level": 80,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 80
+              }
+            },
+            "U4": {
+              "mob_level": 70,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 70
+              }
+            },
+            "B3": {
+              "mob_level": 5,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 5,
+                "locoId": "loco_2_6",
+                "locoName": "Гнездо алигаторов"
+              }
+            },
+            "B4": {
+              "mob_level": 79,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 79
+              }
+            },
+            "Y1": {
+              "mob_level": 90,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 90
+              }
+            },
+            "Y2": {
+              "mob_level": 60,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 60
+              }
+            },
+            "Y3": {
+              "mob_level": 66,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 66
+              }
+            },
+            "Y4": {
+              "mob_level": 50,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 50
+              }
+            },
+            "K1": {
+              "mob_level": 110,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 110
+              }
+            },
+            "K2": {
+              "mob_level": 74,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 74
+              }
+            },
+            "K3": {
+              "mob_level": 3,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 3,
+                "locoId": "loco_2_4",
+                "locoName": "Плавающий остров"
+              }
+            },
+            "K4": {
+              "mob_level": 56,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 56
+              }
+            },
+            "I1": {
+              "mob_level": "44-46",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "44-46"
+              }
+            },
+            "I3": {
+              "mob_level": 45,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 45
+              }
+            },
+            "I4": {
+              "mob_level": 4,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 4,
+                "locoId": "loco_2_7",
+                "locoName": "Логово гигантских пиявок"
+              }
+            },
+            "N1": {
+              "mob_level": 30,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 30
+              }
+            },
+            "N2": {
+              "mob_level": 40,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 40
+              }
+            },
+            "N3": {
+              "mob_level": 34,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 34
+              }
+            },
+            "N4": {
+              "mob_level": 18,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 18
+              }
+            },
+            "G1": {
+              "mob_level": 12,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 12,
+                "mobCount": 2
+              }
+            },
+            "G2": {
+              "mob_level": 24,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 24
+              }
+            },
+            "G3": {
+              "mob_level": 16,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 16
+              }
+            },
+            "G4": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            }
+          }
+        },
+        "west": {
+          "name": "Запад",
+          "squares": {
+            "R2": {
+              "mob_level": 112,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 112
+              }
+            },
+            "R4": {
+              "mob_level": 105,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 105
+              }
+            },
+            "U3": {
+              "mob_level": 95,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 95
+              }
+            },
+            "B1": {
+              "mob_level": 85,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 85
+              }
+            },
+            "B4": {
+              "mob_level": 4,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 4,
+                "locoId": "loco_2_3",
+                "locoName": "Гниющие Пруды"
+              }
+            },
+            "Y1": {
+              "mob_level": 75,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 75
+              }
+            },
+            "Y2": {
+              "mob_level": "68-70",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "68-70"
+              }
+            },
+            "Y4": {
+              "mob_level": 65,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 65
+              }
+            },
+            "K1": {
+              "mob_level": 60,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 60
+              }
+            },
+            "K2": {
+              "mob_level": 64,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 64
+              }
+            },
+            "K3": {
+              "mob_level": 45,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 45
+              }
+            },
+            "K4": {
+              "mob_level": 55,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 55
+              }
+            },
+            "I1": {
+              "mob_level": 40,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 40
+              }
+            },
+            "I2": {
+              "mob_level": 25,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 25
+              }
+            },
+            "I3": {
+              "mob_level": 36,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 36
+              }
+            },
+            "I4": {
+              "mob_level": "30-32",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "30-32"
+              }
+            },
+            "N2": {
+              "mob_level": "20-22",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "20-22"
+              }
+            },
+            "N3": {
+              "mob_level": 18,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 18,
+                "mobCount": 2
+              }
+            },
+            "N4": {
+              "mob_level": 28,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 28
+              }
+            },
+            "G1": {
+              "mob_level": 18,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 18
+              }
+            },
+            "G2": {
+              "mob_level": 12,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 12,
+                "mobCount": "2-3"
+              }
+            },
+            "G3": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14
+              }
+            },
+            "G4": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            }
+          }
+        }
+      }
+    },
+    "loco_3": {
+      "name": "Огненный кратер",
+      "directions": {
+        "north": {
+          "name": "Север",
+          "squares": {
+            "R2": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "R3": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10,
+                "locoId": "loco_3_5",
+                "locoName": "Северный верхний вулкан"
+              }
+            },
+            "U1": {
+              "mob_level": 100,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 100
+              }
+            },
+            "U3": {
+              "mob_level": 82,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 82
+              }
+            },
+            "B1": {
+              "mob_level": 72,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 72
+              }
+            },
+            "B3": {
+              "mob_level": "66-68",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "66-68"
+              }
+            },
+            "B4": {
+              "mob_level": 62,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 62
+              }
+            },
+            "Y1": {
+              "mob_level": 58,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 58
+              }
+            },
+            "Y2": {
+              "mob_level": 52,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 52
+              }
+            },
+            "Y3": {
+              "mob_level": 90,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 90
+              }
+            },
+            "K1": {
+              "mob_level": 2,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 2,
+                "locoId": "loco_3_1",
+                "locoName": "Пещера"
+              }
+            },
+            "K2": {
+              "mob_level": "46-48",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "46-48"
+              }
+            },
+            "K3": {
+              "mob_level": 42,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 42
+              }
+            },
+            "K4": {
+              "mob_level": 110,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 110
+              }
+            },
+            "I1": {
+              "mob_level": "36-38",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "36-38"
+              }
+            },
+            "I2": {
+              "mob_level": 32,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 32
+              }
+            },
+            "I4": {
+              "mob_level": "26-29",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "26-29"
+              }
+            },
+            "N1": {
+              "mob_level": 5,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 5,
+                "locoId": "loco_3_9",
+                "locoName": "Северный нижний вулкан"
+              }
+            },
+            "N2": {
+              "mob_level": 28,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 28
+              }
+            },
+            "N3": {
+              "mob_level": 22,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 22
+              }
+            },
+            "G1": {
+              "mob_level": "16-17",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "16-17"
+              }
+            },
+            "G2": {
+              "mob_level": 12,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 12
+              }
+            },
+            "G4": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            }
+          }
+        },
+        "south": {
+          "name": "Юг",
+          "squares": {
+            "R2": {
+              "mob_level": 118,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 118
+              }
+            },
+            "R4": {
+              "mob_level": 109,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 109
+              }
+            },
+            "U2": {
+              "mob_level": 94,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 94
+              }
+            },
+            "U3": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10,
+                "locoId": "loco_3_6",
+                "locoName": "Южный верхний вулкан"
+              }
+            },
+            "U4": {
+              "mob_level": 104,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 104
+              }
+            },
+            "B2": {
+              "mob_level": 84,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 84
+              }
+            },
+            "Y1": {
+              "mob_level": 74,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 74
+              }
+            },
+            "Y3": {
+              "mob_level": 64,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 64
+              }
+            },
+            "K1": {
+              "mob_level": 4,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 4,
+                "locoId": "loco_3_2",
+                "locoName": "Гейзерное поле"
+              }
+            },
+            "K2": {
+              "mob_level": 54,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 54
+              }
+            },
+            "I1": {
+              "mob_level": 44,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 44
+              }
+            },
+            "I4": {
+              "mob_level": 34,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 34
+              }
+            },
+            "N1": {
+              "mob_level": 28,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 28
+              }
+            },
+            "N3": {
+              "mob_level": 6,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 6,
+                "locoId": "loco_3_10",
+                "locoName": "Южный нижний вулкан"
+              }
+            },
+            "N4": {
+              "mob_level": 24,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 24
+              }
+            },
+            "G1": {
+              "mob_level": "18-20",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "18-20"
+              }
+            },
+            "G2": {
+              "mob_level": 12,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 12,
+                "mobCount": 2
+              }
+            },
+            "G3": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14
+              }
+            },
+            "G4": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            }
+          }
+        },
+        "east": {
+          "name": "Восток",
+          "squares": {
+            "R1": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "R3": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14,
+                "locoId": "loco_3_8",
+                "locoName": "Восточный верхний вулкан"
+              }
+            },
+            "U2": {
+              "mob_level": 102,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 102
+              }
+            },
+            "B1": {
+              "mob_level": 92,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 92
+              }
+            },
+            "B3": {
+              "mob_level": 82,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 82
+              }
+            },
+            "Y2": {
+              "mob_level": 72,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 72
+              }
+            },
+            "K1": {
+              "mob_level": 62,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 62
+              }
+            },
+            "K3": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10,
+                "locoId": "loco_3_4",
+                "locoName": "пепельное поле"
+              }
+            },
+            "K4": {
+              "mob_level": 52,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 52
+              }
+            },
+            "I3": {
+              "mob_level": 32,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 32
+              }
+            },
+            "I4": {
+              "mob_level": 42,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 42
+              }
+            },
+            "N2": {
+              "mob_level": 7,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 7,
+                "locoId": "loco_3_12",
+                "locoName": "Восточный нижний вулкан"
+              }
+            },
+            "N3": {
+              "mob_level": "18-19",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "18-19"
+              }
+            },
+            "N4": {
+              "mob_level": 22,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 22
+              }
+            },
+            "G1": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14,
+                "mobCount": 2
+              }
+            },
+            "G3": {
+              "mob_level": "15-16",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "15-16"
+              }
+            },
+            "G4": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            }
+          }
+        },
+        "west": {
+          "name": "Запад",
+          "squares": {
+            "R4": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14,
+                "locoId": "loco_3_7",
+                "locoName": "Западный верхний вулкан"
+              }
+            },
+            "U3": {
+              "mob_level": 115,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 115
+              }
+            },
+            "B2": {
+              "mob_level": 100,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 100
+              }
+            },
+            "B4": {
+              "mob_level": 102,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 102
+              }
+            },
+            "Y2": {
+              "mob_level": 75,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 75
+              }
+            },
+            "K1": {
+              "mob_level": 60,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 60
+              }
+            },
+            "I1": {
+              "mob_level": 4,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 4,
+                "locoId": "loco_3_3",
+                "locoName": "Соженные руины"
+              }
+            },
+            "I3": {
+              "mob_level": 45,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 45
+              }
+            },
+            "N2": {
+              "mob_level": 35,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 35
+              }
+            },
+            "N3": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10,
+                "locoId": "loco_3_11",
+                "locoName": "Западный нижний вулкан"
+              }
+            },
+            "N4": {
+              "mob_level": "18-19",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "18-19"
+              }
+            },
+            "G1": {
+              "mob_level": 24,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 24
+              }
+            },
+            "G2": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14,
+                "mobCount": "2-3"
+              }
+            },
+            "G3": {
+              "mob_level": 15,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 15
+              }
+            },
+            "G4": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            }
+          }
+        }
+      }
+    },
+    "loco_4": {
+      "name": "Развалины",
+      "directions": {
+        "north": {
+          "name": "Север",
+          "squares": {
+            "U1": {
+              "mob_level": 112,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 112
+              }
+            },
+            "B1": {
+              "mob_level": 80,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 80
+              }
+            },
+            "Y1": {
+              "mob_level": 60,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 60
+              }
+            },
+            "K2": {
+              "mob_level": 6,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 6,
+                "locoId": "loco_4_1",
+                "locoName": "Долина скорпионов"
+              }
+            },
+            "I1": {
+              "mob_level": 40,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 40
+              }
+            },
+            "I4": {
+              "mob_level": 30,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 30
+              }
+            },
+            "N2": {
+              "mob_level": "16-18",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "16-18"
+              }
+            },
+            "N3": {
+              "mob_level": "24-25",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "24-25"
+              }
+            },
+            "N4": {
+              "mob_level": 20,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 20
+              }
+            },
+            "G1": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14,
+                "mobCount": "2"
+              }
+            },
+            "G3": {
+              "mob_level": "13-14",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "13-14"
+              }
+            },
+            "G4": {
+              "mob_level": "10-11",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "10-11"
+              }
+            }
+          }
+        },
+        "south": {
+          "name": "Юг",
+          "squares": {
+            "U2": {
+              "mob_level": 118,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 118
+              }
+            },
+            "B4": {
+              "mob_level": 30,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 30,
+                "locoId": "loco_4_5",
+                "locoName": "Гробницы"
+              }
+            },
+            "Y1": {
+              "mob_level": 109,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 109
+              }
+            },
+            "Y4": {
+              "mob_level": 104,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 104
+              }
+            },
+            "K2": {
+              "mob_level": 100,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 100
+              }
+            },
+            "I1": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10,
+                "locoId": "loco_4_2",
+                "locoName": "Пирамиды Проклятых"
+              }
+            },
+            "N1": {
+              "mob_level": "26-27",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "26-27"
+              }
+            },
+            "N3": {
+              "mob_level": "20-23",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "20-23"
+              }
+            },
+            "N4": {
+              "mob_level": 34,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 34
+              }
+            },
+            "G2": {
+              "mob_level": 16,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 16,
+                "mobCount": 2
+              }
+            },
+            "G3": {
+              "mob_level": 18,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 18
+              }
+            },
+            "G4": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            }
+          }
+        },
+        "east": {
+          "name": "Восток",
+          "squares": {
+            "R3": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "U2": {
+              "mob_level": 104,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 104
+              }
+            },
+            "B1": {
+              "mob_level": 102,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 102
+              }
+            },
+            "Y1": {
+              "mob_level": 47,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 47
+              }
+            },
+            "K3": {
+              "mob_level": 18,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 18,
+                "locoId": "loco_4_4",
+                "locoName": "Пыльные Руины"
+              }
+            },
+            "I3": {
+              "mob_level": 34,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 34
+              }
+            },
+            "I4": {
+              "mob_level": "28-30",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "28-30"
+              }
+            },
+            "N3": {
+              "mob_level": 21,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 21
+              }
+            },
+            "N4": {
+              "mob_level": 25,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 25
+              }
+            },
+            "G1": {
+              "mob_level": "17-20",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "17-20"
+              }
+            },
+            "G2": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14
+              }
+            },
+            "G4": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            }
+          }
+        },
+        "west": {
+          "name": "Запад",
+          "squares": {
+            "U3": {
+              "mob_level": 117,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 117
+              }
+            },
+            "B2": {
+              "mob_level": 83,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 83
+              }
+            },
+            "Y1": {
+              "mob_level": 22,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 22,
+                "locoId": "loco_4_3",
+                "locoName": "Горячие Источники"
+              }
+            },
+            "Y2": {
+              "mob_level": 69,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 69
+              }
+            },
+            "K3": {
+              "mob_level": 49,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 49
+              }
+            },
+            "I3": {
+              "mob_level": 29,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 29
+              }
+            },
+            "N1": {
+              "mob_level": "25-26",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "25-26"
+              }
+            },
+            "N3": {
+              "mob_level": 21,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 21
+              }
+            },
+            "G1": {
+              "mob_level": "17-18",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "17-18"
+              }
+            },
+            "G3": {
+              "mob_level": "13-14",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "13-14"
+              }
+            },
+            "G4": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            }
+          }
+        }
+      }
+    },
+    "loco_5": {
+      "name": "Пустыня",
+      "directions": {
+        "north": {
+          "name": "Север",
+          "squares": {
+            "R3": {
+              "mob_level": 7,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 7,
+                "locoId": "loco_5_5",
+                "locoName": "Гнездо королевы"
+              }
+            },
+            "U4": {
+              "mob_level": 117,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 117
+              }
+            },
+            "B4": {
+              "mob_level": 101,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 101
+              }
+            },
+            "Y3": {
+              "mob_level": 5,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 5,
+                "locoId": "loco_5_2",
+                "locoName": "Алмазные шахты"
+              }
+            },
+            "Y4": {
+              "mob_level": 61,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 61
+              }
+            },
+            "K4": {
+              "mob_level": 53,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 53
+              }
+            },
+            "I2": {
+              "mob_level": 41,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 41
+              }
+            },
+            "I4": {
+              "mob_level": 30,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 30
+              }
+            },
+            "N2": {
+              "mob_level": 25,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 25
+              }
+            },
+            "N4": {
+              "mob_level": 20,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 20
+              }
+            },
+            "G1": {
+              "mob_level": "16-17",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "16-17"
+              }
+            },
+            "G3": {
+              "mob_level": "13-15",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "13-15"
+              }
+            },
+            "G4": {
+              "mob_level": "10-11",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "10-11"
+              }
+            }
+          }
+        },
+        "south": {
+          "name": "Юг",
+          "squares": {
+            "R1": {
+              "mob_level": 115,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 115
+              }
+            },
+            "R4": {
+              "mob_level": 118,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 118
+              }
+            },
+            "U3": {
+              "mob_level": 96,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 96
+              }
+            },
+            "B1": {
+              "mob_level": 94,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 94
+              }
+            },
+            "B3": {
+              "mob_level": 92,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 92
+              }
+            },
+            "Y2": {
+              "mob_level": 4,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 4,
+                "locoId": "loco_5_6",
+                "locoName": "Пещерный водопад"
+              }
+            },
+            "Y3": {
+              "mob_level": 79,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 79
+              }
+            },
+            "K1": {
+              "mob_level": 76,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 76
+              }
+            },
+            "K3": {
+              "mob_level": 72,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 72
+              }
+            },
+            "I3": {
+              "mob_level": 32,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 32
+              }
+            },
+            "I4": {
+              "mob_level": 2,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 2,
+                "locoId": "loco_5_1",
+                "locoName": "Катакомбы"
+              }
+            },
+            "N2": {
+              "mob_level": 29,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 29
+              }
+            },
+            "N3": {
+              "mob_level": 24,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 24
+              }
+            },
+            "N4": {
+              "mob_level": "18-21",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "18-21"
+              }
+            },
+            "G2": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14
+              }
+            },
+            "G3": {
+              "mob_level": 12,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 12,
+                "mobCount": 2
+              }
+            },
+            "G4": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            }
+          }
+        },
+        "east": {
+          "name": "Восток",
+          "squares": {
+            "R4": {
+              "mob_level": 113,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 113
+              }
+            },
+            "U3": {
+              "mob_level": 101,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 101
+              }
+            },
+            "B3": {
+              "mob_level": 94,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 94
+              }
+            },
+            "Y4": {
+              "mob_level": 64,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 64
+              }
+            },
+            "K4": {
+              "mob_level": 3,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 3,
+                "locoId": "loco_5_4",
+                "locoName": "Затерянная библиотека"
+              }
+            },
+            "I1": {
+              "mob_level": 54,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 54
+              }
+            },
+            "N1": {
+              "mob_level": 25,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 25
+              }
+            },
+            "N4": {
+              "mob_level": 30,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 30
+              }
+            },
+            "G1": {
+              "mob_level": "19-20",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "19-20"
+              }
+            },
+            "G2": {
+              "mob_level": 17,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 17,
+                "mobCount": 2
+              }
+            },
+            "G3": {
+              "mob_level": "14-16",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "14-16"
+              }
+            },
+            "G4": {
+              "mob_level": "10-11",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "10-11"
+              }
+            }
+          }
+        },
+        "west": {
+          "name": "Запад",
+          "squares": {
+            "U1": {
+              "mob_level": 37,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 37
+              }
+            },
+            "U4": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "B1": {
+              "mob_level": 6,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 6,
+                "locoId": "loco_5_3",
+                "locoName": "Зал королевы пауков"
+              }
+            },
+            "B2": {
+              "mob_level": 84,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 84
+              }
+            },
+            "Y1": {
+              "mob_level": 94,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 94
+              }
+            },
+            "Y2": {
+              "mob_level": 90,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 90
+              }
+            },
+            "Y4": {
+              "mob_level": 104,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 104
+              }
+            },
+            "K1": {
+              "mob_level": 114,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 114
+              }
+            },
+            "K4": {
+              "mob_level": 52,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 52
+              }
+            },
+            "I1": {
+              "mob_level": 78,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 78
+              }
+            },
+            "I2": {
+              "mob_level": 49,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 49
+              }
+            },
+            "N1": {
+              "mob_level": 45,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 45
+              }
+            },
+            "N4": {
+              "mob_level": 42,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 42
+              }
+            },
+            "G1": {
+              "mob_level": "16-17",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "16-17"
+              }
+            },
+            "G2": {
+              "mob_level": 13,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 13,
+                "mobCount": "2-3"
+              }
+            },
+            "G3": {
+              "mob_level": "13-14",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "13-14"
+              }
+            },
+            "G4": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            }
+          }
+        }
+      }
+    },
+    "loco_6": {
+      "name": "Пустырь",
+      "directions": {
+        "north": {
+          "name": "Север",
+          "squares": {
+            "R3": {
+              "mob_level": 96,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 96
+              }
+            },
+            "U2": {
+              "mob_level": 102,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 102
+              }
+            },
+            "B1": {
+              "mob_level": 86,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 86
+              }
+            },
+            "B2": {
+              "mob_level": 114,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 114
+              }
+            },
+            "B4": {
+              "mob_level": 78,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 78
+              }
+            },
+            "Y2": {
+              "mob_level": 72,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 72
+              }
+            },
+            "K1": {
+              "mob_level": 68,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 68
+              }
+            },
+            "K3": {
+              "mob_level": 66,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 66
+              }
+            },
+            "K4": {
+              "mob_level": 4,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 4,
+                "locoId": "loco_6_3",
+                "locoName": "Ледяная крипта "
+              }
+            },
+            "I2": {
+              "mob_level": 54,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 54
+              }
+            },
+            "I4": {
+              "mob_level": 42,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 42
+              }
+            },
+            "N2": {
+              "mob_level": 30,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 30
+              }
+            },
+            "N3": {
+              "mob_level": 26,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 26
+              }
+            },
+            "N4": {
+              "mob_level": 22,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 22
+              }
+            },
+            "G1": {
+              "mob_level": "18-19",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "18-19"
+              }
+            },
+            "G3": {
+              "mob_level": 18,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 18
+              }
+            },
+            "G4": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14
+              }
+            }
+          }
+        },
+        "south": {
+          "name": "Юг",
+          "squares": {
+            "R3": {
+              "mob_level": 112,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 112
+              }
+            },
+            "U2": {
+              "mob_level": 100,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 100
+              }
+            },
+            "B2": {
+              "mob_level": 80,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 80
+              }
+            },
+            "B3": {
+              "mob_level": 5,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 5,
+                "locoId": "loco_6_1",
+                "locoName": "Рудники"
+              }
+            },
+            "B4": {
+              "mob_level": 70,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 70
+              }
+            },
+            "Y2": {
+              "mob_level": 64,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 64
+              }
+            },
+            "K1": {
+              "mob_level": 54,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 54
+              }
+            },
+            "K4": {
+              "mob_level": 44,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 44
+              }
+            },
+            "N1": {
+              "mob_level": 34,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 34
+              }
+            },
+            "N3": {
+              "mob_level": 19,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 19,
+                "mobCount": 2
+              }
+            },
+            "N4": {
+              "mob_level": "24-25",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "24-25"
+              }
+            },
+            "G2": {
+              "mob_level": 21,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 21
+              }
+            },
+            "G3": {
+              "mob_level": "14-17",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "14-17"
+              }
+            },
+            "G4": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14
+              }
+            }
+          }
+        },
+        "east": {
+          "name": "Восток",
+          "squares": {
+            "U1": {
+              "mob_level": 108,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 108
+              }
+            },
+            "B1": {
+              "mob_level": 100,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 100
+              }
+            },
+            "B4": {
+              "mob_level": 76,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 76
+              }
+            },
+            "Y1": {
+              "mob_level": 70,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 70
+              }
+            },
+            "Y3": {
+              "mob_level": 61,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 61
+              }
+            },
+            "Y4": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "K3": {
+              "mob_level": 51,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 51
+              }
+            },
+            "I2": {
+              "mob_level": 38,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 38
+              }
+            },
+            "I3": {
+              "mob_level": 30,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 30
+              }
+            },
+            "N1": {
+              "mob_level": "23-25",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "23-25"
+              }
+            },
+            "N3": {
+              "mob_level": "20-21",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "20-21",
+                "mobCount": 2
+              }
+            },
+            "G1": {
+              "mob_level": "16-18",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "16-18"
+              }
+            },
+            "G3": {
+              "mob_level": "14-15",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "14-15"
+              }
+            },
+            "G4": {
+              "mob_level": 12,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 12
+              }
+            }
+          }
+        },
+        "west": {
+          "name": "Запад",
+          "squares": {
+            "R2": {
+              "mob_level": 116,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 116
+              }
+            },
+            "R4": {
+              "mob_level": 118,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 118
+              }
+            },
+            "U3": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "B1": {
+              "mob_level": 104,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 104
+              }
+            },
+            "B4": {
+              "mob_level": 110,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 110
+              }
+            },
+            "Y1": {
+              "mob_level": 3,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 3,
+                "locoId": "loco_6_2",
+                "locoName": "Зал времени"
+              }
+            },
+            "Y2": {
+              "mob_level": 100,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 100
+              }
+            },
+            "K2": {
+              "mob_level": 90,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 90
+              }
+            },
+            "I2": {
+              "mob_level": 55,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 55
+              }
+            },
+            "N1": {
+              "mob_level": 45,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 45
+              }
+            },
+            "N2": {
+              "mob_level": "22-23",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "22-23"
+              }
+            },
+            "N3": {
+              "mob_level": 34,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 34
+              }
+            },
+            "N4": {
+              "mob_level": "18-20",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "18-20"
+              }
+            },
+            "G2": {
+              "mob_level": "14-17",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "14-17"
+              }
+            },
+            "G3": {
+              "mob_level": 16,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 16,
+                "mobCount": "2-3"
+              }
+            },
+            "G4": {
+              "mob_level": "11-13",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "11-13"
+              }
+            }
+          }
+        }
+      }
+    },
+    "loco_7": {
+      "name": "loco_7",
+      "directions": {
+        "north": {
+          "name": "Север",
+          "squares": {
+            "R1": {
+              "mob_level": 55,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 55
+              }
+            },
+            "R2": {
+              "mob_level": 100,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 100,
+                "locoId": "loco_7_9",
+                "locoName": "Гниющее Сердце Города"
+              }
+            },
+            "R3": {
+              "mob_level": 41,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 41
+              }
+            },
+            "U2": {
+              "mob_level": 33,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 33
+              }
+            },
+            "U3": {
+              "mob_level": 118,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 118
+              }
+            },
+            "B2": {
+              "mob_level": 54,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 54
+              }
+            },
+            "B3": {
+              "mob_level": 2,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 2,
+                "locoId": "loco_7_2",
+                "locoName": "Красный замок"
+              }
+            },
+            "Y4": {
+              "mob_level": 5,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 5,
+                "locoId": "loco_7_5",
+                "locoName": "Руины амфитеатра"
+              }
+            },
+            "K2": {
+              "mob_level": 39,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 39
+              }
+            },
+            "K3": {
+              "mob_level": 27,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 27
+              }
+            },
+            "I1": {
+              "mob_level": 64,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 64
+              }
+            },
+            "I4": {
+              "mob_level": 20,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 20
+              }
+            },
+            "N3": {
+              "mob_level": 30,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 30
+              }
+            },
+            "N4": {
+              "mob_level": "21-23",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "21-23"
+              }
+            },
+            "G1": {
+              "mob_level": 15,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 15,
+                "mobCount": 2
+              }
+            },
+            "G2": {
+              "mob_level": "18-20",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "18-20"
+              }
+            },
+            "G3": {
+              "mob_level": "13-17",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "13-17"
+              }
+            },
+            "G4": {
+              "mob_level": "10-13",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "10-13"
+              }
+            }
+          }
+        },
+        "south": {
+          "name": "Юг",
+          "squares": {
+            "R2": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "R4": {
+              "mob_level": 84,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 84
+              }
+            },
+            "U1": {
+              "mob_level": 40,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 40,
+                "locoId": "loco_7_10",
+                "locoName": "Костяная Роща"
+              }
+            },
+            "U2": {
+              "mob_level": 78,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 78
+              }
+            },
+            "B1": {
+              "mob_level": 63,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 63
+              }
+            },
+            "B3": {
+              "mob_level": 110,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 110
+              }
+            },
+            "B4": {
+              "mob_level": 3,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 3,
+                "locoId": "loco_7_4",
+                "locoName": "Замок мёртвых"
+              }
+            },
+            "Y1": {
+              "mob_level": 70,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 70
+              }
+            },
+            "Y3": {
+              "mob_level": 64,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 64
+              }
+            },
+            "K1": {
+              "mob_level": 62,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 62
+              }
+            },
+            "K4": {
+              "mob_level": 44,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 44
+              }
+            },
+            "I1": {
+              "mob_level": 8,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 8,
+                "locoId": "loco_7_6",
+                "locoName": "Храм Разбитых Клятв"
+              }
+            },
+            "I2": {
+              "mob_level": 56,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 56
+              }
+            },
+            "I4": {
+              "mob_level": 36,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 36
+              }
+            },
+            "N3": {
+              "mob_level": 26,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 26
+              }
+            },
+            "N4": {
+              "mob_level": "20-21",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "20-21"
+              }
+            },
+            "G1": {
+              "mob_level": "10-14",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "10-14"
+              }
+            },
+            "G2": {
+              "mob_level": "16-17",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "16-17"
+              }
+            },
+            "G4": {
+              "mob_level": 11,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 11
+              }
+            }
+          }
+        },
+        "east": {
+          "name": "Восток",
+          "squares": {
+            "R2": {
+              "mob_level": 94,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 94
+              }
+            },
+            "U1": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "U4": {
+              "mob_level": 92,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 92
+              }
+            },
+            "B1": {
+              "mob_level": 50,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 50,
+                "locoId": "loco_7_8",
+                "locoName": "Осколки Обелиска"
+              }
+            },
+            "B3": {
+              "mob_level": 71,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 71
+              }
+            },
+            "Y2": {
+              "mob_level": 69,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 69
+              }
+            },
+            "Y4": {
+              "mob_level": 65,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 65
+              }
+            },
+            "K1": {
+              "mob_level": 61,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 61
+              }
+            },
+            "K3": {
+              "mob_level": 3,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 3,
+                "locoId": "loco_7_3",
+                "locoName": "Уцелевший замок"
+              }
+            },
+            "K4": {
+              "mob_level": 100,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 100
+              }
+            },
+            "I1": {
+              "mob_level": 37,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 37
+              }
+            },
+            "I2": {
+              "mob_level": 45,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 45
+              }
+            },
+            "I4": {
+              "mob_level": "18-19",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "18-19"
+              }
+            },
+            "N1": {
+              "mob_level": "25-27",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "25-27"
+              }
+            },
+            "N3": {
+              "mob_level": 17,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 17
+              }
+            },
+            "G1": {
+              "mob_level": "22-23",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "22-23"
+              }
+            },
+            "G2": {
+              "mob_level": 14,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 14,
+                "mobCount": 2
+              }
+            },
+            "G4": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            }
+          }
+        },
+        "west": {
+          "name": "Запад",
+          "squares": {
+            "R2": {
+              "mob_level": 19,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 19
+              }
+            },
+            "U1": {
+              "mob_level": 112,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 112
+              }
+            },
+            "U3": {
+              "mob_level": 116,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 116
+              }
+            },
+            "B1": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "B2": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10,
+                "locoId": "loco_7_7",
+                "locoName": "Склепы"
+              }
+            },
+            "B3": {
+              "mob_level": 100,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 100
+              }
+            },
+            "Y1": {
+              "mob_level": 89,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 89
+              }
+            },
+            "Y3": {
+              "mob_level": 84,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 84
+              }
+            },
+            "Y4": {
+              "mob_level": 80,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 80
+              }
+            },
+            "K3": {
+              "mob_level": 3,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 3,
+                "locoId": "loco_7_1",
+                "locoName": "Подземелья"
+              }
+            },
+            "K4": {
+              "mob_level": 60,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 60
+              }
+            },
+            "I2": {
+              "mob_level": 49,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 49
+              }
+            },
+            "I4": {
+              "mob_level": 41,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 41
+              }
+            },
+            "N3": {
+              "mob_level": 26,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 26
+              }
+            },
+            "N4": {
+              "mob_level": "20-22",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "20-22"
+              }
+            },
+            "G1": {
+              "mob_level": "17-19",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "17-19"
+              }
+            },
+            "G2": {
+              "mob_level": 32,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 32
+              }
+            },
+            "G3": {
+              "mob_level": "14-16",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "14-16"
+              }
+            },
+            "G4": {
+              "mob_level": 12,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 12
+              }
+            }
+          }
+        }
+      }
+    },
+    "loco_8": {
+      "name": "loco_8",
+      "directions": {
+        "north": {
+          "name": "Север",
+          "squares": {
+            "R4": {
+              "mob_level": 103,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 103
+              }
+            },
+            "U2": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "U4": {
+              "mob_level": 80,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 80
+              }
+            },
+            "B3": {
+              "mob_level": 90,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 90
+              }
+            },
+            "Y1": {
+              "mob_level": 69,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 69
+              }
+            },
+            "Y2": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10,
+                "locoId": "loco_8_3",
+                "locoName": "Могильник"
+              }
+            },
+            "Y3": {
+              "mob_level": 74,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 74
+              }
+            },
+            "K2": {
+              "mob_level": 54,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 54
+              }
+            },
+            "K4": {
+              "mob_level": 44,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 44
+              }
+            },
+            "I3": {
+              "mob_level": 36,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 36
+              }
+            },
+            "I4": {
+              "mob_level": 2,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 2,
+                "locoId": "loco_8_1",
+                "locoName": "Заброшенная деревня"
+              }
+            },
+            "N1": {
+              "mob_level": 40,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 40
+              }
+            },
+            "N2": {
+              "mob_level": 24,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 24
+              }
+            },
+            "N3": {
+              "mob_level": "13-15",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "13-15",
+                "mobCount": 2
+              }
+            },
+            "N4": {
+              "mob_level": "20-21",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "20-21"
+              }
+            },
+            "G2": {
+              "mob_level": "16-17",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "16-17"
+              }
+            },
+            "G4": {
+              "mob_level": 12,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 12
+              }
+            }
+          }
+        },
+        "south": {
+          "name": "Юг",
+          "squares": {
+            "R1": {
+              "mob_level": 117,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 117
+              }
+            },
+            "R2": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "R4": {
+              "mob_level": 102,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 102
+              }
+            },
+            "U2": {
+              "mob_level": 100,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 100
+              }
+            },
+            "B1": {
+              "mob_level": 96,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 96
+              }
+            },
+            "B3": {
+              "mob_level": 93,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 93
+              }
+            },
+            "Y1": {
+              "mob_level": 90,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 90
+              }
+            },
+            "Y3": {
+              "mob_level": 83,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 83
+              }
+            },
+            "Y4": {
+              "mob_level": 6,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 6,
+                "locoId": "loco_8_2",
+                "locoName": "Пепелище"
+              }
+            },
+            "K1": {
+              "mob_level": 73,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 73
+              }
+            },
+            "K4": {
+              "mob_level": 63,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 63
+              }
+            },
+            "I2": {
+              "mob_level": 53,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 53
+              }
+            },
+            "I4": {
+              "mob_level": 43,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 43
+              }
+            },
+            "N1": {
+              "mob_level": "25-26",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "25-26"
+              }
+            },
+            "N3": {
+              "mob_level": 33,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 33
+              }
+            },
+            "N4": {
+              "mob_level": 20,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 20
+              }
+            },
+            "G2": {
+              "mob_level": 23,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 23
+              }
+            },
+            "G3": {
+              "mob_level": "17-19",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "17-19"
+              }
+            },
+            "G4": {
+              "mob_level": "12-14",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "12-14"
+              }
+            }
+          }
+        },
+        "east": {
+          "name": "Восток",
+          "squares": {
+            "R4": {
+              "mob_level": 104,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 104
+              }
+            },
+            "U3": {
+              "mob_level": 100,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 100
+              }
+            },
+            "B1": {
+              "mob_level": 90,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 90
+              }
+            },
+            "B3": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "Y2": {
+              "mob_level": 87,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 87
+              }
+            },
+            "K1": {
+              "mob_level": 56,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 56
+              }
+            },
+            "K2": {
+              "mob_level": 6,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 6,
+                "locoId": "loco_8_5",
+                "locoName": "Высохший лес"
+              }
+            },
+            "K3": {
+              "mob_level": 67,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 67
+              }
+            },
+            "I1": {
+              "mob_level": 41,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 41
+              }
+            },
+            "I4": {
+              "mob_level": 30,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 30
+              }
+            },
+            "N2": {
+              "mob_level": 52,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 52
+              }
+            },
+            "N3": {
+              "mob_level": 28,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 28
+              }
+            },
+            "G1": {
+              "mob_level": 22,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 22
+              }
+            },
+            "G2": {
+              "mob_level": "17-18",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "17-18"
+              }
+            },
+            "G3": {
+              "mob_level": "13-15",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "13-15",
+                "mobCount": 2
+              }
+            },
+            "G4": {
+              "mob_level": 10,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 10
+              }
+            }
+          }
+        },
+        "west": {
+          "name": "Запад",
+          "squares": {
+            "R2": {
+              "mob_level": 120,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 120
+              }
+            },
+            "R4": {
+              "mob_level": 108,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 108
+              }
+            },
+            "U1": {
+              "mob_level": 104,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 104
+              }
+            },
+            "U3": {
+              "mob_level": 100,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 100
+              }
+            },
+            "U4": {
+              "mob_level": 116,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 116
+              }
+            },
+            "B2": {
+              "mob_level": 91,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 91
+              }
+            },
+            "Y1": {
+              "mob_level": 81,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 81
+              }
+            },
+            "Y3": {
+              "mob_level": 71,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 71
+              }
+            },
+            "K1": {
+              "mob_level": 61,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 61
+              }
+            },
+            "K2": {
+              "mob_level": 8,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 8,
+                "locoId": "loco_8_4",
+                "locoName": "Заброшенные ангары"
+              }
+            },
+            "K3": {
+              "mob_level": 57,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 57
+              }
+            },
+            "I2": {
+              "mob_level": 49,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 49
+              }
+            },
+            "I4": {
+              "mob_level": 43,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 43
+              }
+            },
+            "N2": {
+              "mob_level": "27-29",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "27-29"
+              }
+            },
+            "N3": {
+              "mob_level": 30,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 30
+              }
+            },
+            "N4": {
+              "mob_level": 40,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 40
+              }
+            },
+            "G1": {
+              "mob_level": 20,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 20
+              }
+            },
+            "G2": {
+              "mob_level": 24,
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": 24
+              }
+            },
+            "G3": {
+              "mob_level": "15-17",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "15-17"
+              }
+            },
+            "G4": {
+              "mob_level": "12-13",
+              "mob_name": "unknown",
+              "mob_hp": 0,
+              "mob_max_hp": 0,
+              "raw_data": {
+                "mobLvl": "12-13"
+              }
+            }
+          }
+        }
+      }
+    },
+    "loco_9": {
+      "name": "loco_9",
+      "directions": {
+        "north": {
+          "name": "Север",
+          "squares": {}
+        },
+        "south": {
+          "name": "Юг",
+          "squares": {}
+        },
+        "east": {
+          "name": "Восток",
+          "squares": {}
+        },
+        "west": {
+          "name": "Запад",
+          "squares": {}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1208 @@
+{
+  "loco_4": {
+    "location": "loco_4",
+    "directions": {
+      "south": {
+        "direction": "south",
+        "squares": {
+          "G2": {
+            "square": "G2",
+            "mobs": [
+              {
+                "name": "Паук-ловец",
+                "level": 16,
+                "hp": 2,
+                "max_hp": 156,
+                "count": 11,
+                "drops": []
+              },
+              {
+                "name": "Лесной волк",
+                "level": 16,
+                "hp": 6,
+                "max_hp": 166,
+                "count": 13,
+                "drops": []
+              },
+              {
+                "name": "Обитатель вулканов",
+                "level": 19,
+                "hp": 70,
+                "max_hp": 196,
+                "count": 69,
+                "drops": []
+              },
+              {
+                "name": "Обитатель окрестностей",
+                "level": 16,
+                "hp": 12,
+                "max_hp": 186,
+                "count": 16,
+                "drops": []
+              },
+              {
+                "name": "Быстроногий заяц",
+                "level": 16,
+                "hp": 74,
+                "max_hp": 156,
+                "count": 15,
+                "drops": []
+              },
+              {
+                "name": "Дикий кабан",
+                "level": 16,
+                "hp": 16,
+                "max_hp": 156,
+                "count": 9,
+                "drops": []
+              },
+              {
+                "name": "Редкий обитатель окрестностей",
+                "level": 16,
+                "hp": 34,
+                "max_hp": 372,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Хитрый гоблин",
+                "level": 16,
+                "hp": 2,
+                "max_hp": 146,
+                "count": 9,
+                "drops": []
+              },
+              {
+                "name": "Легендарный обитатель окрестностей",
+                "level": 16,
+                "hp": 105,
+                "max_hp": 744,
+                "count": 1,
+                "drops": []
+              }
+            ],
+            "total_mobs_killed": 145,
+            "last_updated": "2025-06-26T19:36:39.079422"
+          }
+        },
+        "total_mobs_killed": 145,
+        "last_updated": "2025-06-26T19:36:39.079433"
+      },
+      "north": {
+        "direction": "north",
+        "squares": {
+          "G2": {
+            "square": "G2",
+            "mobs": [
+              {
+                "name": "Редкий обитатель окрестностей",
+                "level": 10,
+                "hp": 211,
+                "max_hp": 340,
+                "count": 16,
+                "drops": []
+              },
+              {
+                "name": "Лесной волк",
+                "level": 11,
+                "hp": 43,
+                "max_hp": 152,
+                "count": 44,
+                "drops": []
+              },
+              {
+                "name": "Паук-ловец",
+                "level": 11,
+                "hp": 142,
+                "max_hp": 142,
+                "count": 39,
+                "drops": []
+              },
+              {
+                "name": "Быстроногий заяц",
+                "level": 11,
+                "hp": 27,
+                "max_hp": 142,
+                "count": 40,
+                "drops": []
+              },
+              {
+                "name": "Быстроногий заяц",
+                "level": 10,
+                "hp": 15,
+                "max_hp": 140,
+                "count": 31,
+                "drops": []
+              },
+              {
+                "name": "Паук-ловец",
+                "level": 10,
+                "hp": 140,
+                "max_hp": 140,
+                "count": 40,
+                "drops": []
+              },
+              {
+                "name": "Хитрый гоблин",
+                "level": 10,
+                "hp": 18,
+                "max_hp": 130,
+                "count": 43,
+                "drops": []
+              },
+              {
+                "name": "Обитатель окрестностей",
+                "level": 10,
+                "hp": 170,
+                "max_hp": 170,
+                "count": 49,
+                "drops": []
+              },
+              {
+                "name": "Дикий кабан",
+                "level": 10,
+                "hp": 140,
+                "max_hp": 140,
+                "count": 38,
+                "drops": []
+              },
+              {
+                "name": "Обитатель вулканов",
+                "level": 20,
+                "hp": 7,
+                "max_hp": 200,
+                "count": 3,
+                "drops": []
+              },
+              {
+                "name": "Хитрый гоблин",
+                "level": 11,
+                "hp": 28,
+                "max_hp": 132,
+                "count": 48,
+                "drops": []
+              },
+              {
+                "name": "Эпический обитатель окрестностей",
+                "level": 11,
+                "hp": 40,
+                "max_hp": 516,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Дикий кабан",
+                "level": 11,
+                "hp": 142,
+                "max_hp": 142,
+                "count": 38,
+                "drops": []
+              },
+              {
+                "name": "Эпический обитатель окрестностей",
+                "level": 10,
+                "hp": 249,
+                "max_hp": 510,
+                "count": 1,
+                "drops": []
+              },
+              {
+                "name": "Лесной волк",
+                "level": 10,
+                "hp": 21,
+                "max_hp": 150,
+                "count": 35,
+                "drops": []
+              },
+              {
+                "name": "Обитатель окрестностей",
+                "level": 11,
+                "hp": 172,
+                "max_hp": 172,
+                "count": 48,
+                "drops": []
+              },
+              {
+                "name": "Редкий обитатель окрестностей",
+                "level": 11,
+                "hp": 100,
+                "max_hp": 344,
+                "count": 14,
+                "drops": []
+              }
+            ],
+            "total_mobs_killed": 529,
+            "last_updated": "2025-06-26T22:45:17.601123"
+          },
+          "I1": {
+            "square": "I1",
+            "mobs": [
+              {
+                "name": "Быстроногий заяц",
+                "level": 10,
+                "hp": 140,
+                "max_hp": 140,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Дикий кабан",
+                "level": 10,
+                "hp": 20,
+                "max_hp": 140,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Лесной волк",
+                "level": 11,
+                "hp": 22,
+                "max_hp": 152,
+                "count": 3,
+                "drops": []
+              },
+              {
+                "name": "Паук-ловец",
+                "level": 11,
+                "hp": 142,
+                "max_hp": 142,
+                "count": 5,
+                "drops": []
+              },
+              {
+                "name": "Паук-ловец",
+                "level": 10,
+                "hp": 7,
+                "max_hp": 140,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Хитрый гоблин",
+                "level": 11,
+                "hp": 7,
+                "max_hp": 132,
+                "count": 4,
+                "drops": []
+              },
+              {
+                "name": "Хитрый гоблин",
+                "level": 10,
+                "hp": 130,
+                "max_hp": 130,
+                "count": 4,
+                "drops": []
+              },
+              {
+                "name": "Дикий кабан",
+                "level": 11,
+                "hp": 30,
+                "max_hp": 142,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Обитатель окрестностей",
+                "level": 10,
+                "hp": 170,
+                "max_hp": 170,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Редкий обитатель окрестностей",
+                "level": 11,
+                "hp": 53,
+                "max_hp": 344,
+                "count": 1,
+                "drops": []
+              },
+              {
+                "name": "Лесной волк",
+                "level": 10,
+                "hp": 10,
+                "max_hp": 150,
+                "count": 3,
+                "drops": []
+              }
+            ],
+            "total_mobs_killed": 30,
+            "last_updated": "2025-06-26T23:20:41.201477"
+          }
+        },
+        "total_mobs_killed": 559,
+        "last_updated": "2025-06-26T23:20:41.201488"
+      }
+    },
+    "total_mobs_killed": 704,
+    "last_updated": "2025-06-26T23:20:41.201494"
+  },
+  "loco_0": {
+    "location": "loco_0",
+    "directions": {
+      "south": {
+        "direction": "south",
+        "squares": {
+          "I1": {
+            "square": "I1",
+            "mobs": [
+              {
+                "name": "Лесной волк",
+                "level": 16,
+                "hp": 166,
+                "max_hp": 166,
+                "count": 15,
+                "drops": []
+              },
+              {
+                "name": "Быстроногий заяц",
+                "level": 16,
+                "hp": 57,
+                "max_hp": 156,
+                "count": 11,
+                "drops": [
+                  {
+                    "item_id": "m_0_2",
+                    "item_name": "",
+                    "count": 1,
+                    "chance": 100
+                  },
+                  {
+                    "item_id": "m_0_1",
+                    "item_name": "",
+                    "count": 134,
+                    "chance": 100
+                  },
+                  {
+                    "item_id": "armor_86",
+                    "item_name": "",
+                    "count": 1,
+                    "chance": 18
+                  },
+                  {
+                    "item_id": "armor_110",
+                    "item_name": "",
+                    "count": 1,
+                    "chance": 20
+                  },
+                  {
+                    "item_id": "weapon_46",
+                    "item_name": "",
+                    "count": 1,
+                    "chance": 18
+                  },
+                  {
+                    "item_id": "jew_3",
+                    "item_name": "",
+                    "count": 1,
+                    "chance": 16
+                  }
+                ]
+              },
+              {
+                "name": "Редкий обитатель окрестностей",
+                "level": 16,
+                "hp": 82,
+                "max_hp": 372,
+                "count": 7,
+                "drops": [
+                  {
+                    "item_id": "m_0_2",
+                    "item_name": "",
+                    "count": 4,
+                    "chance": 100
+                  },
+                  {
+                    "item_id": "m_0_1",
+                    "item_name": "",
+                    "count": 163,
+                    "chance": 100
+                  }
+                ]
+              },
+              {
+                "name": "Хитрый гоблин",
+                "level": 16,
+                "hp": 146,
+                "max_hp": 146,
+                "count": 13,
+                "drops": []
+              },
+              {
+                "name": "Паук-ловец",
+                "level": 16,
+                "hp": 65,
+                "max_hp": 156,
+                "count": 22,
+                "drops": [
+                  {
+                    "item_id": "m_0_2",
+                    "item_name": "",
+                    "count": 1,
+                    "chance": 100
+                  },
+                  {
+                    "item_id": "m_0_1",
+                    "item_name": "",
+                    "count": 72,
+                    "chance": 100
+                  },
+                  {
+                    "item_id": "armor_97",
+                    "item_name": "",
+                    "count": 1,
+                    "chance": 20
+                  },
+                  {
+                    "item_id": "weapon_47",
+                    "item_name": "",
+                    "count": 1,
+                    "chance": 19
+                  },
+                  {
+                    "item_id": "jew_2",
+                    "item_name": "",
+                    "count": 1,
+                    "chance": 16
+                  }
+                ]
+              },
+              {
+                "name": "Обитатель окрестностей",
+                "level": 16,
+                "hp": 1,
+                "max_hp": 186,
+                "count": 23,
+                "drops": [
+                  {
+                    "item_id": "m_0_2",
+                    "item_name": "",
+                    "count": 2,
+                    "chance": 100
+                  },
+                  {
+                    "item_id": "m_0_1",
+                    "item_name": "",
+                    "count": 96,
+                    "chance": 100
+                  },
+                  {
+                    "item_id": "recipe_199",
+                    "item_name": "",
+                    "count": 1,
+                    "chance": 3.8
+                  },
+                  {
+                    "item_id": "book_skill_16_page",
+                    "item_name": "",
+                    "count": 1,
+                    "chance": 4
+                  }
+                ]
+              },
+              {
+                "name": "Дикий кабан",
+                "level": 16,
+                "hp": 73,
+                "max_hp": 156,
+                "count": 11,
+                "drops": [
+                  {
+                    "item_id": "m_0_2",
+                    "item_name": "",
+                    "count": 1,
+                    "chance": 100
+                  },
+                  {
+                    "item_id": "m_0_1",
+                    "item_name": "",
+                    "count": 58,
+                    "chance": 100
+                  },
+                  {
+                    "item_id": "armor_92",
+                    "item_name": "",
+                    "count": 1,
+                    "chance": 16
+                  },
+                  {
+                    "item_id": "weapon_2",
+                    "item_name": "",
+                    "count": 1,
+                    "chance": 20
+                  },
+                  {
+                    "item_id": "res_w_15",
+                    "item_name": "",
+                    "count": 1,
+                    "chance": 3.2
+                  }
+                ]
+              },
+              {
+                "name": "Легендарный обитатель окрестностей",
+                "level": 16,
+                "hp": 103,
+                "max_hp": 744,
+                "count": 1,
+                "drops": []
+              }
+            ],
+            "total_mobs_killed": 103,
+            "last_updated": "2025-06-26T23:58:41.278821"
+          }
+        },
+        "total_mobs_killed": 103,
+        "last_updated": "2025-06-26T23:58:41.278825"
+      },
+      "north": {
+        "direction": "north",
+        "squares": {
+          "I1": {
+            "square": "I1",
+            "mobs": [
+              {
+                "name": "Обитатель окрестностей",
+                "level": 1,
+                "hp": 160,
+                "max_hp": 160,
+                "count": 5,
+                "drops": []
+              },
+              {
+                "name": "Быстроногий заяц",
+                "level": 1,
+                "hp": 130,
+                "max_hp": 130,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Паук-ловец",
+                "level": 1,
+                "hp": 130,
+                "max_hp": 130,
+                "count": 6,
+                "drops": []
+              },
+              {
+                "name": "Дикий кабан",
+                "level": 1,
+                "hp": 130,
+                "max_hp": 130,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Редкий обитатель окрестностей",
+                "level": 1,
+                "hp": 46,
+                "max_hp": 320,
+                "count": 1,
+                "drops": []
+              },
+              {
+                "name": "Хитрый гоблин",
+                "level": 1,
+                "hp": 120,
+                "max_hp": 120,
+                "count": 3,
+                "drops": []
+              },
+              {
+                "name": "Лесной волк",
+                "level": 1,
+                "hp": 140,
+                "max_hp": 140,
+                "count": 1,
+                "drops": []
+              }
+            ],
+            "total_mobs_killed": 20,
+            "last_updated": "2025-06-26T23:18:59.245114"
+          }
+        },
+        "total_mobs_killed": 20,
+        "last_updated": "2025-06-26T23:18:59.245117"
+      },
+      "east": {
+        "direction": "east",
+        "squares": {
+          "I1": {
+            "square": "I1",
+            "mobs": [
+              {
+                "name": "Хитрый гоблин",
+                "level": 1,
+                "hp": 120,
+                "max_hp": 120,
+                "count": 3,
+                "drops": []
+              },
+              {
+                "name": "Быстроногий заяц",
+                "level": 1,
+                "hp": 130,
+                "max_hp": 130,
+                "count": 5,
+                "drops": []
+              },
+              {
+                "name": "Обитатель окрестностей",
+                "level": 1,
+                "hp": 160,
+                "max_hp": 160,
+                "count": 5,
+                "drops": []
+              },
+              {
+                "name": "Дикий кабан",
+                "level": 1,
+                "hp": 130,
+                "max_hp": 130,
+                "count": 3,
+                "drops": []
+              },
+              {
+                "name": "Лесной волк",
+                "level": 1,
+                "hp": 140,
+                "max_hp": 140,
+                "count": 4,
+                "drops": []
+              },
+              {
+                "name": "Паук-ловец",
+                "level": 1,
+                "hp": 130,
+                "max_hp": 130,
+                "count": 3,
+                "drops": []
+              },
+              {
+                "name": "Редкий обитатель окрестностей",
+                "level": 1,
+                "hp": 320,
+                "max_hp": 320,
+                "count": 1,
+                "drops": []
+              }
+            ],
+            "total_mobs_killed": 24,
+            "last_updated": "2025-06-26T23:30:51.020246"
+          },
+          "U3": {
+            "square": "U3",
+            "mobs": [
+              {
+                "name": "Обитатель кукурузных полей",
+                "level": 20,
+                "hp": 38,
+                "max_hp": 200,
+                "count": 8,
+                "drops": []
+              }
+            ],
+            "total_mobs_killed": 8,
+            "last_updated": "2025-06-26T23:39:32.116357"
+          },
+          "I4": {
+            "square": "I4",
+            "mobs": [
+              {
+                "name": "Дикий кабан",
+                "level": 20,
+                "hp": 103,
+                "max_hp": 170,
+                "count": 3,
+                "drops": []
+              },
+              {
+                "name": "Эпический обитатель окрестностей",
+                "level": 20,
+                "hp": 114,
+                "max_hp": 600,
+                "count": 1,
+                "drops": []
+              },
+              {
+                "name": "Хитрый гоблин",
+                "level": 20,
+                "hp": 14,
+                "max_hp": 160,
+                "count": 3,
+                "drops": []
+              },
+              {
+                "name": "Обитатель окрестностей",
+                "level": 20,
+                "hp": 22,
+                "max_hp": 200,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Лесной волк",
+                "level": 20,
+                "hp": 29,
+                "max_hp": 180,
+                "count": 1,
+                "drops": []
+              }
+            ],
+            "total_mobs_killed": 10,
+            "last_updated": "2025-06-26T23:46:28.960516"
+          },
+          "N1": {
+            "square": "N1",
+            "mobs": [
+              {
+                "name": "Дикий кабан",
+                "level": 14,
+                "hp": 47,
+                "max_hp": 150,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Хитрый гоблин",
+                "level": 14,
+                "hp": 140,
+                "max_hp": 140,
+                "count": 3,
+                "drops": []
+              },
+              {
+                "name": "Обитатель окрестностей",
+                "level": 14,
+                "hp": 62,
+                "max_hp": 180,
+                "count": 3,
+                "drops": []
+              },
+              {
+                "name": "Паук-ловец",
+                "level": 14,
+                "hp": 150,
+                "max_hp": 150,
+                "count": 1,
+                "drops": []
+              },
+              {
+                "name": "Лесной волк",
+                "level": 14,
+                "hp": 160,
+                "max_hp": 160,
+                "count": 1,
+                "drops": []
+              }
+            ],
+            "total_mobs_killed": 10,
+            "last_updated": "2025-06-26T23:48:00.171407"
+          }
+        },
+        "total_mobs_killed": 52,
+        "last_updated": "2025-06-26T23:48:00.171419"
+      },
+      "west": {
+        "direction": "west",
+        "squares": {
+          "I1": {
+            "square": "I1",
+            "mobs": [
+              {
+                "name": "Обитатель окрестностей",
+                "level": 1,
+                "hp": 160,
+                "max_hp": 160,
+                "count": 4,
+                "drops": []
+              },
+              {
+                "name": "Паук-ловец",
+                "level": 1,
+                "hp": 130,
+                "max_hp": 130,
+                "count": 3,
+                "drops": []
+              },
+              {
+                "name": "Лесной волк",
+                "level": 1,
+                "hp": 140,
+                "max_hp": 140,
+                "count": 3,
+                "drops": []
+              },
+              {
+                "name": "Хитрый гоблин",
+                "level": 1,
+                "hp": 120,
+                "max_hp": 120,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Дикий кабан",
+                "level": 1,
+                "hp": 130,
+                "max_hp": 130,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Быстроногий заяц",
+                "level": 1,
+                "hp": 130,
+                "max_hp": 130,
+                "count": 1,
+                "drops": []
+              },
+              {
+                "name": "Лесной волк",
+                "level": 16,
+                "hp": 71,
+                "max_hp": 166,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Обитатель окрестностей",
+                "level": 16,
+                "hp": 1,
+                "max_hp": 186,
+                "count": 1,
+                "drops": []
+              },
+              {
+                "name": "Редкий обитатель окрестностей",
+                "level": 16,
+                "hp": 80,
+                "max_hp": 372,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Дикий кабан",
+                "level": 16,
+                "hp": 73,
+                "max_hp": 156,
+                "count": 1,
+                "drops": []
+              },
+              {
+                "name": "Хитрый гоблин",
+                "level": 16,
+                "hp": 55,
+                "max_hp": 146,
+                "count": 3,
+                "drops": []
+              },
+              {
+                "name": "Быстроногий заяц",
+                "level": 16,
+                "hp": 57,
+                "max_hp": 156,
+                "count": 1,
+                "drops": []
+              }
+            ],
+            "total_mobs_killed": 25,
+            "last_updated": "2025-06-26T23:49:47.128380"
+          },
+          "I2": {
+            "square": "I2",
+            "mobs": [
+              {
+                "name": "Паук-ловец",
+                "level": 20,
+                "hp": 24,
+                "max_hp": 170,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Лесной волк",
+                "level": 20,
+                "hp": 46,
+                "max_hp": 180,
+                "count": 3,
+                "drops": []
+              },
+              {
+                "name": "Дикий кабан",
+                "level": 20,
+                "hp": 103,
+                "max_hp": 170,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Редкий обитатель окрестностей",
+                "level": 20,
+                "hp": 2,
+                "max_hp": 400,
+                "count": 1,
+                "drops": []
+              },
+              {
+                "name": "Быстроногий заяц",
+                "level": 20,
+                "hp": 31,
+                "max_hp": 170,
+                "count": 1,
+                "drops": []
+              },
+              {
+                "name": "Обитатель окрестностей",
+                "level": 20,
+                "hp": 56,
+                "max_hp": 200,
+                "count": 1,
+                "drops": []
+              }
+            ],
+            "total_mobs_killed": 10,
+            "last_updated": "2025-06-26T23:52:32.910436"
+          }
+        },
+        "total_mobs_killed": 35,
+        "last_updated": "2025-06-26T23:52:32.910445"
+      }
+    },
+    "total_mobs_killed": 210,
+    "last_updated": "2025-06-26T23:58:41.278826"
+  },
+  "loco_1": {
+    "location": "loco_1",
+    "directions": {
+      "north": {
+        "direction": "north",
+        "squares": {
+          "I1": {
+            "square": "I1",
+            "mobs": [
+              {
+                "name": "Обитатель окрестностей",
+                "level": 10,
+                "hp": 170,
+                "max_hp": 170,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Хитрый гоблин",
+                "level": 10,
+                "hp": 130,
+                "max_hp": 130,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Быстроногий заяц",
+                "level": 10,
+                "hp": 140,
+                "max_hp": 140,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Лесной волк",
+                "level": 10,
+                "hp": 150,
+                "max_hp": 150,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Паук-ловец",
+                "level": 10,
+                "hp": 7,
+                "max_hp": 140,
+                "count": 1,
+                "drops": []
+              },
+              {
+                "name": "Дикий кабан",
+                "level": 10,
+                "hp": 140,
+                "max_hp": 140,
+                "count": 1,
+                "drops": []
+              }
+            ],
+            "total_mobs_killed": 10,
+            "last_updated": "2025-06-26T23:27:12.389295"
+          },
+          "G1": {
+            "square": "G1",
+            "mobs": [
+              {
+                "name": "Редкий обитатель окрестностей",
+                "level": 16,
+                "hp": 153,
+                "max_hp": 372,
+                "count": 1,
+                "drops": []
+              },
+              {
+                "name": "Быстроногий заяц",
+                "level": 16,
+                "hp": 57,
+                "max_hp": 156,
+                "count": 4,
+                "drops": []
+              },
+              {
+                "name": "Паук-ловец",
+                "level": 16,
+                "hp": 65,
+                "max_hp": 156,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Дикий кабан",
+                "level": 16,
+                "hp": 6,
+                "max_hp": 156,
+                "count": 1,
+                "drops": []
+              },
+              {
+                "name": "Лесной волк",
+                "level": 16,
+                "hp": 71,
+                "max_hp": 166,
+                "count": 2,
+                "drops": []
+              }
+            ],
+            "total_mobs_killed": 10,
+            "last_updated": "2025-06-26T23:54:14.585436"
+          },
+          "G2": {
+            "square": "G2",
+            "mobs": [
+              {
+                "name": "Паук-ловец",
+                "level": 20,
+                "hp": 28,
+                "max_hp": 170,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Хитрый гоблин",
+                "level": 20,
+                "hp": 81,
+                "max_hp": 160,
+                "count": 1,
+                "drops": []
+              },
+              {
+                "name": "Обитатель окрестностей",
+                "level": 20,
+                "hp": 56,
+                "max_hp": 200,
+                "count": 4,
+                "drops": []
+              },
+              {
+                "name": "Лесной волк",
+                "level": 20,
+                "hp": 105,
+                "max_hp": 180,
+                "count": 1,
+                "drops": []
+              },
+              {
+                "name": "Быстроногий заяц",
+                "level": 20,
+                "hp": 14,
+                "max_hp": 170,
+                "count": 2,
+                "drops": []
+              }
+            ],
+            "total_mobs_killed": 10,
+            "last_updated": "2025-06-26T23:56:22.959254"
+          }
+        },
+        "total_mobs_killed": 30,
+        "last_updated": "2025-06-26T23:56:22.959262"
+      },
+      "south": {
+        "direction": "south",
+        "squares": {
+          "I1": {
+            "square": "I1",
+            "mobs": [
+              {
+                "name": "Лесной волк",
+                "level": 12,
+                "hp": 32,
+                "max_hp": 154,
+                "count": 2,
+                "drops": []
+              },
+              {
+                "name": "Дикий кабан",
+                "level": 12,
+                "hp": 144,
+                "max_hp": 144,
+                "count": 2,
+                "drops": []
+              }
+            ],
+            "total_mobs_killed": 4,
+            "last_updated": "2025-06-26T23:27:44.473922"
+          },
+          "G1": {
+            "square": "G1",
+            "mobs": [
+              {
+                "name": "Дикий кабан",
+                "level": 20,
+                "hp": 51,
+                "max_hp": 170,
+                "count": 1,
+                "drops": []
+              },
+              {
+                "name": "Быстроногий заяц",
+                "level": 20,
+                "hp": 14,
+                "max_hp": 170,
+                "count": 1,
+                "drops": []
+              },
+              {
+                "name": "Хитрый гоблин",
+                "level": 20,
+                "hp": 31,
+                "max_hp": 160,
+                "count": 1,
+                "drops": []
+              },
+              {
+                "name": "Обитатель окрестностей",
+                "level": 20,
+                "hp": 120,
+                "max_hp": 200,
+                "count": 1,
+                "drops": []
+              }
+            ],
+            "total_mobs_killed": 4,
+            "last_updated": "2025-06-26T23:57:11.189646"
+          }
+        },
+        "total_mobs_killed": 8,
+        "last_updated": "2025-06-26T23:57:11.189650"
+      }
+    },
+    "total_mobs_killed": 38,
+    "last_updated": "2025-06-26T23:57:11.189651"
+  }
+}
