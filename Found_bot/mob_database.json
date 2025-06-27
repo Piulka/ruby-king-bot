@@ -1,0 +1,3903 @@
+{
+  "locations": {
+    "loco_3": {
+      "south": {
+        "G1": {
+          "mobs": [
+            {
+              "name": "Обитатель окрестностей",
+              "level": 18,
+              "hp": 4,
+              "max_hp": 192,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:15:29.025718",
+              "last_seen": "2025-06-27T09:15:29.025727"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 20,
+              "hp": 42,
+              "max_hp": 200,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:14:30.338946",
+              "last_seen": "2025-06-27T09:14:30.338969"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 19,
+              "hp": 111,
+              "max_hp": 196,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:15:50.442468",
+              "last_seen": "2025-06-27T09:15:50.442496"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 19,
+              "hp": 40,
+              "max_hp": 166,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:10:55.751034",
+              "last_seen": "2025-06-27T09:10:55.751043"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 18,
+              "hp": 28,
+              "max_hp": 162,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:15:39.673709",
+              "last_seen": "2025-06-27T09:15:39.673733"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 19,
+              "hp": 18,
+              "max_hp": 166,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:13:52.986765",
+              "last_seen": "2025-06-27T09:13:52.986799"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 20,
+              "hp": 41,
+              "max_hp": 170,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:02:34.432385",
+              "last_seen": "2025-06-27T09:02:34.432396"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 20,
+              "hp": 51,
+              "max_hp": 170,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:10:07.621030",
+              "last_seen": "2025-06-27T09:10:07.621060"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 20,
+              "hp": 105,
+              "max_hp": 180,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:06:42.019890",
+              "last_seen": "2025-06-27T09:06:42.019914"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 18,
+              "hp": 75,
+              "max_hp": 162,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:10:45.025445",
+              "last_seen": "2025-06-27T09:10:45.025454"
+            },
+            {
+              "name": "Редкий обитатель окрестностей",
+              "level": 19,
+              "hp": 62,
+              "max_hp": 392,
+              "farm_id": "0_mob_loco_0_rare",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:03:54.694559",
+              "last_seen": "2025-06-27T09:03:54.694564"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 18,
+              "hp": 81,
+              "max_hp": 162,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:15:07.729967",
+              "last_seen": "2025-06-27T09:15:07.729998"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 19,
+              "hp": 19,
+              "max_hp": 156,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:05:21.709783",
+              "last_seen": "2025-06-27T09:05:21.709794"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 20,
+              "hp": 14,
+              "max_hp": 170,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:14:19.673708",
+              "last_seen": "2025-06-27T09:14:19.673731"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 18,
+              "hp": 2,
+              "max_hp": 172,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:11:59.934629",
+              "last_seen": "2025-06-27T09:11:59.934641"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 18,
+              "hp": 71,
+              "max_hp": 152,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:10:23.618319",
+              "last_seen": "2025-06-27T09:10:23.618326"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 19,
+              "hp": 11,
+              "max_hp": 166,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:11:11.886273",
+              "last_seen": "2025-06-27T09:11:11.886283"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 19,
+              "hp": 34,
+              "max_hp": 176,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:11:43.948055",
+              "last_seen": "2025-06-27T09:11:43.948059"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 53,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:41:08.180940",
+              "last_seen": "2025-06-27T10:41:08.180950"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 160,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:40:57.390844",
+              "last_seen": "2025-06-27T10:40:57.390864"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:40:52.045752",
+              "last_seen": "2025-06-27T10:40:52.045754"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:41:13.506547",
+              "last_seen": "2025-06-27T10:41:13.506550"
+            },
+            {
+              "name": "Редкий обитатель окрестностей",
+              "level": 14,
+              "hp": 114,
+              "max_hp": 360,
+              "farm_id": "0_mob_loco_0_rare",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:41:29.583141",
+              "last_seen": "2025-06-27T10:41:29.583144"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:41:56.347045",
+              "last_seen": "2025-06-27T10:41:56.347056"
+            }
+          ],
+          "visits": 58
+        },
+        "G2": {
+          "mobs": [
+            {
+              "name": "Паук-ловец",
+              "level": 18,
+              "hp": 81,
+              "max_hp": 162,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:08:18.351451",
+              "last_seen": "2025-06-27T09:08:18.351476"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 18,
+              "hp": 71,
+              "max_hp": 152,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:04:58.909523",
+              "last_seen": "2025-06-27T09:04:58.909533"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 18,
+              "hp": 29,
+              "max_hp": 192,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:08:45.160017",
+              "last_seen": "2025-06-27T09:08:45.160043"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 20,
+              "hp": 103,
+              "max_hp": 170,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:07:40.768801",
+              "last_seen": "2025-06-27T09:07:40.768823"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 19,
+              "hp": 11,
+              "max_hp": 166,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:07:56.759126",
+              "last_seen": "2025-06-27T09:07:56.759135"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 18,
+              "hp": 2,
+              "max_hp": 172,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:12:26.763729",
+              "last_seen": "2025-06-27T09:12:26.763741"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 19,
+              "hp": 34,
+              "max_hp": 176,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:08:34.326292",
+              "last_seen": "2025-06-27T09:08:34.326303"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 20,
+              "hp": 120,
+              "max_hp": 200,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:08:55.686241",
+              "last_seen": "2025-06-27T09:08:55.686251"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 19,
+              "hp": 40,
+              "max_hp": 166,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:12:37.338854",
+              "last_seen": "2025-06-27T09:12:37.338865"
+            },
+            {
+              "name": "Обитатель вулканов",
+              "level": 20,
+              "hp": 38,
+              "max_hp": 200,
+              "farm_id": "0_mob_volcano_keeper",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:13:26.544700",
+              "last_seen": "2025-06-27T09:13:26.544731"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 180,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:42:39.104293",
+              "last_seen": "2025-06-27T10:42:39.104301"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:43:05.949274",
+              "last_seen": "2025-06-27T10:43:05.949296"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:42:17.679917",
+              "last_seen": "2025-06-27T10:42:17.679919"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 53,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:42:33.780181",
+              "last_seen": "2025-06-27T10:42:33.780185"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 160,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:42:55.311944",
+              "last_seen": "2025-06-27T10:42:55.311979"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:43:22.036690",
+              "last_seen": "2025-06-27T10:43:22.036724"
+            }
+          ],
+          "visits": 28
+        },
+        "G3": {
+          "mobs": [
+            {
+              "name": "Паук-ловец",
+              "level": 20,
+              "hp": 41,
+              "max_hp": 170,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:09:22.449850",
+              "last_seen": "2025-06-27T09:09:22.449856"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 20,
+              "hp": 112,
+              "max_hp": 200,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:09:33.059454",
+              "last_seen": "2025-06-27T09:09:33.059461"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 18,
+              "hp": 73,
+              "max_hp": 162,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:09:43.761447",
+              "last_seen": "2025-06-27T09:09:43.761452"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:44:20.888820",
+              "last_seen": "2025-06-27T10:44:20.888828"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:43:38.136244",
+              "last_seen": "2025-06-27T10:43:38.136250"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 53,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:43:54.295126",
+              "last_seen": "2025-06-27T10:43:54.295138"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 31,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:44:47.674509",
+              "last_seen": "2025-06-27T10:44:47.674516"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 43,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:44:31.605472",
+              "last_seen": "2025-06-27T10:44:31.605481"
+            }
+          ],
+          "visits": 13
+        }
+      },
+      "north": {
+        "G1": {
+          "mobs": [
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:38:38.242360",
+              "last_seen": "2025-06-27T10:38:38.242379"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:38:59.614723",
+              "last_seen": "2025-06-27T10:38:59.614746"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 43,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:38:22.181511",
+              "last_seen": "2025-06-27T10:38:22.181520"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 37,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:38:06.159756",
+              "last_seen": "2025-06-27T10:38:06.159765"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 140,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:38:43.600809",
+              "last_seen": "2025-06-27T10:38:43.600833"
+            }
+          ],
+          "visits": 10
+        },
+        "G2": {
+          "mobs": [
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:39:58.595196",
+              "last_seen": "2025-06-27T10:39:58.595210"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 22,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:39:26.520526",
+              "last_seen": "2025-06-27T10:39:26.520536"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 53,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:39:42.620735",
+              "last_seen": "2025-06-27T10:39:42.620760"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:40:04.089173",
+              "last_seen": "2025-06-27T10:40:04.089176"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 160,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:40:20.118578",
+              "last_seen": "2025-06-27T10:40:20.118585"
+            }
+          ],
+          "visits": 10
+        }
+      },
+      "east": {
+        "R3": {
+          "mobs": [
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 140,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:44:52.943325",
+              "last_seen": "2025-06-27T10:44:52.943331"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:45:19.800333",
+              "last_seen": "2025-06-27T10:45:19.800341"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:45:09.096534",
+              "last_seen": "2025-06-27T10:45:09.096539"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 160,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:45:25.166736",
+              "last_seen": "2025-06-27T10:45:25.166745"
+            },
+            {
+              "name": "Редкий обитатель окрестностей",
+              "level": 14,
+              "hp": 114,
+              "max_hp": 360,
+              "farm_id": "0_mob_loco_0_rare",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:45:57.403633",
+              "last_seen": "2025-06-27T10:45:57.403642"
+            }
+          ],
+          "visits": 7
+        }
+      }
+    },
+    "loco_0": {
+      "north": {
+        "Y1": {
+          "mobs": [
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 43,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:46:00.692726",
+              "last_seen": "2025-06-27T09:46:00.692735"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 160,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:31:40.204909",
+              "last_seen": "2025-06-27T09:31:40.204928"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:46:16.569881",
+              "last_seen": "2025-06-27T09:46:16.569906"
+            },
+            {
+              "name": "Редкий обитатель окрестностей",
+              "level": 14,
+              "hp": 114,
+              "max_hp": 360,
+              "farm_id": "0_mob_loco_0_rare",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:34:49.523001",
+              "last_seen": "2025-06-27T09:34:49.523023"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:45:49.842092",
+              "last_seen": "2025-06-27T09:45:49.842119"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 51,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:45:28.388558",
+              "last_seen": "2025-06-27T09:45:28.388587"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 180,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:46:06.344521",
+              "last_seen": "2025-06-27T09:46:06.344528"
+            }
+          ],
+          "visits": 51
+        },
+        "N1": {
+          "mobs": [
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 180,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:29:49.234008",
+              "last_seen": "2025-06-27T09:29:49.234029"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 48,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:47:36.789980",
+              "last_seen": "2025-06-27T09:47:36.790005"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 53,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:47:04.732093",
+              "last_seen": "2025-06-27T09:47:04.732118"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 140,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:47:42.256543",
+              "last_seen": "2025-06-27T09:47:42.256570"
+            },
+            {
+              "name": "Редкий обитатель окрестностей",
+              "level": 14,
+              "hp": 102,
+              "max_hp": 360,
+              "farm_id": "0_mob_loco_0_rare",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:29:33.126850",
+              "last_seen": "2025-06-27T09:29:33.126880"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:24:35.740528",
+              "last_seen": "2025-06-27T09:24:35.740547"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 41,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:47:20.768744",
+              "last_seen": "2025-06-27T09:47:20.768773"
+            }
+          ],
+          "visits": 37
+        },
+        "N2": {
+          "mobs": [
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:49:02.634286",
+              "last_seen": "2025-06-27T09:49:02.634309"
+            },
+            {
+              "name": "Редкий обитатель окрестностей",
+              "level": 14,
+              "hp": 114,
+              "max_hp": 360,
+              "farm_id": "0_mob_loco_0_rare",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:25:45.321544",
+              "last_seen": "2025-06-27T09:25:45.321570"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 43,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:26:12.125728",
+              "last_seen": "2025-06-27T09:26:12.125749"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:25:56.042802",
+              "last_seen": "2025-06-27T09:25:56.042810"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:48:14.322348",
+              "last_seen": "2025-06-27T09:48:14.322381"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 22,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:47:52.881440",
+              "last_seen": "2025-06-27T09:47:52.881470"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 160,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:49:07.758833",
+              "last_seen": "2025-06-27T09:49:07.758862"
+            }
+          ],
+          "visits": 29
+        },
+        "N3": {
+          "mobs": [
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:50:11.889769",
+              "last_seen": "2025-06-27T09:50:11.889774"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:27:16.407734",
+              "last_seen": "2025-06-27T09:27:16.407741"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 140,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:50:28.006021",
+              "last_seen": "2025-06-27T09:50:28.006028"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:49:55.977934",
+              "last_seen": "2025-06-27T09:49:55.977958"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 43,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:50:06.595895",
+              "last_seen": "2025-06-27T09:50:06.595901"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 48,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:50:22.636848",
+              "last_seen": "2025-06-27T09:50:22.636855"
+            }
+          ],
+          "visits": 18
+        }
+      },
+      "south": {
+        "K1": {
+          "mobs": [
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 48,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:50:44.099708",
+              "last_seen": "2025-06-27T09:50:44.099717"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:52:04.600260",
+              "last_seen": "2025-06-27T09:52:04.600282"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 43,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:51:48.401760",
+              "last_seen": "2025-06-27T09:51:48.401767"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:51:21.615871",
+              "last_seen": "2025-06-27T09:51:21.615874"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 180,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:51:53.829916",
+              "last_seen": "2025-06-27T09:51:53.829942"
+            }
+          ],
+          "visits": 10
+        },
+        "I1": {
+          "mobs": [
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:53:14.223093",
+              "last_seen": "2025-06-27T09:53:14.223114"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 43,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:52:36.731444",
+              "last_seen": "2025-06-27T09:52:36.731466"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:52:42.166191",
+              "last_seen": "2025-06-27T09:52:42.166194"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:53:24.889884",
+              "last_seen": "2025-06-27T09:53:24.889910"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 48,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:53:08.786114",
+              "last_seen": "2025-06-27T09:53:08.786152"
+            }
+          ],
+          "visits": 10
+        }
+      },
+      "east": {
+        "I4": {
+          "mobs": [
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 48,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:53:40.972269",
+              "last_seen": "2025-06-27T09:53:40.972295"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:54:50.379167",
+              "last_seen": "2025-06-27T09:54:50.379190"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 53,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:54:29.179432",
+              "last_seen": "2025-06-27T09:54:29.179454"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:54:18.330862",
+              "last_seen": "2025-06-27T09:54:18.330887"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:54:13.032066",
+              "last_seen": "2025-06-27T09:54:13.032075"
+            }
+          ],
+          "visits": 10
+        },
+        "N1": {
+          "mobs": [
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:55:54.702600",
+              "last_seen": "2025-06-27T09:55:54.702626"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 56,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:55:17.305217",
+              "last_seen": "2025-06-27T09:55:17.305226"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 48,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:56:26.784877",
+              "last_seen": "2025-06-27T09:56:26.784902"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:56:10.782216",
+              "last_seen": "2025-06-27T09:56:10.782237"
+            }
+          ],
+          "visits": 10
+        }
+      },
+      "west": {
+        "I1": {
+          "mobs": [
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:57:52.467664",
+              "last_seen": "2025-06-27T09:57:52.467687"
+            },
+            {
+              "name": "Редкий обитатель окрестностей",
+              "level": 14,
+              "hp": 77,
+              "max_hp": 360,
+              "farm_id": "0_mob_loco_0_rare",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:56:48.342692",
+              "last_seen": "2025-06-27T09:56:48.342703"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:57:04.365877",
+              "last_seen": "2025-06-27T09:57:04.365886"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:57:41.791602",
+              "last_seen": "2025-06-27T09:57:41.791613"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:57:57.869451",
+              "last_seen": "2025-06-27T09:57:57.869462"
+            }
+          ],
+          "visits": 10
+        },
+        "I2": {
+          "mobs": [
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 53,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:59:12.799893",
+              "last_seen": "2025-06-27T09:59:12.799900"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 180,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:59:18.242012",
+              "last_seen": "2025-06-27T09:59:18.242035"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:58:40.687709",
+              "last_seen": "2025-06-27T09:58:40.687722"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:58:46.098520",
+              "last_seen": "2025-06-27T09:58:46.098525"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 48,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:58:56.745485",
+              "last_seen": "2025-06-27T09:58:56.745488"
+            }
+          ],
+          "visits": 10
+        }
+      }
+    },
+    "loco_1": {
+      "north": {
+        "G1": {
+          "mobs": [
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 48,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:59:28.904736",
+              "last_seen": "2025-06-27T09:59:28.904746"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 140,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:00:38.503061",
+              "last_seen": "2025-06-27T10:00:38.503085"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T09:59:50.167569",
+              "last_seen": "2025-06-27T09:59:50.167580"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 53,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:00:33.125167",
+              "last_seen": "2025-06-27T10:00:33.125193"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:00:17.134685",
+              "last_seen": "2025-06-27T10:00:17.134696"
+            }
+          ],
+          "visits": 10
+        },
+        "G2": {
+          "mobs": [
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 140,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:01:26.665560",
+              "last_seen": "2025-06-27T10:01:26.665582"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:01:58.790843",
+              "last_seen": "2025-06-27T10:01:58.790865"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 43,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:01:05.257692",
+              "last_seen": "2025-06-27T10:01:05.257696"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 180,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:01:42.743628",
+              "last_seen": "2025-06-27T10:01:42.743635"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 48,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:01:53.492148",
+              "last_seen": "2025-06-27T10:01:53.492170"
+            }
+          ],
+          "visits": 10
+        }
+      },
+      "south": {
+        "G1": {
+          "mobs": [
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 140,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:02:46.807112",
+              "last_seen": "2025-06-27T10:02:46.807123"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:03:19.012760",
+              "last_seen": "2025-06-27T10:03:19.012765"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:03:03.021460",
+              "last_seen": "2025-06-27T10:03:03.021479"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:02:41.445508",
+              "last_seen": "2025-06-27T10:02:41.445521"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:02:57.590134",
+              "last_seen": "2025-06-27T10:02:57.590137"
+            }
+          ],
+          "visits": 10
+        },
+        "G3": {
+          "mobs": [
+            {
+              "name": "Редкий обитатель окрестностей",
+              "level": 14,
+              "hp": 114,
+              "max_hp": 360,
+              "farm_id": "0_mob_loco_0_rare",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:04:23.097900",
+              "last_seen": "2025-06-27T10:04:23.097925"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:04:07.095586",
+              "last_seen": "2025-06-27T10:04:07.095608"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 140,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:03:51.146044",
+              "last_seen": "2025-06-27T10:03:51.146047"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:04:01.774518",
+              "last_seen": "2025-06-27T10:04:01.774529"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:04:39.103873",
+              "last_seen": "2025-06-27T10:04:39.103897"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 46,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:05:05.800557",
+              "last_seen": "2025-06-27T10:05:05.800582"
+            }
+          ],
+          "visits": 10
+        },
+        "G4": {
+          "mobs": [
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:06:31.269557",
+              "last_seen": "2025-06-27T10:06:31.269576"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 31,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:05:27.063233",
+              "last_seen": "2025-06-27T10:05:27.063236"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:05:43.074727",
+              "last_seen": "2025-06-27T10:05:43.074737"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 48,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:05:59.344235",
+              "last_seen": "2025-06-27T10:05:59.344243"
+            },
+            {
+              "name": "Редкий обитатель окрестностей",
+              "level": 14,
+              "hp": 17,
+              "max_hp": 360,
+              "farm_id": "0_mob_loco_0_rare",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:06:47.304566",
+              "last_seen": "2025-06-27T10:06:47.304580"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:06:20.650732",
+              "last_seen": "2025-06-27T10:06:20.650735"
+            }
+          ],
+          "visits": 10
+        }
+      },
+      "east": {
+        "I3": {
+          "mobs": [
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 31,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:07:03.459563",
+              "last_seen": "2025-06-27T10:07:03.459573"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 160,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:08:02.545796",
+              "last_seen": "2025-06-27T10:08:02.545820"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:08:23.794798",
+              "last_seen": "2025-06-27T10:08:23.794824"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:07:35.634226",
+              "last_seen": "2025-06-27T10:07:35.634230"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 43,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:08:18.482398",
+              "last_seen": "2025-06-27T10:08:18.482406"
+            }
+          ],
+          "visits": 10
+        },
+        "I4": {
+          "mobs": [
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:09:12.005389",
+              "last_seen": "2025-06-27T10:09:12.005400"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:09:28.044390",
+              "last_seen": "2025-06-27T10:09:28.044397"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 140,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:09:33.370849",
+              "last_seen": "2025-06-27T10:09:33.370852"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 53,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:09:44.094723",
+              "last_seen": "2025-06-27T10:09:44.094726"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:09:49.513274",
+              "last_seen": "2025-06-27T10:09:49.513277"
+            }
+          ],
+          "visits": 10
+        },
+        "N3": {
+          "mobs": [
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:10:16.354631",
+              "last_seen": "2025-06-27T10:10:16.354638"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:10:21.821252",
+              "last_seen": "2025-06-27T10:10:21.821259"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:10:48.387121",
+              "last_seen": "2025-06-27T10:10:48.387127"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 140,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:11:15.357996",
+              "last_seen": "2025-06-27T10:11:15.358007"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 51,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:11:09.989370",
+              "last_seen": "2025-06-27T10:11:09.989374"
+            }
+          ],
+          "visits": 10
+        },
+        "G4": {
+          "mobs": [
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 37,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:12:30.243107",
+              "last_seen": "2025-06-27T10:12:30.243154"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:12:19.618544",
+              "last_seen": "2025-06-27T10:12:19.618550"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:11:58.073265",
+              "last_seen": "2025-06-27T10:11:58.073272"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:12:14.072987",
+              "last_seen": "2025-06-27T10:12:14.072994"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:12:35.641281",
+              "last_seen": "2025-06-27T10:12:35.641292"
+            }
+          ],
+          "visits": 10
+        }
+      },
+      "west": {
+        "N1": {
+          "mobs": [
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 48,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:12:46.382357",
+              "last_seen": "2025-06-27T10:12:46.382361"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 140,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:12:52.010195",
+              "last_seen": "2025-06-27T10:12:52.010206"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 180,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:13:07.799436",
+              "last_seen": "2025-06-27T10:13:07.799444"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:13:34.567712",
+              "last_seen": "2025-06-27T10:13:34.567733"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 41,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:14:27.956561",
+              "last_seen": "2025-06-27T10:14:27.956572"
+            },
+            {
+              "name": "Редкий обитатель окрестностей",
+              "level": 14,
+              "hp": 17,
+              "max_hp": 360,
+              "farm_id": "0_mob_loco_0_rare",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:14:12.010561",
+              "last_seen": "2025-06-27T10:14:12.010572"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:14:33.274632",
+              "last_seen": "2025-06-27T10:14:33.274640"
+            }
+          ],
+          "visits": 10
+        },
+        "N4": {
+          "mobs": [
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 160,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:15:53.379366",
+              "last_seen": "2025-06-27T10:15:53.379384"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:14:49.277735",
+              "last_seen": "2025-06-27T10:14:49.277746"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:15:37.385201",
+              "last_seen": "2025-06-27T10:15:37.385223"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:15:15.972961",
+              "last_seen": "2025-06-27T10:15:15.972969"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:15:21.360752",
+              "last_seen": "2025-06-27T10:15:21.360760"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:15:32.078115",
+              "last_seen": "2025-06-27T10:15:32.078125"
+            }
+          ],
+          "visits": 10
+        },
+        "G1": {
+          "mobs": [
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:17:13.800783",
+              "last_seen": "2025-06-27T10:17:13.800806"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 53,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:17:08.401532",
+              "last_seen": "2025-06-27T10:17:08.401554"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 48,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:16:36.276037",
+              "last_seen": "2025-06-27T10:16:36.276041"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 180,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:16:41.712491",
+              "last_seen": "2025-06-27T10:16:41.712502"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:16:57.798397",
+              "last_seen": "2025-06-27T10:16:57.798402"
+            }
+          ],
+          "visits": 10
+        },
+        "G3": {
+          "mobs": [
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:17:29.865178",
+              "last_seen": "2025-06-27T10:17:29.865186"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:18:18.069716",
+              "last_seen": "2025-06-27T10:18:18.069737"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 48,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:18:28.806364",
+              "last_seen": "2025-06-27T10:18:28.806369"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:18:12.718599",
+              "last_seen": "2025-06-27T10:18:12.718607"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:18:34.182433",
+              "last_seen": "2025-06-27T10:18:34.182466"
+            }
+          ],
+          "visits": 10
+        }
+      }
+    },
+    "loco_2": {
+      "north": {
+        "N3": {
+          "mobs": [
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:19:22.272845",
+              "last_seen": "2025-06-27T10:19:22.272872"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 53,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:19:49.034714",
+              "last_seen": "2025-06-27T10:19:49.034730"
+            },
+            {
+              "name": "Редкий обитатель окрестностей",
+              "level": 14,
+              "hp": 17,
+              "max_hp": 360,
+              "farm_id": "0_mob_loco_0_rare",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:19:16.950331",
+              "last_seen": "2025-06-27T10:19:16.950342"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 180,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:19:54.343613",
+              "last_seen": "2025-06-27T10:19:54.343624"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:20:05.192077",
+              "last_seen": "2025-06-27T10:20:05.192087"
+            }
+          ],
+          "visits": 10
+        },
+        "G3": {
+          "mobs": [
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:20:53.323072",
+              "last_seen": "2025-06-27T10:20:53.323093"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:20:42.572772",
+              "last_seen": "2025-06-27T10:20:42.572802"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 37,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:21:09.325668",
+              "last_seen": "2025-06-27T10:21:09.325693"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 43,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:21:25.353454",
+              "last_seen": "2025-06-27T10:21:25.353480"
+            }
+          ],
+          "visits": 10
+        }
+      },
+      "south": {
+        "N3": {
+          "mobs": [
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 160,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:21:30.801448",
+              "last_seen": "2025-06-27T10:21:30.801456"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:21:46.777781",
+              "last_seen": "2025-06-27T10:21:46.777786"
+            },
+            {
+              "name": "Редкий обитатель окрестностей",
+              "level": 14,
+              "hp": 90,
+              "max_hp": 360,
+              "farm_id": "0_mob_loco_0_rare",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:22:02.931180",
+              "last_seen": "2025-06-27T10:22:02.931192"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 180,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:22:40.338092",
+              "last_seen": "2025-06-27T10:22:40.338116"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:22:50.987197",
+              "last_seen": "2025-06-27T10:22:50.987218"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 43,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:22:35.058619",
+              "last_seen": "2025-06-27T10:22:35.058624"
+            }
+          ],
+          "visits": 10
+        },
+        "G1": {
+          "mobs": [
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:24:16.576969",
+              "last_seen": "2025-06-27T10:24:16.576986"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:23:12.350614",
+              "last_seen": "2025-06-27T10:23:12.350634"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 53,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:23:23.183330",
+              "last_seen": "2025-06-27T10:23:23.183341"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 140,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:23:28.359751",
+              "last_seen": "2025-06-27T10:23:28.359771"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 160,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:24:05.789023",
+              "last_seen": "2025-06-27T10:24:05.789035"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:24:22.029582",
+              "last_seen": "2025-06-27T10:24:22.029591"
+            }
+          ],
+          "visits": 10
+        },
+        "G2": {
+          "mobs": [
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 43,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:25:36.770122",
+              "last_seen": "2025-06-27T10:25:36.770138"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:24:48.844165",
+              "last_seen": "2025-06-27T10:24:48.844174"
+            },
+            {
+              "name": "Редкий обитатель окрестностей",
+              "level": 14,
+              "hp": 17,
+              "max_hp": 360,
+              "farm_id": "0_mob_loco_0_rare",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:25:04.796739",
+              "last_seen": "2025-06-27T10:25:04.796748"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:25:10.103498",
+              "last_seen": "2025-06-27T10:25:10.103507"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 48,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:25:53.046398",
+              "last_seen": "2025-06-27T10:25:53.046406"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 140,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:25:42.179438",
+              "last_seen": "2025-06-27T10:25:42.179446"
+            }
+          ],
+          "visits": 10
+        },
+        "G3": {
+          "mobs": [
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 160,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:25:58.309112",
+              "last_seen": "2025-06-27T10:25:58.309115"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:26:57.142336",
+              "last_seen": "2025-06-27T10:26:57.142358"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:27:13.177382",
+              "last_seen": "2025-06-27T10:27:13.177406"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 43,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:26:25.026265",
+              "last_seen": "2025-06-27T10:26:25.026269"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 180,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:27:02.578516",
+              "last_seen": "2025-06-27T10:27:02.578537"
+            }
+          ],
+          "visits": 10
+        }
+      },
+      "east": {
+        "N4": {
+          "mobs": [
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:28:22.609438",
+              "last_seen": "2025-06-27T10:28:22.609443"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:28:33.262848",
+              "last_seen": "2025-06-27T10:28:33.262855"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:28:17.252956",
+              "last_seen": "2025-06-27T10:28:17.252963"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:28:38.697093",
+              "last_seen": "2025-06-27T10:28:38.697104"
+            }
+          ],
+          "visits": 10
+        },
+        "G1": {
+          "mobs": [
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:28:49.407207",
+              "last_seen": "2025-06-27T10:28:49.407217"
+            },
+            {
+              "name": "Редкий обитатель окрестностей",
+              "level": 14,
+              "hp": 17,
+              "max_hp": 360,
+              "farm_id": "0_mob_loco_0_rare",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:29:05.591676",
+              "last_seen": "2025-06-27T10:29:05.591687"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 43,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:29:53.775879",
+              "last_seen": "2025-06-27T10:29:53.775898"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:30:09.783361",
+              "last_seen": "2025-06-27T10:30:09.783385"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 140,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:29:59.056615",
+              "last_seen": "2025-06-27T10:29:59.056624"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 160,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:29:43.063299",
+              "last_seen": "2025-06-27T10:29:43.063315"
+            }
+          ],
+          "visits": 10
+        },
+        "G3": {
+          "mobs": [
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 140,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:30:31.176120",
+              "last_seen": "2025-06-27T10:30:31.176125"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 160,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:31:24.658794",
+              "last_seen": "2025-06-27T10:31:24.658819"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:31:19.329205",
+              "last_seen": "2025-06-27T10:31:19.329229"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 53,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:31:35.367562",
+              "last_seen": "2025-06-27T10:31:35.367584"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:31:08.678005",
+              "last_seen": "2025-06-27T10:31:08.678014"
+            }
+          ],
+          "visits": 10
+        }
+      },
+      "west": {
+        "N3": {
+          "mobs": [
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:33:00.894460",
+              "last_seen": "2025-06-27T10:33:00.894468"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:32:07.444780",
+              "last_seen": "2025-06-27T10:32:07.444795"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 180,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:32:28.774955",
+              "last_seen": "2025-06-27T10:32:28.774975"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 32,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:32:23.452430",
+              "last_seen": "2025-06-27T10:32:23.452442"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 53,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:32:44.828334",
+              "last_seen": "2025-06-27T10:32:44.828340"
+            }
+          ],
+          "visits": 10
+        },
+        "G1": {
+          "mobs": [
+            {
+              "name": "Редкий обитатель окрестностей",
+              "level": 14,
+              "hp": 17,
+              "max_hp": 360,
+              "farm_id": "0_mob_loco_0_rare",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:34:21.333407",
+              "last_seen": "2025-06-27T10:34:21.333427"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 160,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:33:22.377679",
+              "last_seen": "2025-06-27T10:33:22.377682"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 140,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:34:42.692627",
+              "last_seen": "2025-06-27T10:34:42.692634"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 43,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:34:53.324613",
+              "last_seen": "2025-06-27T10:34:53.324630"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 53,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:34:37.380233",
+              "last_seen": "2025-06-27T10:34:37.380239"
+            }
+          ],
+          "visits": 10
+        },
+        "G2": {
+          "mobs": [
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:36:02.956700",
+              "last_seen": "2025-06-27T10:36:02.956713"
+            },
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 58,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:35:25.364244",
+              "last_seen": "2025-06-27T10:35:25.364257"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 48,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:36:13.660899",
+              "last_seen": "2025-06-27T10:36:13.660906"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:35:30.820836",
+              "last_seen": "2025-06-27T10:35:30.820846"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:35:41.554013",
+              "last_seen": "2025-06-27T10:35:41.554020"
+            }
+          ],
+          "visits": 10
+        },
+        "G3": {
+          "mobs": [
+            {
+              "name": "Обитатель окрестностей",
+              "level": 14,
+              "hp": 180,
+              "max_hp": 180,
+              "farm_id": "0_mob_keeper_loco_0",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:37:23.248279",
+              "last_seen": "2025-06-27T10:37:23.248293"
+            },
+            {
+              "name": "Хитрый гоблин",
+              "level": 14,
+              "hp": 33,
+              "max_hp": 140,
+              "farm_id": "0_mob_165_fdgr6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:36:29.695617",
+              "last_seen": "2025-06-27T10:36:29.695621"
+            },
+            {
+              "name": "Лесной волк",
+              "level": 14,
+              "hp": 160,
+              "max_hp": 160,
+              "farm_id": "0_mob_161_gz02r",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:36:35.235980",
+              "last_seen": "2025-06-27T10:36:35.235988"
+            },
+            {
+              "name": "Дикий кабан",
+              "level": 14,
+              "hp": 53,
+              "max_hp": 150,
+              "farm_id": "0_mob_163_dgf53",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:36:45.797907",
+              "last_seen": "2025-06-27T10:36:45.797911"
+            },
+            {
+              "name": "Быстроногий заяц",
+              "level": 14,
+              "hp": 150,
+              "max_hp": 150,
+              "farm_id": "0_mob_162_g3czp6",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:37:07.182458",
+              "last_seen": "2025-06-27T10:37:07.182465"
+            },
+            {
+              "name": "Паук-ловец",
+              "level": 14,
+              "hp": 43,
+              "max_hp": 150,
+              "farm_id": "0_mob_164_65gd8",
+              "exp_reward": 0,
+              "gold_reward": 0,
+              "drop_items": [],
+              "first_seen": "2025-06-27T10:37:33.989358",
+              "last_seen": "2025-06-27T10:37:33.989367"
+            }
+          ],
+          "visits": 10
+        }
+      }
+    }
+  },
+  "mobs": [
+    {
+      "id": "mob_161_gz02r",
+      "type": "passive",
+      "exp": 314,
+      "class": "",
+      "photo": "https://i.ibb.co/FmGY6BB/161-mini.webp",
+      "name": "Лесной волк",
+      "desc": "Хищник, охотящийся на мелких животных и неосторожных путников. Обитает только в окрестностях поселения.",
+      "typeAttack": "physical",
+      "lvl": 14,
+      "powerSkill": 1,
+      "skill": "",
+      "drop": [
+        {
+          "id": "m_0_2",
+          "typeElement": "resources",
+          "position": "inventory",
+          "count": 1,
+          "chance": 100
+        },
+        {
+          "id": "m_0_1",
+          "typeElement": "resources",
+          "position": "inventory",
+          "count": 109,
+          "chance": 100
+        },
+        {
+          "id": "armor_81",
+          "typeElement": "armors",
+          "position": "inventory",
+          "typePart": "gloves",
+          "rank": "norm",
+          "chance": 26,
+          "maxLvlDrop": 15
+        },
+        {
+          "id": "armor_103",
+          "typeElement": "armors",
+          "position": "inventory",
+          "typePart": "top",
+          "rank": "norm",
+          "chance": 22,
+          "maxLvlDrop": 15
+        },
+        {
+          "id": "jew_2",
+          "typeElement": "jewelry",
+          "position": "inventory",
+          "rank": "norm",
+          "chance": 16
+        },
+        {
+          "id": "res_25",
+          "typeElement": "resources",
+          "position": "inventory",
+          "count": 1,
+          "chance": 10
+        }
+      ],
+      "stats": {
+        "userCurrentHP": [
+          48,
+          0
+        ],
+        "userCurrentMP": [
+          0,
+          0
+        ],
+        "userMaxHP": [
+          160,
+          0
+        ],
+        "userMaxMP": [
+          0,
+          0
+        ],
+        "power": [
+          14,
+          0
+        ],
+        "int": [
+          14,
+          0
+        ],
+        "dex": [
+          1,
+          0
+        ],
+        "endurance": [
+          0,
+          0
+        ],
+        "wise": [
+          0,
+          0
+        ],
+        "men": [
+          0,
+          0
+        ],
+        "magicDamage": [
+          63,
+          0
+        ],
+        "physicalDamage": [
+          47,
+          0
+        ],
+        "magicDef": [
+          195,
+          0
+        ],
+        "physicalDef": [
+          223,
+          0
+        ],
+        "evasion": [
+          5,
+          0
+        ],
+        "chanceCritical": [
+          1,
+          0
+        ],
+        "chanceMagCritical": [
+          1,
+          0
+        ],
+        "powerCritical": [
+          100,
+          0
+        ],
+        "blockShield": [
+          1,
+          0
+        ],
+        "atackSpeed": [
+          4,
+          0
+        ],
+        "castSpeed": [
+          4,
+          0
+        ]
+      },
+      "tags": {},
+      "dropDemo": [
+        {
+          "id": "m_0_2",
+          "typeElement": "resources",
+          "position": "inventory",
+          "count": 1,
+          "chance": 100
+        },
+        {
+          "id": "m_0_1",
+          "typeElement": "resources",
+          "position": "inventory",
+          "count": 109,
+          "chance": 100
+        },
+        {
+          "id": "armor_81",
+          "typeElement": "armors",
+          "position": "inventory",
+          "typePart": "gloves",
+          "rank": "norm",
+          "chance": 26,
+          "maxLvlDrop": 15
+        },
+        {
+          "id": "armor_103",
+          "typeElement": "armors",
+          "position": "inventory",
+          "typePart": "top",
+          "rank": "norm",
+          "chance": 22,
+          "maxLvlDrop": 15
+        },
+        {
+          "id": "jew_2",
+          "typeElement": "jewelry",
+          "position": "inventory",
+          "rank": "norm",
+          "chance": 16
+        },
+        {
+          "id": "res_25",
+          "typeElement": "resources",
+          "position": "inventory",
+          "count": 1,
+          "chance": 10
+        }
+      ],
+      "farmId": "0_mob_161_gz02r"
+    },
+    {
+      "id": "mob_163_dgf53",
+      "type": "agr",
+      "exp": 228,
+      "class": "",
+      "photo": "https://i.ibb.co/GkkjKq7/163-mini.webp",
+      "name": "Дикий кабан",
+      "desc": "Агрессивное создание, готовое напасть на тех, кто приближается. Обитает только в окрестностях поселения.",
+      "typeAttack": "physical",
+      "lvl": 10,
+      "powerSkill": 1,
+      "skill": "",
+      "drop": [
+        {
+          "id": "m_0_2",
+          "typeElement": "resources",
+          "position": "inventory",
+          "count": 1,
+          "chance": 100
+        },
+        {
+          "id": "m_0_1",
+          "typeElement": "resources",
+          "position": "inventory",
+          "count": 49,
+          "chance": 100
+        },
+        {
+          "id": "armor_92",
+          "typeElement": "armors",
+          "position": "inventory",
+          "typePart": "boots",
+          "rank": "norm",
+          "chance": 16,
+          "maxLvlDrop": 15
+        },
+        {
+          "id": "weapon_2",
+          "typeElement": "weapons",
+          "position": "inventory",
+          "rank": "norm",
+          "chance": 20
+        },
+        {
+          "id": "res_w_15",
+          "typeElement": "resources",
+          "position": "inventory",
+          "count": 1,
+          "chance": 3.2,
+          "minLvlDrop": 115
+        }
+      ],
+      "stats": {
+        "userCurrentHP": [
+          16,
+          0
+        ],
+        "userCurrentMP": [
+          0,
+          0
+        ],
+        "userMaxHP": [
+          140,
+          0
+        ],
+        "userMaxMP": [
+          0,
+          0
+        ],
+        "power": [
+          10,
+          0
+        ],
+        "int": [
+          10,
+          0
+        ],
+        "dex": [
+          1,
+          0
+        ],
+        "endurance": [
+          0,
+          0
+        ],
+        "wise": [
+          0,
+          0
+        ],
+        "men": [
+          0,
+          0
+        ],
+        "magicDamage": [
+          43,
+          0
+        ],
+        "physicalDamage": [
+          32,
+          0
+        ],
+        "magicDef": [
+          131,
+          0
+        ],
+        "physicalDef": [
+          222,
+          0
+        ],
+        "evasion": [
+          7,
+          0
+        ],
+        "chanceCritical": [
+          2,
+          0
+        ],
+        "chanceMagCritical": [
+          1,
+          0
+        ],
+        "powerCritical": [
+          100,
+          0
+        ],
+        "blockShield": [
+          1,
+          0
+        ],
+        "atackSpeed": [
+          4,
+          0
+        ],
+        "castSpeed": [
+          4,
+          0
+        ]
+      },
+      "tags": {},
+      "dropDemo": [
+        {
+          "id": "m_0_2",
+          "typeElement": "resources",
+          "position": "inventory",
+          "count": 1,
+          "chance": 100
+        },
+        {
+          "id": "m_0_1",
+          "typeElement": "resources",
+          "position": "inventory",
+          "count": 49,
+          "chance": 100
+        },
+        {
+          "id": "armor_92",
+          "typeElement": "armors",
+          "position": "inventory",
+          "typePart": "boots",
+          "rank": "norm",
+          "chance": 16,
+          "maxLvlDrop": 15
+        },
+        {
+          "id": "weapon_2",
+          "typeElement": "weapons",
+          "position": "inventory",
+          "rank": "norm",
+          "chance": 20
+        },
+        {
+          "id": "res_w_15",
+          "typeElement": "resources",
+          "position": "inventory",
+          "count": 1,
+          "chance": 3.2,
+          "minLvlDrop": 115
+        }
+      ],
+      "farmId": "0_mob_163_dgf53"
+    },
+    {
+      "id": "mob_164_65gd8",
+      "type": "passive",
+      "exp": 235,
+      "class": "",
+      "photo": "https://i.ibb.co/n8mdqhL/164-mini.webp",
+      "name": "Паук-ловец",
+      "desc": "Паук с ядовитыми клыками, создающий сложные сети для пойманных жертв. Обитает только в окрестностях поселения.",
+      "typeAttack": "physical",
+      "lvl": 10,
+      "powerSkill": 1,
+      "skill": "",
+      "drop": [
+        {
+          "id": "m_0_2",
+          "typeElement": "resources",
+          "position": "inventory",
+          "count": 1,
+          "chance": 100
+        },
+        {
+          "id": "m_0_1",
+          "typeElement": "resources",
+          "position": "inventory",
+          "count": 61,
+          "chance": 100
+        },
+        {
+          "id": "armor_97",
+          "typeElement": "armors",
+          "position": "inventory",
+          "typePart": "helmet",
+          "rank": "norm",
+          "chance": 20,
+          "maxLvlDrop": 15
+        },
+        {
+          "id": "weapon_47",
+          "typeElement": "weapons",
+          "position": "inventory",
+          "rank": "norm",
+          "chance": 19,
+          "maxLvlDrop": 15
+        },
+        {
+          "id": "jew_2",
+          "typeElement": "jewelry",
+          "position": "inventory",
+          "rank": "norm",
+          "chance": 16
+        }
+      ],
+      "stats": {
+        "userCurrentHP": [
+          2,
+          0
+        ],
+        "userCurrentMP": [
+          0,
+          0
+        ],
+        "userMaxHP": [
+          140,
+          0
+        ],
+        "userMaxMP": [
+          0,
+          0
+        ],
+        "power": [
+          10,
+          0
+        ],
+        "int": [
+          10,
+          0
+        ],
+        "dex": [
+          1,
+          0
+        ],
+        "endurance": [
+          0,
+          0
+        ],
+        "wise": [
+          0,
+          0
+        ],
+        "men": [
+          0,
+          0
+        ],
+        "magicDamage": [
+          43,
+          0
+        ],
+        "physicalDamage": [
+          31,
+          0
+        ],
+        "magicDef": [
+          151,
+          0
+        ],
+        "physicalDef": [
+          192,
+          0
+        ],
+        "evasion": [
+          5,
+          0
+        ],
+        "chanceCritical": [
+          1,
+          0
+        ],
+        "chanceMagCritical": [
+          1,
+          0
+        ],
+        "powerCritical": [
+          100,
+          0
+        ],
+        "blockShield": [
+          1,
+          0
+        ],
+        "atackSpeed": [
+          4,
+          0
+        ],
+        "castSpeed": [
+          4,
+          0
+        ]
+      },
+      "tags": {},
+      "dropDemo": [
+        {
+          "id": "m_0_2",
+          "typeElement": "resources",
+          "position": "inventory",
+          "count": 1,
+          "chance": 100
+        },
+        {
+          "id": "m_0_1",
+          "typeElement": "resources",
+          "position": "inventory",
+          "count": 61,
+          "chance": 100
+        },
+        {
+          "id": "armor_97",
+          "typeElement": "armors",
+          "position": "inventory",
+          "typePart": "helmet",
+          "rank": "norm",
+          "chance": 20,
+          "maxLvlDrop": 15
+        },
+        {
+          "id": "weapon_47",
+          "typeElement": "weapons",
+          "position": "inventory",
+          "rank": "norm",
+          "chance": 19,
+          "maxLvlDrop": 15
+        },
+        {
+          "id": "jew_2",
+          "typeElement": "jewelry",
+          "position": "inventory",
+          "rank": "norm",
+          "chance": 16
+        }
+      ],
+      "farmId": "0_mob_164_65gd8"
+    }
+  ],
+  "statistics": {
+    "total_mobs_found": 257,
+    "total_locations_visited": 0,
+    "total_directions_visited": 0,
+    "total_squares_visited": 0
+  }
+}
