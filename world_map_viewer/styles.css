@@ -270,6 +270,7 @@ main {
 }
 .search-input {
   width: 100%;
+  max-width: 100%;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   border-radius: 8px;
@@ -280,6 +281,7 @@ main {
   box-shadow: 0 0 8px #3a5c8c22;
   outline: none;
   transition: border 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
 }
 .search-input:focus {
   border: 1.5px solid #a7c7ff;
@@ -352,6 +354,21 @@ main {
   max-width: 90vw;
   max-height: 30vw;
 }
+.mob-list-row {
+  border: 1.5px solid #3a5c8c;
+  border-radius: 12px;
+  background: #23242a;
+  margin-bottom: 1.2em;
+  padding: 1.1em 1.2em;
+  box-shadow: 0 2px 12px #3a5c8c11;
+  transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
+  cursor: pointer;
+}
+.mob-list-row:hover {
+  border-color: #a7c7ff;
+  box-shadow: 0 4px 24px #a7c7ff33;
+  background: #2a2c38;
+}
 @media (max-width: 700px) {
   .map-grid {
     grid-template-columns: repeat(4, 36px);
@@ -419,5 +436,10 @@ main {
     width: 100%;
     display: block;
     overflow-x: auto;
+  }
+  .search-input {
+    font-size: 0.98rem;
+    padding: 0.5rem 0.5rem;
+    max-width: 100%;
   }
 } 
