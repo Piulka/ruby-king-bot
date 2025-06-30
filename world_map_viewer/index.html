@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruby King World Map Viewer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Ruby King World Map</div>
+    <nav class="nav">
+      <select id="location-select"></select>
+      <button id="search-btn">🔍 Поиск</button>
+    </nav>
+  </header>
+  <main>
+    <section id="side-select-section" class="side-select-section"></section>
+    <section id="map-section" class="map-section"></section>
+    <section id="mobs-section" class="mobs-section"></section>
+  </main>
+  <div id="popup-search" class="popup-search hidden"></div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html> 

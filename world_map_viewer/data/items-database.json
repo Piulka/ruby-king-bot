@@ -1,0 +1,6 @@
+[
+  {"id": "m_0_2", "name": "Сгусток тьмы", "icon": "https://i.ibb.co/0j1k2k2/darkness.png", "type": "resources"},
+  {"id": "m_0_1", "name": "Сгусток слизи", "icon": "https://i.ibb.co/0j1k2k2/slime.png", "type": "resources"},
+  {"id": "res_15", "name": "Болотная трава", "icon": "https://i.ibb.co/0j1k2k2/swamp-grass.png", "type": "resources"},
+  {"id": "recipe_93", "name": "Рецепт: Зелье страха", "icon": "https://i.ibb.co/0j1k2k2/fear-potion.png", "type": "recipe"}
+] 

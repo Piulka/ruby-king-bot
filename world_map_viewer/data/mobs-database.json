@@ -1,0 +1,17 @@
+[
+  {
+    "id": "mob_24_5647y",
+    "name": "Топящийся Ужас",
+    "photo": "https://i.ibb.co/rcqngps/24-mini.webp",
+    "desc": "Зыбкий и неопределенный облик, который плавает в топях и болотных глубинах, пожирая все, что попадается на его пути, и оставляя лишь следы тревоги и ужаса у своих жертв.",
+    "farmId": "0_mob_24_5647y",
+    "location": "Болото Ужаса",
+    "side": "Юг",
+    "drop": [
+      {"id": "m_0_2", "typeElement": "resources", "count": 1, "chance": 100},
+      {"id": "m_0_1", "typeElement": "resources", "count": 52, "chance": 100},
+      {"id": "res_15", "typeElement": "resources", "count": 3, "chance": 18},
+      {"id": "recipe_93", "typeElement": "resources", "count": 1, "chance": 4, "minLvlDrop": 15}
+    ]
+  }
+] 
