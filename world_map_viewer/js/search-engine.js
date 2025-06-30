@@ -42,16 +42,11 @@ export function showSearchPopup({mobs, items, onSelectMob: mobCb, onSelectItem: 
   popup = document.createElement('div');
   popup.id = 'popup-search';
   popup.className = 'popup-search';
-  popup.style.overflowX = 'hidden';
-  popup.style.width = '98vw';
-  popup.style.maxWidth = '480px';
-  popup.style.boxSizing = 'border-box';
-  popup.style.padding = '0';
   document.body.appendChild(popup);
   popup.classList.remove('hidden');
   let type = currentType;
   function render() {
-    popup.innerHTML = `<div class='popup-content' style='overflow-x:hidden;box-sizing:border-box;width:100%;padding:1.2em;'>
+    popup.innerHTML = `<div class='popup-content' style='overflow-x:hidden;box-sizing:border-box;width:100%;'>
       <div style='display:flex;gap:1rem;margin-bottom:1rem;'>
         <button class='search-type-btn${type==='mob'?' active':''}' id='search-mob-btn'>Мобы</button>
         <button class='search-type-btn${type==='item'?' active':''}' id='search-item-btn'>Предметы</button>
@@ -83,25 +78,33 @@ export function showSearchPopup({mobs, items, onSelectMob: mobCb, onSelectItem: 
   render();
 }
 
-export function showModalPopup(contentHtml) {
-  let modal = document.createElement('div');
-  modal.className = 'modal-popup';
-  modal.innerHTML = `<div class='modal-content' style='background:#23242a;color:#fff;border-radius:16px;padding:1.2em;max-width:900px;width:min(98vw,900px);margin:0 auto;box-shadow:0 4px 32px #000a;'>${contentHtml}<button class='close-btn' id='close-modal-btn'>Закрыть</button></div>`;
-  document.body.appendChild(modal);
-  modal.querySelector('#close-modal-btn').onclick = () => { modal.remove(); };
-  modal.onclick = (e) => {
-    if (e.target === modal) modal.remove();
-  };
-  modal.querySelectorAll('.mob-link').forEach(link => {
+// Универсальная функция для показа любого HTML в popup-search
+export function showInfoPopup(contentHtml) {
+  let popup = document.getElementById('popup-search');
+  if (!popup) {
+    popup = document.createElement('div');
+    popup.id = 'popup-search';
+    popup.className = 'popup-search';
+    document.body.appendChild(popup);
+  }
+  popup.classList.remove('hidden');
+  popup.innerHTML = `<div class='popup-content'>${contentHtml}<button class='close-btn' id='close-info-btn'>Закрыть</button></div>`;
+  document.getElementById('close-info-btn').onclick = () => { popup.classList.add('hidden'); };
+  // Добавляем обработку клика по .mob-link для открытия карточки моба
+  popup.querySelectorAll('.mob-link').forEach(link => {
     link.onclick = (ev) => {
       ev.preventDefault();
       const mobId = link.getAttribute('data-mobid');
-      if (mobId) {
-        modal.remove();
-        showModalPopup(renderMobDetails(allMobs.find(m => m.id === mobId)));
+      if (mobId && typeof window._openMobPopup === 'function') {
+        window._openMobPopup(mobId);
       }
     };
   });
+}
+
+// showModalPopup теперь просто вызывает showInfoPopup
+export function showModalPopup(contentHtml) {
+  showInfoPopup(contentHtml);
 }
 
 // Получить список {location, side} где встречается моб
@@ -128,31 +131,33 @@ export function renderMobDetails(mob) {
   if (locations.length) {
     locHtml = `<div style='margin:0.7rem 0 1.2rem 0;font-size:0.98em;'>Локация: <a href='#' style='color:#a7c7ff;text-decoration:underline;cursor:pointer;font-weight:600;' onclick='window._setLocationAndSide&&window._setLocationAndSideByName&&window._setLocationAndSideByName("${mob.location}","${mob.side}")'>${mob.location} ${mob.side}</a></div>`;
   }
-  return `<div style='width:min(98vw,900px);max-width:900px;min-width:320px;max-height:95vh;margin:0 auto;padding:1.2em;background:#23242a;border-radius:16px;box-shadow:0 4px 32px #000a;color:#fff;'>
-    <div style='display:flex;gap:1.2rem;align-items:flex-start;flex-wrap:wrap;'>
-      <img src='${mob.photo||''}' alt='${mob.name}' style='width:64px;height:64px;border-radius:8px;box-shadow:0 0 12px #3a5c8c33;background:#181a20;object-fit:cover;flex-shrink:0;'>
-      <div style='flex:1;min-width:180px;'>
-        <div class='mob-title' style='font-size:1.25em;font-weight:600;'>${mob.name}</div>
-        <div class='mob-id' style='font-size:0.95em;opacity:0.7;'>ID: ${mob.id} | FarmID: ${mob.farmId||''}</div>
-        <div class='mob-desc' style='margin:0.5em 0 0.7em 0;'>${mob.desc||''}</div>
-        ${locHtml}
+  return `
+    <div class="mob-details">
+      <div style='display:flex;gap:1.2rem;align-items:flex-start;flex-wrap:wrap;'>
+        <img src='${mob.photo||''}' alt='${mob.name}' class='mob-details-img'>
+        <div style='flex:1;min-width:180px;'>
+          <div class='mob-title' style='font-size:1.25em;font-weight:600;'>${mob.name}</div>
+          <div class='mob-id' style='font-size:0.95em;opacity:0.7;'>ID: ${mob.id} | FarmID: ${mob.farmId||''}</div>
+          <div class='mob-desc' style='margin:0.5em 0 0.7em 0;'>${mob.desc||''}</div>
+          ${locHtml}
+        </div>
+      </div>
+      <div style='overflow-x:auto;max-width:100%;margin-top:1.1em;'>
+        <table class='drop-table mob-drop-table'>
+          <tr>
+            <th style='min-width:60px;'>Иконка</th>
+            <th style='min-width:110px;'>Название</th>
+            <th style='min-width:90px;'>ID</th>
+            <th style='min-width:90px;'>Тип</th>
+            <th style='min-width:90px;'>Шанс</th>
+            <th style='min-width:90px;'>Кол-во</th>
+            <th style='min-width:110px;'>Уровень появления</th>
+          </tr>` +
+          (mob.drop||[]).map(drop => `<tr><td></td><td>${drop.id}</td><td>${drop.id}</td><td>${drop.typeElement||''}</td><td>${drop.chance||''}%</td><td>${drop.count||''}</td><td>${drop.minLvlDrop||mob.lvl||''}</td></tr>`).join('') +
+        `</table>
       </div>
     </div>
-    <div style='overflow-x:auto;max-width:100%;margin-top:1.1em;'>
-      <table class='drop-table' style='min-width:700px;border-collapse:separate;border-spacing:0;'>
-        <tr>
-          <th style='min-width:60px;'>Иконка</th>
-          <th style='min-width:110px;'>Название</th>
-          <th style='min-width:90px;'>ID</th>
-          <th style='min-width:90px;'>Тип</th>
-          <th style='min-width:90px;'>Шанс</th>
-          <th style='min-width:90px;'>Кол-во</th>
-          <th style='min-width:110px;'>Уровень появления</th>
-        </tr>` +
-        (mob.drop||[]).map(drop => `<tr><td></td><td>${drop.id}</td><td>${drop.id}</td><td>${drop.typeElement||''}</td><td>${drop.chance||''}%</td><td>${drop.count||''}</td><td>${drop.minLvlDrop||mob.lvl||''}</td></tr>`).join('') +
-      `</table>
-    </div>
-  </div>`;
+  `;
 }
 
 function renderItemDetails(item) {
@@ -208,4 +213,25 @@ if (!window._setLocationAndSideByName) {
     }
     if (locId && sideKey) window._setLocationAndSide && window._setLocationAndSide(locId, sideKey);
   }
+}
+
+// Функция для закрытия всех попапов
+export function closeAllPopups() {
+  document.querySelectorAll('.modal-popup').forEach(e => e.remove());
+  const popup = document.getElementById('popup-search');
+  if (popup) popup.classList.add('hidden');
+}
+
+// Функция для отображения карточки моба прямо в popup-search
+export function showMobInPopup(mob) {
+  let popup = document.getElementById('popup-search');
+  if (!popup) {
+    popup = document.createElement('div');
+    popup.id = 'popup-search';
+    popup.className = 'popup-search';
+    document.body.appendChild(popup);
+  }
+  popup.classList.remove('hidden');
+  popup.innerHTML = `<div class='popup-content'>${renderMobDetails(mob)}<button class='close-btn' id='close-mob-btn'>Закрыть</button></div>`;
+  document.getElementById('close-mob-btn').onclick = () => { popup.classList.add('hidden'); };
 } 

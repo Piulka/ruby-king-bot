@@ -1,6 +1,6 @@
 import { loadAllData, getWorldMapData, getMobsData, getItemsData } from './data-loader.js';
 import { renderMap } from './map-renderer.js';
-import { showSearchPopup } from './search-engine.js';
+import { showSearchPopup, renderMobDetails, showMobInPopup, closeAllPopups } from './search-engine.js';
 
 let selectedLocation = null;
 let selectedSide = null;
@@ -130,7 +130,11 @@ function renderMobsSection() {
   const sideNames = {north: 'Север', east: 'Восток', south: 'Юг', west: 'Запад'};
   const filteredMobs = mobsData.filter(m => m.location === locObj.name && m.side === sideNames[sideKey]);
   if (filteredMobs.length) {
-    mobsSection.innerHTML = filteredMobs.map(mob => `<div class='mob-list-row' style='margin-bottom:1.2em;cursor:pointer;' onclick='window.showModalPopup && window.showModalPopup(window.renderMobDetails && window.renderMobDetails(${JSON.stringify(mob)}));'>${window.renderMobDetails ? window.renderMobDetails(mob) : mob.name}</div>`).join('');
+    mobsSection.innerHTML = filteredMobs.map((mob, idx) => `<div class='mob-list-row' style='margin-bottom:1.2em;cursor:pointer;' id='mob-list-row-${idx}'>${renderMobDetails(mob)}</div>`).join('');
+    filteredMobs.forEach((mob, idx) => {
+      const row = document.getElementById(`mob-list-row-${idx}`);
+      if (row) row.onclick = () => showMobInPopup(mob);
+    });
   }
 }
 
@@ -145,35 +149,14 @@ function setLocationAndSide(locId, sideKey) {
   renderSideSelect();
   renderMapSection();
   renderMobsSection();
-  // Закрыть все модальные окна
-  document.querySelectorAll('.modal-popup').forEach(e => e.remove());
+  // Закрыть все попапы
+  closeAllPopups();
 }
 
 function openMobPopup(mobId) {
   const mob = getMobsData().find(m => m.id === mobId);
   if (mob) {
-    // Импортируем функцию из search-engine.js
-    import('./search-engine.js').then(mod => {
-      mod.showSearchPopup({
-        mobs: getMobsData(),
-        items: getItemsData(),
-        onSelectMob: () => {},
-        onSelectItem: () => {},
-        setLocationAndSide,
-        openMobPopup
-      });
-      // Открываем только модалку моба
-      mod.showSearchPopup({
-        mobs: getMobsData(),
-        items: getItemsData(),
-        onSelectMob: () => {},
-        onSelectItem: () => {},
-        setLocationAndSide,
-        openMobPopup
-      });
-      // showModalPopup уже есть в глобале
-      window.showModalPopup && window.showModalPopup(mod.renderMobDetails(mob));
-    });
+    showMobInPopup(mob);
   }
 }
 
