@@ -226,13 +226,32 @@ class GameEngine:
                 self._handle_exploration_failure(result)
                 return
             
-            # Extract mob data from response
-            mob_data = self.data_extractor.extract_mob_data(result)
-            mob_group_data = self.data_extractor.extract_mob_group_data(result)
+            # --- ГАРАНТИРОВАННАЯ ЗАПИСЬ МОБА В БД ---
+            mob_list = self.data_extractor.extract_mob_data(result)
+            mob_group_data = None  # Инициализация для избежания UnboundLocalError
+            if mob_list and isinstance(mob_list, list):
+                mob_dict = mob_list[0]
+                loco_id = None
+                side_key = None
+                if self.route_manager:
+                    current_point = self.route_manager.get_current_point()
+                    if current_point:
+                        loco_id = getattr(current_point, 'location', None)
+                        side_key = getattr(current_point, 'direction_name', None)
+                logger.info(f"[MOB DB] Параметры для записи: loco_id={loco_id}, side_key={side_key}")
+                if mob_dict:
+                    ok = self.data_extractor.update_mob_database(mob_dict, self.player.level, loco_id=loco_id, side_key=side_key)
+                    logger.info(f"[MOB DB] Моб записан: {ok}, name={mob_dict.get('name')}, id={mob_dict.get('id')}")
+                else:
+                    logger.error("[MOB DB] mob_dict is None after extract_mob_data")
+                # Получаем mob_group_data для дальнейшей логики
+                mob_group_data = self.data_extractor.extract_mob_group_data(result)
+            else:
+                logger.error("[MOB DB] mob_list is empty or not a list")
             
-            if mob_data and mob_group_data:
+            if mob_list and mob_group_data:
                 # Create MobGroup from raw data
-                self.current_mob_group = MobGroup(mob_data)
+                self.current_mob_group = MobGroup(mob_list)
                 # Сбросить все тайминги (кулдауны = 0) при появлении нового моба
                 now = time.time()
                 self.player.last_attack_time = now - self.player.GLOBAL_COOLDOWN
