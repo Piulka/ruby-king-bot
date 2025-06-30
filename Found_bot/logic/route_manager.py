@@ -53,17 +53,13 @@ class RouteManager:
                 for direction, direction_data in directions.items():
                     direction_name = direction_data.get("name", direction)
                     squares = direction_data.get("squares", {})
-                    # Найти наиболее подходящий квадрат на этой стороне
-                    best_square = None
-                    best_diff = float('inf')
-                    best_higher = None
-                    best_higher_diff = float('inf')
-                    best_mob_level = None
+                    # Собираем кандидатов в диапазоне [min_level, player_level]
+                    candidates = []
+                    lower_candidates = []
                     for square, square_data in squares.items():
                         mob_level = square_data.get("mob_level")
                         if mob_level is None:
                             continue
-                        # Обрабатываем уровень моба
                         if isinstance(mob_level, int):
                             mob_lvl = mob_level
                         elif isinstance(mob_level, str) and '-' in mob_level:
@@ -79,31 +75,31 @@ class RouteManager:
                                 continue
                         else:
                             continue
-                        diff = abs(mob_lvl - min_level)
-                        if mob_lvl <= min_level and diff < best_diff:
-                            best_square = square
-                            best_diff = diff
-                            best_mob_level = mob_lvl
-                        elif mob_lvl > min_level and (mob_lvl - min_level) < best_higher_diff:
-                            best_higher = square
-                            best_higher_diff = mob_lvl - min_level
-                    chosen_square = best_square or best_higher
-                    chosen_mob_level = best_mob_level if best_square else None
-                    if not chosen_square and best_higher:
-                        # Если не нашли ниже, берем ближайший выше
-                        chosen_square = best_higher
-                        chosen_mob_level = None  # Можно доработать если нужно
-                    if chosen_square:
+                        if min_level <= mob_lvl <= self.player_level:
+                            candidates.append((square, mob_lvl))
+                        elif mob_lvl < min_level:
+                            lower_candidates.append((square, mob_lvl))
+                    best_square = None
+                    if candidates:
+                        # Берём ближайшую к min_level
+                        best_square, _ = min(candidates, key=lambda x: abs(x[1] - min_level))
+                    elif lower_candidates:
+                        # Если нет кандидатов — берём максимальный из нижних
+                        best_square, _ = max(lower_candidates, key=lambda x: x[1])
+                    # Если ничего не найдено — best_square останется None
+                    chosen_mob_level = None
+                    if best_square:
                         route_point = RoutePoint(
                             location=location,
                             location_name=location_name,
                             direction=direction,
                             direction_name=direction_name,
-                            square=chosen_square,
+                            square=best_square,
                             mob_level=chosen_mob_level if chosen_mob_level is not None else 0
                         )
                         filtered_route.append(route_point)
             self.route = filtered_route
+            self.current_route_index = 0  # Сброс на начало маршрута при старте
             logger.info(f"Route built successfully with {len(self.route)} squares")
         except Exception as e:
             logger.error(f"Failed to build route: {e}")

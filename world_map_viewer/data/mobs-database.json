@@ -34,5 +34,228 @@
         "minLvlDrop": 15
       }
     ]
+  },
+  {
+    "id": "mob_161_gz02r",
+    "name": "Лесной волк",
+    "photo": "https://i.ibb.co/FmGY6BB/161-mini.webp",
+    "desc": "Хищник, охотящийся на мелких животных и неосторожных путников. Обитает только в окрестностях поселения.",
+    "farmId": "0_mob_161_gz02r",
+    "location": "Окрестности поселения",
+    "side": "Север",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 80,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "armor_81",
+        "typeElement": "armors",
+        "count": 1,
+        "chance": 26,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "armor_103",
+        "typeElement": "armors",
+        "count": 1,
+        "chance": 22,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "jew_2",
+        "typeElement": "jewelry",
+        "count": 1,
+        "chance": 16,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_25",
+        "typeElement": "resources",
+        "count": 4,
+        "chance": 20,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_165_fdgr6",
+    "name": "Хитрый гоблин",
+    "photo": "https://i.ibb.co/tPY2jgZ/165-mini.webp",
+    "desc": "Коварный гоблин, грабящий одиноких путников. Обитает только в окрестностях поселения.",
+    "farmId": "0_mob_165_fdgr6",
+    "location": "Окрестности поселения",
+    "side": "Север",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 67,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "armor_102",
+        "typeElement": "armors",
+        "count": 1,
+        "chance": 20,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "weapon_47",
+        "typeElement": "weapons",
+        "count": 1,
+        "chance": 16,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_164_65gd8",
+    "name": "Паук-ловец",
+    "photo": "https://i.ibb.co/n8mdqhL/164-mini.webp",
+    "desc": "Паук с ядовитыми клыками, создающий сложные сети для пойманных жертв. Обитает только в окрестностях поселения.",
+    "farmId": "0_mob_164_65gd8",
+    "location": "Окрестности поселения",
+    "side": "Север",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 50,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "armor_97",
+        "typeElement": "armors",
+        "count": 1,
+        "chance": 20,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "weapon_47",
+        "typeElement": "weapons",
+        "count": 1,
+        "chance": 19,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "jew_2",
+        "typeElement": "jewelry",
+        "count": 1,
+        "chance": 16,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_keeper_winter_loco_0",
+    "name": "Зимний обитатель окрестностей",
+    "photo": "https://i.ibb.co/kVN2fMGj/winter-2.webp",
+    "desc": "Тёмная нечисть, обитающая в окрестностях поселения. Появляется исключительно зимой.",
+    "farmId": "0_mob_keeper_winter_loco_0",
+    "location": "Окрестности поселения",
+    "side": "Север",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 3,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 67,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "recipe_208",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 4.2,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "book_skill_60",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 1.92,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_163_dgf53",
+    "name": "Дикий кабан",
+    "photo": "https://i.ibb.co/GkkjKq7/163-mini.webp",
+    "desc": "Агрессивное создание, готовое напасть на тех, кто приближается. Обитает только в окрестностях поселения.",
+    "farmId": "0_mob_163_dgf53",
+    "location": "Окрестности поселения",
+    "side": "Север",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 40,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "armor_92",
+        "typeElement": "armors",
+        "count": 1,
+        "chance": 16,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "weapon_2",
+        "typeElement": "weapons",
+        "count": 1,
+        "chance": 20,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_w_15",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 3.2,
+        "minLvlDrop": 21
+      }
+    ]
   }
 ]

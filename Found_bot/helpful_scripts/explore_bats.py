@@ -40,7 +40,7 @@ def main():
         print("[1] Найдены летучие мыши! Отправляю обход...")
         bats1 = curl_post(BATS_URL)
         print("Ответ сервера на обход 1:", bats1)
-        time.sleep(1)
+        time.sleep(3)
         print("[2] Повторное исследование...")
         data2 = explore()
         print("Ответ на исследование 2:", data2)
