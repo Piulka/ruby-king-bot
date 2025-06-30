@@ -22,7 +22,7 @@ class APIClient:
         self.token = GAME_TOKEN
         
     def _make_request(self, method: str, endpoint: str, data: Optional[Dict] = None, 
-                     retries: int = None) -> Dict[str, Any]:
+                     retries: int = None, headers: Optional[dict] = None) -> Dict[str, Any]:
         """
         Make HTTP request with retry logic
         
@@ -49,9 +49,10 @@ class APIClient:
                 
                 if method.upper() == "POST":
                     response = self.session.post(
-                        url, 
-                        json=data, 
-                        timeout=Settings.REQUEST_TIMEOUT
+                        url,
+                        json=data,
+                        timeout=Settings.REQUEST_TIMEOUT,
+                        headers=headers
                     )
                 else:
                     response = self.session.get(
@@ -112,7 +113,8 @@ class APIClient:
         }
         
         logger.info("Exploring territory...")
-        result = self._make_request("POST", Endpoints.EXPLORE_TERRITORY, data)
+        headers = self.get_custom_headers(self.token)
+        result = self._make_request("POST", Endpoints.EXPLORE_TERRITORY, data, headers=headers)
         
         # CRITICAL: Log if mob was found (player is now in combat)
         if "mob" in result:
@@ -142,7 +144,8 @@ class APIClient:
         data = {"mobId": mob_id}
         
         logger.info(f"Attacking mob: {mob_id}")
-        result = self._make_request("POST", Endpoints.ATTACK_MOB, data)
+        headers = self.get_custom_headers(self.token)
+        result = self._make_request("POST", Endpoints.ATTACK_MOB, data, headers=headers)
         
         return result
     
@@ -212,7 +215,8 @@ class APIClient:
         """
         data = {"mobId": mob_id, "skillId": skill_id}
         logger.info(f"Using skill {skill_id} on mob: {mob_id}")
-        result = self._make_request("POST", Endpoints.USE_SKILL, data)
+        headers = self.get_custom_headers(self.token)
+        result = self._make_request("POST", Endpoints.USE_SKILL, data, headers=headers)
         return result
 
     def get_user_info(self) -> Dict[str, Any]:
@@ -267,56 +271,55 @@ class APIClient:
         logger.info(f"Buy items response: {result}")
         return result
     
-    def change_main_geo(self, position: str) -> Dict[str, Any]:
+    def get_custom_headers(self, token: str) -> dict:
+        return {
+            'Accept': 'application/json, text/plain, */*',
+            'Accept-Language': 'ru,en;q=0.9,en-US;q=0.8,de;q=0.7',
+            'Connection': 'keep-alive',
+            'Content-Type': 'application/json',
+            'Origin': 'https://ruby-king.ru',
+            'Referer': f'https://ruby-king.ru/city?name={token}&timeEnd=1751300208114',
+            'Sec-Fetch-Dest': 'empty',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Site': 'same-origin',
+            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1',
+        }
+
+    def change_main_geo(self, position: str) -> dict:
         """
-        Change main geographical position (city/farm)
-        
-        Args:
-            position: Position to change to ("city" or "farm")
-            
-        Returns:
-            Response data with position change results
+        Change main geographical position (city/farm) с кастомными headers
         """
         data = {"position": position}
-        logger.info(f"Changing main geo to: {position}")
-        result = self._make_request("POST", Endpoints.CHANGE_MAIN_GEO, data)
-        return result
-    
-    def change_geo(self, loco: str, direction: str, type_action: str = "change") -> Dict[str, Any]:
+        token = self.token
+        url = f"https://ruby-king.ru/api/farm/change-main-geo?name={token}"
+        headers = self.get_custom_headers(token)
+        logger.info(f"[API] change_main_geo: {url} data={data}")
+        resp = self.session.post(url, json=data, headers=headers)
+        return resp.json()
+
+    def change_geo(self, loco: str, direction: str, type_action: str = "change") -> dict:
         """
-        Change geographical location within farm
-        
-        Args:
-            loco: Location name (e.g., "loco_3")
-            direction: Direction (e.g., "south", "north")
-            type_action: Action type (default: "change")
-            
-        Returns:
-            Response data with location change results
+        Change geo (location/direction) с кастомными headers
         """
-        data = {
-            "loco": loco,
-            "direction": direction,
-            "typeAction": type_action
-        }
-        logger.info(f"Changing geo to {loco} {direction}")
-        result = self._make_request("POST", Endpoints.CHANGE_GEO, data)
-        return result
-    
-    def change_square(self, square: str) -> Dict[str, Any]:
+        data = {"loco": loco, "direction": direction, "typeAction": type_action}
+        token = self.token
+        url = f"https://ruby-king.ru/api/farm/change-geo?name={token}"
+        headers = self.get_custom_headers(token)
+        logger.info(f"[API] change_geo: {url} data={data}")
+        resp = self.session.post(url, json=data, headers=headers)
+        return resp.json()
+
+    def reset_geo(self) -> dict:
         """
-        Change square within current location
-        
-        Args:
-            square: Square position (e.g., "G4", "G3")
-            
-        Returns:
-            Response data with square change results
+        Reset geo (typeAction=reset) с кастомными headers
         """
-        data = {"square": square}
-        logger.info(f"Changing square to: {square}")
-        result = self._make_request("POST", Endpoints.CHANGE_SQUARE, data)
-        return result
+        data = {"loco": "", "direction": "", "typeAction": "reset"}
+        token = self.token
+        url = f"https://ruby-king.ru/api/farm/change-geo?name={token}"
+        headers = self.get_custom_headers(token)
+        logger.info(f"[API] reset_geo: {url} data={data}")
+        resp = self.session.post(url, json=data, headers=headers)
+        return resp.json()
 
     def complete_bats_event(self) -> Dict[str, Any]:
         """
@@ -325,4 +328,16 @@ class APIClient:
         endpoint = f"/user/vesna?name={self.token}"
         logger.info("Completing SPEC_BATS event via /api/user/vesna ...")
         result = self._make_request("POST", endpoint, data={})
-        return result 
+        return result
+
+    def change_square(self, square: str) -> dict:
+        """
+        Change to a specific square on the map (маршрут)
+        """
+        data = {"square": square}
+        token = self.token
+        url = f"https://ruby-king.ru/api/farm/change-square?name={token}"
+        headers = self.get_custom_headers(token)
+        logger.info(f"[API] change_square: {url} data={data}")
+        resp = self.session.post(url, json=data, headers=headers)
+        return resp.json() 

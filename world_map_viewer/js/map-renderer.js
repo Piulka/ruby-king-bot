@@ -15,18 +15,22 @@ export function renderMap(gridData, container, onInnerLocationClick, openMobPopu
     let cellLabel = cell.label || '';
     if (cell.type === 'inner') {
       cellDiv.classList.add('cell-inner');
-      cellDiv.textContent = cellLabel;
+      cellDiv.innerHTML = `<span class="cell-label" style="white-space:normal;word-break:break-word;">${cellLabel}</span>`;
       if (cell.innerInfo && cell.innerInfo.name) {
         cellDiv.title = cell.innerInfo.name;
       }
+      cellDiv.style.cursor = 'pointer';
       cellDiv.onclick = () => onInnerLocationClick(cell.innerInfo);
-    } else if (cell.type === 'mob') {
+    } else if ((cellLabel && cellLabel.includes('-')) || (cellLabel && !isNaN(Number(cellLabel)) && Number(cellLabel) > 0)) {
       cellDiv.classList.add('cell-mob');
-      cellDiv.textContent = cellLabel;
+      cellDiv.innerHTML = `<span class=\"cell-label\">${cellLabel}</span>`;
       if (cell.mobId && openMobPopup) {
         cellDiv.style.cursor = 'pointer';
         cellDiv.onclick = () => openMobPopup(cell.mobId);
       }
+    } else if (cellLabel) {
+      cellDiv.classList.add('cell-lvl');
+      cellDiv.innerHTML = `<span class=\"cell-label\">${cellLabel}</span>`;
     } else {
       cellDiv.classList.add('cell-empty');
       cellDiv.textContent = '';

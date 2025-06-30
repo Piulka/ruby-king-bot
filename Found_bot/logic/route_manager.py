@@ -48,6 +48,9 @@ class RouteManager:
             min_level = max(1, self.player_level - 9)
             filtered_route = []
             for location, location_data in world_map.items():
+                # Исключаем 'Окрестности поселения'
+                if location == 'loco_0':
+                    continue
                 location_name = location_data.get("name", location)
                 directions = location_data.get("directions", {})
                 for direction, direction_data in directions.items():
@@ -58,22 +61,24 @@ class RouteManager:
                     lower_candidates = []
                     for square, square_data in squares.items():
                         mob_level = square_data.get("mob_level")
+                        # Новый формат: mob_level может быть dict с mobLvl
                         if mob_level is None:
                             continue
-                        if isinstance(mob_level, int):
-                            mob_lvl = mob_level
-                        elif isinstance(mob_level, str) and '-' in mob_level:
-                            try:
-                                l1, l2 = map(int, mob_level.split('-'))
-                                mob_lvl = l1
-                            except (ValueError, IndexError):
-                                continue
-                        elif isinstance(mob_level, str):
-                            try:
-                                mob_lvl = int(mob_level)
-                            except ValueError:
-                                continue
+                        if isinstance(mob_level, dict):
+                            mob_lvl = mob_level.get("mobLvl")
                         else:
+                            mob_lvl = mob_level
+                        if mob_lvl is None:
+                            continue
+                        # --- Новый парсинг диапазона ---
+                        if isinstance(mob_lvl, str) and '-' in mob_lvl:
+                            try:
+                                mob_lvl = int(mob_lvl.split('-')[0])
+                            except Exception:
+                                continue
+                        try:
+                            mob_lvl = int(mob_lvl)
+                        except (ValueError, TypeError):
                             continue
                         if min_level <= mob_lvl <= self.player_level:
                             candidates.append((square, mob_lvl))
@@ -81,8 +86,8 @@ class RouteManager:
                             lower_candidates.append((square, mob_lvl))
                     best_square = None
                     if candidates:
-                        # Берём ближайшую к min_level
-                        best_square, _ = min(candidates, key=lambda x: abs(x[1] - min_level))
+                        # Берём минимальный mob_level из диапазона
+                        best_square, _ = min(candidates, key=lambda x: x[1])
                     elif lower_candidates:
                         # Если нет кандидатов — берём максимальный из нижних
                         best_square, _ = max(lower_candidates, key=lambda x: x[1])

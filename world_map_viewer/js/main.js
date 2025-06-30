@@ -8,6 +8,7 @@ let allData = null;
 
 window.addEventListener('DOMContentLoaded', async () => {
   allData = await loadAllData();
+  console.log('allData loaded', allData);
   initLocationSelect();
   document.getElementById('search-btn').onclick = openSearch;
 });
@@ -68,6 +69,7 @@ function clearMapAndMobs() {
 }
 
 function renderMapSection() {
+  console.log('renderMapSection called', selectedLocation, selectedSide, getWorldMapData());
   const mapSection = document.getElementById('map-section');
   if (!selectedLocation || selectedSide === null) return;
   const mapData = getWorldMapData();
@@ -91,19 +93,29 @@ function renderMapSection() {
     const cell = squares[cellId] || {};
     let type = 'empty';
     let mobId = null;
-    if (cell.loco_id) {
+    let label = '';
+    let innerInfo = undefined;
+
+    // --- ВНУТРЕННЯЯ ЛОКАЦИЯ ---
+    if (cell.mob_level && cell.mob_level.locoId) {
       type = 'inner';
+      label = cell.mob_level.locoName || '';
+      innerInfo = { name: cell.mob_level.locoName, id: cell.mob_level.locoId };
     } else if (cell.has_mobs) {
       type = 'mob';
       // Найти моба по location и side только из mobs-database.json
       const locName = locObj.name;
       const mob = mobsData.find(m => m.location === locName && m.side === sideNames[sideKey]);
       if (mob) mobId = mob.id;
+    } else if (cell.mob_level && typeof cell.mob_level === 'object' && cell.mob_level.mobLvl !== undefined) {
+      label = String(cell.mob_level.mobLvl);
+    } else if (cell.mob_level) {
+      label = String(cell.mob_level);
     }
     return {
       type,
-      label: cell.loco_name || (cell.mob_level ? String(cell.mob_level) : ''),
-      innerInfo: cell.loco_id ? { name: cell.loco_name, desc: '' } : undefined,
+      label,
+      innerInfo,
       cellId,
       mobId
     };

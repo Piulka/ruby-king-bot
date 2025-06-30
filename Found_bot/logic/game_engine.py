@@ -173,8 +173,64 @@ class GameEngine:
         
         # Check if we need to move to next square
         if self.route_manager and self.route_manager.should_move_to_next_square():
-            console.print(f"[yellow]Moving to next square in route...[/yellow]")
-            logger.info("Moving to next square in route")
+            next_point = self.route_manager.get_next_point()
+            if not next_point:
+                logger.error("Нет следующей точки маршрута!")
+                return
+            # 1. Выйти в фарм-зону
+            result = self.api_client.change_main_geo("farm")
+            if result.get("status") != "success":
+                logger.error(f"Ошибка перехода в фарм-зону: {result}")
+                self.display.print_message("Ошибка перехода в фарм-зону", "error")
+                return
+            # 2. Перейти в нужную локацию/сторону
+            result = self.api_client.change_geo(next_point.location, next_point.direction)
+            if result.get("status") != "success":
+                logger.error(f"Ошибка перехода в локацию: {result}")
+                self.display.print_message("Ошибка перехода в локацию", "error")
+                return
+            # 3. Перейти на нужный квадрат
+            result = self.api_client.change_square(next_point.square)
+            if result.get("status") != "success":
+                logger.error(f"Ошибка перехода на квадрат: {result}")
+                self.display.print_message("Ошибка перехода на квадрат", "error")
+                return
+            # 4. Исследовать клетку через farm-mob-one (explore_territory)
+            explore_result = self.api_client.explore_territory(loco=next_point.location, direction=next_point.direction)
+            if explore_result and "mob" in explore_result:
+                mob_data = explore_result["mob"]
+                # Если mob_data — список, берём первого моба
+                if isinstance(mob_data, list) and mob_data:
+                    mob = mob_data[0]
+                elif isinstance(mob_data, dict):
+                    mob = mob_data
+                else:
+                    mob = None
+                if mob and "farmId" in mob:
+                    mob_id = mob["farmId"]
+                    first_hit = True
+                    while True:
+                        now = time.time()
+                        # Первый удар всегда скиллом, далее — скилл по кд, иначе обычный удар
+                        if first_hit or self.player.can_use_skill(now):
+                            attack_result = self.api_client.use_skill(mob_id)
+                            self.player.record_skill(now)
+                            first_hit = False
+                        elif self.player.can_attack(now):
+                            attack_result = self.api_client.attack_mob(mob_id)
+                            self.player.record_attack(now)
+                        else:
+                            # Ждём ГКД
+                            time.sleep(0.5)
+                            continue
+                        if attack_result.get("status") == "victory" or attack_result.get("result") == "victory":
+                            self.display.print_message(f"Победа над мобом: {mob.get('name', mob_id)}", "success")
+                            break
+                        elif attack_result.get("status") == "fail":
+                            self.display.print_message(f"Ошибка атаки: {attack_result.get('message', '')}", "error")
+                            break
+                        time.sleep(0.5)
+            # 5. Обновить маршрут
             self.route_manager.move_to_next_square(display=self.display)
             self.explore_done = False  # Reset exploration for new square
         

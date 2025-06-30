@@ -41,7 +41,7 @@
     "photo": "https://i.ibb.co/FmGY6BB/161-mini.webp",
     "desc": "Хищник, охотящийся на мелких животных и неосторожных путников. Обитает только в окрестностях поселения.",
     "farmId": "0_mob_161_gz02r",
-    "location": "Окрестности поселения",
+    "location": "Таинственный лес",
     "side": "Север",
     "drop": [
       {
@@ -54,7 +54,7 @@
       {
         "id": "m_0_1",
         "typeElement": "resources",
-        "count": 80,
+        "count": 83,
         "chance": 100,
         "minLvlDrop": 21
       },
@@ -94,7 +94,7 @@
     "photo": "https://i.ibb.co/tPY2jgZ/165-mini.webp",
     "desc": "Коварный гоблин, грабящий одиноких путников. Обитает только в окрестностях поселения.",
     "farmId": "0_mob_165_fdgr6",
-    "location": "Окрестности поселения",
+    "location": "Таинственный лес",
     "side": "Север",
     "drop": [
       {
@@ -133,7 +133,7 @@
     "photo": "https://i.ibb.co/n8mdqhL/164-mini.webp",
     "desc": "Паук с ядовитыми клыками, создающий сложные сети для пойманных жертв. Обитает только в окрестностях поселения.",
     "farmId": "0_mob_164_65gd8",
-    "location": "Окрестности поселения",
+    "location": "Таинственный лес",
     "side": "Север",
     "drop": [
       {
@@ -146,7 +146,7 @@
       {
         "id": "m_0_1",
         "typeElement": "resources",
-        "count": 50,
+        "count": 51,
         "chance": 100,
         "minLvlDrop": 21
       },
@@ -176,10 +176,10 @@
   {
     "id": "mob_keeper_winter_loco_0",
     "name": "Зимний обитатель окрестностей",
-    "photo": "https://i.ibb.co/kVN2fMGj/winter-2.webp",
+    "photo": "https://i.ibb.co/VY5pxGhv/winter-13.webp",
     "desc": "Тёмная нечисть, обитающая в окрестностях поселения. Появляется исключительно зимой.",
     "farmId": "0_mob_keeper_winter_loco_0",
-    "location": "Окрестности поселения",
+    "location": "Таинственный лес",
     "side": "Север",
     "drop": [
       {
@@ -192,7 +192,7 @@
       {
         "id": "m_0_1",
         "typeElement": "resources",
-        "count": 67,
+        "count": 68,
         "chance": 100,
         "minLvlDrop": 21
       },
@@ -218,7 +218,7 @@
     "photo": "https://i.ibb.co/GkkjKq7/163-mini.webp",
     "desc": "Агрессивное создание, готовое напасть на тех, кто приближается. Обитает только в окрестностях поселения.",
     "farmId": "0_mob_163_dgf53",
-    "location": "Окрестности поселения",
+    "location": "Таинственный лес",
     "side": "Север",
     "drop": [
       {
@@ -231,7 +231,7 @@
       {
         "id": "m_0_1",
         "typeElement": "resources",
-        "count": 40,
+        "count": 41,
         "chance": 100,
         "minLvlDrop": 21
       },
@@ -254,6 +254,137 @@
         "typeElement": "resources",
         "count": 1,
         "chance": 3.2,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_162_g3czp6",
+    "name": "Быстроногий заяц",
+    "photo": "https://i.ibb.co/BGBDmPm/162-mini.webp",
+    "desc": "Скромное существо, которое становится добычей для охотников. Обитает только в окрестностях поселения.",
+    "farmId": "0_mob_162_g3czp6",
+    "location": "Таинственный лес",
+    "side": "Север",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 97,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "armor_86",
+        "typeElement": "armors",
+        "count": 1,
+        "chance": 18,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "armor_110",
+        "typeElement": "armors",
+        "count": 1,
+        "chance": 20,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "weapon_46",
+        "typeElement": "weapons",
+        "count": 1,
+        "chance": 18,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "jew_3",
+        "typeElement": "jewelry",
+        "count": 1,
+        "chance": 16,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_loco_1_8_keeper_winter",
+    "name": "Зимний обитатель вороньего холма",
+    "photo": "https://i.ibb.co/W45X8nN8/loco-1-8-winter-2.webp",
+    "desc": "Тёмная нечисть, обитающая на Вороньих холмах Таинственного Леса. Появляется исключительно зимой.",
+    "farmId": "0_mob_loco_1_8_keeper_winter",
+    "location": "Таинственный лес",
+    "side": "Север",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 2,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 72,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "recipe_237",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 2.2,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_a_61",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 4,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_loco_0_rare",
+    "name": "Редкий обитатель окрестностей",
+    "photo": "https://i.ibb.co/20qRgLTL/rare-5.webp",
+    "desc": "Редкая Тёмная нечисть, обитающая в окрестностях поселения.",
+    "farmId": "0_mob_loco_0_rare",
+    "location": "Таинственный лес",
+    "side": "Север",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 4,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 117,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_particles_155",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 6,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "book_1_page",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 6,
         "minLvlDrop": 21
       }
     ]
