@@ -95,7 +95,7 @@ function renderMapSection() {
       type = 'inner';
     } else if (cell.has_mobs) {
       type = 'mob';
-      // Найти моба по location и side
+      // Найти моба по location и side только из mobs-database.json
       const locName = locObj.name;
       const mob = mobsData.find(m => m.location === locName && m.side === sideNames[sideKey]);
       if (mob) mobId = mob.id;
@@ -108,7 +108,6 @@ function renderMapSection() {
       mobId
     };
   });
-  // Рендер с обработчиком клика по мобу
   renderMap(gridData, mapSection, showInnerLocationInfo, openMobPopup);
 }
 
@@ -123,7 +122,16 @@ function renderMobsSection() {
   const mobsSection = document.getElementById('mobs-section');
   mobsSection.innerHTML = '';
   if (!selectedLocation || selectedSide === null) return;
-  // Пока нет данных о мобах для новых локаций — оставляем пусто
+  const mapData = getWorldMapData();
+  const mobsData = getMobsData();
+  const locObj = mapData.world_map[selectedLocation];
+  const sideKeys = Object.keys(locObj.directions || {});
+  const sideKey = sideKeys[selectedSide];
+  const sideNames = {north: 'Север', east: 'Восток', south: 'Юг', west: 'Запад'};
+  const filteredMobs = mobsData.filter(m => m.location === locObj.name && m.side === sideNames[sideKey]);
+  if (filteredMobs.length) {
+    mobsSection.innerHTML = filteredMobs.map(mob => `<div class='mob-list-row' style='margin-bottom:1.2em;cursor:pointer;' onclick='window.showModalPopup && window.showModalPopup(window.renderMobDetails && window.renderMobDetails(${JSON.stringify(mob)}));'>${window.renderMobDetails ? window.renderMobDetails(mob) : mob.name}</div>`).join('');
+  }
 }
 
 function setLocationAndSide(locId, sideKey) {

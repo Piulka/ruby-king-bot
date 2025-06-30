@@ -9,7 +9,7 @@ async function loadJSON(url) {
 }
 
 export async function loadAllData() {
-  if (!worldMapData) worldMapData = await loadJSON('/complete_world_map.json');
+  if (!worldMapData) worldMapData = await loadJSON('data/complete_world_map.json');
   if (!mobsData) mobsData = await loadJSON('data/mobs-database.json');
   if (!itemsData) itemsData = await loadJSON('data/items-database.json');
   window.__worldMapData = worldMapData;

@@ -37,16 +37,21 @@ export function showSearchPopup({mobs, items, onSelectMob: mobCb, onSelectItem: 
   onSelectItem = itemCb;
   window._setLocationAndSide = setLocationAndSide;
   window._openMobPopup = openMobPopup;
-  if (!popup) {
-    popup = document.createElement('div');
-    popup.id = 'popup-search';
-    popup.className = 'popup-search';
-    document.body.appendChild(popup);
-  }
+  const oldPopup = document.getElementById('popup-search');
+  if (oldPopup) oldPopup.remove();
+  popup = document.createElement('div');
+  popup.id = 'popup-search';
+  popup.className = 'popup-search';
+  popup.style.overflowX = 'hidden';
+  popup.style.width = '98vw';
+  popup.style.maxWidth = '480px';
+  popup.style.boxSizing = 'border-box';
+  popup.style.padding = '0';
+  document.body.appendChild(popup);
   popup.classList.remove('hidden');
   let type = currentType;
   function render() {
-    popup.innerHTML = `<div class='popup-content'>
+    popup.innerHTML = `<div class='popup-content' style='overflow-x:hidden;box-sizing:border-box;width:100%;padding:1.2em;'>
       <div style='display:flex;gap:1rem;margin-bottom:1rem;'>
         <button class='search-type-btn${type==='mob'?' active':''}' id='search-mob-btn'>Мобы</button>
         <button class='search-type-btn${type==='item'?' active':''}' id='search-item-btn'>Предметы</button>
@@ -81,13 +86,12 @@ export function showSearchPopup({mobs, items, onSelectMob: mobCb, onSelectItem: 
 export function showModalPopup(contentHtml) {
   let modal = document.createElement('div');
   modal.className = 'modal-popup';
-  modal.innerHTML = `<div class='modal-content'>${contentHtml}<button class='close-btn' id='close-modal-btn'>Закрыть</button></div>`;
+  modal.innerHTML = `<div class='modal-content' style='background:#23242a;color:#fff;border-radius:16px;padding:1.2em;max-width:900px;width:min(98vw,900px);margin:0 auto;box-shadow:0 4px 32px #000a;'>${contentHtml}<button class='close-btn' id='close-modal-btn'>Закрыть</button></div>`;
   document.body.appendChild(modal);
   modal.querySelector('#close-modal-btn').onclick = () => { modal.remove(); };
   modal.onclick = (e) => {
     if (e.target === modal) modal.remove();
   };
-  // Делегируем клик на моба
   modal.querySelectorAll('.mob-link').forEach(link => {
     link.onclick = (ev) => {
       ev.preventDefault();
@@ -119,27 +123,32 @@ function getMobLocations(mobId) {
 }
 
 export function renderMobDetails(mob) {
-  const locations = getMobLocations(mob.id);
-  const sideNames = {north: 'Север', east: 'Восток', south: 'Юг', west: 'Запад'};
+  const locations = [{ locName: mob.location, sideKey: mob.side }];
   let locHtml = '';
   if (locations.length) {
-    locHtml = `<div style='margin:0.7rem 0 1.2rem 0;font-size:0.98em;'>Локации:<ul style='padding-left:1.2em;'>` +
-      locations.map(l => `<li><a href='#' style='color:#a7c7ff;text-decoration:underline;cursor:pointer;' onclick='window._setLocationAndSide&&window._setLocationAndSide("${l.locId}","${l.sideKey}")'>${l.locName} (${sideNames[l.sideKey]||l.sideKey})</a></li>`).join('') +
-      `</ul></div>`;
+    locHtml = `<div style='margin:0.7rem 0 1.2rem 0;font-size:0.98em;'>Локация: <a href='#' style='color:#a7c7ff;text-decoration:underline;cursor:pointer;font-weight:600;' onclick='window._setLocationAndSide&&window._setLocationAndSideByName&&window._setLocationAndSideByName("${mob.location}","${mob.side}")'>${mob.location} ${mob.side}</a></div>`;
   }
-  return `<div style='max-width:420px;width:95vw;max-height:95vh;margin:0 auto;'>
-    <div style='display:flex;gap:1.2rem;align-items:flex-start;'>
-      <img src='${mob.photo||''}' alt='${mob.name}' style='width:64px;height:64px;border-radius:8px;box-shadow:0 0 12px #3a5c8c33;background:#181a20;object-fit:cover;'>
-      <div style='flex:1;'>
-        <div class='mob-title'>${mob.name}</div>
-        <div class='mob-id'>ID: ${mob.id} | FarmID: ${mob.farmId||''}</div>
-        <div class='mob-desc'>${mob.desc||''}</div>
+  return `<div style='width:min(98vw,900px);max-width:900px;min-width:320px;max-height:95vh;margin:0 auto;padding:1.2em;background:#23242a;border-radius:16px;box-shadow:0 4px 32px #000a;color:#fff;'>
+    <div style='display:flex;gap:1.2rem;align-items:flex-start;flex-wrap:wrap;'>
+      <img src='${mob.photo||''}' alt='${mob.name}' style='width:64px;height:64px;border-radius:8px;box-shadow:0 0 12px #3a5c8c33;background:#181a20;object-fit:cover;flex-shrink:0;'>
+      <div style='flex:1;min-width:180px;'>
+        <div class='mob-title' style='font-size:1.25em;font-weight:600;'>${mob.name}</div>
+        <div class='mob-id' style='font-size:0.95em;opacity:0.7;'>ID: ${mob.id} | FarmID: ${mob.farmId||''}</div>
+        <div class='mob-desc' style='margin:0.5em 0 0.7em 0;'>${mob.desc||''}</div>
         ${locHtml}
       </div>
     </div>
-    <div style='overflow-x:auto;max-width:100%;margin-top:0.7em;'>
-      <table class='drop-table' style='min-width:420px;'>
-        <tr><th>Иконка</th><th>Название</th><th>ID</th><th>Тип</th><th>Шанс</th><th>Кол-во</th><th>Уровень появления</th></tr>` +
+    <div style='overflow-x:auto;max-width:100%;margin-top:1.1em;'>
+      <table class='drop-table' style='min-width:700px;border-collapse:separate;border-spacing:0;'>
+        <tr>
+          <th style='min-width:60px;'>Иконка</th>
+          <th style='min-width:110px;'>Название</th>
+          <th style='min-width:90px;'>ID</th>
+          <th style='min-width:90px;'>Тип</th>
+          <th style='min-width:90px;'>Шанс</th>
+          <th style='min-width:90px;'>Кол-во</th>
+          <th style='min-width:110px;'>Уровень появления</th>
+        </tr>` +
         (mob.drop||[]).map(drop => `<tr><td></td><td>${drop.id}</td><td>${drop.id}</td><td>${drop.typeElement||''}</td><td>${drop.chance||''}%</td><td>${drop.count||''}</td><td>${drop.minLvlDrop||mob.lvl||''}</td></tr>`).join('') +
       `</table>
     </div>
@@ -180,4 +189,23 @@ window._openMobPopup = function(mobId) {
   if (mob) {
     showModalPopup(renderMobDetails(mob));
   }
-}; 
+};
+
+if (!window._setLocationAndSideByName) {
+  window._setLocationAndSideByName = function(locName, sideRu) {
+    const mapData = window.getWorldMapData && window.getWorldMapData();
+    if (!mapData || !mapData.world_map) return;
+    let locId = null, sideKey = null;
+    for (const [id, obj] of Object.entries(mapData.world_map)) {
+      if (obj.name === locName) {
+        locId = id;
+        for (const [key, val] of Object.entries(obj.directions||{})) {
+          const sideNames = {north:'Север',east:'Восток',south:'Юг',west:'Запад'};
+          if (sideNames[key] === sideRu) { sideKey = key; break; }
+        }
+        break;
+      }
+    }
+    if (locId && sideKey) window._setLocationAndSide && window._setLocationAndSide(locId, sideKey);
+  }
+} 
