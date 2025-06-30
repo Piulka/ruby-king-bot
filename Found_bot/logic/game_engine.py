@@ -6,6 +6,7 @@ import time
 import logging
 from typing import Dict, Any
 from rich.console import Console
+import subprocess
 
 from api.client import APIClient
 from core.game_state import GameState, GameStateManager
@@ -18,6 +19,7 @@ from logic.exploration_handler import ExplorationHandler
 from logic.rest_handler import RestHandler
 from logic.data_extractor import DataExtractor
 from logic.route_manager import RouteManager
+from config.token import GAME_TOKEN
 
 logger = logging.getLogger(__name__)
 console = Console()
@@ -175,6 +177,9 @@ class GameEngine:
         """Handle city state - exploration and route management"""
         # Сохраняем индекс маршрута перед уходом в город
         if self.route_manager:
+            current_point = self.route_manager.get_current_point()
+            if current_point:
+                logger.info(f"[ROUTE] Перед уходом в магазин: {current_point.location_name}/{current_point.direction_name}/{current_point.square}")
             self.route_manager.save_current_index()
         
         # Check if we need to move to next square
@@ -205,9 +210,24 @@ class GameEngine:
                 # Новый обход: ждем 2 секунды, отправляем запрос на /api/user/vesna, затем продолжаем исследование
                 logger.info("Жду 2 секунды перед обходом SPEC_BATS...")
                 time.sleep(2)
-                logger.info("Отправляю запрос на обход летучих мышей (/api/user/vesna)...")
-                response = self.api_client.complete_bats_event()
-                logger.info(f"SPEC_BATS server response: {response}")
+                logger.info("Отправляю запрос на обход летучих мышей (/api/user/vesna) через curl...")
+                bats_url = f"https://ruby-king.ru/api/user/vesna?name={GAME_TOKEN}"
+                referer = f"https://ruby-king.ru/city?name={GAME_TOKEN}&timeEnd=1751300208114"
+                headers = [
+                    "-H", "Accept: application/json, text/plain, */*",
+                    "-H", "Accept-Language: ru,en;q=0.9,en-US;q=0.8,de;q=0.7",
+                    "-H", "Connection: keep-alive",
+                    "-H", "Content-Type: application/json",
+                    "-H", "Origin: https://ruby-king.ru",
+                    f"-H", f"Referer: {referer}",
+                    "-H", "Sec-Fetch-Dest: empty",
+                    "-H", "Sec-Fetch-Mode: cors",
+                    "-H", "Sec-Fetch-Site: same-origin",
+                    "-H", "User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1"
+                ]
+                cmd = ["curl", "-s", "-X", "POST", bats_url] + headers + ["--data-raw", "{}"]
+                result_bats = subprocess.run(cmd, capture_output=True, text=True)
+                logger.info(f"SPEC_BATS curl response: {result_bats.stdout}")
                 result = self.exploration_handler.explore_territory()
             
             if result is None:  # Exploration failed
@@ -224,6 +244,14 @@ class GameEngine:
             if mob_data and mob_group_data:
                 # Create MobGroup from raw data
                 self.current_mob_group = MobGroup(mob_data)
+                # Сбросить все тайминги (кулдауны = 0) при появлении нового моба
+                now = time.time()
+                self.player.last_attack_time = now - self.player.GLOBAL_COOLDOWN
+                self.player.last_skill_time = now - self.player.SKILL_COOLDOWN
+                self.player.last_heal_time = now - self.player.HEAL_COOLDOWN
+                self.player.last_mana_time = now - self.player.MANA_COOLDOWN
+                logger.info(f"[COOLDOWN RESET] last_attack_time={self.player.last_attack_time}, last_skill_time={self.player.last_skill_time}, last_heal_time={self.player.last_heal_time}, last_mana_time={self.player.last_mana_time}")
+                logger.info(f"[COOLDOWN CHECK] can_attack={self.player.can_attack(now)}, can_use_skill={self.player.can_use_skill(now)}, can_use_heal={self.player.can_use_heal_potion(now)}, can_use_mana={self.player.can_use_mana_potion(now)}")
                 current_target = self.current_mob_group.get_current_target()
                 
                 # Update display data from created group
@@ -312,6 +340,29 @@ class GameEngine:
 
         # Основной боевой цикл
         combat_result = self.combat_handler.handle_combat_round(current_target, current_time, self.current_mob_group)
+        # После каждого шага боя обновляем дисплей с актуальными mob_data
+        mob_data = {
+            'name': current_target.name,
+            'hp': current_target.hp,
+            'max_hp': current_target.max_hp,
+            'level': current_target.level
+        } if current_target else None
+        mob_group_data = self.current_mob_group.get_all_mobs_with_status() if self.current_mob_group else None
+        self.display.update_display(
+            current_state="combat",
+            player_data=self.player.get_stats_summary(),
+            mob_data=mob_data,
+            mob_group_data=mob_group_data,
+            attack_cooldown=max(0, self.player.GLOBAL_COOLDOWN - (current_time - self.player.last_attack_time)),
+            heal_cooldown=max(0, self.player.HEAL_COOLDOWN - (current_time - self.player.last_heal_time)),
+            skill_cooldown=max(0, self.player.SKILL_COOLDOWN - (current_time - self.player.last_skill_time)),
+            mana_cooldown=max(0, self.player.MANA_COOLDOWN - (current_time - self.player.last_mana_time)),
+            rest_time=None,
+            player_name="Piulok",
+            last_attack_time=self.player.last_attack_time,
+            last_skill_time=self.player.last_skill_time,
+            route_data=self.route_manager.get_route_display_data() if self.route_manager else None
+        )
         if combat_result == 'victory':
             self._handle_combat_victory()
             return
@@ -343,18 +394,31 @@ class GameEngine:
         """Handle combat victory"""
         if self.current_mob_group:
             current_target = self.current_mob_group.get_current_target()
-            
             # Update route manager
             if self.route_manager:
                 self.route_manager.increment_mob_kills()
-                
                 # Check if should move to next square
                 if self.route_manager.should_move_to_next_square():
                     console.print(f"[yellow]Killed {self.route_manager.mobs_per_square} mobs on current square, moving to next[/yellow]")
                     logger.info(f"Killed {self.route_manager.mobs_per_square} mobs on current square, moving to next")
                     self.route_manager.move_to_next_square()
                     self.explore_done = False  # Reset exploration for new square
-            
+            # Перед очисткой группы мобов явно очищаем боевую панель
+            self.display.update_display(
+                current_state="city",
+                player_data=self.player.get_stats_summary(),
+                mob_data=None,
+                mob_group_data=None,
+                attack_cooldown=0,
+                heal_cooldown=0,
+                skill_cooldown=0,
+                mana_cooldown=0,
+                rest_time=None,
+                player_name="Piulok",
+                last_attack_time=self.player.last_attack_time,
+                last_skill_time=self.player.last_skill_time,
+                route_data=self.route_manager.get_route_display_data() if self.route_manager else None
+            )
             # Clear current mob group and change state to CITY
             self.current_mob_group = None
             self.explore_done = False
@@ -594,15 +658,11 @@ class GameEngine:
         """Move to current route point"""
         try:
             if not self.route_manager or not self.route_manager.route:
-                console.print("[red]No route available[/red]")
-                logger.error("No route available")
+                logger.error("[ROUTE] Нет маршрута для возврата!")
                 return False
-            
             current_point = self.route_manager.get_current_point()
-            if not current_point:
-                console.print("[red]No current route point[/red]")
-                logger.error("No current route point")
-                return False
+            if current_point:
+                logger.info(f"[ROUTE] После возвращения на маршрут: {current_point.location_name}/{current_point.direction_name}/{current_point.square}")
             
             console.print(f"[blue]Moving to route point: {current_point.location_name}/{current_point.direction_name}/{current_point.square}[/blue]")
             logger.info(f"Moving to route point: {current_point.location_name}/{current_point.direction_name}/{current_point.square}")
