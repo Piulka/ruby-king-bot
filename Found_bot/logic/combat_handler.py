@@ -276,30 +276,17 @@ class CombatHandler:
             return self._handle_victory(result, mob_group)
         
         # Update mob group from response
-        mob_group.update_from_combat_response(result)
+        if mob_group:
+            mob_group.update_from_combat_response(result)
         
         # Check if current target died
         if current_target and current_target.hp <= 0:
             self.display.print_message(f"💀 {current_target.name} повержен!", "success")
-            
-            # Update killed mobs statistics
             self.display.update_killed_mobs(current_target.name)
-            
-            # Switch to next target
             next_target = mob_group.switch_to_next_alive_target()
             if next_target:
                 self.display.print_message(f"🎯 Переключился на: {next_target.name} (HP: {next_target.hp})", "info")
-            else:
-                # All mobs dead but statusBattle not 'win' - treat as victory
-                return self._handle_victory(result, mob_group)
-        
-        # Сохраняем подробную информацию о мобе (если есть)
-        if "mobs" in result:
-            for mob in result["mobs"]:
-                self.update_mob_database(mob)
-        elif "mob" in result:
-            self.update_mob_database(result["mob"])
-        
+        # Никогда не возвращаем victory, если нет statusBattle == 'win'
         return 'continue'
     
     def _extract_damage_received(self, result: Dict[str, Any]) -> int:
@@ -444,13 +431,14 @@ class CombatHandler:
     
     def _handle_victory(self, result: Dict[str, Any], mob_group: MobGroup) -> Literal['victory']:
         """Handle combat victory"""
+        import logging
+        logger = logging.getLogger(__name__)
         # Reset low damage tracking
         self._reset_low_damage_tracking()
         
         # Extract mob information from arrLogs
         arr_logs = result.get('arrLogs', [])
         killed_mobs = {}
-        
         for log_entry in arr_logs:
             def_name = log_entry.get('defname', '')
             if def_name and log_entry.get('winAll', False):
@@ -459,39 +447,51 @@ class CombatHandler:
                     killed_mobs[def_name] += 1
                 else:
                     killed_mobs[def_name] = 1
-        
         # Update killed mobs statistics
         total_killed = 0
         for mob_name, count in killed_mobs.items():
             self.display.update_killed_mobs(mob_name, count)
             total_killed += count
-        
         # Process drops
         drop_data = result.get('dataWin', {}).get('drop', [])
-        if drop_data:
-            self.display.update_drops(drop_data)
-        
+        # Логируем тип и содержимое drop_data
+        logger.debug(f"[DROP DEBUG] drop_data type: {type(drop_data)}, value: {drop_data}")
+        # Исправление: приводим drop_data к плоскому списку словарей
+        flat_drop = []
+        if isinstance(drop_data, list):
+            for item in drop_data:
+                if isinstance(item, list):
+                    logger.debug(f"[DROP DEBUG] Nested list in drop_data: {item}")
+                    flat_drop.extend([x for x in item if isinstance(x, dict)])
+                elif isinstance(item, dict):
+                    flat_drop.append(item)
+                else:
+                    logger.warning(f"[DROP DEBUG] Unexpected item type in drop_data: {type(item)}, value: {item}")
+        elif isinstance(drop_data, dict):
+            flat_drop.append(drop_data)
+        else:
+            logger.warning(f"[DROP DEBUG] drop_data is neither list nor dict: {type(drop_data)}, value: {drop_data}")
+        logger.debug(f"[DROP DEBUG] flat_drop type: {type(flat_drop)}, value: {flat_drop}")
+        # Теперь flat_drop — всегда список словарей
+        if flat_drop:
+            self.display.update_drops(flat_drop)
         # Calculate rewards
         exp_gained = result.get('dataWin', {}).get('expWin', 0)
-        gold_gained = sum(item.get('count', 0) for item in drop_data if item.get('id') == 'm_0_1')
-        
+        gold_gained = sum(item.get('count', 0) for item in flat_drop if item.get('id') == 'm_0_1')
         # Update statistics - добавляем каждого убитого моба отдельно
         for mob_name, count in killed_mobs.items():
             for _ in range(count):  # Добавляем каждого моба отдельно
                 self.display.update_stats(mobs_killed=1)
-        
         # Добавляем опыт и золото
         self.display.update_stats(
             total_exp=exp_gained,
             session_gold=gold_gained
         )
-        
         self.display.print_message(
             f"🎉 Все враги побеждены! Убито мобов: {total_killed}, "
             f"[yellow]+{exp_gained}[/yellow] опыта, [yellow]+{gold_gained}[/yellow] золота", 
             "success"
         )
-        
         return 'victory'
     
     def _log_api_response(self, response: Dict[str, Any], context: str = ""):
@@ -576,24 +576,7 @@ class CombatHandler:
         level = "success" if damage_dealt > 0 else "warning"
         self.display.print_message(message, level)
     
-    def update_mob_database(self, mob_data: dict, db_path: str = "mob_database.json"):
+    def update_mob_database(self, mob_data: dict, db_path: str = "world_map_viewer/data/mobs-database.json", loco_id: Optional[int] = None, side_key: Optional[str] = None):
         """Сохраняет или обновляет информацию о мобе в базе мобов"""
-        if os.path.exists(db_path):
-            with open(db_path, "r", encoding="utf-8") as f:
-                db = json.load(f)
-        else:
-            db = {"mobs": []}
-        # Защита от повреждённой структуры
-        if not isinstance(db.get("mobs"), list):
-            db["mobs"] = []
-        farm_id = mob_data.get("farmId") or mob_data.get("id")
-        found = False
-        for mob in db["mobs"]:
-            if mob.get("farmId") == farm_id:
-                mob.update(mob_data)
-                found = True
-                break
-        if not found:
-            db["mobs"].append(mob_data)
-        with open(db_path, "w", encoding="utf-8") as f:
-            json.dump(db, f, ensure_ascii=False, indent=2) 
+        # Теперь запись мобов ведётся только через data_extractor.update_mob_database
+        pass 

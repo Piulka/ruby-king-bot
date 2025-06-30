@@ -8,10 +8,31 @@
     "location": "Болото",
     "side": "Юг",
     "drop": [
-      {"id": "m_0_2", "typeElement": "resources", "count": 1, "chance": 100},
-      {"id": "m_0_1", "typeElement": "resources", "count": 52, "chance": 100},
-      {"id": "res_15", "typeElement": "resources", "count": 3, "chance": 18},
-      {"id": "recipe_93", "typeElement": "resources", "count": 1, "chance": 4, "minLvlDrop": 15}
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 100
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 52,
+        "chance": 100
+      },
+      {
+        "id": "res_15",
+        "typeElement": "resources",
+        "count": 3,
+        "chance": 18
+      },
+      {
+        "id": "recipe_93",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 4,
+        "minLvlDrop": 15
+      }
     ]
   }
-] 
+]

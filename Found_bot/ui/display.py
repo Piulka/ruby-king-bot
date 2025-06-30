@@ -41,7 +41,8 @@ class GameDisplay:
             'items_sold': 0,
             'gold_from_sales': 0,
             'hp_potions_used': 0,
-            'mp_potions_used': 0
+            'mp_potions_used': 0,
+            'bats_events': 0
         }
         
         # Message history
@@ -112,7 +113,7 @@ class GameDisplay:
         for key, value in kwargs.items():
             if key in self.stats:
                 # Для новых полей — всегда инкрементируем
-                if key in ['city_visits', 'items_sold', 'gold_from_sales', 'hp_potions_used', 'mp_potions_used', 'total_exp', 'session_gold']:
+                if key in ['city_visits', 'items_sold', 'gold_from_sales', 'hp_potions_used', 'mp_potions_used', 'total_exp', 'session_gold', 'bats_events']:
                     self.stats[key] += value
                 else:
                     self.stats[key] = value
@@ -293,10 +294,11 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
                      "[bold green]Продано:[/bold green]", f"[green]│{stats.get('items_sold', 0)}│[/green]")
         table.add_row("[bold cyan]События:[/bold cyan]", f"[cyan]│{stats.get('events_found', 0)}│[/cyan]", 
                      "[bold red]Хилки:[/bold red]", f"[red]│{stats.get('hp_potions_used', 0)}│[/red]")
-        table.add_row("[bold]Ср. урон:[/bold]", f"[yellow]│{avg_damage:.1f}│[/yellow]", 
+        table.add_row("[bold magenta]Летучие мыши:[/bold magenta]", f"[magenta]│{stats.get('bats_events', 0)}│[/magenta]", 
                      "[bold blue]Мана:[/bold blue]", f"[blue]│{stats.get('mp_potions_used', 0)}│[/blue]")
-        table.add_row("[bold]Убито мобов:[/bold]", f"[green]│{total_killed_mobs}│[/green]", 
+        table.add_row("[bold]Ср. урон:[/bold]", f"[yellow]│{avg_damage:.1f}│[/yellow]", 
                      "[bold green]Золото с продаж:[/bold green]", f"[yellow]│{stats.get('gold_from_sales', 0)}│[/yellow]")
+        table.add_row("[bold]Убито мобов:[/bold]", f"[green]│{total_killed_mobs}│[/green]", "", "")
         
         return Panel(table, title="[bold]Статистика[/bold]", border_style="cyan", height=9)
     
@@ -422,7 +424,12 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
     
     def update_drops(self, items: list):
         """Update drop items tracking"""
+        import logging
+        logger = logging.getLogger(__name__)
         for item in items:
+            if not isinstance(item, dict):
+                logger.warning(f"[DROP DEBUG] Unexpected drop item type in update_drops: {type(item)}, value: {item}")
+                continue
             item_id = item.get('id', 'Unknown')
             if item_id != 'm_0_1':  # Исключаем золото
                 if item_id in self.drop_items:
@@ -576,4 +583,8 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
         """Get average damage per attack"""
         if self.stats['total_attacks'] > 0:
             return self.stats['total_damage_dealt'] / self.stats['total_attacks']
-        return 0.0 
+        return 0.0
+    
+    def show_bats_event_message(self):
+        """Показать сообщение о встрече летучих мышей в блоке сообщений"""
+        self.add_message("[bold magenta]Встречены летучие мыши![/bold magenta]") 

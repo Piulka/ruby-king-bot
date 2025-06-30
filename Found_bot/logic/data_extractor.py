@@ -4,6 +4,8 @@ Data Extractor - Extracts and formats data from API responses
 
 import logging
 from typing import Optional, List, Dict, Any
+import json
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -156,4 +158,87 @@ class DataExtractor:
                         if mob_name not in results['killed_mobs']:
                             results['killed_mobs'].append(mob_name)
         
-        return results 
+        return results
+
+    def update_mob_database(self, mob_data: dict, player_level: int, db_path: str = "world_map_viewer/data/mobs-database.json", loco_id: str = None, side_key: str = None) -> bool:
+        """
+        Записывает моба только в world_map_viewer/data/mobs-database.json по структуре:
+        id, name, photo, desc, farmId, location, side, drop (id, typeElement, count, chance, minLvlDrop)
+        location и side вычислять через world map, side переводить на русский
+        """
+        import json, os
+        logger = logging.getLogger(__name__)
+        logger.debug(f"[MOB DB] update_mob_database called with mob_data={mob_data}, loco_id={loco_id}, side_key={side_key}, player_level={player_level}")
+        # Загружаем текущую базу
+        if not os.path.exists(db_path):
+            db = []
+        else:
+            with open(db_path, 'r', encoding='utf-8') as f:
+                try:
+                    db = json.load(f)
+                except Exception:
+                    db = []
+        # Получаем карту мира
+        world_map_path = "world_map_viewer/data/complete_world_map.json"
+        with open(world_map_path, 'r', encoding='utf-8') as f:
+            world_map_data = json.load(f)
+        world_map = world_map_data.get('world_map', {})
+        side_ru = {'north': 'Север', 'south': 'Юг', 'west': 'Запад', 'east': 'Восток', 'center': 'Центр'}
+        # Определяем location и side
+        location_name = ""
+        side_name = ""
+        if loco_id and loco_id in world_map:
+            location_name = world_map[loco_id].get('name', '')
+            if side_key:
+                side_name = side_ru.get(side_key, side_key)
+        else:
+            if not loco_id:
+                logger.warning(f"[MOB DB] Не передан loco_id для моба {mob_data.get('name', '')}")
+            elif loco_id not in world_map:
+                logger.warning(f"[MOB DB] loco_id '{loco_id}' не найден в world_map для моба {mob_data.get('name', '')}")
+            location_name = "unknown"
+        if not side_name:
+            if not side_key:
+                logger.warning(f"[MOB DB] Не передан side_key для моба {mob_data.get('name', '')}")
+            else:
+                logger.warning(f"[MOB DB] side_key '{side_key}' не найден в side_ru для моба {mob_data.get('name', '')}")
+            side_name = "unknown"
+        # Собираем структуру моба
+        mob_entry = {
+            'id': mob_data.get('id', ''),
+            'name': mob_data.get('name', ''),
+            'photo': mob_data.get('photo', None),
+            'desc': mob_data.get('desc', None),
+            'farmId': mob_data.get('farmId', ''),
+            'location': location_name,
+            'side': side_name,
+            'drop': []
+        }
+        # Обрабатываем drop
+        for item in mob_data.get('drop', []):
+            if not isinstance(item, dict):
+                logger.warning(f"[DROP DEBUG] Unexpected drop item type in update_mob_database: {type(item)}, value: {item}")
+                continue
+            drop_item = {
+                'id': item.get('id', ''),
+                'typeElement': item.get('typeElement', ''),
+                'count': item.get('count', 1),
+                'chance': item.get('chance', None)
+            }
+            if 'minLvlDrop' in item:
+                drop_item['minLvlDrop'] = item['minLvlDrop']
+            mob_entry['drop'].append(drop_item)
+        # Проверяем на дубликаты по id и farmId
+        exists = False
+        for i, m in enumerate(db):
+            if m.get('id') == mob_entry['id'] and m.get('farmId') == mob_entry['farmId']:
+                db[i] = mob_entry
+                exists = True
+                break
+        if not exists:
+            db.append(mob_entry)
+        # Сохраняем
+        with open(db_path, 'w', encoding='utf-8') as f:
+            json.dump(db, f, ensure_ascii=False, indent=2)
+        logger.debug(f"[MOB DB] Итоговая запись mob_entry: {mob_entry}")
+        return True 

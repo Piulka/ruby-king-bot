@@ -316,4 +316,13 @@ class APIClient:
         data = {"square": square}
         logger.info(f"Changing square to: {square}")
         result = self._make_request("POST", Endpoints.CHANGE_SQUARE, data)
+        return result
+
+    def complete_bats_event(self) -> Dict[str, Any]:
+        """
+        Завершить событие SPEC_BATS (летучие мыши) — отправить POST на /api/user/vesna
+        """
+        endpoint = f"/user/vesna?name={self.token}"
+        logger.info("Completing SPEC_BATS event via /api/user/vesna ...")
+        result = self._make_request("POST", endpoint, data={})
         return result 

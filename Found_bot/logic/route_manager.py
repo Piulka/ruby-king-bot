@@ -4,6 +4,7 @@ Route Manager - Manages farming routes based on world_map_data.json
 
 import json
 import logging
+import re
 from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
 from datetime import datetime
@@ -21,115 +22,23 @@ class RoutePoint:
     mob_level: int
     mob_name: str = "unknown"
 
-@dataclass
-class MobInfo:
-    """Information about a mob"""
-    name: str
-    level: int
-    hp: int
-    max_hp: int
-    farm_id: str
-    exp_reward: int = 0
-    gold_reward: int = 0
-    drop_items: List[Dict[str, Any]] = None
-
-class MobDatabase:
-    """Database for storing mob information and drops"""
-    
-    def __init__(self, db_file: str = "mob_database.json"):
-        self.db_file = db_file
-        self.data = self._load_database()
-    
-    def _load_database(self) -> Dict[str, Any]:
-        """Load database from file"""
-        try:
-            with open(self.db_file, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        except FileNotFoundError:
-            return {
-                "locations": {},
-                "mobs": {},
-                "statistics": {
-                    "total_mobs_found": 0,
-                    "total_locations_visited": 0,
-                    "total_directions_visited": 0,
-                    "total_squares_visited": 0
-                }
-            }
-    
-    def _save_database(self):
-        """Save database to file"""
-        with open(self.db_file, 'w', encoding='utf-8') as f:
-            json.dump(self.data, f, ensure_ascii=False, indent=2)
-    
-    def add_mob_info(self, location: str, direction: str, square: str, 
-                    mob_info: MobInfo, drop_data: Dict[str, Any] = None):
-        """Add mob information to database"""
-        # Create location structure if it doesn't exist
-        if location not in self.data["locations"]:
-            self.data["locations"][location] = {}
-        
-        if direction not in self.data["locations"][location]:
-            self.data["locations"][location][direction] = {}
-        
-        if square not in self.data["locations"][location][direction]:
-            self.data["locations"][location][direction][square] = {
-                "mobs": [],
-                "visits": 0
-            }
-        
-        # Add mob information
-        mob_data = {
-            "name": mob_info.name,
-            "level": mob_info.level,
-            "hp": mob_info.hp,
-            "max_hp": mob_info.max_hp,
-            "farm_id": mob_info.farm_id,
-            "exp_reward": mob_info.exp_reward,
-            "gold_reward": mob_info.gold_reward,
-            "drop_items": drop_data or [],
-            "first_seen": datetime.now().isoformat(),
-            "last_seen": datetime.now().isoformat()
-        }
-        
-        # Check if mob already exists
-        existing_mob = None
-        for mob in self.data["locations"][location][direction][square]["mobs"]:
-            if mob["name"] == mob_info.name and mob["level"] == mob_info.level:
-                existing_mob = mob
-                break
-        
-        if existing_mob:
-            # Update existing mob
-            existing_mob.update(mob_data)
-            existing_mob["last_seen"] = datetime.now().isoformat()
-        else:
-            # Add new mob
-            self.data["locations"][location][direction][square]["mobs"].append(mob_data)
-            self.data["statistics"]["total_mobs_found"] += 1
-        
-        # Increment visit counter
-        self.data["locations"][location][direction][square]["visits"] += 1
-        
-        self._save_database()
-
 class RouteManager:
     """Manages farming routes based on world map data"""
     
-    def __init__(self, player_level: int, map_path: str = "world_map_data.json"):
+    def __init__(self, player_level: int, map_path: str = None):
         self.player_level = player_level
-        self.map_path = map_path
+        # Игнорируем map_path, всегда используем нужный файл
+        self.map_path = "world_map_viewer/data/complete_world_map.json"
         self.route: List[RoutePoint] = []
         self.current_route_index = 0
         self.mobs_killed_on_current_square = 0
         self.mobs_per_square = 10
-        self.mob_database = MobDatabase()
         
         # Build route
         self._build_route()
     
     def _build_route(self):
-        """Build route from world map data"""
+        """Build route from world map data (только по одному наиболее подходящему квадрату на сторону)"""
         try:
             logger.info(f"Starting to build route from {self.map_path}")
             with open(self.map_path, 'r', encoding='utf-8') as f:
@@ -137,77 +46,79 @@ class RouteManager:
             logger.info(f"Successfully loaded world map data")
             world_map = world_map_data.get("world_map", {})
             min_level = max(1, self.player_level - 9)
-            max_level = min(self.player_level, 20)  # Ограничиваем верхнюю границу 20 уровнем
-            logger.info(f"Building route for player level {self.player_level} (mobs {min_level}-{max_level})")
-            logger.info(f"Found {len(world_map)} locations")
             filtered_route = []
-            
             for location, location_data in world_map.items():
                 location_name = location_data.get("name", location)
                 directions = location_data.get("directions", {})
-                
                 for direction, direction_data in directions.items():
                     direction_name = direction_data.get("name", direction)
                     squares = direction_data.get("squares", {})
-                    
+                    # Найти наиболее подходящий квадрат на этой стороне
+                    best_square = None
+                    best_diff = float('inf')
+                    best_higher = None
+                    best_higher_diff = float('inf')
+                    best_mob_level = None
                     for square, square_data in squares.items():
-                        # Получаем уровень моба из квадрата
                         mob_level = square_data.get("mob_level")
-                        
                         if mob_level is None:
                             continue
-                        
                         # Обрабатываем уровень моба
-                        mob_levels = []
                         if isinstance(mob_level, int):
-                            mob_levels.append(mob_level)
+                            mob_lvl = mob_level
                         elif isinstance(mob_level, str) and '-' in mob_level:
-                            # Обрабатываем диапазон уровней (например, "18-21")
                             try:
                                 l1, l2 = map(int, mob_level.split('-'))
-                                mob_levels.extend(range(l1, l2 + 1))
+                                mob_lvl = l1
                             except (ValueError, IndexError):
-                                logger.warning(f"Invalid level format: {mob_level}")
                                 continue
                         elif isinstance(mob_level, str):
-                            # Обрабатываем одиночный уровень в строке
                             try:
-                                mob_levels.append(int(mob_level))
+                                mob_lvl = int(mob_level)
                             except ValueError:
-                                logger.warning(f"Invalid level format: {mob_level}")
                                 continue
-                        
-                        if not mob_levels:
+                        else:
                             continue
-                        
-                        # Проверяем, что ВСЕ мобы в квадрате подходят по уровню
-                        # Квадрат подходит только если ВСЕ мобы в диапазоне [min_level, max_level]
-                        all_mobs_suitable = all(min_level <= lvl <= max_level for lvl in mob_levels)
-                        
-                        if all_mobs_suitable:
-                            # Создаем RoutePoint для квадрата
-                            route_point = RoutePoint(
-                                location=location,
-                                location_name=location_name,
-                                direction=direction,
-                                direction_name=direction_name,
-                                square=square,
-                                mob_level=min(mob_levels)  # Используем минимальный уровень для отображения
-                            )
-                            filtered_route.append(route_point)
-            
+                        diff = abs(mob_lvl - min_level)
+                        if mob_lvl <= min_level and diff < best_diff:
+                            best_square = square
+                            best_diff = diff
+                            best_mob_level = mob_lvl
+                        elif mob_lvl > min_level and (mob_lvl - min_level) < best_higher_diff:
+                            best_higher = square
+                            best_higher_diff = mob_lvl - min_level
+                    chosen_square = best_square or best_higher
+                    chosen_mob_level = best_mob_level if best_square else None
+                    if not chosen_square and best_higher:
+                        # Если не нашли ниже, берем ближайший выше
+                        chosen_square = best_higher
+                        chosen_mob_level = None  # Можно доработать если нужно
+                    if chosen_square:
+                        route_point = RoutePoint(
+                            location=location,
+                            location_name=location_name,
+                            direction=direction,
+                            direction_name=direction_name,
+                            square=chosen_square,
+                            mob_level=chosen_mob_level if chosen_mob_level is not None else 0
+                        )
+                        filtered_route.append(route_point)
             self.route = filtered_route
             logger.info(f"Route built successfully with {len(self.route)} squares")
-            
         except Exception as e:
             logger.error(f"Failed to build route: {e}")
             self.route = []
     
-    def get_current_point(self) -> Optional[RoutePoint]:
-        """Get current route point"""
+    def get_current_point(self):
         if not self.route:
+            logger.warning("[ROUTE] get_current_point: маршрут пуст!")
             return None
-        return self.route[self.current_route_index]
+        if not (0 <= self.current_route_index < len(self.route)):
+            logger.warning(f"[ROUTE] get_current_point: индекс вне диапазона! current_route_index={self.current_route_index}, route_len={len(self.route)}")
+            return None
+        point = self.route[self.current_route_index]
+        logger.debug(f"[ROUTE] get_current_point: возвращаю точку {point}")
+        return point
     
     def get_next_point(self) -> Optional[RoutePoint]:
         """Get next route point"""
@@ -285,3 +196,49 @@ class RouteManager:
                     self.current_route_index = idx
         except Exception:
             pass  # Если файла нет или ошибка, ничего не делаем 
+
+def parse_mob_level(mob_level):
+    """Преобразует mob_level (int или диапазон) в минимальный int"""
+    if isinstance(mob_level, int):
+        return mob_level
+    if isinstance(mob_level, str):
+        # Например, '26-32' -> 26
+        match = re.match(r"(\d+)", mob_level)
+        if match:
+            return int(match.group(1))
+    return 0
+
+def build_farm_route(player_level: int, world_map_data: Dict[str, Any]) -> List[Dict[str, str]]:
+    """
+    Строит маршрут фарма по всем локациям и сторонам света.
+    Для каждой стороны выбирает наиболее подходящий квадрат (уровень моба ≈ player_level-9, либо ближайший выше).
+    Возвращает список точек маршрута: {'location': ..., 'side': ..., 'square': ...}
+    """
+    route = []
+    side_ru = {'north': 'Север', 'south': 'Юг', 'east': 'Восток', 'west': 'Запад'}
+    for loco_id, loco_obj in world_map_data.get('world_map', {}).items():
+        location_name = loco_obj.get('name', loco_id)
+        for side_key, side_obj in loco_obj.get('directions', {}).items():
+            side_name = side_ru.get(side_key, side_key)
+            squares = side_obj.get('squares', {})
+            best_square = None
+            best_diff = float('inf')
+            best_higher = None
+            best_higher_diff = float('inf')
+            for sq_name, sq_obj in squares.items():
+                mob_lvl = parse_mob_level(sq_obj.get('mob_level', 0))
+                diff = abs(mob_lvl - (player_level - 9))
+                if mob_lvl <= player_level - 9 and diff < best_diff:
+                    best_square = sq_name
+                    best_diff = diff
+                elif mob_lvl > player_level - 9 and (mob_lvl - (player_level - 9)) < best_higher_diff:
+                    best_higher = sq_name
+                    best_higher_diff = mob_lvl - (player_level - 9)
+            chosen_square = best_square or best_higher
+            if chosen_square:
+                route.append({
+                    'location': location_name,
+                    'side': side_name,
+                    'square': chosen_square
+                })
+    return route 
