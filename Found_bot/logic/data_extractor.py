@@ -6,6 +6,9 @@ import logging
 from typing import Optional, List, Dict, Any
 import json
 import os
+# Новые утилиты
+from logic.mob_utils import normalize_mob_name
+from logic.drop_utils import flatten_drop
 
 logger = logging.getLogger(__name__)
 
@@ -237,8 +240,19 @@ class DataExtractor:
                 break
         if not exists:
             db.append(mob_entry)
+        # Строгая валидация обязательных полей
+        required_fields = ['id', 'name', 'photo', 'desc', 'farmId']
+        missing_fields = [field for field in required_fields if not mob_entry.get(field)]
+        if not location_name or not side_name or location_name == 'unknown' or side_name == 'unknown':
+            missing_fields.extend(['location', 'side'])
+        if missing_fields:
+            logger.error(f"[MOB DB] Не записываю моба {mob_entry.get('name', '')}: отсутствуют обязательные поля: {missing_fields}")
+            return False
         # Сохраняем
         with open(db_path, 'w', encoding='utf-8') as f:
             json.dump(db, f, ensure_ascii=False, indent=2)
         logger.debug(f"[MOB DB] Итоговая запись mob_entry: {mob_entry}")
         return True 
+
+    def extract_drop(self, drop_data) -> List[Dict[str, Any]]:
+        return flatten_drop(drop_data) 

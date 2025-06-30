@@ -15,6 +15,10 @@ from ui.display import GameDisplay
 from config.settings import Settings
 from logic.data_extractor import DataExtractor
 from logic.low_damage_handler import LowDamageHandler
+# Новые утилиты
+from logic.mob_utils import get_mob_data, get_mob_group_data, normalize_mob_name, find_current_target, update_mob_hp
+from logic.cooldown_utils import get_attack_cooldown, get_skill_cooldown, get_heal_cooldown, get_mana_cooldown, reset_all_cooldowns
+from logic.drop_utils import flatten_drop, filter_gold_drop
 
 logger = logging.getLogger(__name__)
 
@@ -454,30 +458,11 @@ class CombatHandler:
             total_killed += count
         # Process drops
         drop_data = result.get('dataWin', {}).get('drop', [])
-        # Логируем тип и содержимое drop_data
-        logger.debug(f"[DROP DEBUG] drop_data type: {type(drop_data)}, value: {drop_data}")
-        # Исправление: приводим drop_data к плоскому списку словарей
-        flat_drop = []
-        if isinstance(drop_data, list):
-            for item in drop_data:
-                if isinstance(item, list):
-                    logger.debug(f"[DROP DEBUG] Nested list in drop_data: {item}")
-                    flat_drop.extend([x for x in item if isinstance(x, dict)])
-                elif isinstance(item, dict):
-                    flat_drop.append(item)
-                else:
-                    logger.warning(f"[DROP DEBUG] Unexpected item type in drop_data: {type(item)}, value: {item}")
-        elif isinstance(drop_data, dict):
-            flat_drop.append(drop_data)
-        else:
-            logger.warning(f"[DROP DEBUG] drop_data is neither list nor dict: {type(drop_data)}, value: {drop_data}")
-        logger.debug(f"[DROP DEBUG] flat_drop type: {type(flat_drop)}, value: {flat_drop}")
-        # Теперь flat_drop — всегда список словарей
+        flat_drop = flatten_drop(drop_data)
         if flat_drop:
             self.display.update_drops(flat_drop)
-        # Calculate rewards
         exp_gained = result.get('dataWin', {}).get('expWin', 0)
-        gold_gained = sum(item.get('count', 0) for item in flat_drop if item.get('id') == 'm_0_1')
+        gold_gained = filter_gold_drop(flat_drop)
         # Update statistics - добавляем каждого убитого моба отдельно
         for mob_name, count in killed_mobs.items():
             for _ in range(count):  # Добавляем каждого моба отдельно
@@ -505,30 +490,14 @@ class CombatHandler:
         """Update display after any combat action"""
         # Get player data
         player_data = self.player.get_stats_summary()
-        
         # Get mob data
-        mob_data = None
-        mob_group_data = None
-        if current_target:
-            mob_data = {
-                'name': current_target.name,
-                'hp': current_target.hp,
-                'max_hp': current_target.max_hp,
-                'level': current_target.level
-            }
-        
-        if mob_group:
-            # Get all mobs for display
-            all_mobs = mob_group.get_all_mobs()
-            if len(all_mobs) > 1:
-                mob_group_data = mob_group.get_all_mobs_with_status()
-        
+        mob_data = get_mob_data(current_target)
+        mob_group_data = get_mob_group_data(mob_group)
         # Calculate cooldowns
-        attack_cooldown = max(0, self.player.GLOBAL_COOLDOWN - (current_time - self.player.last_attack_time))
-        skill_cooldown = max(0, self.player.SKILL_COOLDOWN - (current_time - self.player.last_skill_time))
-        heal_cooldown = max(0, self.player.HEAL_COOLDOWN - (current_time - self.player.last_heal_time))
-        mana_cooldown = max(0, self.player.MANA_COOLDOWN - (current_time - self.player.last_mana_time))
-        
+        attack_cooldown = get_attack_cooldown(self.player, current_time)
+        skill_cooldown = get_skill_cooldown(self.player, current_time)
+        heal_cooldown = get_heal_cooldown(self.player, current_time)
+        mana_cooldown = get_mana_cooldown(self.player, current_time)
         # Update display
         self.display.update_display(
             current_state="combat",
@@ -544,7 +513,6 @@ class CombatHandler:
             last_attack_time=self.player.last_attack_time,
             last_skill_time=self.player.last_skill_time
         )
-        
         # Update statistics
         self.display.update_stats(
             current_gold=self.player.get_gold_count(),

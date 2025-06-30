@@ -20,6 +20,8 @@ from logic.rest_handler import RestHandler
 from logic.data_extractor import DataExtractor
 from logic.route_manager import RouteManager
 from config.token import GAME_TOKEN
+from logic.mob_utils import get_mob_data, get_mob_group_data
+from logic.cooldown_utils import get_attack_cooldown, get_skill_cooldown, get_heal_cooldown, get_mana_cooldown, reset_all_cooldowns
 
 logger = logging.getLogger(__name__)
 console = Console()
@@ -120,36 +122,24 @@ class GameEngine:
         """Update the display with current game state"""
         # Get player data
         player_data = self.player.get_stats_summary()
-        
         # Get mob data
         mob_data = None
         mob_group_data = None
         if self.current_mob_group:
             current_target = self.current_mob_group.get_current_target()
-            if current_target:
-                mob_data = {
-                    'name': current_target.name,
-                    'hp': current_target.hp,
-                    'max_hp': current_target.max_hp,
-                    'level': current_target.level
-                }
-            
-            # Get all mobs for display
+            mob_data = get_mob_data(current_target)
             all_mobs = self.current_mob_group.get_all_mobs()
             if len(all_mobs) > 1:
-                mob_group_data = self.current_mob_group.get_all_mobs_with_status()
-        
+                mob_group_data = get_mob_group_data(self.current_mob_group)
         # Calculate cooldowns
-        attack_cooldown = max(0, self.player.GLOBAL_COOLDOWN - (current_time - self.player.last_attack_time))
-        skill_cooldown = max(0, self.player.SKILL_COOLDOWN - (current_time - self.player.last_skill_time))
-        heal_cooldown = max(0, self.player.HEAL_COOLDOWN - (current_time - self.player.last_heal_time))
-        mana_cooldown = max(0, self.player.MANA_COOLDOWN - (current_time - self.player.last_mana_time))
-        
+        attack_cooldown = get_attack_cooldown(self.player, current_time)
+        skill_cooldown = get_skill_cooldown(self.player, current_time)
+        heal_cooldown = get_heal_cooldown(self.player, current_time)
+        mana_cooldown = get_mana_cooldown(self.player, current_time)
         # Calculate rest time if resting
         rest_time = None
         if current_state == GameState.RESTING and self.rest_end_time:
             rest_time = self.rest_end_time
-        
         # Update display
         self.display.update_display(
             current_state=current_state.value,
@@ -166,7 +156,6 @@ class GameEngine:
             last_skill_time=self.player.last_skill_time,
             route_data=self.route_manager.get_route_display_data() if self.route_manager else None
         )
-        
         # Update statistics
         self.display.update_stats(
             current_gold=self.player.get_gold_count(),
