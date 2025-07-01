@@ -63,10 +63,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
     panel.innerHTML = `<button id='close-recipes-panel' style='float:right;margin:0.5em 0.5em 0 0;'>✖</button><h2 style='margin-top:0;'>Рецепты</h2><div id='recipes-list'></div>`;
     document.getElementById('close-recipes-panel').onclick = () => {
-      panel.remove();
-      document.getElementById('side-select-section').style.display = '';
-      document.getElementById('map-section').style.display = '';
-      document.getElementById('mobs-section').style.display = '';
+      document.getElementById('popup-search').classList.add('hidden');
     };
     renderRecipesList();
   }

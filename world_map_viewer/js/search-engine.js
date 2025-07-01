@@ -55,14 +55,14 @@ export function showSearchPopup({mobs, items, onSelectMob: mobCb, onSelectItem: 
       </div>
       <input class='search-input' id='search-input' placeholder='Поиск...'>
       <div id='search-results'></div>
-      <button class='close-btn' id='close-search-btn'>Закрыть</button>
+      <button id="close-recipes-panel" style="float:right;margin:0.5em 0.5em 0 0;">✖</button>
     </div>`;
     const mobBtn = document.getElementById('search-mob-btn');
     const itemBtn = document.getElementById('search-item-btn');
     mobBtn.onclick = () => { type = 'mob'; currentType = 'mob'; mobBtn.classList.add('active'); itemBtn.classList.remove('active'); updateResults(); };
     itemBtn.onclick = () => { type = 'item'; currentType = 'item'; itemBtn.classList.add('active'); mobBtn.classList.remove('active'); updateResults(); };
     document.getElementById('search-input').oninput = updateResults;
-    document.getElementById('close-search-btn').onclick = () => { popup.classList.add('hidden'); };
+    document.getElementById('close-recipes-panel').onclick = () => { popup.classList.add('hidden'); };
     updateResults();
   }
   function updateResults() {
@@ -107,8 +107,8 @@ export function showInfoPopup(contentHtml) {
     document.body.appendChild(popup);
   }
   popup.classList.remove('hidden');
-  popup.innerHTML = `<div class='popup-content'>${contentHtml}<button class='close-btn' id='close-info-btn'>Закрыть</button></div>`;
-  document.getElementById('close-info-btn').onclick = () => { popup.classList.add('hidden'); };
+  popup.innerHTML = `<div class='popup-content'>${contentHtml}<button id="close-recipes-panel" style="float:right;margin:0.5em 0.5em 0 0;">✖</button></div>`;
+  document.getElementById('close-recipes-panel').onclick = () => { popup.classList.add('hidden'); };
   // Добавляем обработку клика по .mob-link для открытия карточки моба
   popup.querySelectorAll('.mob-link').forEach(link => {
     link.onclick = (ev) => {
@@ -270,8 +270,8 @@ export function showMobInPopup(mob) {
     document.body.appendChild(popup);
   }
   popup.classList.remove('hidden');
-  popup.innerHTML = `<div class='popup-content'>${renderMobDetails(mob)}<button class='close-btn' id='close-mob-btn'>Закрыть</button></div>`;
-  document.getElementById('close-mob-btn').onclick = () => { popup.classList.add('hidden'); };
+  popup.innerHTML = `<div class='popup-content'>${renderMobDetails(mob)}<button id="close-recipes-panel" style="float:right;margin:0.5em 0.5em 0 0;">✖</button></div>`;
+  document.getElementById('close-recipes-panel').onclick = () => { popup.classList.add('hidden'); };
   attachDropItemHandlers();
 }
 
