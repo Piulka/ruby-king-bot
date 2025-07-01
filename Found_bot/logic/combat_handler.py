@@ -12,7 +12,7 @@ from core.mob import Mob, MobGroup
 from core.player import Player
 from api.client import APIClient
 from ui.display import GameDisplay
-from config.settings import Settings
+from Found_bot.config.settings import Settings
 from logic.data_extractor import DataExtractor
 from logic.low_damage_handler import LowDamageHandler
 # Новые утилиты

@@ -7,6 +7,7 @@ import logging
 from typing import Optional, Dict, Any
 from api.client import APIClient
 from ui.display import GameDisplay
+from Found_bot.config.settings import Settings
 
 logger = logging.getLogger(__name__)
 
@@ -24,6 +25,11 @@ class ExplorationHandler:
         Returns:
             API response data or None if exploration failed
         """
+        print("[EXPLORATION_HANDLER] Вызван explore_territory без параметров!")
+        import os
+        os.makedirs('logs', exist_ok=True)
+        with open('logs/farm_mob_one_params.log', 'a', encoding='utf-8') as f:
+            f.write("exploration_handler: loco=loco_0, direction=north\n")
         try:
             # Используем стандартное исследование без выбора локации по уровню
             explore_result = self.api_client.explore_territory()

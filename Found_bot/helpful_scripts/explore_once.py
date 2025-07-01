@@ -1,7 +1,9 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 import time
 import requests
 import json
-import sys
 from Found_bot.config.token import GAME_TOKEN  # токен хранится в переменной GAME_TOKEN
 
 # --- Константы ---
@@ -38,6 +40,12 @@ def main():
     print(f'Ответ: {resp2.status_code}')
     time.sleep(2)
 
+    # 2.5. change-square (G3)
+    print('2.5. change-square (G3)...')
+    resp_square = session.post(f'{BASE_URL}/farm/change-square?name={NAME}', json={"square": "G3"})
+    print(f'Ответ: {resp_square.status_code}')
+    time.sleep(2)
+
     # 3. farm-mob-one
     print('3. farm-mob-one...')
     resp3 = session.post(f'{BASE_URL}/farm/farm-mob-one?name={NAME}', json={"loco": "loco_2", "direction": "north"})
@@ -48,6 +56,17 @@ def main():
         data = resp3.json()
         print('\nКого нашёл:')
         print(json.dumps(data, ensure_ascii=False, indent=2))
+        # Выводим имя моба, если найден
+        if "mob" in data and data["mob"]:
+            mob = data["mob"]
+            if isinstance(mob, list) and mob:
+                print(f"Имя моба: {mob[0].get('name', 'Не найдено')}")
+            elif isinstance(mob, dict):
+                print(f"Имя моба: {mob.get('name', 'Не найдено')}")
+            else:
+                print("Моб не найден")
+        else:
+            print("Моб не найден")
     except Exception as e:
         print('Ошибка при разборе ответа:', e)
         print(resp3.text)

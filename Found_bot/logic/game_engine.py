@@ -7,19 +7,20 @@ import logging
 from typing import Dict, Any
 from rich.console import Console
 import subprocess
+import os
 
 from api.client import APIClient
 from core.game_state import GameState, GameStateManager
 from core.player import Player
 from core.mob import MobGroup
 from ui.display import GameDisplay
-from config.settings import Settings
+from Found_bot.config.settings import Settings
 from logic.combat_handler import CombatHandler
 from logic.exploration_handler import ExplorationHandler
 from logic.rest_handler import RestHandler
 from logic.data_extractor import DataExtractor
 from logic.route_manager import RouteManager
-from config.token import GAME_TOKEN
+from Found_bot.config.token import GAME_TOKEN
 from logic.mob_utils import get_mob_data, get_mob_group_data
 from logic.cooldown_utils import get_attack_cooldown, get_skill_cooldown, get_heal_cooldown, get_mana_cooldown, reset_all_cooldowns
 
@@ -175,7 +176,7 @@ class GameEngine:
         if self.route_manager and self.route_manager.should_move_to_next_square():
             next_point = self.route_manager.get_next_point()
             if not next_point:
-                logger.error("Нет следующей точки маршрута!")
+                logger.warning("Нет следующей точки маршрута для исследования территории.")
                 return
             # 1. Выйти в фарм-зону
             result = self.api_client.change_main_geo("farm")
@@ -196,9 +197,9 @@ class GameEngine:
                 self.display.print_message("Ошибка перехода на квадрат", "error")
                 return
             # 4. Исследовать клетку через farm-mob-one (explore_territory)
-            explore_result = self.api_client.explore_territory(loco=next_point.location, direction=next_point.direction)
-            if explore_result and "mob" in explore_result:
-                mob_data = explore_result["mob"]
+            result = self.api_client.explore_territory(loco=next_point.location, direction=next_point.direction)
+            if result and "mob" in result:
+                mob_data = result["mob"]
                 # Если mob_data — список, берём первого моба
                 if isinstance(mob_data, list) and mob_data:
                     mob = mob_data[0]
@@ -208,6 +209,7 @@ class GameEngine:
                     mob = None
                 if mob and "farmId" in mob:
                     mob_id = mob["farmId"]
+                    time.sleep(2)  # Пауза 2 секунды после farm-mob-one
                     first_hit = True
                     while True:
                         now = time.time()
@@ -235,8 +237,11 @@ class GameEngine:
             self.explore_done = False  # Reset exploration for new square
         
         if not self.explore_done:
-            # Try to explore territory
-            result = self.exploration_handler.explore_territory()
+            next_point = self.route_manager.get_next_point()
+            if not next_point:
+                logger.warning("Нет следующей точки маршрута для исследования территории.")
+                return
+            result = self.api_client.explore_territory(loco=next_point.location, direction=next_point.direction)
             
             # --- SPEC_BATS обход ---
             bats_attempts = 0

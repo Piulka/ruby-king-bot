@@ -7,9 +7,9 @@ import logging
 from typing import Dict, Any, Optional
 import requests
 
-from config.settings import Settings
-from config.token import GAME_TOKEN
-from api.endpoints import Endpoints
+from Found_bot.config.settings import Settings
+from Found_bot.config.token import GAME_TOKEN
+from Found_bot.api.endpoints import Endpoints
 
 logger = logging.getLogger(__name__)
 

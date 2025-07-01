@@ -6,13 +6,12 @@
 
 import sys
 import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+
 import time
 
-# Добавляем путь к модулям бота
-sys.path.append(os.path.join(os.path.dirname(__file__), 'ruby_king_bot'))
-
-from api.client import APIClient
-from config.token import GAME_TOKEN
+from Found_bot.api.client import APIClient
+from Found_bot.config.token import GAME_TOKEN
 
 def return_to_city():
     """Возврат в город"""

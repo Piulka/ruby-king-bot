@@ -6,25 +6,28 @@
     "desc": "Зыбкий и неопределенный облик, который плавает в топях и болотных глубинах, пожирая все, что попадается на его пути, и оставляя лишь следы тревоги и ужаса у своих жертв.",
     "farmId": "0_mob_24_5647y",
     "location": "Болото",
-    "side": "Юг",
+    "side": "Север",
     "drop": [
       {
         "id": "m_0_2",
         "typeElement": "resources",
         "count": 1,
-        "chance": 100
+        "chance": 100,
+        "minLvlDrop": 21
       },
       {
         "id": "m_0_1",
         "typeElement": "resources",
-        "count": 52,
-        "chance": 100
+        "count": 55,
+        "chance": 100,
+        "minLvlDrop": 21
       },
       {
         "id": "res_15",
         "typeElement": "resources",
         "count": 3,
-        "chance": 18
+        "chance": 18,
+        "minLvlDrop": 21
       },
       {
         "id": "recipe_93",
@@ -32,6 +35,41 @@
         "count": 1,
         "chance": 4,
         "minLvlDrop": 15
+      },
+      {
+        "id": "recipe_94",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 4,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "recipe_95",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 5,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "recipe_96",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 4,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "recipe_97",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 4,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "recipe_98",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 4,
+        "minLvlDrop": 21
       }
     ]
   },
@@ -54,7 +92,7 @@
       {
         "id": "m_0_1",
         "typeElement": "resources",
-        "count": 83,
+        "count": 82,
         "chance": 100,
         "minLvlDrop": 21
       },
@@ -107,7 +145,7 @@
       {
         "id": "m_0_1",
         "typeElement": "resources",
-        "count": 67,
+        "count": 69,
         "chance": 100,
         "minLvlDrop": 21
       },
@@ -146,7 +184,7 @@
       {
         "id": "m_0_1",
         "typeElement": "resources",
-        "count": 51,
+        "count": 52,
         "chance": 100,
         "minLvlDrop": 21
       },
@@ -176,10 +214,10 @@
   {
     "id": "mob_keeper_winter_loco_0",
     "name": "Зимний обитатель окрестностей",
-    "photo": "https://i.ibb.co/VY5pxGhv/winter-13.webp",
+    "photo": "https://i.ibb.co/rfHdQHpt/winter-4.webp",
     "desc": "Тёмная нечисть, обитающая в окрестностях поселения. Появляется исключительно зимой.",
     "farmId": "0_mob_keeper_winter_loco_0",
-    "location": "Таинственный лес",
+    "location": "Болото",
     "side": "Север",
     "drop": [
       {
@@ -192,7 +230,7 @@
       {
         "id": "m_0_1",
         "typeElement": "resources",
-        "count": 68,
+        "count": 70,
         "chance": 100,
         "minLvlDrop": 21
       },
@@ -231,7 +269,7 @@
       {
         "id": "m_0_1",
         "typeElement": "resources",
-        "count": 41,
+        "count": 42,
         "chance": 100,
         "minLvlDrop": 21
       },
@@ -385,6 +423,1065 @@
         "typeElement": "resources",
         "count": 1,
         "chance": 6,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_8_bgade",
+    "name": "Корнедрев Разрушитель",
+    "photo": "https://i.ibb.co/YtYCyJW/8-mini.webp",
+    "desc": "Древесный гигант, владеющий мощью природы и способный разрушить все на своем пути.",
+    "farmId": "0_mob_8_bgade",
+    "location": "Таинственный лес",
+    "side": "Север",
+    "drop": [
+      {
+        "id": "res_6",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 30,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 2,
+        "chance": 90,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 35,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "armor_113",
+        "typeElement": "armors",
+        "count": 1,
+        "chance": 12,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "recipe_121",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 10,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "book_skill_8",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 4,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_7_VFRT5",
+    "name": "Ветрокрылый Ястреб",
+    "photo": "https://i.ibb.co/PrrH34S/7-mini-2.webp",
+    "desc": "Стремительный хищник, который атакует своих жертв с воздуха, оставляя лишь мертвые следы.",
+    "farmId": "0_mob_7_VFRT5",
+    "location": "Таинственный лес",
+    "side": "Север",
+    "drop": [
+      {
+        "id": "res_5",
+        "typeElement": "resources",
+        "count": 2,
+        "chance": 30,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 2,
+        "chance": 90,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 35,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "recipe_134",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 2.2,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_14",
+        "typeElement": "resources",
+        "count": 4,
+        "chance": 24,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_9_vFrx2",
+    "name": "Призрачная Дриада",
+    "photo": "https://i.ibb.co/jHT2WPG/9-mini.webp",
+    "desc": "Призрачное существо, обладающее способностью скрыться в окружающей среде и незаметно атаковать своих противников.",
+    "farmId": "0_mob_9_vFrx2",
+    "location": "Таинственный лес",
+    "side": "Север",
+    "drop": [
+      {
+        "id": "res_6",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 40,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 2,
+        "chance": 90,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 34,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_w_30",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 3.2,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_10_der56",
+    "name": "Каменный Голем",
+    "photo": "https://i.ibb.co/pnhHgQW/10-mini.webp",
+    "desc": "Могущественный страж, состоящий из каменных блоков, оживленных магической сущностью и защищающих свои территории от любых нарушителей.",
+    "farmId": "0_mob_10_der56",
+    "location": "Таинственный лес",
+    "side": "Север",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 2,
+        "chance": 90,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 68,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "book_skill_1",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 4,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "book_skill_70_page",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 3.8,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_loco_1_rare",
+    "name": "Редкий обитатель леса",
+    "photo": "https://i.ibb.co/X4kpBCM/3.webp",
+    "desc": "Редкая Тёмная нечисть, обитающая в Лесах.",
+    "farmId": "0_mob_loco_1_rare",
+    "location": "Таинственный лес",
+    "side": "Север",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 4,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 118,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_particles_155",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 6,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "book_1_page",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 6,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_keeper_winter_loco_1",
+    "name": "Обитатель зимнего леса",
+    "photo": "https://i.ibb.co/87XzgbC/13-min.webp",
+    "desc": "Тёмная нечисть, обитающая в Таинственном лесу. Появляется исключительно зимой.",
+    "farmId": "0_mob_keeper_winter_loco_1",
+    "location": "Таинственный лес",
+    "side": "Восток",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 2,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 70,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "recipe_209",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 4.4,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_a_177",
+        "typeElement": "resources",
+        "count": 4,
+        "chance": 10,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_20_CZXW3",
+    "name": "Серебряный Олень",
+    "photo": "https://i.ibb.co/1v3nfNb/20-2-mini.webp",
+    "desc": "Волшебное существо, способное призывать силы природы для атаки и защиты.",
+    "farmId": "0_mob_20_CZXW3",
+    "location": "Таинственный лес",
+    "side": "Юг",
+    "drop": [
+      {
+        "id": "m_1",
+        "typeElement": "resources",
+        "count": 2,
+        "chance": 40,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 3,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "recipe_186",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 3,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 35,
+        "chance": 100,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_19_BVPUR",
+    "name": "Камнеед",
+    "photo": "https://i.ibb.co/kSW8HdM/19-mini.webp",
+    "desc": "Грозный гигант, питающийся камнем и обладающий неуязвимой каменной кожей.",
+    "farmId": "0_mob_19_BVPUR",
+    "location": "Таинственный лес",
+    "side": "Юг",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 5,
+        "chance": 90,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 63,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_w_12",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 3.2,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "book_skill_69_page",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 4,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_18_NHYU",
+    "name": "Мракоплет",
+    "photo": "https://i.ibb.co/1MBzRNP/18-mini.webp",
+    "desc": "Темное растение, обвивающее свои жертвы смертоносными лозами и погружающее их в мрак и уныние.",
+    "farmId": "0_mob_18_NHYU",
+    "location": "Таинственный лес",
+    "side": "Юг",
+    "drop": [
+      {
+        "id": "res_43",
+        "typeElement": "resources",
+        "count": 3,
+        "chance": 14,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_1",
+        "typeElement": "resources",
+        "count": 3,
+        "chance": 40,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 4,
+        "chance": 75,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 62,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "book_skill_28",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 4,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_17_CVB",
+    "name": "Охотник Грифон",
+    "photo": "https://i.ibb.co/2kxdvP6/17-mini.webp",
+    "desc": "Грозное слияние грифона и древнего леса, охотящегося на врагов с воздуха и земли.",
+    "farmId": "0_mob_17_CVB",
+    "location": "Таинственный лес",
+    "side": "Юг",
+    "drop": [
+      {
+        "id": "res_45",
+        "typeElement": "resources",
+        "count": 3,
+        "chance": 18,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 2,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 70,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "armor_74",
+        "typeElement": "armors",
+        "count": 1,
+        "chance": 1,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_16_NVQ",
+    "name": "Огненный Лист",
+    "photo": "https://i.ibb.co/54TXxTJ/16-mini.webp",
+    "desc": "Огненный элементаль, принимающий форму листа и атакующий огненными шарами и огненным дыханием.",
+    "farmId": "0_mob_16_NVQ",
+    "location": "Таинственный лес",
+    "side": "Юг",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 2,
+        "chance": 90,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 48,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_w_11",
+        "typeElement": "resources",
+        "count": 3,
+        "chance": 6,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "recipe_135",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 1.6,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_11_GtY65",
+    "name": "Зеленолапый Лесной Хищник",
+    "photo": "https://i.ibb.co/xYpVRCx/11-mini.webp",
+    "desc": "Быстроногий хищник, обитающий в густой растительности и нападающий с неожиданных укрытий.",
+    "farmId": "0_mob_11_GtY65",
+    "location": "Таинственный лес",
+    "side": "Восток",
+    "drop": [
+      {
+        "id": "res_12",
+        "typeElement": "resources",
+        "count": 3,
+        "chance": 18,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "recipe_185",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 3,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 90,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 63,
+        "chance": 100,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_12_cvbgt5",
+    "name": "Мистическая Ведьма Листьев",
+    "photo": "https://i.ibb.co/s3pkTnD/12-mini.webp",
+    "desc": "Загадочная волшебница, владеющая силами природы и способная вызывать магические бури.",
+    "farmId": "0_mob_12_cvbgt5",
+    "location": "Таинственный лес",
+    "side": "Восток",
+    "drop": [
+      {
+        "id": "res_8",
+        "typeElement": "resources",
+        "count": 2,
+        "chance": 28,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 52,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_w_10",
+        "typeElement": "resources",
+        "count": 3,
+        "chance": 6,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_15_eRT",
+    "name": "Лесной Призрак",
+    "photo": "https://i.ibb.co/S6M0sF9/15-mini.webp",
+    "desc": "Невидимое существо, появляющееся из теней и обладающее способностью замедлять и запутывать своих противников.",
+    "farmId": "0_mob_15_eRT",
+    "location": "Таинственный лес",
+    "side": "Восток",
+    "drop": [
+      {
+        "id": "res_17",
+        "typeElement": "resources",
+        "count": 4,
+        "chance": 26,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_1",
+        "typeElement": "resources",
+        "count": 2,
+        "chance": 20,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 2,
+        "chance": 85,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 51,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "book_skill_9",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 4,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_13_ZMU",
+    "name": "Грозовой Древняк",
+    "photo": "https://i.ibb.co/TBB3XF0D/mob-13-2.webp",
+    "desc": "Древнее дерево, оживленное молниями и способное создавать разрушительные электрические разряды.",
+    "farmId": "0_mob_13_ZMU",
+    "location": "Таинственный лес",
+    "side": "Восток",
+    "drop": [
+      {
+        "id": "res_9",
+        "typeElement": "resources",
+        "count": 2,
+        "chance": 24,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 2,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 35,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "recipe_69",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 4,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_w_7",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 3.2,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_8",
+        "typeElement": "resources",
+        "count": 4,
+        "chance": 26,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_14_VF5",
+    "name": "Живая Расщелина",
+    "photo": "https://i.ibb.co/bvP4LYN/14-mini.webp",
+    "desc": "Существо, возникшее из трещин в земле, способное поглощать жизненные силы своих жертв.",
+    "farmId": "0_mob_14_VF5",
+    "location": "Таинственный лес",
+    "side": "Восток",
+    "drop": [
+      {
+        "id": "res_2",
+        "typeElement": "resources",
+        "count": 4,
+        "chance": 16,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 2,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 35,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_a_15",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 18,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "recipe_70",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 4,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_35_4567t",
+    "name": "Ядовитый Блохер",
+    "photo": "https://i.ibb.co/7yLPRML/35-mini.webp",
+    "desc": "Скользкий и мало видимый хищник, обитающий в густых зарослях болотных трав. Он нападает на своих жертв, скачущими прыжками, внедряя ядовитые иглы в их плоть.б",
+    "farmId": "0_mob_35_4567t",
+    "location": "Таинственный лес",
+    "side": "Запад",
+    "drop": [
+      {
+        "id": "res_23",
+        "typeElement": "resources",
+        "count": 3,
+        "chance": 22,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 4,
+        "chance": 70,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 84,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "book_skill_29",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 4,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_36_629is",
+    "name": "Хребтовый Крокодил",
+    "photo": "https://i.ibb.co/MDMS9TW/36-mini.webp",
+    "desc": "Хищник болотных просторов, его чешуя покрыта высокими острыми гребнями, а его челюсти сильны и смертельно опасны. Он подстерегает своих жертв из глубин топей, готовый нанести разрушительный удар.",
+    "farmId": "0_mob_36_629is",
+    "location": "Таинственный лес",
+    "side": "Запад",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 3,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 77,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_a_25",
+        "typeElement": "resources",
+        "count": 4,
+        "chance": 10,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_w_9",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 3.2,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_21_ZPIQW",
+    "name": "Трясинный Зверь",
+    "photo": "https://i.ibb.co/kMd9qVr/21-mini.webp",
+    "desc": "Грозное творение болотной магии, покрытое гнилостью и мхом. Его тело меняет форму, скользя по трясинам, и его злобные глаза сияют зеленым светом, готовым поглотить невнимательного путника.",
+    "farmId": "0_mob_21_ZPIQW",
+    "location": "Таинственный лес",
+    "side": "Запад",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 104,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_42",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 36,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_15",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 34,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "book_skill_78_page",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 4.4,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_37_vcbsu",
+    "name": "Теневой Ужас",
+    "photo": "https://i.ibb.co/5cMqWwk/37-mini.webp",
+    "desc": "Таинственное создание, обитающее в густых зарослях болота, его темные силуэты и зловещие глаза пугают и заманивают жертв в свои лабиринты, где он нападает с непредсказуемой жестокостью.",
+    "farmId": "0_mob_37_vcbsu",
+    "location": "Таинственный лес",
+    "side": "Запад",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 3,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 76,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "recipe_187",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 3,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_w_16",
+        "typeElement": "resources",
+        "count": 3,
+        "chance": 6,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_22_867yr",
+    "name": "Липкая Пасть",
+    "photo": "https://i.ibb.co/bbs8G3P/22-mini.webp",
+    "desc": "Мрачное существо болотной тьмы, его паутина покрывает деревья и кустарники, а его зловещие челюсти готовы запутать и поглотить любого неосторожного путника.",
+    "farmId": "0_mob_22_867yr",
+    "location": "Таинственный лес",
+    "side": "Запад",
+    "drop": [
+      {
+        "id": "res_54",
+        "typeElement": "resources",
+        "count": 3,
+        "chance": 22,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 52,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_w_8",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 3.2,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "book_skill_76",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 3.2,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_15",
+        "typeElement": "resources",
+        "count": 3,
+        "chance": 20,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_keeper_winter_loco_2",
+    "name": "Обитатель зимнего болота",
+    "photo": "https://i.ibb.co/MBFc3zn/2-min.webp",
+    "desc": "Тёмная нечисть, обитающая в Болоте. Появляется исключительно зимой.",
+    "farmId": "0_mob_keeper_winter_loco_2",
+    "location": "Таинственный лес",
+    "side": "Запад",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 2,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 69,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "recipe_210",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 4.4,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_a_176",
+        "typeElement": "resources",
+        "count": 4,
+        "chance": 10,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_loco_2_legend",
+    "name": "Легендарный обитатель болот",
+    "photo": "https://i.ibb.co/4Vtfmnj/1.webp",
+    "desc": "Легендарная Тёмная нечисть, обитающая в Болотах.",
+    "farmId": "0_mob_loco_2_legend",
+    "location": "Болото",
+    "side": "Север",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 12,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 205,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_particles_157",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 1,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "book_1_page",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 14,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_23_vcoei",
+    "name": "Болотный Пожиратель",
+    "photo": "https://i.ibb.co/GpYymXz/45-mini.webp",
+    "desc": "Ужасное создание болотных глубин, его громадные клыки позволяют ему таинственно выскальзывать из-под топей и наносить смертоносные удары своим жертвам.",
+    "farmId": "0_mob_23_vcoei",
+    "location": "Болото",
+    "side": "Север",
+    "drop": [
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 2,
+        "chance": 90,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 62,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "recipe_136",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 1.8,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_15",
+        "typeElement": "resources",
+        "count": 6,
+        "chance": 16,
+        "minLvlDrop": 21
+      }
+    ]
+  },
+  {
+    "id": "mob_40_756ye",
+    "name": "Болотная Ведьма",
+    "photo": "https://i.ibb.co/M8hMJjQ/40-mini.webp",
+    "desc": "Таинственное существо, выходящее из топей, она владеет магией природы и способна вызывать смертоносные проклятия на своих преследователей, оставляя лишь запутанные следы в мокрой глине.",
+    "farmId": "0_mob_40_756ye",
+    "location": "Болото",
+    "side": "Север",
+    "drop": [
+      {
+        "id": "recipe_3",
+        "typeElement": "resources",
+        "count": 3,
+        "chance": 10,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "res_a_114",
+        "typeElement": "resources",
+        "count": 4,
+        "chance": 10,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_2",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "m_0_1",
+        "typeElement": "resources",
+        "count": 76,
+        "chance": 100,
+        "minLvlDrop": 21
+      },
+      {
+        "id": "book_skill_77",
+        "typeElement": "resources",
+        "count": 1,
+        "chance": 1.78,
         "minLvlDrop": 21
       }
     ]
