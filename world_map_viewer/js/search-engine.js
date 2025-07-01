@@ -126,10 +126,13 @@ function getMobLocations(mobId) {
 }
 
 export function renderMobDetails(mob) {
-  const locations = [{ locName: mob.location, sideKey: mob.side }];
   let locHtml = '';
-  if (locations.length) {
-    locHtml = `<div style='margin:0.7rem 0 1.2rem 0;font-size:0.98em;'>Локация: <a href='#' style='color:#a7c7ff;text-decoration:underline;cursor:pointer;font-weight:600;' onclick='window._setLocationAndSide&&window._setLocationAndSideByName&&window._setLocationAndSideByName("${mob.location}","${mob.side}")'>${mob.location} ${mob.side}</a></div>`;
+  if (Array.isArray(mob.locations) && mob.locations.length) {
+    locHtml = `<div style='margin:0.7rem 0 1.2rem 0;font-size:0.98em;'>Локации:<ul style='padding-left:1.2em;margin:0;'>` +
+      mob.locations.map(loc =>
+        `<li><a href='#' style='color:#a7c7ff;text-decoration:underline;cursor:pointer;font-weight:600;' onclick='window.handleLocationClick("${loc.location}","${loc.side}")'>${loc.location} ${loc.side}</a></li>`
+      ).join('') +
+      `</ul></div>`;
   }
   return `
     <div class="mob-details">
@@ -234,4 +237,14 @@ export function showMobInPopup(mob) {
   popup.classList.remove('hidden');
   popup.innerHTML = `<div class='popup-content'>${renderMobDetails(mob)}<button class='close-btn' id='close-mob-btn'>Закрыть</button></div>`;
   document.getElementById('close-mob-btn').onclick = () => { popup.classList.add('hidden'); };
-} 
+}
+
+// --- Добавляю функцию для перехода по локации и закрытия попапа ---
+window.handleLocationClick = function(loc, side) {
+  if (window._setLocationAndSideByName) {
+    window._setLocationAndSideByName(loc, side);
+  }
+  // Закрыть попап моба
+  const popup = document.getElementById('popup-search');
+  if (popup) popup.classList.add('hidden');
+}; 

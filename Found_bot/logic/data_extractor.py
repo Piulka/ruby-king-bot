@@ -166,7 +166,7 @@ class DataExtractor:
     def update_mob_database(self, mob_data: dict, player_level: int, db_path: str = "world_map_viewer/data/mobs-database.json", loco_id: str = None, side_key: str = None) -> bool:
         """
         Новая логика: Записывает моба только в world_map_viewer/data/mobs-database.json по структуре:
-        id, name, photo, desc, farmId, location, side, drop (id, typeElement, count, chance, minLvlDrop)
+        id, name, photo, desc, farmId, locations, drop (id, typeElement, count, chance, minLvlDrop)
         location и side вычислять через world map, side переводить на русский
         Все поля брать из ответа атаки (или исследования), minLvlDrop писать только если ещё не было
         """
@@ -194,17 +194,37 @@ class DataExtractor:
             location_name = world_map[loco_id].get('name', 'unknown')
             if side_key:
                 side_name = side_ru.get(side_key, side_key)
-        # Собираем структуру моба
-        mob_entry = {
-            'id': mob_data.get('id', ''),
-            'name': mob_data.get('name', ''),
-            'photo': mob_data.get('photo', None),
-            'desc': mob_data.get('desc', None),
-            'farmId': mob_data.get('farmId', ''),
-            'location': location_name,
-            'side': side_name,
-            'drop': []
-        }
+        # --- Новый формат: массив локаций/сторон ---
+        loc_pair = {"location": location_name, "side": side_name}
+        # Проверяем, есть ли моб уже в базе
+        mob_idx = None
+        for i, m in enumerate(db):
+            if m.get('id') == mob_data.get('id', '') and m.get('farmId') == mob_data.get('farmId', ''):
+                mob_idx = i
+                break
+        if mob_idx is not None:
+            mob_entry = db[mob_idx]
+            # Обновляем массив locations
+            locations = mob_entry.get('locations', [])
+            if loc_pair not in locations:
+                locations.append(loc_pair)
+            mob_entry['locations'] = locations
+            # Обновляем остальные поля (drop, name, photo, desc и т.д.)
+            mob_entry['name'] = mob_data.get('name', mob_entry.get('name', ''))
+            mob_entry['photo'] = mob_data.get('photo', mob_entry.get('photo', None))
+            mob_entry['desc'] = mob_data.get('desc', mob_entry.get('desc', None))
+            mob_entry['drop'] = []
+        else:
+            mob_entry = {
+                'id': mob_data.get('id', ''),
+                'name': mob_data.get('name', ''),
+                'photo': mob_data.get('photo', None),
+                'desc': mob_data.get('desc', None),
+                'farmId': mob_data.get('farmId', ''),
+                'locations': [loc_pair],
+                'drop': []
+            }
+            db.append(mob_entry)
         # Обрабатываем drop
         for item in mob_data.get('drop', []):
             if not isinstance(item, dict):
@@ -216,7 +236,6 @@ class DataExtractor:
                 'count': item.get('count', 1),
                 'chance': item.get('chance', None)
             }
-            # minLvlDrop: если уже есть для этого id+typeElement, не обновлять, иначе писать текущий уровень
             found = False
             for old_mob in db:
                 for old_drop in old_mob.get('drop', []):
@@ -230,17 +249,8 @@ class DataExtractor:
             if not found:
                 drop_item['minLvlDrop'] = player_level
             mob_entry['drop'].append(drop_item)
-        # Проверяем на дубликаты по id и farmId
-        exists = False
-        for i, m in enumerate(db):
-            if m.get('id') == mob_entry['id'] and m.get('farmId') == mob_entry['farmId']:
-                db[i] = mob_entry
-                exists = True
-                break
-        if not exists:
-            db.append(mob_entry)
         # Строгая валидация обязательных полей
-        required_fields = ['id', 'name', 'photo', 'desc', 'farmId', 'location', 'side']
+        required_fields = ['id', 'name', 'photo', 'desc', 'farmId', 'locations']
         missing_fields = [field for field in required_fields if not mob_entry.get(field)]
         if missing_fields:
             logger.error(f"[MOB DB] Не записываю моба {mob_entry.get('name', '')}: отсутствуют обязательные поля: {missing_fields}")

@@ -140,7 +140,10 @@ function renderMobsSection() {
   const sideKeys = Object.keys(locObj.directions || {});
   const sideKey = sideKeys[selectedSide];
   const sideNames = {north: 'Север', east: 'Восток', south: 'Юг', west: 'Запад'};
-  const filteredMobs = mobsData.filter(m => m.location === locObj.name && m.side === sideNames[sideKey]);
+  const filteredMobs = mobsData.filter(mob =>
+    Array.isArray(mob.locations) &&
+    mob.locations.some(loc => loc.location === locObj.name && loc.side === sideNames[sideKey])
+  );
   if (filteredMobs.length) {
     mobsSection.innerHTML = filteredMobs.map((mob, idx) => `<div class='mob-list-row' style='margin-bottom:1.2em;cursor:pointer;' id='mob-list-row-${idx}'>${renderMobDetails(mob)}</div>`).join('');
     filteredMobs.forEach((mob, idx) => {
