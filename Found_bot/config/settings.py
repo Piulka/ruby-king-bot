@@ -19,7 +19,7 @@ class Settings:
     HEAL_COOLDOWN = 5.5  # seconds between healing potions
     MANA_COOLDOWN = 5.5  # seconds between mana potions
     REST_DURATION = 1200  # 20 minutes in seconds
-    HEAL_THRESHOLD = 50  # HP percentage threshold for healing
+    HEAL_THRESHOLD = 85  # HP percentage threshold for healing
     MANA_THRESHOLD = 50  # Mana percentage threshold for mana potion
     STAMINA_THRESHOLD = 0  # Stamina threshold for resting
     SKILL_HP_THRESHOLD = 100  # HP threshold for using skill (use skill only if mob HP > 100)

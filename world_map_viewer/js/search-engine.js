@@ -1,3 +1,5 @@
+import { getItemsData } from './data-loader.js';
+
 let popup = null;
 let currentType = 'mob';
 let allMobs = [];
@@ -78,7 +80,24 @@ export function showSearchPopup({mobs, items, onSelectMob: mobCb, onSelectItem: 
   render();
 }
 
-// Универсальная функция для показа любого HTML в popup-search
+function attachDropItemHandlers() {
+  const popup = document.getElementById('popup-search');
+  if (!popup) return;
+  setTimeout(() => {
+    popup.querySelectorAll('.drop-item-link').forEach(link => {
+      link.onclick = (ev) => {
+        ev.preventDefault();
+        const itemId = link.getAttribute('data-itemid');
+        const items = getItemsData && getItemsData();
+        let item = items && items.find(it => it.id === itemId);
+        if (!item) item = { id: itemId, name: itemId, icon: '', type: '' };
+        showModalPopup(renderItemDetails(item));
+        attachDropItemHandlers(); // для вложенных попапов
+      };
+    });
+  }, 0);
+}
+
 export function showInfoPopup(contentHtml) {
   let popup = document.getElementById('popup-search');
   if (!popup) {
@@ -100,11 +119,12 @@ export function showInfoPopup(contentHtml) {
       }
     };
   });
+  attachDropItemHandlers();
 }
 
-// showModalPopup теперь просто вызывает showInfoPopup
 export function showModalPopup(contentHtml) {
   showInfoPopup(contentHtml);
+  attachDropItemHandlers();
 }
 
 // Получить список {location, side} где встречается моб
@@ -134,6 +154,21 @@ export function renderMobDetails(mob) {
       ).join('') +
       `</ul></div>`;
   }
+  // --- Делаю предметы кликабельными и красивыми ---
+  const items = getItemsData && getItemsData();
+  const dropRows = (mob.drop||[]).map(drop => {
+    let item = items && items.find(it => it.id === drop.id);
+    let itemName = item ? item.name : drop.id;
+    return `<tr>
+      <td></td>
+      <td><a href="#" class="drop-item-link" data-itemid="${drop.id}" style="color:#7ecfff;text-decoration:underline;cursor:pointer;font-weight:600;">${itemName}</a></td>
+      <td>${drop.id}</td>
+      <td>${drop.typeElement||''}</td>
+      <td>${drop.chance||''}%</td>
+      <td>${drop.count||''}</td>
+      <td>${drop.minLvlDrop||mob.lvl||''}</td>
+    </tr>`;
+  }).join('');
   return `
     <div class="mob-details">
       <div style='display:flex;gap:1.2rem;align-items:flex-start;flex-wrap:wrap;'>
@@ -155,9 +190,9 @@ export function renderMobDetails(mob) {
             <th style='min-width:90px;'>Шанс</th>
             <th style='min-width:90px;'>Кол-во</th>
             <th style='min-width:110px;'>Уровень появления</th>
-          </tr>` +
-          (mob.drop||[]).map(drop => `<tr><td></td><td>${drop.id}</td><td>${drop.id}</td><td>${drop.typeElement||''}</td><td>${drop.chance||''}%</td><td>${drop.count||''}</td><td>${drop.minLvlDrop||mob.lvl||''}</td></tr>`).join('') +
-        `</table>
+          </tr>
+          ${dropRows}
+        </table>
       </div>
     </div>
   `;
@@ -237,6 +272,7 @@ export function showMobInPopup(mob) {
   popup.classList.remove('hidden');
   popup.innerHTML = `<div class='popup-content'>${renderMobDetails(mob)}<button class='close-btn' id='close-mob-btn'>Закрыть</button></div>`;
   document.getElementById('close-mob-btn').onclick = () => { popup.classList.add('hidden'); };
+  attachDropItemHandlers();
 }
 
 // --- Добавляю функцию для перехода по локации и закрытия попапа ---

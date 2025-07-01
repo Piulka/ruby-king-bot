@@ -8,7 +8,14 @@
 </head>
 <body>
   <header class="header">
-    <div class="logo">Ruby King World Map</div>
+    <button id="menu-btn" class="menu-btn">☰</button>
+    <div id="menu-dropdown" class="menu-dropdown hidden">
+      <ul>
+        <li><a href="#" id="menu-skills">Скиллы</a></li>
+        <li><a href="#" id="menu-equip">Эквип</a></li>
+        <li><a href="#" id="menu-recipes">Рецепты</a></li>
+      </ul>
+    </div>
     <nav class="nav">
       <select id="location-select"></select>
       <button id="search-btn">🔍 Поиск</button>

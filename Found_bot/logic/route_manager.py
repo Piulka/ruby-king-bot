@@ -61,6 +61,9 @@ class RouteManager:
                     lower_candidates = []
                     for square, square_data in squares.items():
                         mob_level = square_data.get("mob_level")
+                        # Пропускать внутренние локации
+                        if isinstance(mob_level, dict) and (mob_level.get("locoId") or mob_level.get("locoName")):
+                            continue
                         # Новый формат: mob_level может быть dict с mobLvl
                         if mob_level is None:
                             continue
@@ -228,6 +231,8 @@ def build_farm_route(player_level: int, world_map_data: Dict[str, Any]) -> List[
             best_higher_diff = float('inf')
             for sq_name, sq_obj in squares.items():
                 mob_lvl = parse_mob_level(sq_obj.get('mob_level', 0))
+                if isinstance(mob_lvl, dict) and (mob_lvl.get("locoId") or mob_lvl.get("locoName")):
+                    continue
                 diff = abs(mob_lvl - (player_level - 9))
                 if mob_lvl <= player_level - 9 and diff < best_diff:
                     best_square = sq_name

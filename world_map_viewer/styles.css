@@ -454,4 +454,224 @@ main {
     padding: 0.5rem 0.5rem;
     max-width: 100%;
   }
+}
+.menu-btn {
+  background: #23242a;
+  color: #a7c7ff;
+  border: none;
+  font-size: 2rem;
+  padding: 0.3rem 1.1rem 0.3rem 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 1.2rem;
+  box-shadow: 0 0 8px #3a5c8c55;
+  transition: background 0.2s, color 0.2s;
+}
+.menu-btn:hover {
+  background: #3a5c8c;
+  color: #fff;
+}
+.menu-dropdown {
+  position: absolute;
+  top: 3.2rem;
+  left: 1.5rem;
+  background: #23242a;
+  border: 1px solid #3a5c8c;
+  border-radius: 10px;
+  box-shadow: 0 4px 24px #000a;
+  z-index: 1000;
+  min-width: 180px;
+  padding: 0.5rem 0;
+  display: block;
+}
+.menu-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.menu-dropdown li {
+  margin: 0;
+  padding: 0;
+}
+.menu-dropdown a {
+  display: block;
+  color: #a7c7ff;
+  text-decoration: none;
+  padding: 0.7rem 1.5rem;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+.menu-dropdown a:hover {
+  background: #3a5c8c;
+  color: #fff;
+}
+.menu-dropdown.hidden {
+  display: none;
+}
+
+/* === РЕЦЕПТЫ: Адаптивность и UX === */
+.recipes-panel {
+  background: #23242a;
+  border-radius: 14px;
+  box-shadow: 0 0 18px #3a5c8c44;
+  padding: 1.2em 1.2em 2em 1.2em;
+  margin: 2em auto 0 auto;
+  max-width: 700px;
+  min-width: 0;
+  width: 100%;
+}
+.recipe-list-item {
+  background: #23242a;
+  border-radius: 10px;
+  box-shadow: 0 0 8px #3a5c8c22;
+  margin-bottom: 1.1em;
+  padding: 0.7em 1em 0.7em 0.7em;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+.recipe-list-item:hover {
+  box-shadow: 0 0 16px #a7c7ff55;
+}
+.recipe-details-animated {
+  background: #23242a;
+  border-radius: 0 0 10px 10px;
+  margin-top: 0.5em;
+  margin-bottom: 0.2em;
+  box-shadow: 0 2px 8px #3a5c8c22;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.recipe-details-animated.open {
+  border-top: 1px solid #3a5c8c44;
+}
+.l2-details {
+  padding: 0.7em 1em 0.7em 1em;
+}
+.l2-title-row {
+  font-size: 1.05em;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+}
+.l2-materials-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.l2-material-item {
+  display: block;
+  margin-bottom: 0.4em;
+  position: relative;
+}
+.l2-mat-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 5px;
+  background: #181a20;
+  object-fit: cover;
+}
+.l2-mat-name {
+  font-size: 1em;
+  font-weight: 500;
+  margin-right: 0.5em;
+}
+.l2-mat-count {
+  font-size: 0.98em;
+  color: #a7c7ff;
+  margin-left: 0.5em;
+}
+.l2-expand-btn {
+  background: #23242a;
+  color: #a7c7ff;
+  border: 1px solid #3a5c8c;
+  border-radius: 6px;
+  padding: 0.2em 0.7em;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left: 0.7em;
+  transition: background 0.2s, color 0.2s;
+}
+.l2-expand-btn:hover {
+  background: #3a5c8c;
+  color: #fff;
+}
+.l2-mat-children {
+  width: 100%;
+  margin-top: 0.4em;
+  margin-left: 0;
+  padding-left: 1.2em;
+  border-left: 2px solid #3a5c8c44;
+  transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow: hidden;
+}
+.l2-mat-children.open {
+  /* только border и padding */
+}
+@media (max-width: 700px) {
+  .l2-mat-children {
+    margin-left: 0;
+    padding-left: 0.7em;
+  }
+}
+
+/* Поп-ап: адаптивность и UX */
+.popup-search {
+  max-width: 95vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 14px;
+  box-shadow: 0 0 24px #3a5c8c88;
+  background: #23242a;
+  z-index: 1002;
+}
+.popup-content {
+  max-width: 95vw;
+  padding: 1.2em 1.2em 1.2em 1.2em;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+.popup-content button.close-btn {
+  position: absolute;
+  top: 1.2em;
+  right: 1.2em;
+  background: #23242a;
+  color: #a7c7ff;
+  border: 1px solid #3a5c8c;
+  border-radius: 6px;
+  padding: 0.4em 1.2em;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 1003;
+}
+.popup-content button.close-btn:hover {
+  background: #3a5c8c;
+  color: #fff;
+}
+
+@media (max-width: 700px) {
+  .recipes-panel {
+    max-width: 99vw;
+    padding: 0.7em 0.2em 1.2em 0.2em;
+    margin: 1em auto 0 auto;
+  }
+  .recipe-list-item {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.7em 0.5em 0.7em 0.5em;
+  }
+  .l2-details {
+    padding: 0.5em 0.2em 0.5em 0.2em;
+  }
+  .popup-content {
+    padding: 0.7em 0.2em 0.7em 0.2em;
+  }
+  .popup-search {
+    max-width: 99vw;
+    max-height: 97vh;
+  }
 } 
