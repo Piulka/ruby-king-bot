@@ -32,6 +32,15 @@ class Player:
         self.max_inventory_weight = 0  # Максимальный вес рюкзака
         self.stats = PlayerStats()
         self.inventory = {}  # Добавлено для хранения инвентаря
+        # Новые поля для локации
+        self.current_location = None
+        self.current_direction = None
+        self.current_square = None
+        
+        # Поля для позиции возврата после похода в город
+        self.return_location = None
+        self.return_direction = None
+        self.return_square = None
         
         # Cooldowns
         self.last_attack_time = 0
@@ -269,6 +278,35 @@ class Player:
         """Record mana potion usage time"""
         self.last_mana_time = current_time
     
+    def set_location(self, location: str, direction: str = None, square: str = None):
+        self.current_location = location
+        self.current_direction = direction
+        self.current_square = square
+
+    def set_square(self, square: str):
+        self.current_square = square
+
+    def save_return_position(self):
+        """Сохранить текущую позицию для возврата после похода в город"""
+        self.return_location = self.current_location
+        self.return_direction = self.current_direction
+        self.return_square = self.current_square
+        logger.info(f"Return position saved: {self.return_location} -> {self.return_direction} -> {self.return_square}")
+    
+    def has_return_position(self) -> bool:
+        """Проверить есть ли сохраненная позиция возврата"""
+        return all([self.return_location, self.return_direction, self.return_square])
+    
+    def restore_return_position(self):
+        """Восстановить позицию возврата"""
+        if self.has_return_position():
+            self.current_location = self.return_location
+            self.current_direction = self.return_direction
+            self.current_square = self.return_square
+            logger.info(f"Return position restored: {self.current_location} -> {self.current_direction} -> {self.current_square}")
+            return True
+        return False
+
     def get_stats_summary(self) -> Dict[str, Any]:
         """Get player stats summary"""
         return {
@@ -287,7 +325,10 @@ class Player:
             'skulls': self.get_skulls_count(),
             'morale': getattr(self, 'morale', 0),
             'inventory_weight': getattr(self, 'inventory_weight', 0),
-            'max_inventory_weight': getattr(self, 'max_inventory_weight', 0)
+            'max_inventory_weight': getattr(self, 'max_inventory_weight', 0),
+            'location': self.current_location,
+            'direction': self.current_direction,
+            'square': self.current_square
         }
     
     def get_heal_potions_count(self) -> int:
@@ -320,4 +361,21 @@ class Player:
             potion = self.inventory.get('m_3')
             if potion and isinstance(potion, dict):
                 return potion.get('count', 0)
-        return 0 
+        return 0
+    
+    def initialize(self, api_client):
+        """Initialize player data from API"""
+        try:
+            # Получаем данные игрока из города
+            player_info = api_client.get_user_city_info()
+            if player_info and 'user' in player_info:
+                self.update_from_api_response(player_info)
+                logger.info("Player data initialized successfully")
+            else:
+                logger.warning("Could not get player data, using defaults")
+        except Exception as e:
+            logger.error(f"Failed to get player data: {e}, using defaults")
+    
+    def set_level(self, level: int):
+        """Set player level"""
+        self.stats.level = level 

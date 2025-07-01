@@ -123,6 +123,7 @@ class Mob:
         self.max_hp = 0
         self.level = 1
         self.is_alive = True
+        self.drops = []  # Дроп моба
         
         if mob_data:
             self.update_from_data(mob_data)
@@ -168,10 +169,16 @@ class Mob:
         
         self.level = mob_data.get('lvl', mob_data.get('level', self.level))
         
+        # Извлекаем дроп моба
+        self.drops = mob_data.get('drop', [])
+        if not self.drops:
+            # Пробуем альтернативные ключи
+            self.drops = mob_data.get('drops', [])
+        
         # Update alive status
         self.is_alive = self.hp > 0
         
-        logger.debug(f"Mob updated: {self.name} HP {self.hp}/{self.max_hp} farmId: {self.farm_id}")
+        logger.debug(f"Mob updated: {self.name} HP {self.hp}/{self.max_hp} farmId: {self.farm_id} drops: {len(self.drops)}")
     
     def update_from_combat_response(self, response_data: Dict[str, Any]):
         """

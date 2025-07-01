@@ -103,7 +103,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         if (isOpen) {
           renderRecipeDetails(recipe, detailsDiv, recipesById, 1);
           detailsDiv.classList.add('open');
-          detailsDiv.style.maxHeight = detailsDiv.scrollHeight + 32 + 'px';
+          detailsDiv.style.maxHeight = detailsDiv.scrollHeight + 3332 + 'px';
           itemDiv.querySelector('.l2-expand-btn').textContent = '▲';
         } else {
           detailsDiv.classList.remove('open');
@@ -172,7 +172,7 @@ window.addEventListener('DOMContentLoaded', async () => {
           if (subOpen) {
             renderRecipeDetails(subRecipe, childDiv, recipesById, item.count * (craftCount || 1));
             childDiv.classList.add('open');
-            childDiv.style.maxHeight = childDiv.scrollHeight + 24 + 'px';
+            childDiv.style.maxHeight = childDiv.scrollHeight + 2400 + 'px';
             btn.textContent = '▲';
           } else {
             childDiv.classList.remove('open');
@@ -329,7 +329,7 @@ function showInnerLocationInfo(innerInfo) {
   // Показываем pop-up с описанием внутренней локации
   const popup = document.getElementById('popup-search');
   popup.classList.remove('hidden');
-  popup.innerHTML = `<div class='popup-content'><h3>${innerInfo.name}</h3><p>${innerInfo.desc||''}</p><button onclick="document.getElementById('popup-search').classList.add('hidden')">Закрыть</button></div>`;
+  popup.innerHTML = `<div class='popup-content'><h3>${innerInfo.name}</h3><p>${innerInfo.desc||''}</p><button class='popup-close-btn'>✕</button></div>`;
 }
 
 function renderMobsSection() {
@@ -446,7 +446,7 @@ function openSearch() {
 function showPopupStub(title) {
   const popup = document.getElementById('popup-search');
   popup.classList.remove('hidden');
-  popup.innerHTML = `<div class='popup-content'><h2 style='margin-bottom:1em;'>${title}</h2><div style='opacity:0.7;'>Раздел в разработке</div><button class='close-btn' onclick='document.getElementById("popup-search").classList.add("hidden")'>Закрыть</button></div>`;
+  popup.innerHTML = `<div class='popup-content'><h2 style='margin-bottom:1em;'>${title}</h2><div style='opacity:0.7;'>Раздел в разработке</div><button class='popup-close-btn'>✕</button></div>`;
 }
 
 // === РЕЦЕПТЫ: Рекурсивный подсчёт итоговых ресурсов ===

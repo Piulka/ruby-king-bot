@@ -20,6 +20,7 @@ import logging
 
 # Import item database
 from ..utils.item_database import format_item_display_with_emoji, get_item_emoji, get_item_name
+from ..config.constants import LOCATION_NAMES, DIRECTION_NAMES
 
 class GameDisplay:
     """Beautiful console UI for Ruby King Bot"""
@@ -41,7 +42,10 @@ class GameDisplay:
             'items_sold': 0,
             'gold_from_sales': 0,
             'hp_potions_used': 0,
-            'mp_potions_used': 0
+            'mp_potions_used': 0,
+            'squares_visited': 0,
+            'directions_visited': 0,
+            'locations_visited': 0
         }
         
         # Message history
@@ -72,13 +76,14 @@ class GameDisplay:
         
         self.layout["left"].split_column(
             Layout(name="player", size=9),  # Фиксированный размер
-            Layout(name="combat", size=9),  # Фиксированный размер
+            Layout(name="combat", size=11),  # Увеличиваем с 9 до 11
+            Layout(name="route", size=8),  # Новый блок для маршрута
             Layout(name="killed_mobs", ratio=1)  # Растягивается до блока сообщений
         )
         
         self.layout["right"].split_column(
             Layout(name="stats", size=9),  # Фиксированный размер
-            Layout(name="cooldowns", size=9),  # Фиксированный размер
+            Layout(name="cooldowns", size=11),  # Увеличиваем с 9 до 11
             Layout(name="drops", ratio=1)  # Растягивается до блока сообщений
         )
     
@@ -116,6 +121,8 @@ class GameDisplay:
                 self.stats['current_skulls'] = value
             elif key == 'events_found':
                 self.stats['events_found'] = value
+            elif key in ['squares_visited', 'directions_visited', 'locations_visited']:
+                self.stats[key] = value
     
     def format_time(self, seconds: int) -> str:
         """Format seconds to mm:ss"""
@@ -186,18 +193,25 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
         
         return Panel(content, title="[bold]Игрок[/bold]", border_style="green", height=9)
     
-    def create_combat_status(self, mob_data: Optional[Dict[str, Any]] = None, mob_group_data: Optional[List[Dict[str, Any]]] = None) -> Panel:
+    def create_combat_status(self, mob_data: Optional[Dict[str, Any]], mob_group_data: Optional[List[Dict[str, Any]]], 
+                           location: str = "", direction: str = "", square: str = "") -> Panel:
         """Create combat status panel"""
-        logger = logging.getLogger(__name__)
-        logger.debug(f"🔍 DEBUG: create_combat_status called with:")
-        logger.debug(f"  - mob_data: {mob_data}")
-        logger.debug(f"  - mob_group_data: {mob_group_data}")
-        
         content_lines = []
+        
+        # Показываем информацию о локации
+        if location and direction and square:
+            # Переводим ID локации в название и направление на русский
+            location_name = LOCATION_NAMES.get(location, location)
+            direction_name = DIRECTION_NAMES.get(direction, direction)
+            content_lines.append(f"Локация: {location_name} | {direction_name} | {square}")
+        elif location:
+            location_name = LOCATION_NAMES.get(location, location)
+            content_lines.append(f"Локация: {location_name}")
+        
+        content_lines.append("")  # Пустая строка
         
         if mob_group_data and len(mob_group_data) > 0:
             # Multi-mob display
-            logger.debug(f"🔍 DEBUG: Showing {len(mob_group_data)} mobs from mob_group_data")
             content_lines.append(f"Найдено врагов: {len(mob_group_data)}")
             
             for i, mob_info in enumerate(mob_group_data):
@@ -206,8 +220,6 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
                 mob_hp_str = mob_info.get('hp', '0/0')
                 is_current_target = mob_info.get('is_current_target', False)
                 is_dead = mob_info.get('is_dead', False)
-                
-                logger.debug(f"🔍 DEBUG: Mob {i}: {mob_name}, HP: {mob_hp_str}, Level: {mob_level}, Current: {is_current_target}, Dead: {is_dead}")
                 
                 # Parse HP string like "123/134" or "-6/144"
                 if '/' in mob_hp_str:
@@ -250,20 +262,17 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
                 content_lines.append(f"    HP: {mob_hp_bar} {mob_hp_str} ({mob_hp_percent:.1f}%)")
         else:
             # Single mob display (backward compatibility)
-            logger.debug("🔍 DEBUG: Using single mob display")
             if mob_data is None:
                 content_lines.append("[dim]Нет активного боя[/dim]")
             else:
                 mob_hp_percent = (mob_data.get('hp', 0) / max(mob_data.get('max_hp', 1), 1)) * 100
                 mob_hp_color = "green" if mob_hp_percent > 50 else "yellow" if mob_hp_percent > 25 else "red"
                 mob_hp_bar = f"[{mob_hp_color}]█[/{mob_hp_color}]" * int(mob_hp_percent / 10) + "░" * (10 - int(mob_hp_percent / 10))
-                
                 content_lines.append(f"Цель: [bold red]{mob_data.get('name', 'Неизвестно')}[/bold red] ур.{mob_data.get('level', 1)}")
                 content_lines.append(f"HP: {mob_hp_bar} {mob_data.get('hp', 0)}/{mob_data.get('max_hp', 0)} ({mob_hp_percent:.1f}%)")
         
         content = "\n".join(content_lines)
-        
-        return Panel(content, title="[bold]Бой[/bold]", border_style="magenta", height=9)
+        return Panel(content, title="[bold]Бой[/bold]", border_style="magenta", height=11)
     
     def create_stats_table(self) -> Panel:
         """Create statistics panel"""
@@ -280,7 +289,7 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
         table.add_column(justify="left")
         table.add_column(justify="right")
         
-        # Левый столбец (5 строк)
+        # Левый столбец (6 строк)
         table.add_row("[bold yellow]Опыт:[/bold yellow]", f"[yellow]│{stats['total_exp']}│[/yellow]", 
                      "[bold magenta]В город:[/bold magenta]", f"[magenta]│{stats.get('city_visits', 0)}│[/magenta]")
         table.add_row("[bold yellow]Золото:[/bold yellow]", f"[yellow]│{stats['session_gold']}│[/yellow]", 
@@ -291,6 +300,8 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
                      "[bold blue]Мана:[/bold blue]", f"[blue]│{stats.get('mp_potions_used', 0)}│[/blue]")
         table.add_row("[bold]Убито мобов:[/bold]", f"[green]│{total_killed_mobs}│[/green]", 
                      "[bold green]Золото с продаж:[/bold green]", f"[yellow]│{stats.get('gold_from_sales', 0)}│[/yellow]")
+        table.add_row("[bold]Квадраты:[/bold]", f"[cyan]│{stats.get('squares_visited', 0)}│[/cyan]", 
+                     "[bold]Локации:[/bold]", f"[blue]│{stats.get('locations_visited', 0)}│[/blue]")
         
         return Panel(table, title="[bold]Статистика[/bold]", border_style="cyan", height=9)
     
@@ -355,30 +366,55 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
                       mob_group_data: list = None, attack_cooldown: float = 0, 
                       heal_cooldown: float = 0, skill_cooldown: float = 0, 
                       mana_cooldown: float = 0, rest_time: float = None, player_name: str = "Player",
-                      last_attack_time: float = 0, last_skill_time: float = 0):
-        """Update the entire display"""
-        # Debug logging
-        logger = logging.getLogger(__name__)
-        logger.debug(f"🔍 DEBUG: update_display called with:")
-        logger.debug(f"  - current_state: {current_state}")
-        logger.debug(f"  - player_data keys: {list(player_data.keys()) if player_data else 'None'}")
-        logger.debug(f"  - mob_data: {mob_data}")
-        logger.debug(f"  - mob_group_data: {mob_group_data}")
-        logger.debug(f"  - player_name: {player_name}")
-        
-        # Update cooldown tracking times
-        self.last_attack_time = last_attack_time
-        self.last_skill_time = last_skill_time
-        
-        # Update layout components
-        self.layout["top"].update(self.create_header(current_state, player_name, player_data))
-        self.layout["main"]["left"]["player"].update(self.create_player_status(player_data))
-        self.layout["main"]["left"]["combat"].update(self.create_combat_status(mob_data, mob_group_data))
-        self.layout["main"]["left"]["killed_mobs"].update(self.create_killed_mobs_panel())
-        self.layout["main"]["right"]["stats"].update(self.create_stats_table())
-        self.layout["main"]["right"]["cooldowns"].update(self.create_cooldowns_panel(attack_cooldown, heal_cooldown, skill_cooldown, mana_cooldown, rest_time))
-        self.layout["main"]["right"]["drops"].update(self.create_drops_panel())
-        self.layout["bottom"].update(self.create_messages_panel())
+                      last_attack_time: float = 0, last_skill_time: float = 0,
+                      location: str = "", direction: str = "", square: str = "",
+                      current_route: List = None, current_route_index: int = 0, mobs_killed_on_current_square: int = 0):
+        """Update the display with current game information"""
+        try:
+            # Update cooldown tracking
+            self.last_attack_time = last_attack_time
+            self.last_skill_time = last_skill_time
+            
+            # Create header
+            header = self.create_header(current_state, player_name, player_data)
+            self.layout["top"].update(header)
+            
+            # Create player status
+            player_panel = self.create_player_status(player_data)
+            self.layout["left"]["player"].update(player_panel)
+            
+            # Create combat status
+            combat_panel = self.create_combat_status(mob_data, mob_group_data, location, direction, square)
+            self.layout["left"]["combat"].update(combat_panel)
+            
+            # Create route panel
+            route_panel = self.create_route_panel(current_route, current_route_index, mobs_killed_on_current_square)
+            self.layout["left"]["route"].update(route_panel)
+            
+            # Create killed mobs panel
+            killed_mobs_panel = self.create_killed_mobs_panel()
+            self.layout["left"]["killed_mobs"].update(killed_mobs_panel)
+            
+            # Create stats table
+            stats_panel = self.create_stats_table()
+            self.layout["right"]["stats"].update(stats_panel)
+            
+            # Create cooldowns panel
+            cooldowns_panel = self.create_cooldowns_panel(attack_cooldown, heal_cooldown, skill_cooldown, mana_cooldown, rest_time)
+            self.layout["right"]["cooldowns"].update(cooldowns_panel)
+            
+            # Create drops panel
+            drops_panel = self.create_drops_panel()
+            self.layout["right"]["drops"].update(drops_panel)
+            
+            # Create messages panel
+            messages_panel = self.create_messages_panel()
+            self.layout["bottom"].update(messages_panel)
+            
+        except Exception as e:
+            logging.error(f"Error updating display: {e}")
+            # Fallback to simple display
+            self.layout["top"].update(Panel(f"Error: {e}", title="Error"))
     
     def print_message(self, message: str, level: str = "info"):
         """Print a message with appropriate styling"""
@@ -498,7 +534,7 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
         mana_icon = "🔵🔥" if 0 < mana_cooldown <= 5 else "🔵"
         table.add_row(mana_icon, "Мана", f"[{mana_style}]{mana_status}[/{mana_style}]")
         
-        return Panel(table, title="⏱️ КД", border_style="blue", height=9)
+        return Panel(table, title="⏱️ КД", border_style="blue", height=11)
     
     def update_damage_stats(self, damage_dealt: int):
         """Update damage statistics"""
@@ -511,3 +547,54 @@ MR:   {stamina_bar} {stamina_value}/{max_stamina_value} ({stamina_percent:.1f}%)
         if self.stats['total_attacks'] > 0:
             return self.stats['total_damage_dealt'] / self.stats['total_attacks']
         return 0.0 
+    
+    def update_route_progress(self, route_progress: str):
+        """Обновить информацию о прогрессе маршрута"""
+        self.add_message(route_progress, "info")
+    
+    def update_combat_status(self, combat_status: str, location: str, direction: str, square: str):
+        """Обновить статус боя"""
+        self.add_message(combat_status, "combat")
+    
+    def update_exp_gained(self, exp_gained: int):
+        """Обновить полученный опыт"""
+        if exp_gained > 0:
+            self.add_message(f"🎉 +{exp_gained} опыта", "success")
+    
+    def update_gold_gained(self, gold_gained: int):
+        """Обновить полученное золото"""
+        if gold_gained > 0:
+            self.add_message(f"💰 +{gold_gained} золота", "success")
+    
+    def update_mobs_killed(self, mobs_killed: int):
+        """Обновить количество убитых мобов"""
+        if mobs_killed > 0:
+            self.add_message(f"⚔️ Убито мобов: {mobs_killed}", "combat")
+    
+    def create_route_panel(self, current_route: List = None, current_route_index: int = 0, mobs_killed_on_current_square: int = 0) -> Panel:
+        """Create route panel with interactive route display"""
+        if not current_route:
+            content = "[dim]Маршрут не настроен[/dim]"
+            return Panel(content, title="[bold]Маршрут[/bold]", border_style="cyan", height=8)
+        
+        content_lines = []
+        content_lines.append(f"[bold cyan]Маршрут: {current_route_index + 1}/{len(current_route)}[/bold cyan]")
+        
+        # Показываем текущую точку и несколько следующих
+        start_idx = max(0, current_route_index - 1)
+        end_idx = min(len(current_route), current_route_index + 4)
+        
+        for i in range(start_idx, end_idx):
+            point = current_route[i]
+            if i == current_route_index:
+                # Текущая точка - выделяем
+                mobs_text = f" [red]💀{mobs_killed_on_current_square}[/red]" if mobs_killed_on_current_square > 0 else ""
+                content_lines.append(f"[bold yellow]▶ {point.location_name} | {point.direction_name} | {point.square}{mobs_text}[/bold yellow]")
+            else:
+                content_lines.append(f"[dim]  {point.location_name} | {point.direction_name} | {point.square}[/dim]")
+        
+        if end_idx < len(current_route):
+            content_lines.append(f"[dim]  ... и еще {len(current_route) - end_idx} точек[/dim]")
+        
+        content = "\n".join(content_lines)
+        return Panel(content, title="[bold]Маршрут[/bold]", border_style="cyan", height=8) 
