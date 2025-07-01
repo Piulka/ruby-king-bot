@@ -173,9 +173,23 @@ function openMobPopup(mobId) {
 }
 
 function openSearch() {
+  const mobs = getMobsData();
+  const items = getItemsData();
+  // Собираем все уникальные id предметов из дропа мобов
+  const dropItemIds = new Set();
+  mobs.forEach(mob => {
+    (mob.drop || []).forEach(drop => dropItemIds.add(drop.id));
+  });
+  // Формируем массив предметов для отображения
+  const dropItems = Array.from(dropItemIds).map(id => {
+    const item = items.find(it => it.id === id);
+    if (item) return item;
+    // Если предмета нет в itemsData, делаем заглушку
+    return { id, name: id, icon: '', type: '' };
+  });
   showSearchPopup({
-    mobs: getMobsData(),
-    items: getItemsData(),
+    mobs,
+    items: dropItems,
     onSelectMob: mob => {},
     onSelectItem: item => {},
     setLocationAndSide,
