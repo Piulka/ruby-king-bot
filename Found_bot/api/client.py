@@ -20,6 +20,7 @@ class APIClient:
         self.session = requests.Session()
         self.session.headers.update(Settings.DEFAULT_HEADERS)
         self.token = GAME_TOKEN
+        self._last_request_time = 0  # Throttle: время последнего запроса
         
     def _make_request(self, method: str, endpoint: str, data: Optional[Dict] = None, 
                      retries: int = None, headers: Optional[dict] = None) -> Dict[str, Any]:
@@ -42,6 +43,14 @@ class APIClient:
             retries = Settings.MAX_RETRIES
             
         url = Endpoints.get_url_with_token(endpoint, self.token)
+        
+        # --- THROTTLE: ограничение частоты запросов ---
+        now = time.time()
+        elapsed = now - self._last_request_time
+        if elapsed < 1:
+            time.sleep(1 - elapsed)
+        self._last_request_time = time.time()
+        # --- конец throttle ---
         
         for attempt in range(retries + 1):
             try:

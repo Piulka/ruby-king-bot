@@ -247,7 +247,9 @@ class DataExtractor:
                 if found:
                     break
             if not found:
-                drop_item['minLvlDrop'] = player_level
+                drop_item['minLvlDrop'] = item.get('minLvlDrop', "")
+                if drop_item['minLvlDrop'] is None:
+                    drop_item['minLvlDrop'] = ""
             mob_entry['drop'].append(drop_item)
         # Строгая валидация обязательных полей
         required_fields = ['id', 'name', 'photo', 'desc', 'farmId', 'locations']

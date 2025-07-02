@@ -8,6 +8,8 @@ from typing import Dict, Any
 from rich.console import Console
 import subprocess
 import os
+import requests
+import json
 
 from api.client import APIClient
 from core.game_state import GameState, GameStateManager
@@ -23,6 +25,7 @@ from logic.route_manager import RouteManager
 from Found_bot.config.token import GAME_TOKEN
 from logic.mob_utils import get_mob_data, get_mob_group_data
 from logic.cooldown_utils import get_attack_cooldown, get_skill_cooldown, get_heal_cooldown, get_mana_cooldown, reset_all_cooldowns
+from Found_bot.helpful_scripts.pay_goblins import pay_goblins
 
 logger = logging.getLogger(__name__)
 console = Console()
@@ -198,6 +201,16 @@ class GameEngine:
                 return
             # 4. Исследовать клетку через farm-mob-one (explore_territory)
             result = self.api_client.explore_territory(loco=next_point.location, direction=next_point.direction)
+            goblin_retry_count = 0
+            while result and result.get('status') == 'fail' and 'гоблинами-разбойниками' in result.get('message', '') and goblin_retry_count < 3:
+                self.display.print_message(f"[DEBUG] Гоблины: {result.get('message', '')}", "warning")
+                resp = pay_goblins()
+                msg = f"[pay_goblins] Status: {getattr(resp, 'status_code', '?')}, Response: {getattr(resp, 'text', resp)}"
+                self.display.print_message(msg, "info")
+                time.sleep(2)
+                result = self.api_client.explore_territory(loco=next_point.location, direction=next_point.direction)
+                goblin_retry_count += 1
+                self.display.print_message(f"[DEBUG] После повторной попытки explore_territory: {str(result)}", "info")
             if result and "mob" in result:
                 mob_data = result["mob"]
                 # Если mob_data — список, берём первого моба
@@ -242,43 +255,16 @@ class GameEngine:
                 logger.warning("Нет следующей точки маршрута для исследования территории.")
                 return
             result = self.api_client.explore_territory(loco=next_point.location, direction=next_point.direction)
-            
-            # --- SPEC_BATS обход ---
-            bats_attempts = 0
-            while result and result.get('action') == 'SPEC_BATS':
-                bats_attempts += 1
-                console.print(f"[yellow]Обнаружено событие SPEC_BATS (летучие мыши), попытка {bats_attempts}...[/yellow]")
-                logger.info(f"SPEC_BATS detected, attempt {bats_attempts}")
-                self.display.update_stats(bats_events=1)
-                self.display.show_bats_event_message()
-                self.display.update_display(
-                    current_state=str(self.state_manager.current_state),
-                    player_data=self.player.to_dict() if hasattr(self.player, 'to_dict') else {},
-                    mob_data=None,
-                    mob_group_data=None
-                )
-                # Новый обход: ждем 2 секунды, отправляем запрос на /api/user/vesna, затем продолжаем исследование
-                logger.info("Жду 2 секунды перед обходом SPEC_BATS...")
+            goblin_retry_count = 0
+            while result and result.get('status') == 'fail' and 'гоблинами-разбойниками' in result.get('message', '') and goblin_retry_count < 3:
+                self.display.print_message(f"[DEBUG] Гоблины: {result.get('message', '')}", "warning")
+                resp = pay_goblins()
+                msg = f"[pay_goblins] Status: {getattr(resp, 'status_code', '?')}, Response: {getattr(resp, 'text', resp)}"
+                self.display.print_message(msg, "info")
                 time.sleep(2)
-                logger.info("Отправляю запрос на обход летучих мышей (/api/user/vesna) через curl...")
-                bats_url = f"https://ruby-king.ru/api/user/vesna?name={GAME_TOKEN}"
-                referer = f"https://ruby-king.ru/city?name={GAME_TOKEN}&timeEnd=1751300208114"
-                headers = [
-                    "-H", "Accept: application/json, text/plain, */*",
-                    "-H", "Accept-Language: ru,en;q=0.9,en-US;q=0.8,de;q=0.7",
-                    "-H", "Connection: keep-alive",
-                    "-H", "Content-Type: application/json",
-                    "-H", "Origin: https://ruby-king.ru",
-                    f"-H", f"Referer: {referer}",
-                    "-H", "Sec-Fetch-Dest: empty",
-                    "-H", "Sec-Fetch-Mode: cors",
-                    "-H", "Sec-Fetch-Site: same-origin",
-                    "-H", "User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1"
-                ]
-                cmd = ["curl", "-s", "-X", "POST", bats_url] + headers + ["--data-raw", "{}"]
-                result_bats = subprocess.run(cmd, capture_output=True, text=True)
-                logger.info(f"SPEC_BATS curl response: {result_bats.stdout}")
-                result = self.exploration_handler.explore_territory()
+                result = self.api_client.explore_territory(loco=next_point.location, direction=next_point.direction)
+                goblin_retry_count += 1
+                self.display.print_message(f"[DEBUG] После повторной попытки explore_territory: {str(result)}", "info")
             
             if result is None:  # Exploration failed
                 return
@@ -313,13 +299,13 @@ class GameEngine:
             if mob_list and mob_group_data:
                 # Create MobGroup from raw data
                 self.current_mob_group = MobGroup(mob_list)
-                # Сбросить все тайминги (кулдауны = 0) при появлении нового моба
+                # Сбросить только скилловый кулдаун при появлении нового моба
                 now = time.time()
-                self.player.last_attack_time = now - self.player.GLOBAL_COOLDOWN
+                # self.player.last_attack_time = now - self.player.GLOBAL_COOLDOWN  # Не сбрасываем ГКД!
                 self.player.last_skill_time = now - self.player.SKILL_COOLDOWN
-                self.player.last_heal_time = now - self.player.HEAL_COOLDOWN
-                self.player.last_mana_time = now - self.player.MANA_COOLDOWN
-                logger.info(f"[COOLDOWN RESET] last_attack_time={self.player.last_attack_time}, last_skill_time={self.player.last_skill_time}, last_heal_time={self.player.last_heal_time}, last_mana_time={self.player.last_mana_time}")
+                # self.player.last_heal_time = now - self.player.HEAL_COOLDOWN  # Не сбрасываем
+                # self.player.last_mana_time = now - self.player.MANA_COOLDOWN  # Не сбрасываем
+                logger.info(f"[COOLDOWN RESET] last_skill_time={self.player.last_skill_time}")
                 logger.info(f"[COOLDOWN CHECK] can_attack={self.player.can_attack(now)}, can_use_skill={self.player.can_use_skill(now)}, can_use_heal={self.player.can_use_heal_potion(now)}, can_use_mana={self.player.can_use_mana_potion(now)}")
                 current_target = self.current_mob_group.get_current_target()
                 
@@ -343,7 +329,7 @@ class GameEngine:
                             flat_mobs.append(mob)
                     mob_group_data = flat_mobs
                 mob_names = [mob['name'] for mob in mob_group_data if isinstance(mob, dict) and 'name' in mob]
-                self.display.print_message(f"🔍 Найдены враги: {', '.join(mob_names)}", "info")
+                self.display.print_message(f"Найдены враги: {', '.join(mob_names)}", "info")
                 
                 # Check and use skill immediately after exploration if conditions are met
                 current_time = time.time()
@@ -363,9 +349,58 @@ class GameEngine:
             else:
                 # No mobs found - this means an event was found
                 self.display.print_message("🎯 Найдено событие или пустая область", "info")
+                self.display.print_message(f"[DEBUG] Ответ события: {result}", "info")
                 # Update events counter
                 self.display.update_stats(events_found=1)
-                # Don't set explore_done = True for events - continue exploring
+                # --- UNIVERSAL ACTION HANDLER ---
+                action_id = result.get('action')
+                if action_id:
+                    if action_id == "SPEC_BATS":
+                        self.display.print_message("[EVENT] Обнаружены летучие мыши, выполняю обход SPEC_BATS...", "warning")
+                        bats_url = f"https://ruby-king.ru/api/user/vesna?name={GAME_TOKEN}"
+                        referer = f"https://ruby-king.ru/city?name={GAME_TOKEN}"
+                        headers = {
+                            "Accept": "application/json, text/plain, */*",
+                            "Accept-Language": "ru,en;q=0.9,en-US;q=0.8,de;q=0.7",
+                            "Connection": "keep-alive",
+                            "Content-Type": "application/json",
+                            "Origin": "https://ruby-king.ru",
+                            "Referer": referer,
+                            "Sec-Fetch-Dest": "empty",
+                            "Sec-Fetch-Mode": "cors",
+                            "Sec-Fetch-Site": "same-origin",
+                            "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1"
+                        }
+                        try:
+                            resp = requests.post(bats_url, headers=headers, data="{}")
+                            self.display.print_message(f"[EVENT] Ответ SPEC_BATS: {resp.status_code} {resp.text}", "info")
+                        except Exception as e:
+                            self.display.print_message(f"[EVENT] Ошибка SPEC_BATS: {e}", "error")
+                    else:
+                        self.display.print_message(f"[EVENT] Обнаружено событие с action: {action_id}, отправляю open-action...", "warning")
+                        url = f"https://ruby-king.ru/api/resources/open-action?name={GAME_TOKEN}"
+                        headers = {
+                            "Accept": "application/json, text/plain, */*",
+                            "Accept-Language": "ru,en;q=0.9,en-US;q=0.8,de;q=0.7",
+                            "Connection": "keep-alive",
+                            "Content-Type": "application/json",
+                            "Origin": "https://ruby-king.ru",
+                            "Referer": f"https://ruby-king.ru/city?name={GAME_TOKEN}",
+                            "Sec-Fetch-Dest": "empty",
+                            "Sec-Fetch-Mode": "cors",
+                            "Sec-Fetch-Site": "same-origin",
+                            "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1"
+                        }
+                        data = {"actionId": action_id}
+                        try:
+                            resp = requests.post(url, headers=headers, data=json.dumps(data))
+                            self.display.print_message(f"[EVENT] Ответ open-action: {resp.status_code} {resp.text}", "info")
+                        except Exception as e:
+                            self.display.print_message(f"[EVENT] Ошибка при отправке open-action: {e}", "error")
+                    time.sleep(2)
+                    # Повторяем исследование клетки
+                    result = self.api_client.explore_territory(loco=next_point.location, direction=next_point.direction)
+                    # Можно добавить повторную обработку action, если нужно
     
     def _should_use_skill_after_exploration(self, current_target, current_time: float) -> bool:
         """Check if skill should be used immediately after exploration"""
@@ -440,22 +475,27 @@ class GameEngine:
             return
         elif combat_result == 'recover':
             self.display.print_message("▶️ Запуск процедуры восстановления (LowDamageHandler)...", "warning")
-            result = self.combat_handler.low_damage_handler.handle_low_damage_situation(
-                current_target,
-                self.current_mob_group,
-                current_time,
-                self.combat_handler.situation_type
-            )
-            if result:
-                self.combat_handler.low_damage_handled = False
-                self.combat_handler._reset_low_damage_tracking()
-                self.display.print_message("✅ Восстановление завершено, возвращаемся к фарму!", "success")
-                # Сбрасываем флаг исследования и переходим в город для запуска исследования
-                self.explore_done = False
-                self.current_mob_group = None  # Очищаем группу мобов
-                self.state_manager.change_state(GameState.CITY, "Восстановление завершено")
-            else:
-                self.display.print_message("❌ Ошибка восстановления, попробуйте позже", "error")
+            while True:
+                result = self.combat_handler.low_damage_handler.handle_low_damage_situation(
+                    current_target,
+                    self.current_mob_group,
+                    current_time,
+                    self.combat_handler.situation_type
+                )
+                # Проверяем HP после восстановления
+                hp_percentage = (self.player.hp / self.player.max_hp * 100) if self.player.max_hp > 0 else 100
+                if result and hp_percentage >= 80:
+                    self.combat_handler.low_damage_handled = False
+                    self.combat_handler._reset_low_damage_tracking()
+                    self.display.print_message("✅ Восстановление завершено, возвращаемся к фарму!", "success")
+                    self.explore_done = False
+                    self.current_mob_group = None
+                    self.state_manager.change_state(GameState.CITY, "Восстановление завершено")
+                    break
+                elif not result:
+                    self.display.print_message("❌ Ошибка восстановления, попробуйте позже", "error")
+                    break
+                # иначе повторяем восстановление, пока HP < 80%
             return
         # иначе просто продолжаем бой (continue)
     
@@ -578,6 +618,11 @@ class GameEngine:
                 user_info = self.api_client.get_user_info()
                 if user_info and 'user' in user_info:
                     self.player.update_from_api_response(user_info)
+                
+                # --- ВОССТАНОВЛЕНИЕ ИНДЕКСА МАРШРУТА ---
+                if self.route_manager:
+                    self.route_manager.restore_index()
+                # --- КОНЕЦ ВОССТАНОВЛЕНИЯ ---
             
             # 3. Теперь игрок должен быть в фарм-зоне - ищем подходящий квадрат
             if geo == 'farm' or user_info.get('geo') == 'farm':

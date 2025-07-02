@@ -49,14 +49,14 @@ class RouteManager:
             filtered_route = []
             for location, location_data in world_map.items():
                 # Исключаем 'Окрестности поселения'
-                if location == 'loco_0':
-                    continue
+                # if location == 'loco_0':
+                #     continue
                 location_name = location_data.get("name", location)
                 directions = location_data.get("directions", {})
                 for direction, direction_data in directions.items():
                     direction_name = direction_data.get("name", direction)
                     squares = direction_data.get("squares", {})
-                    # Собираем кандидатов в диапазоне [min_level, player_level]
+                    # Собираем кандидатов в диапазоне [min_level, player_level] и mob_lvl <= 20
                     candidates = []
                     lower_candidates = []
                     for square, square_data in squares.items():
@@ -83,19 +83,21 @@ class RouteManager:
                             mob_lvl = int(mob_lvl)
                         except (ValueError, TypeError):
                             continue
+                        if mob_lvl > 20:
+                            continue  # Исключаем квадраты с мобами выше 20 уровня
                         if min_level <= mob_lvl <= self.player_level:
                             candidates.append((square, mob_lvl))
                         elif mob_lvl < min_level:
                             lower_candidates.append((square, mob_lvl))
                     best_square = None
+                    best_mob_lvl = None
                     if candidates:
                         # Берём минимальный mob_level из диапазона
-                        best_square, _ = min(candidates, key=lambda x: x[1])
+                        best_square, best_mob_lvl = min(candidates, key=lambda x: x[1])
                     elif lower_candidates:
                         # Если нет кандидатов — берём максимальный из нижних
-                        best_square, _ = max(lower_candidates, key=lambda x: x[1])
+                        best_square, best_mob_lvl = max(lower_candidates, key=lambda x: x[1])
                     # Если ничего не найдено — best_square останется None
-                    chosen_mob_level = None
                     if best_square:
                         route_point = RoutePoint(
                             location=location,
@@ -103,7 +105,7 @@ class RouteManager:
                             direction=direction,
                             direction_name=direction_name,
                             square=best_square,
-                            mob_level=chosen_mob_level if chosen_mob_level is not None else 0
+                            mob_level=best_mob_lvl if best_mob_lvl is not None else 0
                         )
                         filtered_route.append(route_point)
             self.route = filtered_route

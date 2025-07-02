@@ -40,57 +40,89 @@ class LowDamageHandler:
         self.is_handling_low_damage = True
         
         if situation_type == "low_potions":
-            self.display.print_message("🔄 Запуск процедуры восстановления из-за малого количества зелий...", "warning")
+            self.display.print_message("🛒 Мало зелий — идём в город за покупкой!", "warning")
+            # Сохраняем текущую точку маршрута
+            route_point = None
+            if hasattr(self, 'route_manager') and self.route_manager:
+                route_point = self.route_manager.get_current_point()
+            elif hasattr(self.player, 'route_manager') and self.player.route_manager:
+                route_point = self.player.route_manager.get_current_point()
+            else:
+                route_point = None
+            # Уходим в город и покупаем зелья
+            self._return_to_city()
+            time.sleep(2)
+            self._buy_potions()
+            time.sleep(2)
+            self._go_to_farm_zone()
+            time.sleep(2)
+            # Возвращаемся на сохранённую точку маршрута
+            if route_point:
+                self.display.print_message(f"🚶‍♂️ Возвращаемся на маршрут: {route_point.location_name}/{route_point.direction_name}/{route_point.square}", "info")
+                self.api_client.change_geo(route_point.location, route_point.direction)
+                time.sleep(2)
+                self.api_client.change_square(route_point.square)
+                time.sleep(2)
+            self.display.print_message("✅ Купили зелья и вернулись на маршрут! Продолжаем обычную работу.", "success")
+            # Выставляем флаг just_bought_potions в combat_handler, если есть
+            if hasattr(self, 'combat_handler'):
+                self.combat_handler.just_bought_potions = True
+            return True
         else:
             self.display.print_message("🔄 Запуск процедуры восстановления после низкого урона...", "warning")
         
         try:
-            self.display.print_message("➡️ Этап 1: Завершение боя (пропускаем добивание)", "info")
-            # 1. Не добиваем оставшихся мобов, сразу идём дальше
-            # self._finish_remaining_mobs(current_target, mob_group, current_time)  # Убираем добивание
-            
-            self.display.print_message("➡️ Этап 2: Переход на квадрат G4", "info")
-            self._move_to_g4()
-            time.sleep(2)  # Пауза 2 секунды
-            self._force_display_update()  # Принудительное обновление дисплея
-            
-            self.display.print_message("➡️ Этап 3: Сброс локации", "info")
-            self._reset_location()
-            time.sleep(2)  # Пауза 2 секунды
-            self._force_display_update()  # Принудительное обновление дисплея
-            
-            self.display.print_message("➡️ Этап 4: Возврат в город", "info")
-            self._return_to_city()
-            time.sleep(2)  # Пауза 2 секунды
-            self._force_display_update()  # Принудительное обновление дисплея
-            
-            self.display.print_message("➡️ Этап 5: Продажа предметов", "info")
-            self._sell_equipment(self.player)
-            time.sleep(2)  # Пауза 2 секунды
-            self._force_display_update()  # Принудительное обновление дисплея
-            
-            self.display.print_message("➡️ Этап 6: Покупка зелий", "info")
-            self._buy_potions()
-            time.sleep(2)  # Пауза 2 секунды
-            self._force_display_update()  # Принудительное обновление дисплея
-            
-            self.display.print_message("➡️ Этап 7: Переход в фарм зону", "info")
-            self._go_to_farm_zone()
-            time.sleep(2)  # Пауза 2 секунды
-            self._force_display_update()  # Принудительное обновление дисплея
-            
-            self.display.print_message("➡️ Этап 8: Переход на локацию", "info")
-            self._go_to_location()
-            time.sleep(2)  # Пауза 2 секунды
-            self._force_display_update()  # Принудительное обновление дисплея
-            
-            self.display.print_message("➡️ Этап 9: Переход на подходящий квадрат", "info")
-            self._go_to_best_square()
-            
-            if situation_type == "low_potions":
-                self.display.print_message("✅ Процедура восстановления зелий завершена! Возвращаемся к обычному фарму.", "success")
-            else:
-                self.display.print_message("✅ Процедура восстановления завершена! Возвращаемся к обычному фарму.", "success")
+            while True:
+                # Получаем актуальные данные о HP и банках
+                user_info = self.api_client.get_user_info()
+                if user_info and 'user' in user_info:
+                    self.player.update_from_api_response(user_info)
+                hp = self.player.hp
+                max_hp = self.player.max_hp
+                hp_percent = (hp / max_hp * 100) if max_hp > 0 else 100
+                potions = self.player.get_heal_potions_count() if hasattr(self.player, 'get_heal_potions_count') else 0
+                self.display.print_message(f'Текущее HP: {hp}/{max_hp} ({hp_percent:.1f}%), Банки: {potions}', 'info')
+                self.display.update_display(
+                    current_state="recover",
+                    player_data=self.player.get_stats_summary(),
+                    mob_data=None,
+                    mob_group_data=None,
+                    attack_cooldown=0,
+                    heal_cooldown=0,
+                    skill_cooldown=0,
+                    mana_cooldown=0,
+                    rest_time=None,
+                    player_name="Piulok",
+                    last_attack_time=self.player.last_attack_time,
+                    last_skill_time=self.player.last_skill_time
+                )
+                if hp_percent >= 80:
+                    self.display.print_message("✅ HP восстановлено! Возвращаемся к обычному фарму.", "success")
+                    break
+                if potions == 0:
+                    self.display.print_message("❌ Зелья лечения закончились! Возвращаемся в город за покупкой.", "error")
+                    self._return_to_city()
+                    time.sleep(2)
+                    self._buy_potions()
+                    time.sleep(2)
+                    self._go_to_farm_zone()
+                    time.sleep(2)
+                    self._go_to_location()
+                    time.sleep(2)
+                    self.display.print_message("✅ Купили зелья и вернулись на фарм! Продолжаем восстановление HP...", "success")
+                    continue
+                if hp_percent < 80 and self.player.can_use_heal_potion(time.time()):
+                    heal_result = self.api_client.use_healing_potion()
+                    self.player.record_heal(time.time())
+                    if "user" in heal_result:
+                        self.player.update_from_api_response(heal_result)
+                    # Получаем актуальные HP и количество банок
+                    current_hp = self.player.hp
+                    max_hp = self.player.max_hp
+                    potions = self.player.get_heal_potions_count() if hasattr(self.player, 'get_heal_potions_count') else 'N/A'
+                    hp_percent = (current_hp / max_hp * 100) if max_hp > 0 else 100
+                    self.display.print_message(f"❤️ Использовал зелье лечения!   HP: {current_hp}/{max_hp} ({hp_percent:.1f}%), Банки: {potions}", "success")
+                time.sleep(1.1)
             return True
             
         except Exception as e:
@@ -114,7 +146,11 @@ class LowDamageHandler:
                     self.player.record_heal(current_time)
                     if "user" in heal_result:
                         self.player.update_from_api_response(heal_result)
-                    self.display.print_message("❤️ Использовал зелье лечения!", "success")
+                    current_hp = self.player.hp
+                    max_hp = self.player.max_hp
+                    potions = self.player.get_heal_potions_count() if hasattr(self.player, 'get_heal_potions_count') else 'N/A'
+                    hp_percent = (current_hp / max_hp * 100) if max_hp > 0 else 100
+                    self.display.print_message(f"❤️ Использовал зелье лечения!   HP: {current_hp}/{max_hp} ({hp_percent:.1f}%), Банки: {potions}", "success")
                 except Exception as e:
                     self.display.print_message(f"❌ Ошибка лечения: {e}", "error")
                 time.sleep(1.1)

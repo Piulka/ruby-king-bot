@@ -2,8 +2,8 @@ import json
 import os
 import time
 from copy import deepcopy
-from api.client import APIClient
-from config.token import GAME_TOKEN
+from Found_bot.api.client import APIClient
+from Found_bot.config.token import GAME_TOKEN
 
 WORLD_MAP_PATH = "world_map_viewer/data/complete_world_map.json"
 SIDE_KEYS = ["north", "south", "east", "west"]

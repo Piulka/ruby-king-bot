@@ -1,3 +1,6 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 import time
 import requests
 from Found_bot.config.token import GAME_TOKEN
@@ -18,13 +21,11 @@ HEADERS = {
 }
 
 def pay_goblins():
-    for i in range(1, 15):
-        action_id = f'action_{i}'
-        data = {"actionId": action_id}
-        params = {"name": GAME_TOKEN}
-        response = requests.post(BASE_URL, headers=HEADERS, params=params, json=data)
-        print(f"[action_{i}] Status: {response.status_code}, Response: {response.text}")
-        time.sleep(2)
+    action_id = 'action_11'
+    data = {"actionId": action_id}
+    params = {"name": GAME_TOKEN}
+    response = requests.post(BASE_URL, headers=HEADERS, params=params, json=data)
+    print(f"[{action_id}] Status: {response.status_code}, Response: {response.text}")
 
 if __name__ == "__main__":
     pay_goblins() 

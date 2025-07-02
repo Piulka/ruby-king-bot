@@ -8,6 +8,7 @@ from typing import Optional, Dict, Any
 from api.client import APIClient
 from ui.display import GameDisplay
 from Found_bot.config.settings import Settings
+from core.player import Player
 
 logger = logging.getLogger(__name__)
 
@@ -31,6 +32,17 @@ class ExplorationHandler:
         with open('logs/farm_mob_one_params.log', 'a', encoding='utf-8') as f:
             f.write("exploration_handler: loco=loco_0, direction=north\n")
         try:
+            # Новая логика: не исследовать при HP < 40%, ждать восстановления до 80%
+            player = getattr(self.display, 'player', None)
+            if player is not None:
+                hp_percentage = (player.hp / player.max_hp * 100) if player.max_hp > 0 else 100
+                if hp_percentage < 40:
+                    self.display.print_message("\U0001F6D1 HP ниже 40% — исследование приостановлено!", "warning")
+                    return None
+                if hp_percentage < 80:
+                    self.display.print_message("\U0001F6D1 HP ниже 80% — ждем восстановления!", "warning")
+                    return None
+            
             # Используем стандартное исследование без выбора локации по уровню
             explore_result = self.api_client.explore_territory()
             

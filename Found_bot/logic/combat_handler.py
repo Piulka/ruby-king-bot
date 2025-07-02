@@ -41,6 +41,7 @@ class CombatHandler:
         self.combat_paused = False  # Flag to pause combat
         self.low_damage_handled = False  # Flag to track if low damage was handled
         self.situation_type = "low_damage"  # Type of situation: "low_damage" or "low_potions"
+        self.just_bought_potions = False  # Флаг: только что купили зелья
     
     def handle_combat_round(self, current_target: Mob, current_time: float, mob_group: MobGroup) -> Literal['victory', 'continue', 'failure', 'recover']:
         """
@@ -60,26 +61,44 @@ class CombatHandler:
         self.skill_used = False  # Reset flag at start of round
         self.need_recover = False
         
+        # Если только что купили зелья — не запускать восстановление HP
+        if self.just_bought_potions:
+            self.display.print_message("🟢 Только что купили зелья — пропускаем восстановление HP и продолжаем фарм.", "info")
+            self.just_bought_potions = False
+            return 'continue'
+        
         # Check if combat is paused due to low damage
         if self.combat_paused:
             time.sleep(1)
             return 'continue'
         
-        # Check if potions are running low
+        # Check if potions are running low (ПРИОРИТЕТ)
         if self._check_low_potions():
-            self.need_recover = True
+            self.display.print_message("⚠️ Мало зелий! Запуск процедуры пополнения зелий.", "warning")
+            self.situation_type = "low_potions"
+            return 'recover'
         # Check if low damage pattern is detected (by last 3 attacks)
         if hasattr(self, 'last_attack_damages') and len(self.last_attack_damages) == 3:
             average_damage = self.display.get_average_damage()
             if average_damage > 0 and all(damage <= average_damage / 2 for damage in self.last_attack_damages):
                 if not self.low_damage_handled:
                     self.need_recover = True
-        
         if self.need_recover or self.low_damage_handled:
             self.display.print_message("🚨 Переход к восстановлению!", "warning")
+            self.situation_type = "low_damage"
             return 'recover'
-        
-        # 1. Check and use healing potion
+        # Новая логика: если HP < 40%, не атаковать и не использовать скиллы, только лечиться
+        hp_percentage = (self.player.hp / self.player.max_hp * 100) if self.player.max_hp > 0 else 100
+        if hp_percentage < 40:
+            self.display.print_message("\U0001F6D1 HP ниже 40% — только восстановление!", "warning")
+            # Используем банку, если можно
+            if self._should_use_heal_potion(current_time):
+                heal_result = self._use_healing_potion(current_time)
+                if heal_result == 'failure':
+                    return 'failure'
+            self.situation_type = "low_damage"
+            return 'recover'
+        # 1. Check and use healing potion (при HP < 85%)
         if self._should_use_heal_potion(current_time):
             heal_result = self._use_healing_potion(current_time)
             if heal_result == 'failure':
